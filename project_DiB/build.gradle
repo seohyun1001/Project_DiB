@@ -37,6 +37,18 @@ dependencies {
     testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
     testImplementation 'org.springframework.security:spring-security-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Model Mapper
+    implementation 'org.modelmapper:modelmapper:3.1.0'
+
+    // Thumbnailator
+    implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.16'
+
+    // swagger ui
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
 }
 
 tasks.named('test') {
