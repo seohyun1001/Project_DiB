@@ -1,5 +1,6 @@
 package org.zerock.project_dib.member.dto;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -11,10 +12,18 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class MemberDTO {
 
+    @NotEmpty
     private String mid;
+
+    @NotEmpty
     private String mwp;
+
+    @NotEmpty
     private String name;
+
+    @NotEmpty
     private String email;
+
     private String address;
     private LocalDateTime birthdate;
     private String phone;
