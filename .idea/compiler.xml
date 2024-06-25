@@ -10,9 +10,6 @@
         <module name="project_DiB.main" />
       </profile>
     </annotationProcessing>
-<<<<<<< HEAD
-=======
     <bytecodeTargetLevel target="17" />
->>>>>>> origin/main
   </component>
 </project>
