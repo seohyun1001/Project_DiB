@@ -7,5 +7,5 @@ public interface MemberService {
 
     void join(MemberDTO memberDTO);
 
-    boolean confirmId(boolean exist) throws MidExistException;
+    boolean confirmId(String id) throws MidExistException ;
 }

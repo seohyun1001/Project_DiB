@@ -6,7 +6,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.zerock.project_dib.member.domain.Member;
-import org.zerock.project_dib.member.domain.MemberRole;
 import org.zerock.project_dib.member.dto.MemberDTO;
 import org.zerock.project_dib.member.mapper.MemberMapper;
 
@@ -34,7 +33,13 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public boolean confirmId(boolean exist) throws MidExistException {
+    public boolean confirmId(String id) throws MidExistException {
+        int count = memberMapper.selectOneId(id);
+        boolean exist = count > 0;
+        System.out.println(exist);
+//        if (exist) {
+//            throw new MidExistException();
+//        }
         return exist;
     }
 

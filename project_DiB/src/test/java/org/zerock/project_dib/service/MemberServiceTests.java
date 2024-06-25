@@ -1,15 +1,17 @@
 package org.zerock.project_dib.service;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.config.annotation.web.oauth2.login.OAuth2LoginSecurityMarker;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.project_dib.member.domain.Member;
 import org.zerock.project_dib.member.dto.MemberDTO;
 import org.zerock.project_dib.member.service.MemberService;
 
 @SpringBootTest
-
+@ExtendWith(SpringExtension.class)
 public class MemberServiceTests {
 
     @Autowired
@@ -27,5 +29,6 @@ public class MemberServiceTests {
                 .build();
         memberService.join(memberDTO);
     }
+
 
 }
