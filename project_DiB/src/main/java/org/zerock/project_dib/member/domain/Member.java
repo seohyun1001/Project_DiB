@@ -14,7 +14,7 @@ import java.util.Set;
 public class Member {
 
     private String mid;
-    private String mwp;
+    private String mpw;
     private String name;
     private String email;
     private String address;
@@ -23,5 +23,14 @@ public class Member {
     private LocalDateTime regdate;
     private LocalDateTime moddate;
 
-    private Set<MemberRole> roleSet = new HashSet<>();
+    @Builder.Default
+    private final Set<MemberRole> roleSet = new HashSet<>();
+
+    public void changePassword(String mpw) {
+        this.mpw = mpw;
+    }
+
+    public void addRole(MemberRole role) {
+        this.roleSet.add(role);
+    }
 }

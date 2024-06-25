@@ -16,7 +16,7 @@ public class MemberDTO {
     private String mid;
 
     @NotEmpty
-    private String mwp;
+    private String mpw;
 
     @NotEmpty
     private String name;
