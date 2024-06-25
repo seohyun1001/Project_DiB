@@ -22,6 +22,7 @@ public class Member {
     private String phone;
     private LocalDateTime regdate;
     private LocalDateTime moddate;
+    private boolean social;
 
     @Builder.Default
     private final Set<MemberRole> roleSet = new HashSet<>();

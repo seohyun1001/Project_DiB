@@ -1,5 +1,6 @@
 package org.zerock.project_dib.member.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/join")
-    public String joinPost(MemberDTO memberDTO, RedirectAttributes redirectAttributes) {
+    public String joinPost(@Valid MemberDTO memberDTO, RedirectAttributes redirectAttributes) {
         log.info("-------------------------- join --------------------------");
         log.info("memberDTO : " + memberDTO);
 
@@ -31,20 +32,16 @@ public class MemberController {
 
     @GetMapping("/join")
     public String join() {
-        return "MemberJoin";
+        return "/member/join";
     }
 
-//    @PostMapping("/confirm")
-//    public String confirmPost(String id, RedirectAttributes redirectAttributes) {
-//        log.info("-------------------------- confirm --------------------------");
-//        try {
-//            memberService.confirmId(id);
-//        } catch (MidExistException e) {
-//            redirectAttributes.addFlashAttribute("error", "midExist");
-//            return "redirect:/member/join";
-//        }
-//        redirectAttributes.addFlashAttribute("confirmResult", "success");
-//        return "redirect:/member/join";
-//    }
+    @GetMapping("/login")
+    public void login(String error, String logout) {
+        log.info("------------------------- login -------------------------");
+        log.info("-------------------- error : " + error + "--------------------");
+        if (logout != null){
+            log.info("user logout --------------");
+        }
+    }
 
 }

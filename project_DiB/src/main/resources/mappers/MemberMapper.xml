@@ -6,11 +6,15 @@
 <mapper namespace="org.zerock.project_dib.member.mapper.MemberMapper">
 
     <insert id="insert">
-        insert into member (mid, mpw, name, email, address, birthdate, phone, roleSet) values (#{mid}, #{mpw}, #{name}, #{email}, #{address}, #{birthdate}, #{phone}, "USER")
+        insert into member (mid, mpw, name, email, address, birthdate, phone, roleSet, social) values (#{mid}, #{mpw}, #{name}, #{email}, #{address}, #{birthdate}, #{phone}, "USER", 0)
     </insert>
 
     <select id="selectOneId" resultType="int">
         select count(*) from member where mid = #{mid}
+    </select>
+
+    <select id="getWithRoles" resultType="org.zerock.project_dib.member.domain.Member">
+        select mid from member where mid = #{mid} and social = 0
     </select>
 
 </mapper>
