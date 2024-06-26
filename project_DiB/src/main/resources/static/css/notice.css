@@ -67,7 +67,6 @@ main {
 /* 공지사항 등록 버튼 스타일 */
 .register-notice-btn {
     display: inline-block;
-    margin-top: 20px;
     padding: 10px 20px;
     background-color: black;
     color: white;
