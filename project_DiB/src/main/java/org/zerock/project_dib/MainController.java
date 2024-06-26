@@ -1,4 +1,4 @@
-package org.zerock.project_dib.member.controller;
+package org.zerock.project_dib;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -12,7 +12,7 @@ public class MainController {
 
     @GetMapping("/")
     public String index() {
-        return "/main";
+        return "/index";
     }
 
 }

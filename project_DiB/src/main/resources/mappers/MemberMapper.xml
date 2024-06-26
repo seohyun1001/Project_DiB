@@ -3,7 +3,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
                         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.zerock.project_dib.member.mapper.MemberMapper">
+<mapper namespace="org.zerock.project_dib.mapper.MemberMapper">
 
     <insert id="insert">
         insert into member (mid, mpw, name, email, address, birthdate, phone, roleSet, social) values (#{mid}, #{mpw}, #{name}, #{email}, #{address}, #{birthdate}, #{phone}, "USER", 0)

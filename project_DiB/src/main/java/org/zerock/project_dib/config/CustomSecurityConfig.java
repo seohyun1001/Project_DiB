@@ -53,4 +53,23 @@ public class CustomSecurityConfig {
         return http.build();
     }
 
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return new Custom403Handler();
+    }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        log.info("-------------------- web configure --------------------");
+        //static 폴더 안에 존재하는 정적 리소스는 로그인 과정을 거치지 않고 실행 가능
+        return (web) -> web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+    }
+
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+        tokenRepository.setDataSource(dataSource);
+        return tokenRepository;
+    }
+
 }

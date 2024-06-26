@@ -5,7 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.zerock.project_dib.pse.domain.Notice;
 import org.zerock.project_dib.pse.dto.NoticeDTO;
-import org.zerock.project_dib.pse.mapper.NoticeMapper;
+import org.zerock.project_dib.mapper.NoticeMapper;
 
 import java.time.LocalDate;
 import java.util.List;
