@@ -14,7 +14,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../../project_DiB/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../project_DiB/src/main/resources" type="java-resource" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="corretto-17" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.projectlombok:lombok:1.18.32" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-security:3.3.0" level="project" />
@@ -22,6 +22,9 @@
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-web:3.3.0" level="project" />
     <orderEntry type="library" name="Gradle: org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3" level="project" />
     <orderEntry type="library" name="Gradle: org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-validation:3.3.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.modelmapper:modelmapper:3.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: net.coobird:thumbnailator:0.4.16" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter:3.3.0" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.security:spring-security-config:6.3.0" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.security:spring-security-web:6.3.0" level="project" />
@@ -36,6 +39,8 @@
     <orderEntry type="library" name="Gradle: org.mybatis:mybatis:3.5.14" level="project" />
     <orderEntry type="library" name="Gradle: org.mybatis:mybatis-spring:3.0.3" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:2.0.13" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.tomcat.embed:tomcat-embed-el:10.1.24" level="project" />
+    <orderEntry type="library" name="Gradle: org.hibernate.validator:hibernate-validator:8.0.1.Final" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-autoconfigure:3.3.0" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot:3.3.0" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-logging:3.3.0" level="project" />
@@ -53,10 +58,12 @@
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.17.1" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.tomcat.embed:tomcat-embed-websocket:10.1.24" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.tomcat.embed:tomcat-embed-core:10.1.24" level="project" />
-    <orderEntry type="library" name="Gradle: org.apache.tomcat.embed:tomcat-embed-el:10.1.24" level="project" />
     <orderEntry type="library" name="Gradle: io.micrometer:micrometer-observation:1.13.0" level="project" />
     <orderEntry type="library" name="Gradle: com.zaxxer:HikariCP:5.1.0" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-jdbc:6.1.8" level="project" />
+    <orderEntry type="library" name="Gradle: jakarta.validation:jakarta.validation-api:3.0.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.jboss.logging:jboss-logging:3.5.3.Final" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml:classmate:1.7.0" level="project" />
     <orderEntry type="library" name="Gradle: ch.qos.logback:logback-classic:1.5.6" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.logging.log4j:log4j-to-slf4j:2.23.1" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:jul-to-slf4j:2.0.13" level="project" />

@@ -5,8 +5,6 @@
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/jcl-over-slf4j/2.0.13/d062d6e35605aabee0c727a950e29d39ac0a262e/jcl-over-slf4j-2.0.13.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/jcl-over-slf4j/2.0.13/247a72428efb9df1581a149ff9b4cd622f73d25d/jcl-over-slf4j-2.0.13-sources.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

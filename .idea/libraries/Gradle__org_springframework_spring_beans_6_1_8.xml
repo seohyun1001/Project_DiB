@@ -5,8 +5,6 @@
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/6.1.8/79a5e45383542ff514b5328fe277410cf4054f3b/spring-beans-6.1.8.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/6.1.8/6b0c65bb443e810e49dff5d473f73f513b96c519/spring-beans-6.1.8-sources.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

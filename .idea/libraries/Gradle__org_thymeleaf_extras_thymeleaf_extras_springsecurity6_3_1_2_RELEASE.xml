@@ -5,8 +5,6 @@
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.thymeleaf.extras/thymeleaf-extras-springsecurity6/3.1.2.RELEASE/574c188eb147191e2f162419e9fc780fcf3256d7/thymeleaf-extras-springsecurity6-3.1.2.RELEASE.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.thymeleaf.extras/thymeleaf-extras-springsecurity6/3.1.2.RELEASE/469dca77d3192ae48e1cf2a5141b8b8c214b1e76/thymeleaf-extras-springsecurity6-3.1.2.RELEASE-sources.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>
