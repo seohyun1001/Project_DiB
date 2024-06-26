@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<footer th:fragment="footerFragment">
+    <div class="footer-container">
+        <div class="footer-left">
+            <h2>DiB</h2>
+            <p>편안한 밤을 위한 숙소, 특별한 맛집,<br>
+                잊지 못할 관광지까지!<br>
+                모든 정보를 한 곳에서 만나보세요.<br>
+                Dive Into Busan!</p>
+            <p>Copyright © 2024 Dive Into Busan</p>
+        </div>
+        <div class="footer-center">
+            <ul>
+                <br>
+                <br>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/gallery">Gallery</a></li>
+                <li><a href="/services">Our Services</a></li>
+            </ul>
+        </div>
+        <div class="footer-right">
+            <ul>
+                <br>
+                <br>
+                <li><a href="/contact">Contact US</a></li>
+                <li><a href="/privacy">Privacy Policy</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

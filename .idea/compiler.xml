@@ -10,9 +10,10 @@
         <module name="project_DiB.main" />
       </profile>
     </annotationProcessing>
-<<<<<<< HEAD
-=======
-    <bytecodeTargetLevel target="17" />
->>>>>>> origin/main
+    <bytecodeTargetLevel>
+      <module name="project_DiB" target="17" />
+      <module name="project_DiB.main" target="17" />
+      <module name="project_DiB.test" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
