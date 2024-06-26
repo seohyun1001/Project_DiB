@@ -13,7 +13,7 @@ body {
 /* 메인 텍스트 스타일 */
 .main-title {
     color: white;
-    font-size: 7em; /* 글자 크기 3배 */
+    font-size: 10em;
     text-align: center;
     margin-top: 5px;
     margin-bottom: 10px;
@@ -78,7 +78,7 @@ header {
 }
 
 .menu a:hover {
-    background-color: rgba(0, 123, 255, 0.8); /* 반투명한 파란색 배경 */
+    background-color: rgba(0, 123, 255, 0.6); /* 반투명한 파란색 배경 */
     color: white;
 }
 
