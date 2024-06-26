@@ -39,6 +39,8 @@ public class CustomSecurityConfig {
         http.formLogin().loginPage("/member/login");
         http.csrf().disable();
 
+
+
         // 자동 로그인 - 쿠키 생성
         http.rememberMe()
                 .key("12345678")

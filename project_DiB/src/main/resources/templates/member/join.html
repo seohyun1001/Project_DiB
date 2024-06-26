@@ -8,6 +8,7 @@
 </head>
 
 <div layout:fragment="content">
+    <div class="container-fluid d-flex justify-content-center" style="height:100vh">
     <div class="row mt-3">
         <div class="col">
             <div class="card">
@@ -19,7 +20,7 @@
                         <div class="input-group mb-3">
                             <span class="input-group-text">MID</span>
                             <input type="text" name="mid" class="form-control">
-                            <button class="confirm">confirm</button>
+                            <button class="btn btn-secondary confirm">confirm</button>
                         </div>
 
                         <div class="input-group mb-3">
@@ -64,24 +65,34 @@
             </div> <!-- end card -->
         </div> <!-- end col -->
     </div> <!-- end row -->
+    </div>
 </div> <!-- end layout -->
 
 <script layout:fragment="script" th:inline="javascript"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 <script>
     document.querySelector(".confirm").addEventListener("click", function (e) {
-        const data = document.querySelector(".mid").data;
+        e.preventDefault();
+        const data = document.querySelector("[name='mid']").value;
 
         axios.get("http://localhost:8080/confirmId/" + data).then(res => {
             console.log(res)
             const exist = res.data
             if (exist) {
                 alert("사용 불가능")
-            } else {
+            } if (!data){
+                e.preventDefault();
+                alert("아이디를 입력해주세요.");
+            }
+            else {
                 alert("사용 가능")
             }
-        })
-    })
+        }).catch(error => {
+            console.error(error);
+        });
+    });
 
 </script>
 

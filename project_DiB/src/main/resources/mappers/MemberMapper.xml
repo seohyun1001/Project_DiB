@@ -14,7 +14,7 @@
     </select>
 
     <select id="getWithRoles" resultType="org.zerock.project_dib.member.domain.Member">
-        select mid from member where mid = #{mid} and social = 0
+        select * from member where mid = #{mid} and social = 0
     </select>
 
 </mapper>
