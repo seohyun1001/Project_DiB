@@ -14,4 +14,8 @@ public interface AccommodationMapper {
 
     AccommodationVO selectOne(int ano);
 
+    void update(AccommodationVO accommodationVO);
+
+    void delete(int ano);
+
 }

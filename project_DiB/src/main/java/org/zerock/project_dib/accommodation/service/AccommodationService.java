@@ -12,4 +12,8 @@ public interface AccommodationService {
 
     AccommodationDTO accInfo(int ano);
 
+    void modify(AccommodationDTO accommodationDTO);
+
+    void delete(int ano);
+
 }

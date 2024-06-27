@@ -43,4 +43,18 @@ public class AccommodationServiceImpl implements AccommodationService {
         return modelMapper.map(accommodationMapper.selectOne(ano), AccommodationDTO.class);
     }
 
+    @Override
+    public void modify(AccommodationDTO accommodationDTO) {
+
+        accommodationMapper.update(modelMapper.map(accommodationDTO, AccommodationVO.class));
+
+    }
+
+    @Override
+    public void delete(int ano) {
+
+        accommodationMapper.delete(ano);
+
+    }
+
 }

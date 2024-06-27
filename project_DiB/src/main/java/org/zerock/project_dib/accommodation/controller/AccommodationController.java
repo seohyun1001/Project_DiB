@@ -7,11 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.project_dib.accommodation.dto.AccommodationDTO;
 import org.zerock.project_dib.accommodation.service.AccommodationService;
+
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/accommodation")
@@ -63,7 +66,7 @@ public class AccommodationController {
     }
 
     @PostMapping("/modify")
-    public String modify(int ano, @Valid AccommodationDTO accommodationDTO, RedirectAttributes redirectAttributes, BindingResult bindingResult) {
+    public String modify(int ano, @Valid AccommodationDTO accommodationDTO, RedirectAttributes redirectAttributes, BindingResult bindingResult) throws IOException {
 
         if (bindingResult.hasErrors()) {
             log.info("has modify error........................");
@@ -71,10 +74,19 @@ public class AccommodationController {
             return "redirect:/accommodation/modify?ano="+ ano;
         }
 
+        accommodationService.modify(accommodationDTO);
+
         log.info(accommodationDTO);
-        
+
 
         return "redirect:/accommodation/view?ano=" + ano;
+    }
+
+    @PostMapping("/delete/{ano}")
+    public void delete(@PathVariable("ano") int ano) {
+
+        accommodationService.delete(ano);
+
     }
 
 

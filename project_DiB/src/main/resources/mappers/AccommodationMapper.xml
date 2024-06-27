@@ -18,4 +18,13 @@
         select * from accommodation where ano = #{ano}
     </select>
 
+    <update id="update">
+        update accommodation set acc_name = #{acc_name}, acc_exp = #{acc_exp}, acc_loc = #{acc_loc}, acc_phone = #{acc_phone}, moddate = #{moddate}
+        where ano = #{ano}
+    </update>
+
+    <delete id="delete">
+        delete from accommodation where ano = #{ano}
+    </delete>
+
 </mapper>

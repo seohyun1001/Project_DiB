@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <button type="button" class="btn-secondary">목록으로 돌아가기</button>
-                <button type="submit" class="btn-primary" th:data-ano="${accInfo.ano}">수정 완료</button>
+                <button type="submit" class="btn-primary">수정 완료</button>
             </form>
         </div>
     </div>
@@ -40,17 +40,6 @@
         e.stopPropagation()
 
         self.location = '/accommodation/list'
-
-    }, false)
-
-    document.querySelector(".btn-primary").addEventListener("click", function (e) {
-
-        e.preventDefault()
-        e.stopPropagation()
-
-        const ano = e.target.getAttribute('data-ano')
-
-        self.location = '/accommodation/view?ano=' + ano
 
     }, false)
 

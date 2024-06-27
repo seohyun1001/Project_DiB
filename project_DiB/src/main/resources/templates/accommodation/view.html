@@ -29,6 +29,7 @@
             </div>
             <button type="button" class="btn-secondary">목록으로 돌아가기</button>
             <button type="button" class="btn-primary" th:data-ano="${accInfo.ano}">수정</button>
+            <button type="button" class="btn-danger" th:data-ano="${accInfo.ano}">삭제</button>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -53,6 +54,19 @@
         const ano = e.target.getAttribute('data-ano')
 
         self.location = `/accommodation/modify?ano=` + ano
+
+    },false)
+
+    document.querySelector(".btn-danger").addEventListener("click", function (e){
+
+        e.preventDefault()
+        e.stopPropagation()
+
+        const ano = e.target.getAttribute('data-ano')
+
+        axios.post("/accommodation/delete/"+ ano).then(
+            self.location = `/accommodation/list`
+        )
 
     },false)
 
