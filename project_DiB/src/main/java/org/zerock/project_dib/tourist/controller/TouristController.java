@@ -4,10 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.zerock.project_dib.tourist.domain.Tourist;
-import org.zerock.project_dib.tourist.domain.TouristImg;
+import org.springframework.web.multipart.MultipartFile;
+import org.zerock.project_dib.tourist.dto.TouristDTO;
+import org.zerock.project_dib.tourist.dto.TouristImgDTO;
 import org.zerock.project_dib.tourist.service.TouristService;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -19,40 +21,61 @@ public class TouristController {
 
     @GetMapping("/")
     public String getList(Model model) {
-        model.addAttribute("list", touristService.getList());
+        List<TouristDTO> list = touristService.getList();
+        model.addAttribute("list", list);
         return "tourists";
     }
 
     @GetMapping("/read/{tno}")
-    public Tourist read(@PathVariable("tno") int tno) {
+    @ResponseBody
+    public TouristDTO read(@PathVariable("tno") int tno) {
         return touristService.read(tno);
     }
 
+
+
     @PostMapping("/register")
-    public String register(Tourist tourist) {
-        touristService.register(tourist);
+    public String register(TouristDTO touristDTO, @RequestParam("file") MultipartFile file) throws IOException {
+        if (!file.isEmpty()) {
+            byte[] bytes = file.getBytes();
+            touristDTO.setTourImageBytes(bytes);
+        }
+        touristService.register(touristDTO);
         return "redirect:/tourists/";
     }
 
     @PostMapping("/modify/{tno}")
-    public void modify(@PathVariable("tno") int tno, Tourist tourist) {
-        tourist.setTno(tno);
-        touristService.modify(tourist); // 이 부분이 추가됨
+    @ResponseBody
+    public void modify(@PathVariable("tno") int tno, @RequestBody TouristDTO touristDTO) {
+        touristDTO.setTno(tno);
+        touristService.modify(touristDTO);
     }
 
     @GetMapping("/{tno}/images")
-    public List<TouristImg> getImgList(@PathVariable("tno") int tno) {
+    @ResponseBody
+    public List<TouristImgDTO> getImgList(@PathVariable("tno") int tno) {
         return touristService.getImgList(tno);
     }
 
     @PostMapping("/{tno}/images")
-    public void registerImg(@PathVariable("tno") int tno, TouristImg touristImg) {
-        touristImg.setTno(tno);
-        touristService.registerImg(touristImg);
+    @ResponseBody
+    public void registerImg(@PathVariable("tno") int tno, @RequestParam MultipartFile file) throws IOException {
+        TouristDTO touristDTO = new TouristDTO();
+        touristDTO.setTno(tno);
+
+        if (!file.isEmpty()) {
+            byte[] bytes = file.getBytes();
+            touristDTO.setTourImageBytes(bytes); // TouristDTO의 tourImageBytes 필드에 바이트 배열 저장
+        }
+
+        touristService.registerImg(touristDTO, file);
     }
 
     @PostMapping("/remove/{tno}/images")
+    @ResponseBody
     public void removeImgs(@PathVariable("tno") int tno) {
         touristService.removeImgs(tno);
     }
+
+
 }

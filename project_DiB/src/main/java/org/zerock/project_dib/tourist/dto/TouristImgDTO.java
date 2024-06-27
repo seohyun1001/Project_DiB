@@ -1,9 +1,9 @@
-package org.zerock.project_dib.tourist.domain;
+package org.zerock.project_dib.tourist.dto;
 
 import lombok.Data;
 
 @Data
-public class TouristImg {
+public class TouristImgDTO {
 
     private String uuid;
 
@@ -12,6 +12,4 @@ public class TouristImg {
     private int tno;
 
     private int ord;
-
-    private byte[] image;
 }

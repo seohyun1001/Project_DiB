@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Tourist Data</title>
+</head>
+<body>
+<h2>Insert Tourist Data</h2>
+<form action="/tourists/register" method="post" enctype="multipart/form-data">
+    <label for="tourName">Tour Name:</label><br>
+    <input type="text" id="tourName" name="tourName" required><br><br>
+
+    <label for="tourAddr">Tour Address:</label><br>
+    <input type="text" id="tourAddr" name="tourAddr" required><br><br>
+
+    <label for="tourOpentime">Opening Time:</label><br>
+    <input type="text" id="tourOpentime" name="tourOpentime" required><br><br>
+
+    <label for="tourClosetime">Closing Time:</label><br>
+    <input type="text" id="tourClosetime" name="tourClosetime" required><br><br>
+
+    <label for="tourParking">Parking Available:</label>
+    <input type="checkbox" id="tourParking" name="tourParking"><br><br>
+
+    <label for="tourContent">Tour Description:</label><br>
+    <textarea id="tourContent" name="tourContent" rows="4" required></textarea><br><br>
+
+    <label for="file">Tour Image:</label><br>
+    <input type="file" id="file" name="file" accept="image/*" required><br><br>
+
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

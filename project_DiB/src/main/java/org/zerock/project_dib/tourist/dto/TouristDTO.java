@@ -1,10 +1,12 @@
-package org.zerock.project_dib.tourist.domain;
+package org.zerock.project_dib.tourist.dto;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.time.LocalDateTime;
 
 @Data
-public class Tourist {
+public class TouristDTO {
 
     private int tno;
 
@@ -20,7 +22,7 @@ public class Tourist {
 
     private String tourContent;
 
-    private byte[] tourImage; // 이미지를 byte 배열로 저장
+    private byte[] tourImageBytes; // 이미지 파일을 byte 배열로 변환하여 저장할 필드
 
     private LocalDateTime modDate;
 

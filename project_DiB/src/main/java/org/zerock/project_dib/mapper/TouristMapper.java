@@ -1,4 +1,4 @@
-package org.zerock.project_dib.tourist.mapper;
+package org.zerock.project_dib.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.zerock.project_dib.tourist.domain.Tourist;
