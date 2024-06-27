@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/project_DiB.iml" filepath="$PROJECT_DIR$/.idea/modules/project_DiB.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/project_DiB.main.iml" filepath="$PROJECT_DIR$/.idea/modules/project_DiB.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/project_DiB.test.iml" filepath="$PROJECT_DIR$/.idea/modules/project_DiB.test.iml" />
-    </modules>
-  </component>
+    <component name="ProjectModuleManager">
+        <modules>
+            <module fileurl="file://$PROJECT_DIR$/.idea/modules/project_DiB.iml" filepath="$PROJECT_DIR$/.idea/modules/project_DiB.iml" />
+            <module fileurl="file://$PROJECT_DIR$/.idea/modules/project_DiB.main.iml" filepath="$PROJECT_DIR$/.idea/modules/project_DiB.main.iml" />
+            <module fileurl="file://$PROJECT_DIR$/.idea/modules/project_DiB.test.iml" filepath="$PROJECT_DIR$/.idea/modules/project_DiB.test.iml" />
+            <module fileurl="file://$PROJECT_DIR$/.idea/team_project.iml" filepath="$PROJECT_DIR$/.idea/team_project.iml" />
+        </modules>
+    </component>
 </project>

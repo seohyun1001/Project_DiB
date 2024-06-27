@@ -7,7 +7,6 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager">
     <output-test url="file://$MODULE_DIR$/../../project_DiB/build/classes/java/test" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../project_DiB/src/test">
