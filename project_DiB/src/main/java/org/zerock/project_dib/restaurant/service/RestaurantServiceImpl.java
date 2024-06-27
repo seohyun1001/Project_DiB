@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.zerock.project_dib.restaurant.dto.PageRequestDTO;
 import org.zerock.project_dib.restaurant.dto.PageResponseDTO;
 import org.zerock.project_dib.restaurant.dto.RestaurantReviewDTO;
-import org.zerock.project_dib.restaurant.mapper.RestaurantMapper;
+import org.zerock.project_dib.restaurant.mappers.RestaurantMapper;
 import org.modelmapper.ModelMapper;
 import java.util.List;
 
