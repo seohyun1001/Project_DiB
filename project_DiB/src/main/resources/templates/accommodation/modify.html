@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{/layout/basic.html}">
+<head>
+    <title>[[${accInfo.acc_name}]]</title>
+</head>
+<div layout:fragment="content">
+    <div class="row mt-3">
+        <div class="col">
+            <form action="/accommodation/modify" method="post">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="input-group mb-3">
+                            <input type="text" name="acc_name" class="form-control" th:value="${accInfo.acc_name}">
+                        </div>
+                        <div class="input-group mb-3">
+                            <textarea class="form-control col-sm-5" rows="5"
+                                      name="acc_exp">[[${accInfo.acc_exp}]]</textarea>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">주소</span>
+                            <input type="text" name="acc_loc" class="form-control" th:value="${accInfo.acc_loc}">
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn-secondary">목록으로 돌아가기</button>
+                <button type="submit" class="btn-primary" th:data-ano="${accInfo.ano}">수정 완료</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/reply.js"></script>
+</div>
+<script layout:fragment="script" th:inline="javascript">
+
+    document.querySelector(".btn-secondary").addEventListener("click", function (e) {
+
+        e.preventDefault()
+        e.stopPropagation()
+
+        self.location = '/accommodation/list'
+
+    }, false)
+
+    document.querySelector(".btn-primary").addEventListener("click", function (e) {
+
+        e.preventDefault()
+        e.stopPropagation()
+
+        const ano = e.target.getAttribute('data-ano')
+
+        self.location = '/accommodation/view?ano=' + ano
+
+    }, false)
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

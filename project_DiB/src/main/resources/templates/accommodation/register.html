@@ -32,8 +32,8 @@
                         </div>
                         <div class="my-4">
                             <div class="float-end">
-                                <button type="submit" class="btn btn-primary submitBtn">등록</button>
-                                <button type="button" class="btn btn-secondary">목록으로</button>
+                                <button type="submit" class="btn btn-primary submitBtn">등록 완료</button>
+                                <button type="button" class="btn btn-secondary">목록으로 돌아가기</button>
                             </div>
                         </div>
                     </form>
@@ -47,6 +47,15 @@
 
 
 <script layout:fragment="script" th:inline="javascript">
+
+    document.querySelector(".btn-secondary").addEventListener("click", function (e){
+
+        e.preventDefault()
+        e.stopPropagation()
+
+        self.location = '/accommodation/list'
+
+    },false)
 
 </script>
 </html>

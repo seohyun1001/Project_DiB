@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +30,7 @@ public class AccommodationController {
     public String addAccommodation(@Valid AccommodationDTO accommodationDTO, RedirectAttributes redirectAttributes, BindingResult bindingResult) throws Exception {
 
         if (bindingResult.hasErrors()){
-            log.info("has error..........");
+            log.info("has register error..........");
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             return "redirect:/accommodation/register";
         }
@@ -41,8 +42,40 @@ public class AccommodationController {
     }
 
     @GetMapping("/list")
-    public void list() {
+    public void list(@Valid AccommodationDTO accommodationDTO, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            log.info("has list error........................");
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+        }
+
+        model.addAttribute("accList", accommodationService.accList());
 
     }
+
+    @GetMapping({"/view", "/modify"})
+    public void view(int ano, Model model) {
+
+        AccommodationDTO accommodationDTO = accommodationService.accInfo(ano);
+        log.info(accommodationDTO);
+        model.addAttribute("accInfo", accommodationDTO);
+
+    }
+
+    @PostMapping("/modify")
+    public String modify(int ano, @Valid AccommodationDTO accommodationDTO, RedirectAttributes redirectAttributes, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            log.info("has modify error........................");
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            return "redirect:/accommodation/modify?ano="+ ano;
+        }
+
+        log.info(accommodationDTO);
+        
+
+        return "redirect:/accommodation/view?ano=" + ano;
+    }
+
 
 }

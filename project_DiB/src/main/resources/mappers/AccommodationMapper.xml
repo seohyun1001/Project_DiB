@@ -10,4 +10,12 @@
         values (#{ano}, #{acc_name}, #{acc_exp}, #{acc_loc}, #{acc_phone})
     </insert>
 
+    <select id="findAll" resultType="org.zerock.project_dib.accommodation.domain.AccommodationVO">
+        select * from accommodation
+    </select>
+
+    <select id="selectOne" resultType="org.zerock.project_dib.accommodation.domain.AccommodationVO">
+        select * from accommodation where ano = #{ano}
+    </select>
+
 </mapper>
