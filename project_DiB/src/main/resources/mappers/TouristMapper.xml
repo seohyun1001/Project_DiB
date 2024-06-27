@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.project_dib.tourist.mapper.TouristMapper">
+
+<!--    <resultMap id="TouristMap" type="org.zerock.project_dib.tourist.domain.Tourist">-->
+<!--        <id property="tno" column="tno"/>-->
+<!--        <result property="tourName" column="tour_name"/>-->
+<!--        <result property="tourAddr" column="tour_addr"/>-->
+<!--        <result property="tourOpentime" column="tour_opentime"/>-->
+<!--        <result property="tourClosetime" column="tour_closetime"/>-->
+<!--        <result property="tourParking" column="tour_parking"/>-->
+<!--        <result property="tourContent" column="tour_content"/>-->
+<!--        <result property="tourImage" column="tour_image"/>-->
+<!--        <result property="modDate" column="moddate"/>-->
+<!--        <result property="regDate" column="regdate"/>-->
+<!--    </resultMap>-->
+
+<!--    <resultMap id="TouristImgMap" type="org.zerock.project_dib.tourist.domain.TouristImg">-->
+<!--        <id property="uuid" column="uuid"/>-->
+<!--        <result property="fileName" column="file_name"/>-->
+<!--        <result property="tno" column="tno"/>-->
+<!--        <result property="ord" column="ord"/>-->
+<!--    </resultMap>-->
+
+    <select id="getList" resultType="org.zerock.project_dib.tourist.domain.Tourist">
+        SELECT *
+        FROM tourist
+    </select>
+
+    <select id="read" parameterType="int" resultType="org.zerock.project_dib.tourist.domain.Tourist">
+        SELECT *
+        FROM tourist
+        WHERE tno = #{tno}
+    </select>
+
+    <insert id="insert" parameterType="org.zerock.project_dib.tourist.domain.Tourist">
+        INSERT INTO tourist (tour_Name, tour_addr, tour_opentime, tour_closetime, tour_parking, tour_content,
+                             tour_image)
+        VALUES (#{tourName}, #{tourAddr}, #{tourOpentime}, #{tourClosetime}, #{tourParking}, #{tourContent},
+                #{tourImage})
+    </insert>
+
+    <update id="update" parameterType="org.zerock.project_dib.tourist.domain.Tourist">
+        UPDATE tourist
+        SET tour_name      = #{tourName},
+            tour_addr      = #{tourAddr},
+            tour_opentime  = #{tourOpentime},
+            tour_closetime = #{tourClosetime},
+            tour_parking   = #{tourParking},
+            tour_content   = #{tourContent},
+            tour_image     = #{tourImage},
+            moddate        = #{modDate},
+            regdate        = #{regDate}
+        WHERE tno = #{tno}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE
+        FROM tourist
+        WHERE tno = #{tno}
+    </delete>
+
+    <!-- Tourist 관련 쿼리 -->
+    <select id="getImgList" parameterType="int" resultType="org.zerock.project_dib.tourist.domain.TouristImg">
+        SELECT *
+        FROM tourist_img
+        WHERE tno = #{tno}
+        ORDER BY ord
+    </select>
+
+    <insert id="insertImg" parameterType="org.zerock.project_dib.tourist.domain.TouristImg">
+        INSERT INTO tourist_img (uuid, file__name, tno, ord)
+        VALUES (#{uuid}, #{fileName}, #{tno}, #{ord})
+    </insert>
+
+    <delete id="deleteImgs" parameterType="int">
+        DELETE
+        FROM tourist_img
+        WHERE tno = #{tno}
+    </delete>
+
+</mapper>
+
+
+
+
+
+
+

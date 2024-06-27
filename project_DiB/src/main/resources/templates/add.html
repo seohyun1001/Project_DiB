@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DiB - Dive Into Busan - 게시글 추가</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<header>
+    <div class="logo">DiB</div>
+    <nav>
+        <ul>
+            <li>맛집</li>
+            <li>숙박</li>
+            <li>관광지</li>
+            <li>공지사항</li>
+        </ul>
+    </nav>
+    <div class="my-page">
+        <button>My Page ▼</button>
+    </div>
+    <div class="search-bar">
+        <input type="text" placeholder="검색어를 입력해주세요.">
+        <button>🔍</button>
+    </div>
+</header>
+<main class="container mt-4">
+    <h1 class="mb-4">게시글 추가</h1>
+    <form action="/posts/add" method="post">
+        <div class="form-group">
+            <label for="title">제목</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="content">내용</label>
+            <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="author">작성자</label>
+            <input type="text" class="form-control" id="author" name="author" required>
+        </div>
+        <div class="form-group">
+            <label for="createdAt">작성일</label>
+            <input type="date" class="form-control" id="createdAt" name="createdAt" required>
+        </div>
+        <button type="submit" class="btn btn-primary">추가하기</button>
+    </form>
+</main>
+<footer class="mt-4">
+    <div class="footer-content container">
+        <p>© 2024 Dive Into Busan</p>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Gallery</a></li>
+                <li><a href="#">Our Services</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </nav>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"
+        integrity="sha384-bU9dFe5wcUdMHU8Ofwb6m5kG65tlnUNfS4/0DI5TyKBThT2ow/46UxhFgMv/XG6C"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+        crossorigin="anonymous"></script>
+</body>
+</html>
