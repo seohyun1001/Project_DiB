@@ -57,6 +57,7 @@ public class NoticeController {
     @PostMapping("/modify")
     public String modifyNotice(@ModelAttribute NoticeDTO noticeDTO) {
         noticeDTO.setModdate(LocalDate.now()); // 수정일자를 현재 날짜로 설정
+        System.out.println("Modifying Notice: " + noticeDTO);
         noticeService.modify(noticeDTO);
         return "redirect:/notice";
     }

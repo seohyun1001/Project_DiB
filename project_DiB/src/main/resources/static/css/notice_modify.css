@@ -1,4 +1,4 @@
-/* notice_detail.css */
+/* notice_modify.css */
 
 /* 공지사항 컨테이너 스타일 */
 .notice-container {
@@ -58,7 +58,7 @@ main {
     width: 100%;
     margin-top: 20px;
     margin-left: 160px;
-    gap: 240px; /* 버튼 사이 간격 */
+    gap: 260px; /* 버튼 사이 간격 */
 }
 
 .btn-group {

@@ -15,6 +15,11 @@
     align-items: flex-start; /* 변경: 왼쪽 정렬 */
 }
 
+/* 기본적인 패딩 값을 0으로 설정 */
+.navbar {
+    padding: 0 !important;
+}
+
 /* 화면 중앙 흰색 컨테이너의 위치 조정 */
 main {
     padding-top: 20px;
