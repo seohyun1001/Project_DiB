@@ -13,23 +13,27 @@
 
 <main>
     <div class="notice-container">
-        <h3>공지사항</h3>
+        <h3 class="notice-detail-title">공지사항</h3>
         <div class="notice-detail">
             <div class="mb-3">
-                <label for="noticeTitle" class="form-label">제목</label>
+                <label for="noticeTitle" class="form-label"></label>
                 <input type="text" class="form-control" id="noticeTitle" th:value="${notice.noticeTitle}" readonly>
             </div>
             <div class="mb-3">
-                <label for="noticeContent" class="form-label">내용</label>
+                <label for="noticeContent" class="form-label"></label>
                 <textarea class="form-control" id="noticeContent" rows="10" readonly th:text="${notice.noticeContent}"></textarea>
             </div>
             <div class="mb-3">
-                <label for="regdate" class="form-label">등록날짜</label>
+                <label for="regdate" class="form-label"></label>
                 <input type="text" class="form-control" id="regdate" th:value="${notice.regdate}" readonly>
             </div>
+            <div class="mb-3">
+                <label for="noticeImage" class="form-label">이미지</label>
+                <img th:if="${notice.noticeImagePath}" th:src="@{${notice.noticeImagePath}}" class="img-fluid" alt="공지사항 이미지">
+            </div>
             <div class="d-flex justify-content-between">
-                <a href="/notice" class="btn btn-secondary">목록으로 돌아가기</a>
-                <a href="/notice/modify/${notice.nno}" class="btn btn-primary">공지사항 수정</a>
+                <a href="/notice" class="btn btn-secondary mx-auto">목록으로 돌아가기</a>
+                <a th:href="@{/notice/modify/{nno}(nno=${notice.nno})}" class="btn btn-primary">공지사항 수정</a>
             </div>
         </div>
     </div>

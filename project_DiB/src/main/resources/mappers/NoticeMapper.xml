@@ -18,12 +18,12 @@
         SELECT * FROM notice WHERE nno = #{nno}
     </select>
 
-    <insert id="insert" parameterType="org.zerock.project_dib.pse.dto.NoticeDTO">
+    <insert id="insert" parameterType="org.zerock.project_dib.pse.domain.Notice">
         INSERT INTO notice (notice_title, notice_content, notice_image, regdate, moddate)
         VALUES (#{noticeTitle}, #{noticeContent}, #{noticeImage}, #{regdate}, #{moddate})
     </insert>
 
-    <update id="update" parameterType="org.zerock.project_dib.pse.dto.NoticeDTO">
+    <update id="update">
         UPDATE notice
         SET notice_title = #{noticeTitle},
             notice_content = #{noticeContent},

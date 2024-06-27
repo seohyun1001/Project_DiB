@@ -25,6 +25,16 @@ main {
     width: 100%;
 }
 
+/* 공지사항 제목 스타일 */
+.notice-detail-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 20px;
+    margin-top: 10px;
+    width: 100%; /* 변경: 전체 폭으로 확장하여 왼쪽 정렬 유지 */
+}
+
 /* 버튼 스타일 */
 .btn {
     padding: 10px 20px;
@@ -38,4 +48,10 @@ main {
 
 .btn-secondary:hover {
     background-color: grey;
+}
+
+/* 목록으로 돌아가기 버튼을 가운데 정렬 */
+.d-flex.justify-content-between .mx-auto {
+    margin-left: auto;
+    margin-right: auto;
 }

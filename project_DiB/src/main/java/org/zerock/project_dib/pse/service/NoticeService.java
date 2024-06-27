@@ -1,5 +1,7 @@
 package org.zerock.project_dib.pse.service;
 
+import org.springframework.web.multipart.MultipartFile;
+import org.zerock.project_dib.pse.domain.Notice;
 import org.zerock.project_dib.pse.dto.NoticeDTO;
 import org.zerock.project_dib.pse.dto.PageRequestDTO;
 import org.zerock.project_dib.pse.dto.PageResponseDTO;
@@ -12,4 +14,14 @@ public interface NoticeService {
     void modify(NoticeDTO noticeDTO);
     void remove(Long nno);
     PageResponseDTO<NoticeDTO> getAllNotices(PageRequestDTO pageRequestDTO);
+
+    default Notice dtoToEntity(NoticeDTO noticeDTO){
+        Notice notice = new Notice();
+        notice.setNno(noticeDTO.getNno());
+        notice.setNoticeTitle(noticeDTO.getNoticeTitle());
+        notice.setNoticeContent(noticeDTO.getNoticeContent());
+        MultipartFile file = noticeDTO.getNoticeImage();
+        notice.setNoticeImage(file.getName());
+        return notice;
+    }
 }

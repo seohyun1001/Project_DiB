@@ -70,7 +70,7 @@ header {
 .menu a {
     text-decoration: none;
     color: white;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
     padding: 10px 20px;
     border-radius: 5px;
@@ -82,9 +82,12 @@ header {
     color: white;
 }
 
+/* 로그인 버튼 */
 .menu-item a {
-    background-color: #007bff;
+    background-color: rgba(0, 123, 255, 0.8); /* 살짝 투명한 파란색 */
     color: white;
+    font-size: 25px; /* 로그인 버튼 크기 조정 */
+    padding: 8px 16px;
 }
 
 main {

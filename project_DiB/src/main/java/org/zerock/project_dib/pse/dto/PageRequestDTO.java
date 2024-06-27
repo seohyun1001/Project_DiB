@@ -24,10 +24,10 @@ public class PageRequestDTO {
     private int page = 1;
 
     @Builder.Default
-    @Min(value = 10)
+    @Min(value = 7)
     @Max(value = 100)
     @Positive
-    private int size = 10;
+    private int size = 7;
 
     private String[] types;
     private String keyword;
