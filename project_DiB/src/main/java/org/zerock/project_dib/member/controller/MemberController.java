@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,11 +48,30 @@ public class MemberController {
         }
     }
 
-    @GetMapping({"/myPage"})
+    @GetMapping({"/myPage", "/modify"})
     public void readMemberInfo(Principal principal, String mid, Model model) {
         MemberDTO memberDTO = memberService.myPage(principal.getName());
         log.info("memberDTO : " + memberDTO);
         model.addAttribute("memberDTO", memberDTO);
+    }
+
+    @PostMapping("/modify")
+    public String modify(@Valid MemberDTO memberDTO,
+                         BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            redirectAttributes.addAttribute("mid", memberDTO.getMid());
+            return "redirect:/member/myPage";
+        }
+        memberService.modify(memberDTO);
+        return "redirect:/member/myPage";
+    }
+
+    @PostMapping("/delete")
+    public String delete(String mid, RedirectAttributes redirectAttributes) {
+        memberService.delete(mid);
+        return "redirect:/";
     }
 
 }

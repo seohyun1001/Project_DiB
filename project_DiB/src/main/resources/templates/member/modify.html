@@ -16,7 +16,7 @@
                     JOIN
                 </div> <!-- end card-header -->
                 <div class="card-body">
-                    <form id="myPageForm">
+                    <form id="modifyForm">
                         <div class="input-group mb-3">
                             <span class="input-group-text">MID</span>
                             <input type="text" name="mid" class="form-control" th:value="${memberDTO.mid}" readonly>
@@ -24,7 +24,7 @@
 
                         <div class="input-group mb-3">
                             <span class="input-group-text">MPW</span>
-                            <input type="password" name="mpw" class="form-control" readonly>
+                            <input type="password" name="mpw" class="form-control" >
                         </div>
 
                         <div class="input-group mb-3">
@@ -34,23 +34,23 @@
 
                         <div class="input-group mb-3">
                             <span class="input-group-text">EMAIL</span>
-                            <input type="text" name="email" class="form-control" th:value="${memberDTO.email}" readonly>
+                            <input type="text" name="email" class="form-control" th:value="${memberDTO.email}" >
                         </div>
 
                         <div class="input-group mb-3">
                             <span class="input-group-text">ADDRESS</span>
-                            <input type="text" name="address" class="form-control" th:value="${memberDTO.address}" readonly>
+                            <input type="text" name="address" class="form-control" th:value="${memberDTO.address}" >
                         </div>
 
                         <div class="input-group mb-3">
                             <span class="input-group-text">PHONE</span>
-                            <input type="text" name="phone" class="form-control" th:value="${memberDTO.phone}" readonly>
+                            <input type="text" name="phone" class="form-control" th:value="${memberDTO.phone}" >
                         </div>
 
                         <div class="my-4">
                             <div class="float-end">
-                                <button type="submit" class="btn btn-danger quitBtn">탈퇴</button>
                                 <button type="submit" class="btn btn-primary modifyBtn">정보수정</button>
+                                <button type="reset" class="btn btn-secondary">리셋</button>
                             </div>
                         </div>
                     </form> <!-- end form -->
@@ -61,24 +61,23 @@
     </div> <!-- end row -->
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </div> <!-- end layout -->
 
 <script layout:fragment="script" th:inline="javascript">
-
-    document.querySelector(".modifyBtn").addEventListener("click", function(e){
+    const formObj = document.querySelector("#modifyForm")
+    document.querySelector(".modifyBtn").addEventListener("click",function (e){
         e.preventDefault()
         e.stopPropagation()
-        self.location="/member/modify"}, false);
 
-    const formObj = document.querySelector("#myPageForm")
-    document.querySelector(".quitBtn").addEventListener("click",function (e){
-        e.preventDefault()
-        e.stopPropagation()
-        formObj.action="/member/delete"
-        formObj.method="post"
+        formObj.action = "/member/modify"
+        formObj.method = "post"
         formObj.submit()
     }, false);
 
 </script>
+
+
+
 
 </html>

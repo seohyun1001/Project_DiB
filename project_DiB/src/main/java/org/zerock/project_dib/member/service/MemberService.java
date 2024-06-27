@@ -11,4 +11,8 @@ public interface MemberService {
     boolean confirmId(String id) throws MidExistException ;
 
     MemberDTO myPage(String mid);
+
+    void modify(MemberDTO memberDTO);
+
+    void delete(String mid);
 }
