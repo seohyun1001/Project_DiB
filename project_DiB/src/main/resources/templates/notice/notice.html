@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">공지사항</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/notice.css}">
+</head>
+<body>
+<div th:replace="fragment/header :: headerFragment"></div>
+
+<main>
+    <div class="notice-container">
+        <h1>공지사항</h1>
+        <div class="notice-table">
+            <div class="table-header">
+                <button class="list-btn active"></button>
+                <button class="grid-btn"></button>
+                <button class="calendar-btn"></button>
+                <input type="text" placeholder="Search notice...">
+                <button>Filter</button>
+            </div>
+            <table>
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Content</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- 공지사항 리스트를 표시 -->
+                <tr th:each="notice : ${notices}">
+                    <td th:text="${notice.noticeTitle}"></td>
+                    <td th:text="${notice.noticeContent}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <button class="pagination">페이지 처리할 부분</button>
+            <a href="/notice/register" class="register-notice-btn">공지사항 등록</a>
+        </div>
+    </div>
+</main>
+
+<div th:replace="fragment/footer :: footerFragment"></div>
+
+<script th:src="@{/js/script.js}"></script>
+<script>
+    // 버튼 클릭 이벤트로 활성화 상태를 토글하는 스크립트
+    document.addEventListener("DOMContentLoaded", function() {
+        const buttons = document.querySelectorAll(".table-header button");
+        buttons.forEach(button => {
+            button.addEventListener("click", function() {
+                buttons.forEach(btn => btn.classList.remove("active"));
+                this.classList.add("active");
+            });
+        });
+    });
+</script>
+</body>
+</html>

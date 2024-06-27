@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      layout:decorate="~{layout/basic.html}">
+<head>
+    <title>Board Read</title>
+</head>
+
+<div layout:fragment="content">
+    <div class="row mt-3">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    Board Reada
+                </div>
+                <div class="card-body">
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Bno</span>
+                        <input type="text" class="form-control" th:value="${dto.bno}" readonly>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Title</span>
+                        <input type="text" class="form-control" th:value="${dto.title}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Content</span>
+                        <textarea class="form-control col-sm-5" rows="5" readonly>[[${dto.content}]]</textarea>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Writer</span>
+                        <input type="text" class="form-control" th:value="${dto.writer}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">RegDate</span>
+                        <input type="text" class="form-control" th:value="${#temporals.format(dto.regDate, 'yyyy-MM-dd HH:mm:ss')}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">ModDate</span>
+                        <input type="text" class="form-control" th:value="${#temporals.format(dto.modDate, 'yyyy-MM-dd HH:mm:ss')}" readonly>
+                    </div>
+
+                    <div class="my-4" th:with="user=${#authentication.principal}">
+                        <div class="float-end" th:with="link = ${pageRequestDTO.getLink()}">
+                            <a th:href="|@{/board/list}?${link}|" class="text-decoration-none">
+                            <button type="button" class="btn btn-primary">List</button>
+                            </a>
+                            <a th:if="${user != null && user.username == dto.writer}" th:href="|@{/board/modify(bno=${dto.bno})}&${link}|" class="text-decoration-none">
+                            <button type="button" class="btn btn-secondary">Modify</button>
+                            </a>
+                        </div>
+                    </div>
+
+                </div> <!-- end card body -->
+
+                <div class="col">
+                    <div class="card" th:if="${dto.fileNames != null && dto.fileNames.size() > 0}">
+                        <img class="card-img-top"
+                            th:each="fileName:${dto.fileNames}"
+                            th:src="|/view/${fileName}|">
+                    </div>
+                </div>
+
+            </div> <!-- end card -->
+        </div> <!-- end col -->
+    </div> <!-- end row / List Modify 버튼-->
+
+
+
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <div class="my-4">
+                <button class="btn btn-info addReplyBtn">ADD REPLY</button>
+            </div>
+            <ul class="list-group replyList">
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+            <ul class="pagination replyPaging">
+            </ul>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="/js/reply.js"></script>
+    </div>
+
+    <div class="modal registerModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Register Reply</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Reply Text</span>
+                        <input type="text" class="form-control replyText">
+                    </div>
+                    <div class="input-group mb-3" th:with="user=${#authentication.principal}">
+                        <span class="input-group-text">Replyer</span>
+                        <input type="text" class="form-control replyer" th:value="${user.username}" readonly>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary registerBtn">Register</button>
+                    <button type="button" class="btn btn-outline-dark closeRegisterBtn">Close</button>
+                </div>
+            </div>
+        </div>
+    </div> <!-- register modal -->
+
+    <div class="modal modifyModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title replyHeader"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Reply Text</span>
+                        <input type="text" class="form-control modifyText">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info modifyBtn">Modify</button>
+                    <button type="button" class="btn btn-danger removeBtn">Remove</button>
+                    <button type="button" class="btn btn-outline-dark closeModifyBtn">Close</button>
+                </div>
+            </div>
+        </div>
+    </div> <!-- modifyModal -->
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/reply.js"></script>
+
+</div>
+
+
+
+<script layout:fragment="script" th:inline="javascript">
+    // 현재 로그인한 사용자의 아이디
+    const currentUser = [[${#authentication.principal.username}]]
+
+    const errors = [[${errors}]]
+    console.log(errors)
+
+    let errorMsg = ''
+
+    if (errors) {
+        for (let i = 0; i < errors.length; i++) {
+            errorMsg += `${errors[i].field}은(는) ${errors[i].code} \n`
+        }
+        alert(errorMsg)
+    }
+
+    const bno = [[${dto.bno}]]
+    // replyList <ul>태그를 변수에 저장:  JavaScript로 <ul>태그에 <li>태그를 추가하기 위한 변수 설정
+    const replyList = document.querySelector('.replyList') // 댓글 목록 DOM
+    // replyPaging <ul>태그를 변수에 저장
+    const replyPaging = document.querySelector('.replyPaging') // 페이지 목록 DOM
+
+    function printList(dtoList){ // 댓글 목록 출력
+        let str = '';
+        if (dtoList && dtoList.length > 0){
+            for (const dto of dtoList) {
+
+                str += `<li class="list-group-item d-flex replyItem">
+                        <span class="col-2">${dto.rno}</span>
+                        <span class="col-6" data-rno ="${dto.rno}">${dto.replyText}</span>
+                        <span class="col-2">${dto.replyer}</span>
+                        <span class="col-2">${dto.regDate}</span>
+                        </li>`
+
+            }
+        }
+        // 위의 반복문에서 작성한 HTML태그들을 replyList <ul>태그에 더해주는 코드
+        replyList.innerHTML = str
+    }
+
+    function printPages(data){
+        // innerHTML에 더해줄 HTML태그 문자열을 저장하는 변수
+        let pageStr = '';
+        // 뒤로가기 버튼 생성 로직
+        if (data.prev) {
+            pageStr += `<li class="page-item"><a class="page-link" data-page="${data.start-1}">PREV</a></li>`
+        }
+        // 숫자로된 페이지 버튼 생성 로직
+        for (let i = data.start; i <= data.end; i++){
+            pageStr += `<li class="page-item ${i == data.page?"active":""}"><a class="page-link" data-page="${i}">${i}</a></li>`
+        }
+        // NEXT 버튼 생성 로직
+        if (data.next) {
+            pageStr += `<li class="page-item"><a class="page-link" data-page="${data.end+1}">NEXT</a></li>`
+        }
+        // 위의 반복문에서 작성한 HTML태그들을 replyPaging <ul>태그에 더해주는 코드
+        replyPaging.innerHTML = pageStr
+    }
+
+    const registerModal = new bootstrap.Modal(document.querySelector(".registerModal"))
+    // 모달창 내부의 버튼의 변수 선언부
+    const registerBtn = document.querySelector(".registerBtn")
+    const replyText = document.querySelector(".replyText")
+    // 모달창 내부의 인풋태그의 변수 선언부
+    const replyer = document.querySelector(".replyer")
+    const closeRegisterBtn = document.querySelector(".closeRegisterBtn")
+
+
+
+    // 댓글 목록위의 ADD REPLY 버튼 : 모달창 출력 버튼
+    document.querySelector(".addReplyBtn").addEventListener("click", function(e){
+        registerModal.show()
+    }, false)
+
+    // 모달창 안의 CLOSE : 모달창 끄기 버튼
+    closeRegisterBtn.addEventListener("click", function (e){
+        registerModal.hide()
+    }, false)
+
+
+
+    // 모달창 내부의 Register버튼 : 인풋태그의 데이터를 reply.js 보내어 데이터를 저장하고 댓글 목록을 갱신하는 함수
+    registerBtn.addEventListener("click", function (e){
+
+        // Json타입으로 변환하기 쉽도록 key:value형식으로 데이터를 저장
+        const replyObj = {
+            bno:bno, // 댓글번호
+            replyText:replyText.value, // 내용
+            replyer:replyer.value} // 작성자
+
+        // reply.js의 addReply실행
+        addReply(replyObj).then(result => {
+            // 추가된 댓글번호를 메시지 창에 출력
+            alert(result.rno)
+            // 메시지 창에서 확인버튼을 눌렀을때 모달창을 끄기
+            registerModal.hide()
+            // 저장한 데이터 초기화
+            replyText.value = ''
+            // replyer.value = ''
+            // 댓글 목록 갱신 goLast가 true이기 때문에 마지막 페이지로 이동
+            printReplies(1, 10, true)
+        }).catch(e => {
+            alert("Exception---")
+        })
+    }, false)
+
+
+
+    function printReplies(page, size, goLast){
+        getList({bno, page, size, goLast}).then(
+            data => {
+                // 댓글 리스트를 생성하는 함수
+                printList(data.dtoList)
+                // 페이지의 버튼을 생성하는 함수
+                printPages(data)}
+        ).catch(e => {
+            console.error(e)
+        })
+    }
+
+    printReplies(1, 10, true)
+
+    get1(bno).then(data => {
+        console.log(data)
+    }).catch(e => {
+        console.error(e)
+    })
+
+    let page = 1
+    let size = 10
+
+    replyPaging.addEventListener("click", function (e){
+
+        e.preventDefault()
+        e.stopPropagation()
+        // 선택한 A태그를 취득하는 코드
+        const target = e.target
+        // A태그인지 아닌지 확인하고 A태그가 아니면 아무것도 실행하지 않음
+        if (!target || target.tagName != 'A'){
+            return
+        }
+        // 몇 페이지인지 취득
+        const pageNum = target.getAttribute("data-page")
+        page = pageNum
+        // 페이지 이동
+        printReplies(page, size)
+
+    }, false)
+
+
+
+    // modifyModal
+    const modifyModal = new bootstrap.Modal(document.querySelector(".modifyModal"))
+
+    const replyHeader = document.querySelector(".replyHeader")
+    const modifyText = document.querySelector(".modifyText")
+    const modifyBtn = document.querySelector(".modifyBtn")
+    const removeBtn = document.querySelector(".removeBtn")
+    const closeModifyBtn = document.querySelector(".closeModifyBtn")
+
+
+
+    let hasAuth = false // 댓글의 작성자와 currentUser의 일치 여부
+
+    replyList.addEventListener("click", function (e){
+
+        e.preventDefault()
+        e.stopPropagation()
+
+        const target = e.target
+
+        if (!target || target.tagName != 'SPAN'){
+            return
+        }
+
+        const rno = target.getAttribute("data-rno")
+
+        if (!rno){
+            return
+        }
+
+        getReply(rno).then(reply => {
+            console.log(reply)
+            replyHeader.innerHTML = reply.rno
+            modifyText.value = reply.replyText
+            modifyModal.show()
+
+            hasAuth = currentUser === reply.replyer // 댓글의 작성자와 현재 사용자 일치 여부 확인
+
+        }).catch(e => alert('error'))
+
+    }, false)
+
+
+
+
+
+    // 댓글 수정과 화면 갱신
+    modifyBtn.addEventListener("click", function (e){
+
+        if (!hasAuth){
+            alert("댓글 작성자만 수정 가능합니다.")
+            modifyModal.hide()
+            return
+        }
+
+        // 서버에 보낼 데이터를 설정
+        const replyObj = {
+            bno:bno, // 게시글 번호
+            rno:replyHeader.innerHTML, // 댓글 번호
+            replyText:modifyText.value} // 댓글 내용
+
+        modifyReply(replyObj).then(result => {
+            alert(result.rno+' 댓글이 수정되었습니다.')
+            replyText.value = ''
+            modifyModal.hide()
+            printReplies(page, size)
+        }).catch(e => {
+            console.log(e)
+        })
+    }, false)
+
+    closeModifyBtn.addEventListener("click", function (e){
+        modifyModal.hide()
+    }, false)
+
+
+
+    // 댓글 삭제
+    removeBtn.addEventListener("click", function (e){
+
+        if (!hasAuth){
+            alert("댓글 작성자만 삭제 가능합니다.")
+            modifyModal.hide()
+            return
+        }
+
+        removeReply(replyHeader.innerHTML).then(result => {
+            alert(result.rno + ' 댓글이 삭제되었습니다.')
+            replyText.value = ''
+            modifyModal.hide()
+
+            // page = 1 // page 1로 돌아감
+            printReplies(page, size)
+        }).catch(e => {
+            console.log(e)
+        })
+    }, false)
+
+</script>
+</html>
