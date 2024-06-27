@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title th:text="${title}">메인 페이지</title>
@@ -17,8 +17,12 @@
             <li><a href="/hotplace">관광지</a></li>
             <li><a href="/notice">공지사항</a></li>
             <li id="login-menu" class="menu-item">
-                <a href="/login">로그인</a>
+                <a sec:authorize="isAnonymous()" href="/member/login">로그인</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" sec:authorize="isAuthenticated()" href="/logout">로그아웃</a>
+            </li>
+
         </ul>
     </nav>
 </header>

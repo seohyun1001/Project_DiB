@@ -17,4 +17,8 @@
         select * from member where mid = #{mid} and social = 0
     </select>
 
+    <select id="selectOneMyPage" resultType="org.zerock.project_dib.member.domain.Member">
+        select * from member where mid = #{mid}
+    </select>
+
 </mapper>

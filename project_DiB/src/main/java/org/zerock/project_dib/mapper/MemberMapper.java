@@ -14,4 +14,6 @@ public interface MemberMapper {
 
     Optional<Member> getWithRoles(String mid);
 
+    Member selectOneMyPage(String mid);
+
 }

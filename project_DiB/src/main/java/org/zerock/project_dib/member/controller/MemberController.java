@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +43,14 @@ public class MemberController {
         if (logout != null){
             log.info("user logout --------------");
         }
+    }
+
+    @GetMapping({"/myPage"})
+    public void readMemberInfo(String mid, Model model) {
+        MemberDTO memberDTO = memberService.myPage(mid);
+        log.info("memberDTO : " + memberDTO);
+        model.addAttribute("memberDTO", memberDTO);
+
     }
 
 }
