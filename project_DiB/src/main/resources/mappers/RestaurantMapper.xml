@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.project_dib.restaurant.mapper.RestaurantMapper">
+    <resultMap id="RestaurantMap" type="org.zerock.project_dib.restaurant.domain.Restaurant">
+        <id property="rno" column="rno" />
+        <result property="rest_name" column="rest_name" />
+        <result property="rest_exp" column="rest_exp" />
+        <result property="rest_exp2" column="rest_exp2" />
+        <result property="rest_loc" column="rest_loc" />
+        <result property="rest_phone" column="rest_phone" />
+        <result property="rest_menu" column="rest_menu" />
+        <result property="rest_time" column="rest_time" />
+        <result property="moddate" column="moddate" />
+        <result property="regdate" column="regdate" />
+        <collection property="imageSet" ofType="org.zerock.project_dib.restaurant.domain.RestaurantImage">
+            <id property="uuid" column="uuid" />
+            <result property="file_name" column="file_name" />
+            <result property="ord" column="ord" />
+            <result property="rno" column="rno" />
+        </collection>
+    </resultMap>
+    <insert id="insertRest">
+        INSERT INTO restaurant (rno, rest_name, rest_exp, rest_exp2, rest_loc, rest_phone, rest_menu,
+                                rest_time)
+        VALUES (#{rno}, #{rest_name}, #{rest_exp}, #{rest_exp2}, #{rest_loc}, #{rest_phone}, #{rest_menu},
+                #{rest_time})
+    </insert>
+    <select id="selectAll" resultMap="RestaurantMap">
+        SELECT r.*, ri.uuid, ri.file_name, ri.ord, ri.rno
+        FROM restaurant r
+                 LEFT JOIN restaurant_img ri ON r.rno = ri.rno
+    </select>
+    <select id="readOne" resultMap="RestaurantMap">
+        SELECT r.*, ri.uuid, ri.file_name, ri.ord, ri.rno
+        FROM restaurant r
+                 LEFT JOIN restaurant_img ri ON r.rno = ri.rno
+        WHERE r.rno = #{rno}
+    </select>
+    <update id="update">
+        update restaurant
+        set
+            rest_name    = #{rest_name},
+            rest_exp  = #{rest_exp},
+            rest_exp2 = #{rest_exp2},
+            rest_loc = #{rest_loc},
+            rest_phone = #{rest_phone},
+            rest_menu = #{rest_menu},
+            rest_time = #{rest_time}
+        where rno = #{rno}
+    </update>
+    <delete id="delete">
+        delete
+        from restaurant
+        where rno = #{rno}
+    </delete>
+    <select id="search" resultMap="RestaurantMap">
+        SELECT *
+        FROM restaurant
+        WHERE rno = #{rno} OR rest_name = #{rest_name} OR rest_loc = #{rest_loc};
+    </select>
+</mapper>
