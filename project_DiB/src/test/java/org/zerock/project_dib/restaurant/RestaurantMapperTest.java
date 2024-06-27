@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.zerock.project_dib.restaurant.domain.Restaurant;
 import org.zerock.project_dib.restaurant.domain.RestaurantImage;
+import org.zerock.project_dib.restaurant.dto.PageRequestDTO;
+import org.zerock.project_dib.restaurant.dto.PageResponseDTO;
 import org.zerock.project_dib.restaurant.dto.RestaurantDTO;
 import org.zerock.project_dib.restaurant.mapper.RestaurantImageMapper;
 import org.zerock.project_dib.restaurant.mapper.RestaurantMapper;
@@ -15,6 +17,8 @@ import org.zerock.project_dib.restaurant.service.RestaurantService;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Log4j2
@@ -31,10 +35,10 @@ public class RestaurantMapperTest {
 
     @Test
     public void testInsert() {
-        IntStream.rangeClosed(9,10).forEach(i -> {
+        IntStream.rangeClosed(1,22).forEach(i -> {
             Restaurant restaurant = Restaurant.builder()
                     .rno(i)
-                    .rest_name("rest_name " + i)
+                    .rest_name("rest_name" + i)
                     .rest_exp("rest_exp" + i)
                     .rest_exp2("rest_exp2" + i)
                     .rest_loc("rest_loc" + i)
@@ -120,6 +124,27 @@ public class RestaurantMapperTest {
         }
         restaurantService.deleteFile(rno);
         restaurantService.delete(rno);
+    }
 
+    @Test
+    public void testSearchRestaurants() {
+        log.info("Testing searchRestaurants() method...");
+
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(1)
+                .size(10)
+                .rno(null)
+                .rest_name(null)
+                .rest_loc(null)
+                .build();
+
+        PageResponseDTO<RestaurantDTO> responseDTO = restaurantService.search(pageRequestDTO);
+
+        assertThat(responseDTO).isNotNull();
+        assertThat(responseDTO.getDtoList()).isNotEmpty();
+
+        responseDTO.getDtoList().forEach(restaurantDTO -> {
+            log.info("Restaurant: {}", restaurantDTO);
+        });
     }
 }

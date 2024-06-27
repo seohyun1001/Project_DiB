@@ -6,6 +6,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.zerock.project_dib.restaurant.domain.Restaurant;
 import org.zerock.project_dib.restaurant.domain.RestaurantImage;
+import org.zerock.project_dib.restaurant.dto.PageRequestDTO;
+import org.zerock.project_dib.restaurant.dto.PageResponseDTO;
 import org.zerock.project_dib.restaurant.dto.RestaurantDTO;
 import org.zerock.project_dib.restaurant.dto.uploadfile.UploadResultDTO;
 import org.zerock.project_dib.restaurant.mapper.RestaurantImageMapper;
@@ -80,6 +82,26 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public void deleteFile(int rno){restaurantImageMapper.deleteFile(rno);}
 
+    @Override
+    public PageResponseDTO<RestaurantDTO> search(PageRequestDTO pageRequestDTO) {
+        List<Restaurant> restaurants = restaurantMapper.search(pageRequestDTO);
+        List<RestaurantDTO> dtoList = restaurants.stream()
+                .map(restaurant -> {
+                    RestaurantDTO restaurantDTO = modelMapper.map(restaurant, RestaurantDTO.class);
+                    restaurantDTO.setFileNames(restaurant.getImageSet().stream()
+                            .map(image -> image.getUuid() + "_" + image.getFile_name())
+                            .collect(Collectors.toList()));
+                    return restaurantDTO;
+                })
+                .collect(Collectors.toList());
+
+        int total = restaurants.size();
+        return PageResponseDTO.<RestaurantDTO>withAll()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total(total)
+                .build();
+    }
 
     private Restaurant dtoToEntity(RestaurantDTO restaurantDTO) {
         return Restaurant.builder()

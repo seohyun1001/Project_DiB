@@ -4,21 +4,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zerock.project_dib.restaurant.mapper.RestaurantMapper">
     <resultMap id="RestaurantMap" type="org.zerock.project_dib.restaurant.domain.Restaurant">
-        <id property="rno" column="rno" />
-        <result property="rest_name" column="rest_name" />
-        <result property="rest_exp" column="rest_exp" />
-        <result property="rest_exp2" column="rest_exp2" />
-        <result property="rest_loc" column="rest_loc" />
-        <result property="rest_phone" column="rest_phone" />
-        <result property="rest_menu" column="rest_menu" />
-        <result property="rest_time" column="rest_time" />
-        <result property="moddate" column="moddate" />
-        <result property="regdate" column="regdate" />
+        <id property="rno" column="rno"/>
+        <result property="rest_name" column="rest_name"/>
+        <result property="rest_exp" column="rest_exp"/>
+        <result property="rest_exp2" column="rest_exp2"/>
+        <result property="rest_loc" column="rest_loc"/>
+        <result property="rest_phone" column="rest_phone"/>
+        <result property="rest_menu" column="rest_menu"/>
+        <result property="rest_time" column="rest_time"/>
+        <result property="moddate" column="moddate"/>
+        <result property="regdate" column="regdate"/>
         <collection property="imageSet" ofType="org.zerock.project_dib.restaurant.domain.RestaurantImage">
-            <id property="uuid" column="uuid" />
-            <result property="file_name" column="file_name" />
-            <result property="ord" column="ord" />
-            <result property="rno" column="rno" />
+            <id property="uuid" column="uuid"/>
+            <result property="file_name" column="file_name"/>
+            <result property="ord" column="ord"/>
+            <result property="rno" column="rno"/>
         </collection>
     </resultMap>
     <insert id="insertRest">
@@ -40,14 +40,13 @@
     </select>
     <update id="update">
         update restaurant
-        set
-            rest_name    = #{rest_name},
-            rest_exp  = #{rest_exp},
-            rest_exp2 = #{rest_exp2},
-            rest_loc = #{rest_loc},
+        set rest_name  = #{rest_name},
+            rest_exp   = #{rest_exp},
+            rest_exp2  = #{rest_exp2},
+            rest_loc   = #{rest_loc},
             rest_phone = #{rest_phone},
-            rest_menu = #{rest_menu},
-            rest_time = #{rest_time}
+            rest_menu  = #{rest_menu},
+            rest_time  = #{rest_time}
         where rno = #{rno}
     </update>
     <delete id="delete">
@@ -58,6 +57,18 @@
     <select id="search" resultMap="RestaurantMap">
         SELECT *
         FROM restaurant
-        WHERE rno = #{rno} OR rest_name = #{rest_name} OR rest_loc = #{rest_loc};
+        <where>
+            <if test="pageRequestDTO.rno != null">
+                AND rno = #{pageRequestDTO.rno}
+            </if>
+            <if test="pageRequestDTO.rest_name != null">
+                AND rest_name = #{pageRequestDTO.rest_name}
+            </if>
+            <if test="pageRequestDTO.rest_loc != null">
+                AND rest_loc = #{pageRequestDTO.rest_loc}
+            </if>
+        </where>
+        ORDER BY rno DESC
+        LIMIT #{pageRequestDTO.offset}, #{pageRequestDTO.size};
     </select>
 </mapper>

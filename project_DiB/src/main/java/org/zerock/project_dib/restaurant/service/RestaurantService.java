@@ -2,6 +2,8 @@ package org.zerock.project_dib.restaurant.service;
 
 import org.springframework.stereotype.Service;
 
+import org.zerock.project_dib.restaurant.dto.PageRequestDTO;
+import org.zerock.project_dib.restaurant.dto.PageResponseDTO;
 import org.zerock.project_dib.restaurant.dto.RestaurantDTO;
 import org.zerock.project_dib.restaurant.dto.uploadfile.UploadResultDTO;
 
@@ -16,6 +18,8 @@ public interface RestaurantService {
     void update(RestaurantDTO restaurantDTO);
     void delete(int rno);
     void deleteFile(int rno);
+    PageResponseDTO<RestaurantDTO> search(PageRequestDTO pageRequestDTO);
+
 
 
 //    // restaurantDTO를 restaurant 객체로 바꾸기위해 사용하는 메서드
