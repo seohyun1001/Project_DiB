@@ -16,6 +16,10 @@
         <h3 class="notice-detail-title">공지사항</h3>
         <div class="notice-detail">
             <form th:action="@{/notice/modify}" th:object="${notice}" method="post">
+
+                <!-- 게시글 수정을 위해 nno가 필요. 숨겨둠 -->
+                <input type="hidden" th:field="*{nno}" />
+
                 <div class="mb-3">
                     <label for="noticeTitle" class="form-label"></label>
                     <input type="text" class="form-control" id="noticeTitle" th:field="*{noticeTitle}">

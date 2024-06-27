@@ -89,7 +89,7 @@ public class NoticeServiceImpl implements NoticeService {
                 e.printStackTrace();
             }
         }
-
+        System.out.println("Updating Notice: " + notice);
         noticeMapper.update(notice);
     }
 
