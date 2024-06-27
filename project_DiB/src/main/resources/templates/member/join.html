@@ -20,7 +20,7 @@
                         <div class="input-group mb-3">
                             <span class="input-group-text">MID</span>
                             <input type="text" name="mid" class="form-control">
-                            <button class="btn btn-secondary confirm">confirm</button>
+                            <button class="btn btn-secondary confirm" type="button">confirm</button>
                         </div>
 
                         <div class="input-group mb-3">
@@ -66,25 +66,24 @@
         </div> <!-- end col -->
     </div> <!-- end row -->
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </div> <!-- end layout -->
 
-<script layout:fragment="script" th:inline="javascript"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-<script>
+<script layout:fragment="script" th:inline="javascript">
     document.querySelector(".confirm").addEventListener("click", function (e) {
-        e.preventDefault();
+        e.preventDefault()
+        e.stopPropagation()
         const data = document.querySelector("[name='mid']").value;
-
-        axios.get("http://localhost:8080/confirmId/" + data).then(res => {
+        console.log("http://localhost:8080/confirmId/" + data)
+        if (!data){
+            alert("아이디를 입력해주세요.");
+            return
+        }
+        axios.get("http://localhost:8080/member/confirmId/" + data).then(res => {
             console.log(res)
             const exist = res.data
             if (exist) {
                 alert("사용 불가능")
-            } if (!data){
-                e.preventDefault();
-                alert("아이디를 입력해주세요.");
             }
             else {
                 alert("사용 가능")
@@ -93,10 +92,6 @@
             console.error(error);
         });
     });
-
 </script>
-
-
-
 
 </html>

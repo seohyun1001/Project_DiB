@@ -19,7 +19,6 @@ public class MemberSecurityDTO extends User {
     private String name;
     private String email;
     private String address;
-    private LocalDateTime birthdate;
     private String phone;
     private LocalDateTime regdate;
     private LocalDateTime moddate;
@@ -30,7 +29,6 @@ public class MemberSecurityDTO extends User {
                              String name,
                              String email,
                              String address,
-                             LocalDateTime birthdate,
                              String phone,
                              LocalDateTime regdate,
                              LocalDateTime moddate,
@@ -43,7 +41,6 @@ public class MemberSecurityDTO extends User {
         this.name = name;
         this.email = email;
         this.address = address;
-        this.birthdate = birthdate;
         this.phone = phone;
         this.regdate = regdate;
         this.moddate = moddate;

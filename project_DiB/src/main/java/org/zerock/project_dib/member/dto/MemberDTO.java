@@ -28,8 +28,6 @@ public class MemberDTO {
 
     private String address;
 
-    @DateTimeFormat(pattern = "yyyyMMdd")
-    private LocalDate birthdate;
     private String phone;
     private LocalDateTime regdate;
     private LocalDateTime moddate;

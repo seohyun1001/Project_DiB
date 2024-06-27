@@ -16,6 +16,7 @@
             <li><a href="/stay">숙박</a></li>
             <li><a href="/hotplace">관광지</a></li>
             <li><a href="/notice">공지사항</a></li>
+            <li><a href="/member/myPage" sec:authorize="isAuthenticated()">마이페이지</a></li>
             <li id="login-menu" class="menu-item">
                 <a sec:authorize="isAnonymous()" href="/member/login">로그인</a>
             </li>

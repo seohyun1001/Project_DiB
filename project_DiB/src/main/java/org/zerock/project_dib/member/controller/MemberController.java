@@ -12,6 +12,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.project_dib.member.dto.MemberDTO;
 import org.zerock.project_dib.member.service.MemberService;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/member")
 @Log4j2
@@ -46,11 +48,10 @@ public class MemberController {
     }
 
     @GetMapping({"/myPage"})
-    public void readMemberInfo(String mid, Model model) {
-        MemberDTO memberDTO = memberService.myPage(mid);
+    public void readMemberInfo(Principal principal, String mid, Model model) {
+        MemberDTO memberDTO = memberService.myPage(principal.getName());
         log.info("memberDTO : " + memberDTO);
         model.addAttribute("memberDTO", memberDTO);
-
     }
 
 }
