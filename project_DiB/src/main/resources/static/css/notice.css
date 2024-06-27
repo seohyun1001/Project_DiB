@@ -21,6 +21,12 @@ main {
     padding-bottom: 20px;
 }
 
+/* notice-table */
+.notice-table {
+    width: 700px;
+}
+
+
 /* 버튼 스타일 */
 .notice-table .table-header button {
     background-color: #f0f0f0; /* 기본 회색 배경 */

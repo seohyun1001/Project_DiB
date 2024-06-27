@@ -38,5 +38,11 @@
 
     <select id="getAll" resultMap="NoticeResultMap">
         SELECT * FROM notice
+        ORDER BY nno DESC
+            LIMIT #{pageRequestDTO.size} OFFSET #{pageRequestDTO.skip}
+    </select>
+
+    <select id="getCount">
+        SELECT COUNT(*) FROM notice
     </select>
 </mapper>

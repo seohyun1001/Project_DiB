@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.zerock.project_dib.pse.dto.NoticeDTO;
+import org.zerock.project_dib.pse.dto.PageRequestDTO;
+import org.zerock.project_dib.pse.dto.PageResponseDTO;
 import org.zerock.project_dib.pse.service.NoticeService;
 
 import java.util.List;
@@ -17,8 +19,11 @@ public class NoticeController {
     private NoticeService noticeService;
 
     @GetMapping("")
-    public String getAllNotices(Model model) {
-        model.addAttribute("notices", noticeService.getAllNotices());
+    public String getAllNotices(@ModelAttribute PageRequestDTO pageRequestDTO, Model model) {
+        PageResponseDTO<NoticeDTO> responseDTO = noticeService.getAllNotices(pageRequestDTO);
+        model.addAttribute("notices", responseDTO.getDtoList());
+        model.addAttribute("pageRequestDTO", pageRequestDTO);
+        model.addAttribute("totalPage", responseDTO.getTotalPage());
         return "notice/notice"; // 공지사항 리스트 페이지
     }
 
@@ -33,11 +38,11 @@ public class NoticeController {
         return "redirect:/notice";
     }
 
-    @GetMapping("/{nno}")
+    @GetMapping("/detail/{nno}")
     public String readNotice(@PathVariable Long nno, Model model) {
         NoticeDTO noticeDTO = noticeService.readOne(nno);
         model.addAttribute("notice", noticeDTO);
-        return "notice_detail"; // 공지사항 상세 페이지로 이동
+        return "notice/notice_detail"; // 공지사항 상세 페이지로 이동
     }
 
     @PostMapping("/modify")

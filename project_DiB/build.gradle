@@ -24,6 +24,9 @@ repositories {
 }
 
 dependencies {
+    // PageRequestDTO 때문에 한 줄 추가했습니다_성언
+    compileOnly('javax:javaee-api:8.0.1')
+
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
