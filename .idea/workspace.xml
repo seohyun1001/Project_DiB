@@ -6,10 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="07e3978e-3da9-4f74-909c-1f4178aecd8f" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/java/org/zerock/project_dib/restaurant/mapper/RestaurantMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/main/java/org/zerock/project_dib/restaurant/mapper/RestaurantMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/java/org/zerock/project_dib/restaurant/mapper/search/RestaurantSearchMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/java/org/zerock/project_dib/restaurant/service/RestaurantService.java" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/main/java/org/zerock/project_dib/restaurant/service/RestaurantService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/java/org/zerock/project_dib/restaurant/service/RestaurantServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/main/java/org/zerock/project_dib/restaurant/service/RestaurantServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/mappers/RestaurantMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/main/resources/mappers/RestaurantMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project_DiB/src/test/java/org/zerock/project_dib/restaurant/RestaurantMapperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/test/java/org/zerock/project_dib/restaurant/RestaurantMapperTest.java" afterDir="false" />
     </list>
@@ -89,6 +85,7 @@
     "Gradle.RestaurantMapperTest.testReadOne.executor": "Run",
     "Gradle.RestaurantMapperTest.testReadOne2.executor": "Run",
     "Gradle.RestaurantMapperTest.testSearchRestaurants.executor": "Run",
+    "Gradle.RestaurantMapperTest.testSearchRestaurantsWithSorting.executor": "Run",
     "Gradle.RestaurantMapperTest.testSelectAll.executor": "Run",
     "Gradle.project_DiB 빌드.executor": "Run",
     "RequestMappingsPanelOrder0": "0",
@@ -179,30 +176,6 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="RestaurantMapperTest.testReadOne" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/project_DiB" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;org.zerock.project_dib.restaurant.RestaurantMapperTest.testReadOne&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
     <configuration name="RestaurantMapperTest.testReadOne2" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -251,6 +224,30 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
+    <configuration name="RestaurantMapperTest.testSearchRestaurantsWithSorting" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/project_DiB" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;org.zerock.project_dib.restaurant.RestaurantMapperTest.testSearchRestaurantsWithSorting&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="ProjectDiBApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="project_DiB.main" />
@@ -262,10 +259,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.RestaurantMapperTest.testSearchRestaurants" />
+        <item itemvalue="Gradle.RestaurantMapperTest.testSearchRestaurantsWithSorting" />
         <item itemvalue="Gradle.RestaurantMapperTest.testInsert" />
         <item itemvalue="Gradle.RestaurantMapperTest.testReadOne2" />
         <item itemvalue="Gradle.RestaurantMapperTest.testDelete" />
-        <item itemvalue="Gradle.RestaurantMapperTest.testReadOne" />
       </list>
     </recent_temporary>
   </component>
@@ -297,7 +294,7 @@
       <workItem from="1719360332968" duration="6883000" />
       <workItem from="1719446763292" duration="5853000" />
       <workItem from="1719452948207" duration="7051000" />
-      <workItem from="1719464418822" duration="6723000" />
+      <workItem from="1719464418822" duration="8574000" />
     </task>
     <servers />
   </component>
@@ -328,19 +325,6 @@
     </option>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/project_DiB/src/test/java/org/zerock/project_dib/restaurant/RestaurantMapperTest.java</url>
-          <line>129</line>
-          <properties class="org.zerock.project_dib.restaurant.RestaurantMapperTest" method="testSearchRestaurants">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="GradleRunConfiguration">
         <watch expression="restaurantImage" />

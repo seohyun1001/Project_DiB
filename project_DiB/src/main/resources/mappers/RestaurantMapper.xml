@@ -68,7 +68,8 @@
                 AND rest_loc = #{pageRequestDTO.rest_loc}
             </if>
         </where>
-        ORDER BY rno DESC
+        ORDER BY rno ASC
         LIMIT #{pageRequestDTO.offset}, #{pageRequestDTO.size};
     </select>
+
 </mapper>
