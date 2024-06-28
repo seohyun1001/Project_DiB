@@ -22,6 +22,22 @@ public class NoticeController {
 
     @GetMapping("")
     public String getAllNotices(@ModelAttribute PageRequestDTO pageRequestDTO, Model model) {
+        if (pageRequestDTO == null) {
+            pageRequestDTO = new PageRequestDTO(); // 페이지 요청 객체가 null일 경우 초기화
+        }
+
+        PageResponseDTO<NoticeDTO> responseDTO = noticeService.getAllNotices(pageRequestDTO);
+        model.addAttribute("notices", responseDTO.getDtoList());
+        model.addAttribute("pageRequestDTO", pageRequestDTO);
+        model.addAttribute("totalPage", responseDTO.getTotalPage());
+        return "notice/notice"; // 공지사항 리스트 페이지
+    }
+    @PostMapping("")
+    public String getAllNotices2(PageRequestDTO pageRequestDTO, Model model) {
+        if (pageRequestDTO == null) {
+            pageRequestDTO = new PageRequestDTO(); // 페이지 요청 객체가 null일 경우 초기화
+        }
+
         PageResponseDTO<NoticeDTO> responseDTO = noticeService.getAllNotices(pageRequestDTO);
         model.addAttribute("notices", responseDTO.getDtoList());
         model.addAttribute("pageRequestDTO", pageRequestDTO);

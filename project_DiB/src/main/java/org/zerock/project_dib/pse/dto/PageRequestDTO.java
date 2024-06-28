@@ -21,20 +21,22 @@ public class PageRequestDTO {
     @Builder.Default
     @Min(value = 1)
     @Positive
-    private int page = 1;
+    private int page = 1; // 현재 페이지 번호
 
     @Builder.Default
-    @Min(value = 7)
+    @Min(value = 8) // 최소값을 8
     @Max(value = 100)
     @Positive
-    private int size = 7;
+    private int size = 8; // 페이지당 데이터 수
 
     private String[] types;
+    private String type;
     private String keyword;
     private boolean finished;
     private LocalDate from;
     private LocalDate to;
 
+    // 페이지 건너뛰기 계산
     public int getSkip() {
         return (page - 1) * size;
     }

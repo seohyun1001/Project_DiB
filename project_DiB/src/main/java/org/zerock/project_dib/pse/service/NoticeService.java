@@ -13,7 +13,10 @@ public interface NoticeService {
     NoticeDTO readOne(Long nno);
     void modify(NoticeDTO noticeDTO);
     void remove(Long nno);
+
+    // 페이징된 공지사항 목록 조회
     PageResponseDTO<NoticeDTO> getAllNotices(PageRequestDTO pageRequestDTO);
+
 
     default Notice dtoToEntity(NoticeDTO noticeDTO){
         Notice notice = new Notice();

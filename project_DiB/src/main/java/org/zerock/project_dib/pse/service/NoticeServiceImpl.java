@@ -65,13 +65,6 @@ public class NoticeServiceImpl implements NoticeService {
         return noticeDTO;
     }
 
-//    @Override
-//    public void modify(NoticeDTO noticeDTO) {
-//        Notice notice = modelMapper.map(noticeDTO, Notice.class);
-//        notice.setModdate(LocalDate.now()); // 수정일자를 현재 날짜로 설정
-//        noticeMapper.update(notice);
-//    }
-
     @Override
     public void modify(NoticeDTO noticeDTO) {
         Notice notice = modelMapper.map(noticeDTO, Notice.class);
@@ -100,15 +93,19 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     public PageResponseDTO<NoticeDTO> getAllNotices(PageRequestDTO pageRequestDTO) {
+
+        // 공지사항 목록 조회
         List<Notice> notices = noticeMapper.getAll(pageRequestDTO);
         List<NoticeDTO> dtoList = notices.stream()
                 .map(notice -> modelMapper.map(notice, NoticeDTO.class))
                 .collect(Collectors.toList());
-        int total = noticeMapper.getCount();
+
+        // 공지사항 총 개수 조회
+        int total = noticeMapper.getCount(pageRequestDTO);
         return PageResponseDTO.<NoticeDTO>builder()
                 .dtoList(dtoList)
                 .pageRequestDTO(pageRequestDTO)
-                .totalPage((int) Math.ceil((double) total / pageRequestDTO.getSize()))
+                .totalPage((int) Math.ceil((double) total / pageRequestDTO.getSize())) // 총 페이지 수 계산
                 .build();
     }
 }

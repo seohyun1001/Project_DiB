@@ -13,7 +13,6 @@
         <result property="moddate" column="moddate" />
     </resultMap>
 
-
     <select id="read" resultMap="NoticeResultMap" parameterType="long">
         SELECT * FROM notice WHERE nno = #{nno}
     </select>
@@ -36,13 +35,35 @@
         DELETE FROM notice WHERE nno = #{nno}
     </delete>
 
+    <!-- 페이징 처리를 위한 공지사항 목록 조회 -->
     <select id="getAll" resultMap="NoticeResultMap">
         SELECT * FROM notice
+        <if test="pageRequestDTO.keyword != null and pageRequestDTO.keyword != ''">
+            WHERE
+            <if test='"t".equals(pageRequestDTO.type)'>
+                notice_title LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+            </if>
+            <if test='"w".equals(pageRequestDTO.type)'>
+                notice_content LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+            </if>
+        </if>
         ORDER BY nno DESC
-            LIMIT #{pageRequestDTO.size} OFFSET #{pageRequestDTO.skip}
+        LIMIT #{pageRequestDTO.page}, #{pageRequestDTO.size}
     </select>
 
+    <!-- 페이징 처리를 위한 공지사항 총 개수 조회 -->
     <select id="getCount">
         SELECT COUNT(*) FROM notice
+        <if test="pageRequestDTO.keyword != null and pageRequestDTO.keyword != ''">
+            WHERE
+            <choose>
+                <when test="pageRequestDTO.checkType('title')">
+                    notice_title LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+                </when>
+                <when test="pageRequestDTO.checkType('content')">
+                    notice_content LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+                </when>
+            </choose>
+        </if>
     </select>
 </mapper>

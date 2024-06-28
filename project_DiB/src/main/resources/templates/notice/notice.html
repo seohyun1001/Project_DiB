@@ -18,23 +18,24 @@
 
             <div class="search-bar">
                 <div class="row">
-                    <div class="col-xs-8 col-xs-offset-2">
-                        <div class="input-group">
-                            <div class="input-group-btn search-panel">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                    <span id="search_concept">제목</span> <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="noticeTitle">제목</a></li>
-                                    <li><a href="noticeContent">내용</a></li>
-<!--                                    <li class="divider"></li>-->
-<!--                                    <li><a href="#all">제목+내용</a></li>-->
-                                </ul>
+                    <form th:action="@{/notice}" method="post">
+                        <div class="col-xs-8 col-xs-offset-2">
+                            <div class="input-group">
+                                <div class="input-group-btn search-panel">
+                                    <select name="type" class="btn btn-default dropdown-toggle">
+                                        <option value="t">제목</option>
+                                        <option value="w">내용</option>
+    <!--                                    <option value="tw">제목+내용</option>-->
+                                    </select>
+                                </div>
+<!--                                <input type="hidden" name="title" id="search_param" value="title">-->
+                                <input type="text" class="form-control" name="keyword" placeholder="검색">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="submit">검색</button>
+                                </span>
                             </div>
-                            <input type="hidden" name="search_param" value="all" id="search_param">
-                            <input type="text" class="form-control" name="x" placeholder="검색">
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
 
@@ -70,11 +71,7 @@
                         </li>
                         <li class="page-item" th:classappend="${pageRequestDTO.page == totalPage} ? 'disabled'">
                             <a class="page-link" th:href="@{/notice(page=${pageRequestDTO.page + 1}, size=${pageRequestDTO.size})}" aria-label="Next">
-<!--                        <li class="page-item"><a class="page-link" href="#">1</a></li>-->
-<!--                        <li class="page-item"><a class="page-link" href="#">2</a></li>-->
-<!--                        <li class="page-item"><a class="page-link" href="#">3</a></li>-->
-<!--                        <li class="page-item">-->
-<!--                            <a class="page-link" href="#" aria-label="Next">-->
+
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>
@@ -93,5 +90,18 @@
 <script th:src="@{/js/script.js}"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+<script>
+    // 검색 타입을 설정하는 스크립트
+    $(document).on('click', '.search-panel .dropdown-menu a', function(e) {
+        e.preventDefault();
+        var param = $(this).attr("href").replace("#", "");
+        var concept = $(this).text();
+        $('.search-panel span#search_concept').text(concept);
+        $('input#search_param').val(param);
+    });
+</script>
+
+
 </body>
 </html>
