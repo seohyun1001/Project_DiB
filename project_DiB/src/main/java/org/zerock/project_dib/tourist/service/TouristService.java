@@ -13,7 +13,7 @@ public interface TouristService {
 
     TouristDTO read(int tno);
 
-    void register(TouristDTO touristDTO);
+    int register(TouristDTO touristDTO);
 
     void modify(TouristDTO touristDTO);
 

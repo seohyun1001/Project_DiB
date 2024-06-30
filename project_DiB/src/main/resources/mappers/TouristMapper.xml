@@ -15,11 +15,11 @@
         WHERE tno = #{tno}
     </select>
 
-    <insert id="insert" parameterType="org.zerock.project_dib.tourist.domain.Tourist">
-        INSERT INTO tourist (tour_Name, tour_addr, tour_opentime, tour_closetime, tour_parking, tour_content,
-                             tour_image)
-        VALUES (#{tourName}, #{tourAddr}, #{tourOpentime}, #{tourClosetime}, #{tourParking}, #{tourContent},
-                #{tourImage})
+    <insert id="insert" parameterType="org.zerock.project_dib.tourist.domain.Tourist" useGeneratedKeys="true" keyProperty="tno">
+        INSERT INTO tourist (tour_Name, tour_addr, tour_opentime, tour_closetime, tour_parking, tour_content
+                             )
+        VALUES (#{tourName}, #{tourAddr}, #{tourOpentime}, #{tourClosetime}, #{tourParking}, #{tourContent}
+                )
     </insert>
 
     <update id="update" parameterType="org.zerock.project_dib.tourist.domain.Tourist">
@@ -30,7 +30,6 @@
             tour_closetime = #{tourClosetime},
             tour_parking   = #{tourParking},
             tour_content   = #{tourContent},
-            tour_image     = #{tourImage},
             moddate        = #{modDate, jdbcType=TIMESTAMP},
             regdate        = #{regDate, jdbcType=TIMESTAMP}
         WHERE tno = #{tno}
@@ -50,8 +49,8 @@
     </select>
 
     <insert id="insertImg" parameterType="org.zerock.project_dib.tourist.domain.TouristImg">
-        INSERT INTO tourist_img (uuid, file_name, tno, ord, image)
-        VALUES (#{uuid}, #{fileName}, #{tno}, #{ord}, #{image})
+        INSERT INTO tourist_img (uuid, file_name, tno, ord)
+        VALUES (#{uuid}, #{fileName}, #{tno}, #{ord})
     </insert>
 
     <delete id="deleteImgs" parameterType="int">

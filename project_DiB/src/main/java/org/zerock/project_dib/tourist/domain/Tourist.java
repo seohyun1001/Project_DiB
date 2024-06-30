@@ -20,8 +20,6 @@ public class Tourist {
 
     private String tourContent;
 
-    private byte[] tourImage; // 이미지를 byte 배열로 저장
-
     private LocalDateTime modDate;
 
     private LocalDateTime regDate;

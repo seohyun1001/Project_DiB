@@ -13,5 +13,4 @@ public class TouristImg {
 
     private int ord;
 
-    private byte[] image;
 }

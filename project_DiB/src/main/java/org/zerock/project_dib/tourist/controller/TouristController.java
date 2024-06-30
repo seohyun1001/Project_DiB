@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.zerock.project_dib.tourist.dto.TouristDTO;
 import org.zerock.project_dib.tourist.dto.TouristImgDTO;
+import org.zerock.project_dib.tourist.dto.upload.UploadFileDTO;
 import org.zerock.project_dib.tourist.service.TouristService;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @Controller
@@ -36,13 +39,16 @@ public class TouristController {
 
     @PostMapping("/register")
     public String register(TouristDTO touristDTO, @RequestParam("file") MultipartFile file) throws IOException {
+        int tno = touristService.register(touristDTO);
+        touristDTO.setTno(tno);
         if (!file.isEmpty()) {
-            byte[] bytes = file.getBytes();
-            touristDTO.setTourImageBytes(bytes);
+            touristService.registerImg(touristDTO, file);
         }
-        touristService.register(touristDTO);
+
         return "redirect:/tourists/";
     }
+
+
 
     @PostMapping("/modify/{tno}")
     @ResponseBody
@@ -64,8 +70,13 @@ public class TouristController {
         touristDTO.setTno(tno);
 
         if (!file.isEmpty()) {
-            byte[] bytes = file.getBytes();
-            touristDTO.setTourImageBytes(bytes); // TouristDTO의 tourImageBytes 필드에 바이트 배열 저장
+            var upDownDto = new UploadFileDTO();
+            var imgList = new ArrayList<MultipartFile>();
+            imgList.add(file);
+            upDownDto.setFiles(imgList);
+
+            var updownController = new UpDownController();
+            updownController.upload(upDownDto);
         }
 
         touristService.registerImg(touristDTO, file);

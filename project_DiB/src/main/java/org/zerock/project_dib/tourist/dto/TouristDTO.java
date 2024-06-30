@@ -22,8 +22,6 @@ public class TouristDTO {
 
     private String tourContent;
 
-    private byte[] tourImageBytes; // 이미지 파일을 byte 배열로 변환하여 저장할 필드
-
     private LocalDateTime modDate;
 
     private LocalDateTime regDate;
