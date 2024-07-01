@@ -35,32 +35,32 @@
         DELETE FROM notice WHERE nno = #{nno}
     </delete>
 
-    <!-- 페이징 처리를 위한 공지사항 목록 조회 -->
-    <select id="getAll" resultMap="NoticeResultMap">
+    <select id="getAll" resultMap="NoticeResultMap" parameterType="org.zerock.project_dib.pse.dto.PageRequestDTO">
         SELECT * FROM notice
         <if test="pageRequestDTO.keyword != null and pageRequestDTO.keyword != ''">
             WHERE
-            <if test='"t".equals(pageRequestDTO.type)'>
-                notice_title LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
-            </if>
-            <if test='"w".equals(pageRequestDTO.type)'>
-                notice_content LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
-            </if>
+            <choose>
+                <when test="pageRequestDTO.type == 't'">
+                    notice_title LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+                </when>
+                <when test="pageRequestDTO.type == 'w'">
+                    notice_content LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+                </when>
+            </choose>
         </if>
         ORDER BY nno DESC
-        LIMIT #{pageRequestDTO.page}, #{pageRequestDTO.size}
+        LIMIT #{pageRequestDTO.skip}, #{pageRequestDTO.size}
     </select>
 
-    <!-- 페이징 처리를 위한 공지사항 총 개수 조회 -->
-    <select id="getCount">
+    <select id="getCount" parameterType="org.zerock.project_dib.pse.dto.PageRequestDTO">
         SELECT COUNT(*) FROM notice
         <if test="pageRequestDTO.keyword != null and pageRequestDTO.keyword != ''">
             WHERE
             <choose>
-                <when test="pageRequestDTO.checkType('title')">
+                <when test="pageRequestDTO.type == 't'">
                     notice_title LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
                 </when>
-                <when test="pageRequestDTO.checkType('content')">
+                <when test="pageRequestDTO.type == 'w'">
                     notice_content LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
                 </when>
             </choose>

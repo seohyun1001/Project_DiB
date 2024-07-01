@@ -32,8 +32,10 @@ public class NoticeController {
         model.addAttribute("totalPage", responseDTO.getTotalPage());
         return "notice/notice"; // 공지사항 리스트 페이지
     }
+
+    // 추가된 부분: POST 요청을 처리하여 검색 기능을 구현
     @PostMapping("")
-    public String getAllNotices2(PageRequestDTO pageRequestDTO, Model model) {
+    public String searchNotices(PageRequestDTO pageRequestDTO, Model model) {
         if (pageRequestDTO == null) {
             pageRequestDTO = new PageRequestDTO(); // 페이지 요청 객체가 null일 경우 초기화
         }
