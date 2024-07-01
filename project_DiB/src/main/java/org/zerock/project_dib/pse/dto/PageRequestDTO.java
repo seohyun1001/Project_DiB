@@ -1,8 +1,5 @@
 package org.zerock.project_dib.pse.dto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -28,6 +25,12 @@ public class PageRequestDTO {
     @Max(value = 100)
     @Positive
     private int size = 8; // 페이지당 데이터 수
+    private Long nno;
+    private String noticeTitle;
+    private String noticeContent;
+
+    @Getter
+    private int offset;
 
     private String[] types;
     private String type;
@@ -35,6 +38,12 @@ public class PageRequestDTO {
     private boolean finished;
     private LocalDate from;
     private LocalDate to;
+
+
+    // offset 계산 로직 추가
+    private void calculateOffset() {
+        this.offset = (page - 1) * size;
+    }
 
     // 페이지 건너뛰기 계산
     public int getSkip() {
@@ -75,4 +84,6 @@ public class PageRequestDTO {
         }
         return Arrays.stream(types).anyMatch(type::equals);
     }
+
+
 }

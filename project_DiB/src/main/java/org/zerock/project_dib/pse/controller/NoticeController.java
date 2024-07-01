@@ -1,10 +1,13 @@
 package org.zerock.project_dib.pse.controller;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.project_dib.pse.dto.NoticeDTO;
 import org.zerock.project_dib.pse.dto.PageRequestDTO;
 import org.zerock.project_dib.pse.dto.PageResponseDTO;
@@ -12,41 +15,75 @@ import org.zerock.project_dib.pse.service.NoticeService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
+@Log4j2
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/notice")
 public class NoticeController {
 
     @Autowired
     private NoticeService noticeService;
 
-    // GET 요청을 처리하여 공지사항 목록을 반환
     @GetMapping("")
-    public String getAllNotices(@ModelAttribute PageRequestDTO pageRequestDTO, Model model) {
-        if (pageRequestDTO == null) {
-            pageRequestDTO = new PageRequestDTO(); // 페이지 요청 객체가 null일 경우 초기화
+    public String getAllNotices(@ModelAttribute PageRequestDTO pageRequestDTO, Model model, RedirectAttributes redirectAttributes) {
+        try {
+            if (pageRequestDTO == null) {
+                pageRequestDTO = new PageRequestDTO(); // 페이지 요청 객체가 null일 경우 초기화
+            }
+            PageResponseDTO<NoticeDTO> responseDTO = noticeService.search(pageRequestDTO);
+            model.addAttribute("notices", responseDTO.getDtoList());
+            model.addAttribute("pageRequestDTO", pageRequestDTO);
+            model.addAttribute("totalPage", responseDTO.getTotalPage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/notice";
         }
-
-        PageResponseDTO<NoticeDTO> responseDTO = noticeService.getAllNotices(pageRequestDTO);
-        model.addAttribute("notices", responseDTO.getDtoList());
-        model.addAttribute("pageRequestDTO", pageRequestDTO);
-        model.addAttribute("totalPage", responseDTO.getTotalPage());
-        return "notice/notice"; // 공지사항 리스트 페이지
+        return "notice/notice";
     }
 
-    // POST 요청을 처리하여 검색 기능을 구현
     @PostMapping("")
-    public String searchNotices(PageRequestDTO pageRequestDTO, Model model) {
-        if (pageRequestDTO == null) {
-            pageRequestDTO = new PageRequestDTO(); // 페이지 요청 객체가 null일 경우 초기화
+    public String searchNotices(@ModelAttribute PageRequestDTO pageRequestDTO, Model model) {
+        try {
+            PageResponseDTO<NoticeDTO> responseDTO = noticeService.search(pageRequestDTO);
+            model.addAttribute("notices", responseDTO.getDtoList());
+            model.addAttribute("pageRequestDTO", pageRequestDTO);
+            model.addAttribute("totalPage", responseDTO.getTotalPage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/notice";
         }
-
-        PageResponseDTO<NoticeDTO> responseDTO = noticeService.getAllNotices(pageRequestDTO);
-        model.addAttribute("notices", responseDTO.getDtoList());
-        model.addAttribute("pageRequestDTO", pageRequestDTO);
-        model.addAttribute("totalPage", responseDTO.getTotalPage());
-        return "notice/notice"; // 공지사항 리스트 페이지
+        return "notice/notice";
     }
+
+//    // GET 요청을 처리하여 공지사항 목록을 반환
+//    @GetMapping("")
+//    public String getAllNotices(@ModelAttribute PageRequestDTO pageRequestDTO, Model model) {
+//        if (pageRequestDTO == null) {
+//            pageRequestDTO = new PageRequestDTO(); // 페이지 요청 객체가 null일 경우 초기화
+//        }
+//
+//        PageResponseDTO<NoticeDTO> responseDTO = noticeService.getAllNotices(pageRequestDTO);
+//        model.addAttribute("notices", responseDTO.getDtoList());
+//        model.addAttribute("pageRequestDTO", pageRequestDTO);
+//        model.addAttribute("totalPage", responseDTO.getTotalPage());
+//        return "notice/notice"; // 공지사항 리스트 페이지
+//    }
+//
+//    // POST 요청을 처리하여 검색 기능을 구현
+//    @PostMapping("")
+//    public String searchNotices(PageRequestDTO pageRequestDTO, Model model) {
+//        if (pageRequestDTO == null) {
+//            pageRequestDTO = new PageRequestDTO(); // 페이지 요청 객체가 null일 경우 초기화
+//        }
+//
+//        PageResponseDTO<NoticeDTO> responseDTO = noticeService.getAllNotices(pageRequestDTO);
+//        model.addAttribute("notices", responseDTO.getDtoList());
+//        model.addAttribute("pageRequestDTO", pageRequestDTO);
+//        model.addAttribute("totalPage", responseDTO.getTotalPage());
+//        return "notice/notice"; // 공지사항 리스트 페이지
+//    }
 
     @GetMapping("/register")
     public String showRegisterForm() {

@@ -26,10 +26,8 @@
                                     <select name="type" class="btn btn-default dropdown-toggle">
                                         <option value="t">제목</option>
                                         <option value="w">내용</option>
-    <!--                                    <option value="tw">제목+내용</option>-->
                                     </select>
                                 </div>
-<!--                                <input type="hidden" name="title" id="search_param" value="title">-->
                                 <input type="text" class="form-control" name="keyword" placeholder="검색">
                                 <span class="input-group-btn">
                                     <button class="btn btn-primary" type="submit">검색</button>
@@ -72,7 +70,6 @@
                         </li>
                         <li class="page-item" th:classappend="${pageRequestDTO.page == totalPage} ? 'disabled'">
                             <a class="page-link" th:href="@{/notice(page=${pageRequestDTO.page + 1}, size=${pageRequestDTO.size})}" aria-label="Next">
-
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>

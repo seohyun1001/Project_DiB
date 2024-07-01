@@ -35,35 +35,31 @@
         DELETE FROM notice WHERE nno = #{nno}
     </delete>
 
-    <select id="getAll" resultMap="NoticeResultMap" parameterType="org.zerock.project_dib.pse.dto.PageRequestDTO">
-        SELECT * FROM notice
-        <if test="pageRequestDTO.keyword != null and pageRequestDTO.keyword != ''">
-            WHERE
-            <choose>
-                <when test="pageRequestDTO.type == 't'">
-                    notice_title LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
-                </when>
-                <when test="pageRequestDTO.type == 'w'">
-                    notice_content LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
-                </when>
-            </choose>
-        </if>
-        ORDER BY nno DESC
-        LIMIT #{pageRequestDTO.skip}, #{pageRequestDTO.size}
+    <select id="search" resultMap="NoticeResultMap">
+        SELECT *
+        FROM notice
+        <where>
+            <if test="pageRequestDTO.nno != null">
+                AND nno = #{pageRequestDTO.nno}
+            </if>
+            <if test="pageRequestDTO.noticeTitle != null">
+                AND notice_title = #{pageRequestDTO.noticeTitle}
+            </if>
+            <if test="pageRequestDTO.noticeContent != null">
+                AND notice_content = #{pageRequestDTO.noticeContent}
+            </if>
+            <if test="pageRequestDTO.keyword != null">
+                AND (notice_title LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+                OR notice_content LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%'))
+            </if>
+        </where>
+        ORDER BY nno ASC
+        LIMIT #{pageRequestDTO.offset}, #{pageRequestDTO.size};
     </select>
 
-    <select id="getCount" parameterType="org.zerock.project_dib.pse.dto.PageRequestDTO">
-        SELECT COUNT(*) FROM notice
-        <if test="pageRequestDTO.keyword != null and pageRequestDTO.keyword != ''">
-            WHERE
-            <choose>
-                <when test="pageRequestDTO.type == 't'">
-                    notice_title LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
-                </when>
-                <when test="pageRequestDTO.type == 'w'">
-                    notice_content LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
-                </when>
-            </choose>
-        </if>
+
+    <select id="selectAll" resultMap="NoticeResultMap">
+        SELECT * FROM notice
     </select>
+
 </mapper>

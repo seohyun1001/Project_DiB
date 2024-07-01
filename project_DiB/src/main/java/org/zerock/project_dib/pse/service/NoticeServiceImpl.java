@@ -1,6 +1,7 @@
 package org.zerock.project_dib.pse.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Log4j2
 @RequiredArgsConstructor
 public class NoticeServiceImpl implements NoticeService {
 
@@ -92,20 +94,67 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public PageResponseDTO<NoticeDTO> getAllNotices(PageRequestDTO pageRequestDTO) {
+    public List<NoticeDTO> getAllNotices() {
+        return noticeMapper.selectAll().stream()
+                .map(this::entityToDto)
+                .collect(Collectors.toList());
+    }
 
-        // 공지사항 목록 조회
-        List<Notice> notices = noticeMapper.getAll(pageRequestDTO);
+    @Override
+    public PageResponseDTO<NoticeDTO> search(PageRequestDTO pageRequestDTO) {
+        List<Notice> notices = noticeMapper.search(pageRequestDTO);
         List<NoticeDTO> dtoList = notices.stream()
-                .map(notice -> modelMapper.map(notice, NoticeDTO.class))
+                .map(notice -> {
+                    NoticeDTO noticeDTO = modelMapper.map(notice, NoticeDTO.class);
+//                    noticeDTO.setFileNames(notice.getImageSet().stream()
+//                            .map(image -> image.getUuid() + "_" + image.getFile_name())
+//                            .collect(Collectors.toList()));
+                    return noticeDTO;
+                })
                 .collect(Collectors.toList());
 
-        // 공지사항 총 개수 조회
-        int total = noticeMapper.getCount(pageRequestDTO);
-        return PageResponseDTO.<NoticeDTO>builder()
-                .dtoList(dtoList)
+        int total = notices.size();
+        return PageResponseDTO.<NoticeDTO>withAll()
                 .pageRequestDTO(pageRequestDTO)
-                .totalPage((int) Math.ceil((double) total / pageRequestDTO.getSize())) // 총 페이지 수 계산
+                .dtoList(dtoList)
+                .total(total)
                 .build();
     }
+
+    private Notice dtoToEntity(NoticeDTO noticeDTO) {
+        return Notice.builder()
+                .noticeTitle(noticeDTO.getNoticeTitle())
+                .noticeContent(noticeDTO.getNoticeContent())
+                .build();
+    }
+
+    private NoticeDTO entityToDto(Notice notice) {
+        return NoticeDTO.builder()
+                .nno(notice.getNno())
+                .noticeTitle(notice.getNoticeTitle())
+                .noticeContent(notice.getNoticeContent())
+//                .fileNames(notice.getImageSet().stream()
+//                        .map(image -> image.getUuid() + "_" + image.getFile_name())
+//                        .collect(Collectors.toList()))
+                .build();
+    }
+
+
+//    @Override
+//    public PageResponseDTO<NoticeDTO> getAllNotices(PageRequestDTO pageRequestDTO) {
+//
+//        // 공지사항 목록 조회
+//        List<Notice> notices = noticeMapper.getAll(pageRequestDTO);
+//        List<NoticeDTO> dtoList = notices.stream()
+//                .map(notice -> modelMapper.map(notice, NoticeDTO.class))
+//                .collect(Collectors.toList());
+//
+//        // 공지사항 총 개수 조회
+//        int total = noticeMapper.getCount(pageRequestDTO);
+//        return PageResponseDTO.<NoticeDTO>builder()
+//                .dtoList(dtoList)
+//                .pageRequestDTO(pageRequestDTO)
+//                .totalPage((int) Math.ceil((double) total / pageRequestDTO.getSize())) // 총 페이지 수 계산
+//                .build();
+//    }
 }
