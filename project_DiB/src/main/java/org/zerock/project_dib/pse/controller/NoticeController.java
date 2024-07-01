@@ -20,6 +20,7 @@ public class NoticeController {
     @Autowired
     private NoticeService noticeService;
 
+    // GET 요청을 처리하여 공지사항 목록을 반환
     @GetMapping("")
     public String getAllNotices(@ModelAttribute PageRequestDTO pageRequestDTO, Model model) {
         if (pageRequestDTO == null) {
@@ -33,7 +34,7 @@ public class NoticeController {
         return "notice/notice"; // 공지사항 리스트 페이지
     }
 
-    // 추가된 부분: POST 요청을 처리하여 검색 기능을 구현
+    // POST 요청을 처리하여 검색 기능을 구현
     @PostMapping("")
     public String searchNotices(PageRequestDTO pageRequestDTO, Model model) {
         if (pageRequestDTO == null) {

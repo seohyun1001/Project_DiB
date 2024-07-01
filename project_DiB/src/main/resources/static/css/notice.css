@@ -1,4 +1,10 @@
 /* notice.css */
+/* 공지사항 페이지 배경 이미지 설정 */
+body {
+    background: url('/img/board_bg.png') no-repeat center center fixed; /* 배경 이미지 설정 */
+    background-size: cover; /* 이미지 크기를 조절하여 화면을 덮도록 설정 */
+}
+
 
 /* 공지사항 컨테이너 스타일 */
 .notice-container {

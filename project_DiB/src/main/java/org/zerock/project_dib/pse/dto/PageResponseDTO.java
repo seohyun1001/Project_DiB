@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class PageResponseDTO<T> {
     private PageRequestDTO pageRequestDTO; // 페이징 요청 정보를 담는 객체
-    private List<T> dtoList;  // 데이터 리스트
+    private List<T> dtoList;  // 검색시 데이터 리스트
     private int totalPage; // 총 페이지 수
     private int total; // 전체 데이터 수
 

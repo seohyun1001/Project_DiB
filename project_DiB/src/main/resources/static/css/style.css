@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
-    background: url('/img/board_bg.png') no-repeat center center fixed; /* 배경 이미지 추가 */
+    background: url('/img/sample.png') no-repeat center center;
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -90,14 +90,33 @@ header {
     padding: 8px 16px;
 }
 
-main {
-    text-align: center;
-    padding-top: 250px;
-    padding-bottom: 50px;
-    background-color: transparent; /* 배경 이미지 위에 반투명 배경 */
-    min-height: 100vh; /* 배경 이미지와 동일한 높이로 설정 */
+
+
+
+.full-page {
+    width: 100%;
+    height: 3240px; /* 페이지의 높이를 3240px로 설정 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     overflow-y: auto; /* 세로 스크롤 활성화 */
 }
+
+.content {
+    text-align: center;
+    padding-bottom: 2500px;
+    background-color: transparent; /* 배경 이미지 위에 반투명 배경 */
+}
+
+/*main {*/
+/*    text-align: center;*/
+/*    padding-top: 250px;*/
+/*    padding-bottom: 50px;*/
+/*    background-color: transparent; !* 배경 이미지 위에 반투명 배경 *!*/
+/*    min-height: 100vh; !* 배경 이미지와 동일한 높이로 설정 *!*/
+/*    overflow-y: auto; !* 세로 스크롤 활성화 *!*/
+/*}*/
 
 
 /* 푸터 스타일 */
