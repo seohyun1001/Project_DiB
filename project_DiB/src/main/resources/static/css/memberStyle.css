@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    background: url("/im") no-repeat center center fixed; /* 배경 이미지 추가 */
+    /*background: url("/im") no-repeat center center fixed; !* 배경 이미지 추가 *!*/
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -174,4 +174,10 @@ footer {
 .form-signin {
     max-width: 330px;
     padding: 1rem;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
 }
