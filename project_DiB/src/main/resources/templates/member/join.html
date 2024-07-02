@@ -12,30 +12,34 @@
 </head>
 <body class="d-flex align-items-center">
 <div th:replace="fragment/header :: headerFragment"></div>
-<!--<div layout:fragment="content">-->
 <div class="align-middle">
     <div class="container-fluid d-flex justify-content-center">
         <div class="row mt-3">
             <div class="col">
                 <div class="card align-self-center">
                     <div class="card-header">
-                        JOIN
+                        회원가입
                     </div> <!-- end card-header -->
                     <div class="card-body">
                         <form id="registerForm" action="/member/join" method="post">
                             <div class="input-group mb-3">
-                                <span class="input-group-text">MID</span>
+                                <span class="input-group-text">아이디</span>
                                 <input type="text" name="mid" class="form-control">
                                 <button class="btn btn-secondary confirm" type="button">confirm</button>
                             </div>
 
                             <div class="input-group mb-3">
-                                <span class="input-group-text">MPW</span>
+                                <span class="input-group-text">비밀번호</span>
                                 <input type="text" name="mpw" class="form-control">
                             </div>
 
                             <div class="input-group mb-3">
-                                <span class="input-group-text">NAME</span>
+                                <span class="input-group-text">비밀번호 확인</span>
+                                <input type="text" name="mpw_confirm" class="form-control">
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">이름</span>
                                 <input type="text" name="name" class="form-control">
                             </div>
 
@@ -49,11 +53,6 @@
                                 <input type="text" name="address" class="form-control">
                             </div>
 
-<!--                            <div class="input-group mb-3">-->
-<!--                                <span class="input-group-text">BIRTHDAY</span>-->
-<!--                                <input type="text" name="birthdate" class="form-control">-->
-<!--                            </div>-->
-
                             <div class="input-group mb-3">
                                 <span class="input-group-text">PHONE</span>
                                 <input type="text" name="phone" class="form-control">
@@ -61,7 +60,7 @@
 
                             <div class="my-4">
                                 <div class="float-end">
-                                    <button type="submit" class="btn btn-primary submitBtn">Submit</button>
+                                    <button type="button" class="btn btn-primary submitBtn">Submit</button>
                                     <button type="reset" class="btn btn-secondary">Reset</button>
                                 </div>
                             </div>
@@ -78,9 +77,9 @@
 <div th:replace="fragment/footer :: footerFragment"></div>
 
 <script th:src="@{/js/script.js}"></script>
-<!--</div> &lt;!&ndash; end layout &ndash;&gt;-->
 
 <script layout:fragment="script" th:inline="javascript">
+    // 아이디 중복확인
     document.querySelector(".confirm").addEventListener("click", function (e) {
         e.preventDefault()
         e.stopPropagation()
@@ -103,6 +102,27 @@
             console.error(error);
         });
     });
+
+    // 비밀번호 = 비밀번호 확인 일치 여부 확인
+    document.querySelector(".submitBtn").addEventListener("click", function(e) {
+        e.preventDefault()
+        e.stopPropagation()
+        let formObj = document.getElementById("registerForm")
+
+        const mpw = document.querySelector("[name='mpw']").value
+        const mpw_confirm = document.querySelector("[name='mpw_confirm']").value
+
+        if(mpw !== mpw_confirm){
+            alert("비밀번호를 확인 해주십시오.");
+            return
+        }
+        else {
+            alert("회원 가입을 환영합니다.")
+            formObj.submit()
+        }
+
+    }, false)
+
 </script>
 
 </body>
