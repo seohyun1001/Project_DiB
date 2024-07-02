@@ -13,13 +13,14 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class NoticeDTO {
-    private Long nno; // 공지사항 번호
-    private String noticeTitle;
-    private String noticeContent;
-    private MultipartFile noticeImage; // 공지사항 이미지 파일
+public class One2oneDTO {
+    private Long otono; // 1대1 문의 번호
+    private String one2oneTitle;
+    private String one2oneContent;
+    private MultipartFile one2oneImage; // 1대1 문의 이미지 파일
     private LocalDate regdate;
     private LocalDate moddate;
-    private String noticeImagePath; // 공지사항 이미지 경로
+    private String one2oneImagePath; // 1대1 문의 이미지 경로
     private List<String> fileNames; // 파일 이름 목록
+    private String mid; // 작성자 ID
 }
