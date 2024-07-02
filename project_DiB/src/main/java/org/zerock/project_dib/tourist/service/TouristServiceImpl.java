@@ -115,12 +115,12 @@ public class TouristServiceImpl implements TouristService {
     private TouristDTO toDTO(Tourist tourist) {
         TouristDTO dto = new TouristDTO();
         dto.setTno(tourist.getTno());
-        dto.setTourName(tourist.getTourName());
-        dto.setTourAddr(tourist.getTourAddr());
-        dto.setTourOpentime(tourist.getTourOpentime());
-        dto.setTourClosetime(tourist.getTourClosetime());
-        dto.setTourParking(tourist.isTourParking());
-        dto.setTourContent(tourist.getTourContent());
+        dto.setTourName(tourist.getTour_name());
+        dto.setTourAddr(tourist.getTour_addr());
+        dto.setTourOpentime(tourist.getTour_opentime());
+        dto.setTourClosetime(tourist.getTour_closetime());
+        dto.setTourParking(tourist.isTour_parking());
+        dto.setTourContent(tourist.getTour_content());
         dto.setModDate(tourist.getModDate());
         dto.setRegDate(tourist.getRegDate());
         return dto;
@@ -129,12 +129,12 @@ public class TouristServiceImpl implements TouristService {
     private Tourist toEntity(TouristDTO dto) {
         Tourist tourist = new Tourist();
         tourist.setTno(dto.getTno());
-        tourist.setTourName(dto.getTourName());
-        tourist.setTourAddr(dto.getTourAddr());
-        tourist.setTourOpentime(dto.getTourOpentime());
-        tourist.setTourClosetime(dto.getTourClosetime());
-        tourist.setTourParking(dto.isTourParking());
-        tourist.setTourContent(dto.getTourContent());
+        tourist.setTour_name(dto.getTourName());
+        tourist.setTour_addr(dto.getTourAddr());
+        tourist.setTour_opentime(dto.getTourOpentime());
+        tourist.setTour_closetime(dto.getTourClosetime());
+        tourist.setTour_parking(dto.isTourParking());
+        tourist.setTour_content(dto.getTourContent());
         tourist.setModDate(dto.getModDate());
         tourist.setRegDate(dto.getRegDate());
         return tourist;

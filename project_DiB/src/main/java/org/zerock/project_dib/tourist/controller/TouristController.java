@@ -26,7 +26,7 @@ public class TouristController {
     public String getList(Model model) {
         List<TouristDTO> list = touristService.getList();
         model.addAttribute("list", list);
-        return "tourists";
+        return "tourist/tourists";
     }
 
     @GetMapping("/read/{tno}")

@@ -1,35 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Insert Tourist Data</title>
+    <title>Register Tourist</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-<h2>Insert Tourist Data</h2>
-<form action="/tourists/register" method="post" enctype="multipart/form-data">
-    <label for="tourName">Tour Name:</label><br>
-    <input type="text" id="tourName" name="tourName" required><br><br>
-
-    <label for="tourAddr">Tour Address:</label><br>
-    <input type="text" id="tourAddr" name="tourAddr" required><br><br>
-
-    <label for="tourOpentime">Opening Time:</label><br>
-    <input type="text" id="tourOpentime" name="tourOpentime" required><br><br>
-
-    <label for="tourClosetime">Closing Time:</label><br>
-    <input type="text" id="tourClosetime" name="tourClosetime" required><br><br>
-
-    <label for="tourParking">Parking Available:</label>
-    <input type="checkbox" id="tourParking" name="tourParking"><br><br>
-
-    <label for="tourContent">Tour Description:</label><br>
-    <textarea id="tourContent" name="tourContent" rows="4" required></textarea><br><br>
-
-    <label for="file">Tour Image:</label><br>
-    <input type="file" id="file" name="file" accept="image/*" required><br><br>
-
-    <input type="submit" value="Submit">
-</form>
+<div class="container">
+    <h1 class="my-4">Register New Tourist</h1>
+    <form th:action="@{/tourists/register}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" class="form-control" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="file">Image</label>
+            <input type="file" id="file" name="file" class="form-control-file">
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
 </body>
 </html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tourist List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="my-4">Tourist List</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Img</th>
+            <th>Address</th>
+            <th>Open Time</th>
+            <th>Close Time</th>
+            <th>Parking</th>
+            <th>Content</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tourist : ${list}">
+            <td th:text="${tourist.tno}">1</td>
+            <td th:text="${tourist.tourName}">Name</td>
+            <div th:if="${touristImg.fileName != null && touristImg.boardImages.size() > 0}">
+                <img style="withd:100px" th:each="boardImage : ${dto.boardImages}"
+                     th:src="|/view/s_${boardImage.uuid}_${boardImage.fileName}|">
+            </div>
+            <td th:text="${tourist.tourAddr}">Address</td>
+            <td th:text="${tourist.tourOpentime}">Open Time</td>
+            <td th:text="${tourist.tourClosetime}">Close Time</td>
+            <td th:text="${tourist.tourParking} ? 'Yes' : 'No'">Parking</td>
+            <td th:text="${tourist.tourContent}">Content</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
