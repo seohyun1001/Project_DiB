@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${title}">1대1 문의 상세보기</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/one2one_detail.css}">
+</head>
+<body>
+<div th:replace="fragment/header :: headerFragment"></div>
+
+<main>
+    <div class="one2one-container">
+        <h3 class="one2one-detail-title">1대1 문의</h3>
+        <div class="one2one-detail">
+            <div class="mb-3">
+                <label for="one2oneTitle" class="form-label"></label>
+                <input type="text" class="form-control" id="one2oneTitle" th:value="${one2one.one2oneTitle}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="one2oneContent" class="form-label"></label>
+                <textarea class="form-control" id="one2oneContent" rows="10" readonly th:text="${one2one.one2oneContent}"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="mid" class="form-label">작성자</label>
+                <input type="text" class="form-control" id="mid" th:value="${one2one.mid}" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label for="regdate" class="form-label"></label>
+                <input type="text" class="form-control" id="regdate" th:value="${one2one.regdate}" readonly>
+            </div>
+<!--            <div class="mb-3">-->
+<!--                <label for="one2oneImage" class="form-label">이미지</label>-->
+<!--                <img th:if="${one2one.one2oneImagePath}" th:src="@{${one2one.one2oneImagePath}}" class="img-fluid" alt="1대1 문의 이미지">-->
+<!--            </div>-->
+            <div class="button-container">
+                <a href="/one2one" class="btn btn-secondary">목록으로</a>
+                <div class="btn-group">
+                <form th:action="@{/one2one/delete/{otono}(otono=${one2one.otono})}" method="post">
+                    <button type="submit" class="btn btn-danger">삭제</button>
+                <a th:href="@{/one2one/modify/{otono}(otono=${one2one.otono})}" class="btn btn-primary">수정</a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div th:replace="fragment/footer :: footerFragment"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

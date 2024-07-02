@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Member Join Page</title>
+</head>
+
+<div layout:fragment="content">
+    <div class="container-fluid d-flex justify-content-center" style="height:100vh">
+    <div class="row mt-3">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    JOIN
+                </div> <!-- end card-header -->
+                <div class="card-body">
+                    <form id="modifyForm">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">MID</span>
+                            <input type="text" name="mid" class="form-control" th:value="${memberDTO.mid}" readonly>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">MPW</span>
+                            <input type="password" name="mpw" class="form-control" >
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">NAME</span>
+                            <input type="text" name="name" class="form-control" th:value="${memberDTO.name}" readonly>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">EMAIL</span>
+                            <input type="text" name="email" class="form-control" th:value="${memberDTO.email}" >
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">ADDRESS</span>
+                            <input type="text" name="address" class="form-control" th:value="${memberDTO.address}" >
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">PHONE</span>
+                            <input type="text" name="phone" class="form-control" th:value="${memberDTO.phone}" >
+                        </div>
+
+                        <div class="my-4">
+                            <div class="float-end">
+                                <button type="submit" class="btn btn-primary modifyBtn">정보수정</button>
+                                <button type="reset" class="btn btn-secondary">리셋</button>
+                            </div>
+                        </div>
+                    </form> <!-- end form -->
+
+                </div> <!-- end card-body -->
+            </div> <!-- end card -->
+        </div> <!-- end col -->
+    </div> <!-- end row -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</div> <!-- end layout -->
+
+<script layout:fragment="script" th:inline="javascript">
+    const formObj = document.querySelector("#modifyForm")
+    document.querySelector(".modifyBtn").addEventListener("click",function (e){
+        e.preventDefault()
+        e.stopPropagation()
+
+        formObj.action = "/member/modify"
+        formObj.method = "post"
+        formObj.submit()
+    }, false);
+
+</script>
+
+
+
+
+</html>

@@ -24,6 +24,9 @@ repositories {
 }
 
 dependencies {
+    // PageRequestDTO 때문에 한 줄 추가했습니다_성언
+    compileOnly('javax:javaee-api:8.0.1')
+
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -62,6 +65,20 @@ dependencies {
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.1.0'
     // thymeleaf extras springsecurity5
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.2.RELEASE'
+
+
+    // gson
+    implementation 'com.google.code.gson:gson:2.8.9'
+
+    // jjwt
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+
+    // dataTypeConverter 에러에 필요한 라이브러리
+    implementation 'com.sun.xml.bind:jaxb-impl:4.0.1'
+    implementation 'com.sun.xml.bind:jaxb-core:4.0.1'
+    implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
 
 }
 

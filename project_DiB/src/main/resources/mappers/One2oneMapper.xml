@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.project_dib.pse.mapper.One2oneMapper">
+    <resultMap id="One2oneResultMap" type="org.zerock.project_dib.pse.domain.One2one">
+        <id property="otono" column="otono" />
+        <result property="one2oneTitle" column="one2one_title" />
+        <result property="one2oneContent" column="one2one_content" />
+        <result property="one2oneImage" column="one2one_image" />
+        <result property="regdate" column="regdate" />
+        <result property="moddate" column="moddate" />
+    </resultMap>
+
+    <!-- 1대1 문의 읽기 -->
+    <select id="read" resultMap="One2oneResultMap" parameterType="long">
+        SELECT * FROM one2one WHERE otono = #{otono}
+    </select>
+
+    <!-- 1대1 문의 삽입 -->
+    <insert id="insert" parameterType="org.zerock.project_dib.pse.domain.One2one">
+        INSERT INTO one2one (one2one_title, one2one_content, one2one_image, regdate, moddate)
+        VALUES (#{one2oneTitle}, #{one2oneContent}, #{one2oneImage}, #{regdate}, #{moddate})
+    </insert>
+
+    <!-- 1대1 문의 수정 -->
+    <update id="update">
+        UPDATE one2one
+        SET one2one_title = #{one2oneTitle},
+            one2one_content = #{one2oneContent},
+            one2one_image = #{one2oneImage},
+            moddate = #{moddate}
+        WHERE otono = #{otono}
+    </update>
+
+    <!-- 1대1 문의 삭제 -->
+    <delete id="delete">
+        DELETE FROM one2one WHERE otono = #{otono}
+    </delete>
+
+    <!-- 1대1 문의 검색 -->
+    <select id="search" resultMap="One2oneResultMap">
+        SELECT
+        otono,
+        one2one_title as one2oneTitle,
+        one2one_content as one2oneContent,
+        one2one_image as one2oneImage,
+        regdate,
+        moddate,
+        mid
+        FROM
+        one2one
+        <where>
+            <if test="pageRequestDTO.otono != null">
+                AND otono = #{pageRequestDTO.otono}
+            </if>
+            <if test="pageRequestDTO.one2oneTitle != null">
+                AND one2one_title = #{pageRequestDTO.one2oneTitle}
+            </if>
+            <if test="pageRequestDTO.one2oneContent != null">
+                AND one2one_content = #{pageRequestDTO.one2oneContent}
+            </if>
+            <if test="pageRequestDTO.keyword != null">
+                AND (one2one_title LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+                OR one2one_content LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%'))
+            </if>
+        </where>
+        ORDER BY otono DESC
+        LIMIT #{pageRequestDTO.offset}, #{pageRequestDTO.size};
+    </select>
+
+    <select id="totalCount" resultType="int">
+        SELECT COUNT(*)
+        FROM one2one
+        <where>
+            <if test="pageRequestDTO.otono != null">
+                AND otono = #{pageRequestDTO.otono}
+            </if>
+            <if test="pageRequestDTO.one2oneTitle != null">
+                AND one2one_title = #{pageRequestDTO.one2oneTitle}
+            </if>
+            <if test="pageRequestDTO.one2oneContent != null">
+                AND one2one_content = #{pageRequestDTO.one2oneContent}
+            </if>
+            <if test="pageRequestDTO.keyword != null">
+                AND (one2one_title LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+                OR one2one_content LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%'))
+            </if>
+        </where>
+    </select>
+
+    <!-- 모든 1대1 문의 선택 -->
+    <select id="selectAll" resultMap="One2oneResultMap">
+        SELECT * FROM one2one
+    </select>
+
+</mapper>
