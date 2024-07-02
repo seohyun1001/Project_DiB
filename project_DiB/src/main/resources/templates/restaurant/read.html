@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Restaurant Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-2 border-bottom">
+    <div class="col-md-3 mb-2 mb-md-0">
+        <!--        <a href="/restaurant/list" class="d-inline-flex link-body-emphasis text-decoration-none">-->
+        <!--            <h3>List</h3>-->
+        <!--        </a>-->
+        <!--        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2"-->
+        <!--                aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">-->
+        <!--            <span class="navbar-toggler-icon"></span>-->
+        <!--        </button>-->
+    </div>
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+        <li><a href="#" class="nav-link px-2">Features</a></li>
+        <li><a href="#" class="nav-link px-2">Pricing</a></li>
+        <li><a href="#" class="nav-link px-2">FAQs</a></li>
+        <li><a href="#" class="nav-link px-2">About</a></li>
+    </ul>
+    <div class="col-md-3 text-end">
+        <button type="button" class="btn btn-outline-primary me-2">Login</button>
+        <button type="button" class="btn btn-primary">Sign-up</button>
+    </div>
+</header>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h2 th:text="${dto.rest_name}">Restaurant Name</h2>
+            <p th:text="${dto.rest_exp}">Restaurant Description</p>
+            <p th:text="${dto.rest_exp2}">Detailed Description</p>
+            <p><strong>Location:</strong> <span th:text="${dto.rest_loc}">Location</span></p>
+            <p><strong>Phone:</strong> <span th:text="${dto.rest_phone}">Phone</span></p>
+            <p><strong>Menu:</strong> <span th:text="${dto.rest_menu}">Menu</span></p>
+            <p><strong>Operating Hours:</strong> <span th:text="${dto.rest_time}">Operating Hours</span></p>
+        </div>
+    </div>
+    <div class="row">
+<!--        섬네일 이미지 출력-->
+        <div class="col-12">
+            <h3>Uploaded Images</h3>
+            <div class="row">
+                <div th:each="file : ${dto.fileNames}" class="col-md-3 mb-3">
+                    <img th:src="@{|/view/${file}|}" class="img-fluid rounded" alt="Restaurant Image">
+                </div>
+            </div>
+        </div>
+<!--        원본 이미지 출력-->
+<!--        <div class="col">-->
+<!--            <div class="card" th:if="${dto.fileNames != null && dto.fileNames.size()>0}">-->
+<!--                <img class="card-img-top"-->
+<!--                     th:each="fileName: ${dto.fileNames}"-->
+<!--                     th:src="|/view/${fileName}|">-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+    <div class="row mt-4">
+        <div class="col-12">
+            <a href="/restaurant/list" class="btn btn-secondary">Back to List</a>
+            <a href="/re"
+            <a th:href="@{/restaurant/modify(rno=${dto.rno})}" class="btn btn-primary">Modify</a>
+        </div>
+    </div>
+</div>
+
+<footer class="py-5 text-center text-body-secondary bg-body-tertiary mt-4">
+    <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a
+            href="https://twitter.com/mdo">@mdo</a>.</p>
+    <p class="mb-0">
+        <a href="#">Back to top</a>
+    </p>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,100 +1,79 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/basic.html}">
+<html lang="en">
+
 <head>
-    <title>Review Register</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Restaurant Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
-<div layout:fragment="content">
-    <div class="row mt-3">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    Review Register
-                </div>
-                <div class="card-body">
-
-                    <form action="/restaurant/register" method="post">
-                        <input type="hidden" name="rno" th:value="${rno}">
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">리뷰</span>
-                            <textarea class="form-control col-sm-5" rows="5" name="content"></textarea>
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">작성자</span>
-                            <input type="text" name="writer" class="form-control" th:value="${mid}"
-                                  readonly>
-                        </div>
-                        <div class="input-group mb-3">
-
-                            <div class="float-end uploadHidden">
-                            </div>
-                        </div>
-
-                        <div class="my-4">
-                            <div class="float-end">
-                                <a href="goodfood" type="submit" class="btn btn-primary submitBtn">Submit</a>
-                                <button type="reset" class="btn btn-secondary">Reset</button>
-                            </div>
-                        </div>
-                    </form>
-
-                </div> <!-- end card body -->
-            </div> <!-- end card -->
-        </div> <!-- end col -->
-    </div> <!-- end row -->
-
-    <!-- 첨부파일 섬네일을 보여줄 부분 -->
-    <div class="row mt-3">
-        <div class="col ">
-            <div class="container-fluid d-flex uploadResult" style="flex-wrap: wrap;">
-            </div>
-        </div>
+<body>
+<header
+        class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-2 border-bottom">
+    <div class="col-md-3 mb-2 mb-md-0">
+        <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+            <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap">
+                <use xlink:href="#bootstrap"/>
+            </svg>
+        </a>
     </div>
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+        <li><a href="#" class="nav-link px-2">Features</a></li>
+        <li><a href="#" class="nav-link px-2">Pricing</a></li>
+        <li><a href="#" class="nav-link px-2">FAQs</a></li>
+        <li><a href="#" class="nav-link px-2">About</a></li>
+    </ul>
+    <div class="col-md-3 text-end">
+        <button type="button" class="btn btn-outline-primary me-2">Login</button>
+        <button type="button" class="btn btn-primary">Sign-up</button>
+    </div>
+</header>
 
+<div class="container">
+    <h2>Register Restaurant</h2>
+    <form id="restaurantForm" method="post" action="/restaurant/register" enctype="multipart/form-data">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <div class="mb-3">
+            <label for="rest_name" class="form-label">Restaurant Name</label>
+            <input class="form-control" type="text" id="rest_name" name="rest_name" required>
+        </div>
+        <div class="mb-3">
+            <label for="rest_exp" class="form-label">Description</label>
+            <textarea class="form-control" id="rest_exp" name="rest_exp" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="rest_exp2" class="form-label">Detailed Description</label>
+            <textarea class="form-control" id="rest_exp2" name="rest_exp2"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="rest_loc" class="form-label">Location</label>
+            <input class="form-control" type="text" id="rest_loc" name="rest_loc" required>
+        </div>
+        <div class="mb-3">
+            <label for="rest_phone" class="form-label">Phone</label>
+            <input class="form-control" type="text" id="rest_phone" name="rest_phone">
+        </div>
+        <div class="mb-3">
+            <label for="rest_menu" class="form-label">Menu</label>
+            <input class="form-control" type="text" id="rest_menu" name="rest_menu">
+        </div>
+        <div class="mb-3">
+            <label for="rest_time" class="form-label">Operating Hours</label>
+            <input class="form-control" type="text" id="rest_time" name="rest_time">
+        </div>
+        <div class="mb-3">
+            <label for="files" class="form-label">Upload Images</label>
+            <input class="form-control" type="file" id="files" name="files" multiple>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/js/upload.js"></script>
-
-</div> <!-- end layout fragment -->
-
-
-<script layout:fragment="script" th:inline="javascript">
-
-
-//    // 게시물 등록 과정 처리
-//    document.querySelector(".submitBtn").addEventListener("click", function (e){
-//
-//        e.preventDefault()
-//        e.stopPropagation()
-//
-//        // input hidden을 추가하기 위한 변수 설정
-//        const target = document.querySelector(".uploadHidden")
-//        // 화면의 모든 img 태그를 가져옴
-//        const uploadFiles = uploadResult.querySelectorAll("img")
-//
-//        // innerHTML에 넣을 문자열 변수 선언
-//        let str = ''
-//
-//        // 이미지 태그의 개수만큼 반복
-//        for (let i = 0; i < uploadFiles.length; i++){
-//            // 이미지 태그를 하나하나 담아주는 변수
-//            const uploadFile = uploadFiles[i]
-//            // data-src 안에 들어있는 데이터를 취득
-//            // data-src : img 태그 안의 생성한 속성으로 파일이름을 의미
-//            const imgLink = uploadFile.getAttribute("data-src")
-//            // input hidden 생성
-//            str += `<input type='hidden' name='fileNames' value="${imgLink}">`
-//        }
-//
-//        // uploadHidden 안에 input hidden 설정
-//        target.innerHTML = str;
-//        // submit 실행
-//        document.querySelector("form").submit();
-//    }, false)
-
-
-</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqEQ2qhCEjHRg3Mr4Aq8tB9/ScQsAP7EVx0xParls2XmB28+iZf3Lg9N/Rp+E"
+        crossorigin="anonymous"></script>
+</body>
 </html>

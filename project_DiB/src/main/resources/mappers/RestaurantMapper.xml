@@ -1,22 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zerock.project_dib.mapper.RestaurantMapper">
-    <select id="selectAll" resultType="org.zerock.project_dib.restaurant.dto.RestaurantReviewDTO">
-        select * from restaurant_review order by rno desc
-    </select>
-    <delete id="delete">
-        DELETE FROM restaurant_review where rno=#{rno}
-    </delete>
-    <update id="update">
-        UPDATE restaurant_review SET review_text=#{review_text},review_like=#{review_like} where rno=#{rno}
-    </update>
-    <insert id="insert" useGeneratedKeys="true" keyProperty="">
-        INSERT INTO restaurant_review (review_text,mid,review_like,rno) values (#{review_text},#{mid},#{review_like},#{rno})
-
+    <resultMap id="RestaurantMap" type="org.zerock.project_dib.restaurant.domain.Restaurant">
+        <id property="rno" column="rno"/>
+        <result property="rest_name" column="rest_name"/>
+        <result property="rest_exp" column="rest_exp"/>
+        <result property="rest_exp2" column="rest_exp2"/>
+        <result property="rest_loc" column="rest_loc"/>
+        <result property="rest_phone" column="rest_phone"/>
+        <result property="rest_menu" column="rest_menu"/>
+        <result property="rest_time" column="rest_time"/>
+        <result property="moddate" column="moddate"/>
+        <result property="regdate" column="regdate"/>
+        <collection property="imageSet" ofType="org.zerock.project_dib.restaurant.domain.RestaurantImage">
+            <id property="uuid" column="uuid"/>
+            <result property="fileName" column="file_name"/>
+            <result property="ord" column="ord"/>
+            <result property="rno" column="rno"/>
+        </collection>
+    </resultMap>
+    <insert id="insertRest" useGeneratedKeys="true" keyProperty="rno">
+        INSERT INTO restaurant (rest_name, rest_exp, rest_exp2, rest_loc, rest_phone, rest_menu, rest_time)
+        VALUES (#{rest_name}, #{rest_exp}, #{rest_exp2}, #{rest_loc}, #{rest_phone}, #{rest_menu}, #{rest_time})
     </insert>
-    <select id="selectOne" resultType="org.zerock.project_dib.restaurant.dto.RestaurantReviewDTO">
-         select * from restaurant_review where rno=#{rno}
+    <select id="selectAll" resultMap="RestaurantMap">
+        SELECT r.*, ri.uuid, ri.file_name, ri.ord, ri.rno
+        FROM restaurant r
+                 LEFT JOIN restaurant_img ri ON r.rno = ri.rno
+        ORDER BY r.rno ASC
     </select>
+    <select id="readOne" resultMap="RestaurantMap">
+        SELECT r.*, ri.uuid, ri.file_name, ri.ord, ri.rno
+        FROM restaurant r
+                 LEFT JOIN restaurant_img ri ON r.rno = ri.rno
+        WHERE r.rno = #{rno}
+    </select>
+    <update id="update">
+        update restaurant
+        set rest_name  = #{rest_name},
+            rest_exp   = #{rest_exp},
+            rest_exp2  = #{rest_exp2},
+            rest_loc   = #{rest_loc},
+            rest_phone = #{rest_phone},
+            rest_menu  = #{rest_menu},
+            rest_time  = #{rest_time}
+        where rno = #{rno}
+    </update>
+    <delete id="delete">
+        delete
+        from restaurant
+        where rno = #{rno}
+    </delete>
+
+    <select id="search" resultMap="RestaurantMap">
+        SELECT r.*, ri.uuid, ri.file_name, ri.ord, ri.rno
+        FROM restaurant r
+        LEFT JOIN restaurant_img ri ON r.rno = ri.rno
+        <where>
+            (ri.ord = 0 or ri.ord is null)
+            <if test="pageRequestDTO.rno != null">
+                AND r.rno = #{pageRequestDTO.rno}
+            </if>
+            <if test="pageRequestDTO.rest_name != null and pageRequestDTO.rest_name != ''">
+                AND r.rest_name LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+            </if>
+            <if test="pageRequestDTO.rest_loc != null and pageRequestDTO.rest_loc != ''">
+                AND r.rest_loc LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+            </if>
+            <if test="pageRequestDTO.rest_menu != null and pageRequestDTO.rest_menu != ''">
+                AND r.rest_menu LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+            </if>
+<!--            <if test="pageRequestDTO.keyword != null and pageRequestDTO.keyword != ''">-->
+<!--                AND (-->
+<!--                r.rest_name LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')-->
+<!--                OR r.rest_loc LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')-->
+<!--                )-->
+<!--            </if>-->
+        </where>
+        LIMIT #{pageRequestDTO.offset}, #{pageRequestDTO.size};
+    </select>
+
+    <select id="countTotal" resultType="int">
+        SELECT COUNT(*)
+        FROM restaurant
+        <where>
+<!--            <if test="pageRequestDTO.rno != null">-->
+<!--                OR rno = #{pageRequestDTO.rno}-->
+<!--            </if>-->
+            <if test="pageRequestDTO.rest_name != null">
+                OR rest_name LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+            </if>
+            <if test="pageRequestDTO.rest_loc != null">
+                OR rest_loc LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+            </if>
+            <if test="pageRequestDTO.rest_menu != null">
+                OR rest_menu LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteImages">
+        DELETE FROM restaurant_img
+        WHERE rno = #{rno}
+    </delete>
+
+    <insert id="insertImage">
+        INSERT INTO restaurant_img (uuid, file_name, ord, rno)
+        VALUES (#{uploadResult.uuid}, #{uploadResult.fileName}, #{uploadResult.ord}, #{rno})
+    </insert>
+
+<!--    <select id="getFileNames" resultType="string">-->
+<!--        SELECT CONCAT(uuid, '_', file_name)-->
+<!--        FROM restaurant_img-->
+<!--        WHERE rno = #{rno}-->
+<!--    </select>-->
 </mapper>

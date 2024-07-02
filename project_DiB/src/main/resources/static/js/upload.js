@@ -1,3 +1,4 @@
+
 async function uploadToServer (formObj){
 
     console.log("upload to server ----------")
@@ -19,3 +20,8 @@ async function removeFileToServer(uuid, fileName){
     const response = await axios.delete(`/remove/${uuid}_${fileName}`)
     return response.data
 }
+
+
+
+
+

@@ -1,18 +1,12 @@
 package org.zerock.project_dib.restaurant.dto;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.time.LocalDate;
-import java.util.Arrays;
 
 @Builder
 @Data
@@ -20,59 +14,55 @@ import java.util.Arrays;
 @NoArgsConstructor
 public class PageRequestDTO {
     @Builder.Default
-    @Min(value = 1)
-    @Positive
-    private int page=1;
+    private int page = 1;
     @Builder.Default
-    @Min(value = 10)
-    @Max(value = 100)
-    @Positive
-    private int size=10;
-    private String link;
-    private String[] types;
+    private int size = 10;
+    private Integer rno;
+    private String rest_name;
+    private String rest_loc;
+    private String rest_menu;
     private String keyword;
-    private boolean finished;
-    private LocalDate from;
-    private LocalDate to;
-    public int getSkip(){
-        return (page -1) * 10;
+    private String filter;
+
+    public int getOffset() {
+        return (page - 1) * size;
     }
-public String getLink(){
 
-
-    StringBuilder builder = new StringBuilder();
-
-    builder.append("page=" + this.page);
-    builder.append("&size=" + this.size);
-    link=builder.toString();
-
-    if(finished){
-        builder.append("&finished=on");
+    public String getLink() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("page=").append(this.page);
+        builder.append("&size=").append(this.size);
+        if (rno != null) {
+            builder.append("&rno=").append(rno);
+        }
+        if (rest_name != null && !rest_name.isEmpty()) {
+            builder.append("&rest_name=").append(rest_name);
+        }
+        if (rest_loc != null && !rest_loc.isEmpty()) {
+            builder.append("&rest_loc=").append(rest_loc);
+        }
+        if (keyword != null && !keyword.isEmpty()) {
+            try {
+                builder.append("&keyword=").append(URLEncoder.encode(keyword, "UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+        if (filter != null && !filter.isEmpty()) {
+            builder.append("&filter=").append(filter);
+        }
+        return builder.toString();
     }
-    if(types !=null && types.length >0){
-        for(int i=0; i<types.length; i++){
-            builder.append("&types="+types[i]);
+
+
+    public void setFilterAndKeyword() {
+        if ("rest_name".equals(filter)) {
+            this.rest_name = keyword;
+        } else if ("rest_loc".equals(filter)) {
+            this.rest_loc = keyword;
+        } else if ("rest_menu".equals(filter)) {
+            this.rest_menu = keyword;
+
         }
     }
-    if(keyword!=null){
-        try{
-            builder.append("&keyword="+ URLEncoder.encode(keyword,"UTF-8"));
-        }catch (UnsupportedEncodingException e){
-            e.printStackTrace();
-        }
-    }
-    if(from!=null){
-        builder.append("&from="+from.toString());
-    }
-    if(to!=null){
-        builder.append("&to="+to.toString());
-    }
-    return builder.toString();
-}
-public boolean checkType(String type){
-        if(types==null||types.length==0){
-            return false;
-        }
-        return Arrays.stream(types).anyMatch(type::equals);
-}
 }

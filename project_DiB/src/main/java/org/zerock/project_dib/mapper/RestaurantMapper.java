@@ -1,21 +1,27 @@
 package org.zerock.project_dib.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
+import org.zerock.project_dib.restaurant.domain.Restaurant;
 import org.zerock.project_dib.restaurant.dto.PageRequestDTO;
-import org.zerock.project_dib.restaurant.dto.RestaurantReviewDTO;
+import org.zerock.project_dib.restaurant.dto.uploadfile.UploadResultDTO;
 
 import java.util.List;
 
 @Mapper
 public interface RestaurantMapper {
-    List<RestaurantReviewDTO> selectAll();
-    Long insert(RestaurantReviewDTO restaurantReviewDTO);
-    void delete(Long rno);
-    void update(RestaurantReviewDTO restaurantReviewDTO);
+    @Options(useGeneratedKeys = true, keyProperty = "rno")
+    int insertRest(Restaurant restaurant);
+    List<Restaurant> selectAll();
+    Restaurant readOne(int rno);
+    void update(Restaurant restaurant);
+    void delete(int rno);
+    List<Restaurant> search(@Param("pageRequestDTO") PageRequestDTO pageRequestDTO);
+    int countTotal(@Param("pageRequestDTO") PageRequestDTO pageRequestDTO);
 
-    int getCount(PageRequestDTO pageRequestDTO);
+    void deleteImages(int rno);
+    void insertImage(@Param("rno") int rno, @Param("uploadResult") UploadResultDTO uploadResult);
 
-    List<RestaurantReviewDTO> selectList(PageRequestDTO pageRequestDTO);
-
-    RestaurantReviewDTO selectOne(Long rno);
+    List<String> getFileNames(int rno);
 }
