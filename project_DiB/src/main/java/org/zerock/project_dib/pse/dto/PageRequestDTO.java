@@ -25,9 +25,22 @@ public class PageRequestDTO {
     @Max(value = 100)
     @Positive
     private int size = 8; // 페이지당 데이터 수
+
+    //Notice
     private Long nno;
     private String noticeTitle;
     private String noticeContent;
+
+    //FAQ
+    private Long fno;
+    private String faqTitle;
+    private String faqContent;
+
+    //1대1 문의
+    private Long otono;
+    private String one2oneTitle;
+    private String one2oneContent;
+    private String mid;
 
     @Getter
     private int offset;

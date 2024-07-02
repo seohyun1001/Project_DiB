@@ -11,11 +11,11 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor // 기본 생성자
 @AllArgsConstructor // 모든 매개변수를 받는 생성자
-public class Notice {
-    private Long nno; // 공지사항 번호
-    private String noticeTitle;
-    private String noticeContent;
-    private String noticeImage; // 공지사항 이미지 경로
+public class Faq {
+    private Long fno; // FAQ 번호
+    private String faqTitle;
+    private String faqContent;
+    private String faqImage; // FAQ 이미지 경로
     private LocalDate regdate = LocalDate.now();
     private LocalDate moddate = LocalDate.now();
 }

@@ -16,18 +16,4 @@ public interface NoticeService {
 
     List<NoticeDTO> getAllNotices();
     PageResponseDTO<NoticeDTO> search(PageRequestDTO pageRequestDTO);
-
-//    // 페이징된 공지사항 목록 조회
-//    PageResponseDTO<NoticeDTO> getAllNotices(PageRequestDTO pageRequestDTO);
-//
-//
-//    default Notice dtoToEntity(NoticeDTO noticeDTO){
-//        Notice notice = new Notice();
-//        notice.setNno(noticeDTO.getNno());
-//        notice.setNoticeTitle(noticeDTO.getNoticeTitle());
-//        notice.setNoticeContent(noticeDTO.getNoticeContent());
-//        MultipartFile file = noticeDTO.getNoticeImage();
-//        notice.setNoticeImage(file.getName());
-//        return notice;
-//    }
 }

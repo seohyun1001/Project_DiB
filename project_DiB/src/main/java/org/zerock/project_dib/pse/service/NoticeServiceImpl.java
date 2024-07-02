@@ -51,12 +51,6 @@ public class NoticeServiceImpl implements NoticeService {
         return notice.getNno();
     }
 
-//    @Override
-//    public NoticeDTO readOne(Long nno) {
-//        Notice notice = noticeMapper.read(nno);
-//        return modelMapper.map(notice, NoticeDTO.class);
-//    }
-
     @Override
     public NoticeDTO readOne(Long nno) {
         Notice notice = noticeMapper.read(nno);
