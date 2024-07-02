@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.zerock.project_dib.restaurant.dto.PageRequestDTO;
 import org.zerock.project_dib.restaurant.dto.PageResponseDTO;
 import org.zerock.project_dib.restaurant.dto.RestaurantReviewDTO;
-import org.zerock.project_dib.restaurant.mappers.RestaurantMapper;
+import org.zerock.project_dib.mapper.RestaurantMapper;
 import org.modelmapper.ModelMapper;
 import java.util.List;
 
@@ -23,9 +23,10 @@ public class RestaurantServiceImpl implements RestaurantService{
     }
 
     @Override
-    public void register(RestaurantReviewDTO restaurantReviewDTO) {
+    public Long register(RestaurantReviewDTO restaurantReviewDTO) {
 
-        restaurantMapper.insert(restaurantReviewDTO);
+        Long rno=restaurantMapper.insert(restaurantReviewDTO);
+        return rno;
     }
 
     @Override

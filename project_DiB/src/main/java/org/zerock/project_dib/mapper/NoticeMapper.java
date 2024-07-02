@@ -1,7 +1,7 @@
 package org.zerock.project_dib.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.zerock.project_dib.pse.domain.Notice;
+import org.zerock.project_dib.notice.domain.Notice;
 import java.util.List;
 
 @Mapper

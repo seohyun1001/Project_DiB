@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.zerock.project_dib.restaurant.mappers.RestaurantMapper">
+<mapper namespace="org.zerock.project_dib.mapper.RestaurantMapper">
     <select id="selectAll" resultType="org.zerock.project_dib.restaurant.dto.RestaurantReviewDTO">
         select * from restaurant_review order by rno desc
     </select>
@@ -12,8 +12,8 @@
     <update id="update">
         UPDATE restaurant_review SET review_text=#{review_text},review_like=#{review_like} where rno=#{rno}
     </update>
-    <insert id="insert">
-        INSERT INTO restaurant_review (review_text,review_like) values (#{review_text},#{review_like})
+    <insert id="insert" useGeneratedKeys="true" keyProperty="">
+        INSERT INTO restaurant_review (review_text,mid,review_like,rno) values (#{review_text},#{mid},#{review_like},#{rno})
 
     </insert>
     <select id="selectOne" resultType="org.zerock.project_dib.restaurant.dto.RestaurantReviewDTO">

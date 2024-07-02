@@ -1,6 +1,6 @@
-package org.zerock.project_dib.pse.service;
+package org.zerock.project_dib.notice.service;
 
-import org.zerock.project_dib.pse.dto.NoticeDTO;
+import org.zerock.project_dib.notice.dto.NoticeDTO;
 
 import java.util.List;
 

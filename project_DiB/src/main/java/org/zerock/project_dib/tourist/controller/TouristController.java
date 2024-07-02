@@ -87,6 +87,10 @@ public class TouristController {
     public void removeImgs(@PathVariable("tno") int tno) {
         touristService.removeImgs(tno);
     }
+    @GetMapping("/list")
+    public String list(){
+        return "tourist/list";
+    }
 
 
 }

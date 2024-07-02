@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}">
+<head>
+    <title>Review Register</title>
+</head>
+
+<div layout:fragment="content">
+    <div class="row mt-3">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    Review Register
+                </div>
+                <div class="card-body">
+
+                    <form action="/restaurant/register" method="post">
+                        <input type="hidden" name="rno" th:value="${rno}">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">리뷰</span>
+                            <textarea class="form-control col-sm-5" rows="5" name="content"></textarea>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">작성자</span>
+                            <input type="text" name="writer" class="form-control" th:value="${mid}"
+                                  readonly>
+                        </div>
+                        <div class="input-group mb-3">
+
+                            <div class="float-end uploadHidden">
+                            </div>
+                        </div>
+
+                        <div class="my-4">
+                            <div class="float-end">
+                                <a href="goodfood" type="submit" class="btn btn-primary submitBtn">Submit</a>
+                                <button type="reset" class="btn btn-secondary">Reset</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div> <!-- end card body -->
+            </div> <!-- end card -->
+        </div> <!-- end col -->
+    </div> <!-- end row -->
+
+    <!-- 첨부파일 섬네일을 보여줄 부분 -->
+    <div class="row mt-3">
+        <div class="col ">
+            <div class="container-fluid d-flex uploadResult" style="flex-wrap: wrap;">
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/upload.js"></script>
+
+</div> <!-- end layout fragment -->
+
+
+<script layout:fragment="script" th:inline="javascript">
+
+
+//    // 게시물 등록 과정 처리
+//    document.querySelector(".submitBtn").addEventListener("click", function (e){
+//
+//        e.preventDefault()
+//        e.stopPropagation()
+//
+//        // input hidden을 추가하기 위한 변수 설정
+//        const target = document.querySelector(".uploadHidden")
+//        // 화면의 모든 img 태그를 가져옴
+//        const uploadFiles = uploadResult.querySelectorAll("img")
+//
+//        // innerHTML에 넣을 문자열 변수 선언
+//        let str = ''
+//
+//        // 이미지 태그의 개수만큼 반복
+//        for (let i = 0; i < uploadFiles.length; i++){
+//            // 이미지 태그를 하나하나 담아주는 변수
+//            const uploadFile = uploadFiles[i]
+//            // data-src 안에 들어있는 데이터를 취득
+//            // data-src : img 태그 안의 생성한 속성으로 파일이름을 의미
+//            const imgLink = uploadFile.getAttribute("data-src")
+//            // input hidden 생성
+//            str += `<input type='hidden' name='fileNames' value="${imgLink}">`
+//        }
+//
+//        // uploadHidden 안에 input hidden 설정
+//        target.innerHTML = str;
+//        // submit 실행
+//        document.querySelector("form").submit();
+//    }, false)
+
+
+</script>
+</html>

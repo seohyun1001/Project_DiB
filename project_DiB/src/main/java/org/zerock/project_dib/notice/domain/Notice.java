@@ -1,4 +1,4 @@
-package org.zerock.project_dib.pse.domain;
+package org.zerock.project_dib.notice.domain;
 
 import lombok.Data;
 import java.time.LocalDate;

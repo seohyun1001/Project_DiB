@@ -1,4 +1,4 @@
-package org.zerock.project_dib.restaurant.mappers;
+package org.zerock.project_dib.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.zerock.project_dib.restaurant.dto.PageRequestDTO;
@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface RestaurantMapper {
     List<RestaurantReviewDTO> selectAll();
-    void insert(RestaurantReviewDTO restaurantReviewDTO);
+    Long insert(RestaurantReviewDTO restaurantReviewDTO);
     void delete(Long rno);
     void update(RestaurantReviewDTO restaurantReviewDTO);
 

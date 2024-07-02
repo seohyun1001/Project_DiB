@@ -1,22 +1,23 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DiB - Dive Into Busan</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <title th:text="${title}">메인 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
+    <div th:replace="fragment/header :: headerFragment"></div>
+
 <body>
 <header>
     <div class="logo">DiB</div>
-    <nav>
-        <ul>
-            <li>맛집</li>
-            <li>숙박</li>
-            <li>관광지</li>
-            <li>공지사항</li>
-        </ul>
-    </nav>
+<!--    <nav>-->
+<!--        <ul>-->
+<!--            <li>맛집</li>-->
+<!--            <li>숙박</li>-->
+<!--            <li>관광지</li>-->
+<!--            <li>공지사항</li>-->
+<!--        </ul>-->
+<!--    </nav>-->
     <div class="my-page">
         <button>My Page ▼</button>
     </div>
@@ -60,19 +61,20 @@
     </aside>
 </main>
 <footer>
-    <div class="footer-content">
-        <p>© 2024 Dive Into Busan</p>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Gallery</a></li>
-                <li><a href="#">Our Services</a></li>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-            </ul>
-        </nav>
-    </div>
+    <div th:replace="fragment/footer :: footerFragment"></div>
+<!--    <div class="footer-content">-->
+<!--        <p>© 2024 Dive Into Busan</p>-->
+<!--        <nav>-->
+<!--            <ul>-->
+<!--                <li><a href="#">Home</a></li>-->
+<!--                <li><a href="#">About</a></li>-->
+<!--                <li><a href="#">Gallery</a></li>-->
+<!--                <li><a href="#">Our Services</a></li>-->
+<!--                <li><a href="#">Contact Us</a></li>-->
+<!--                <li><a href="#">Privacy Policy</a></li>-->
+<!--            </ul>-->
+<!--        </nav>-->
+<!--    </div>-->
 </footer>
 </body>
 </html>

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface RestaurantService {
     List<RestaurantReviewDTO> getAll();
-    void register(RestaurantReviewDTO restaurantReviewDTO);
+    Long register(RestaurantReviewDTO restaurantReviewDTO);
     void remove(Long rno);
     void modify(RestaurantReviewDTO restaurantReviewDTO);
     PageResponseDTO<RestaurantReviewDTO> getList(PageRequestDTO pageRequestDTO);

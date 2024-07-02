@@ -64,14 +64,12 @@ dependencies {
     // Thumbnailator
     implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.16'
 
-<<<<<<< HEAD
-=======
+
     // thymeleaf
     // https://mvnrepository.com/artifact/nz.net.ultraq.thymeleaf/thymeleaf-layout-dialect
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.1.0'
     // thymeleaf extras springsecurity5
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.2.RELEASE'
->>>>>>> main
 
 }
 

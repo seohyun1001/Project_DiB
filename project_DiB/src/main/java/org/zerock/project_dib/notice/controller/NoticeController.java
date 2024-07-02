@@ -1,13 +1,11 @@
-package org.zerock.project_dib.pse.controller;
+package org.zerock.project_dib.notice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.zerock.project_dib.pse.dto.NoticeDTO;
-import org.zerock.project_dib.pse.service.NoticeService;
-
-import java.util.List;
+import org.zerock.project_dib.notice.dto.NoticeDTO;
+import org.zerock.project_dib.notice.service.NoticeService;
 
 @Controller
 @RequestMapping("/notice")
