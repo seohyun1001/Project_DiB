@@ -21,4 +21,10 @@ public interface AccommodationService {
 
     void modifyFile(AccommodationImgDTO accommodationImgDTO);
 
+    void deleteFile(int ano);
+
+    List<AccommodationImgDTO> findAllFileByAno(int ano);
+
+    List<AccommodationImgDTO> findAllFiles();
+
 }

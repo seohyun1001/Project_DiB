@@ -37,4 +37,17 @@
         where ord = #{ord}
     </update>
 
+    <delete id="deleteFile">
+        delete from accommodation_img
+        where ano = #{ano}
+    </delete>
+
+    <select id="findAllFilesByAno" resultType="org.zerock.project_dib.accommodation.domain.AccommodationImgVO">
+        select * from accommodation_img where ano = #{ano}
+    </select>
+
+    <select id="findAllFiles" resultType="org.zerock.project_dib.accommodation.domain.AccommodationImgVO">
+        select * from accommodation_img
+    </select>
+
 </mapper>

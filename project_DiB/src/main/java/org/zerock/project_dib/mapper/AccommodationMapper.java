@@ -23,4 +23,10 @@ public interface AccommodationMapper {
 
     void updateFile(AccommodationImgVO accommodationImgVO);
 
+    void deleteFile(int ano);
+
+    List<AccommodationImgVO> findAllFilesByAno(int ano);
+
+    List<AccommodationImgVO> findAllFiles();
+
 }

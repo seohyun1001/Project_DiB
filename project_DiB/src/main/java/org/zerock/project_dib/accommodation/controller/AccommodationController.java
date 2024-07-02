@@ -15,6 +15,7 @@ import org.zerock.project_dib.accommodation.service.AccommodationService;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -69,6 +70,7 @@ public class AccommodationController {
         }
 
         model.addAttribute("accList", accommodationService.accList());
+        model.addAttribute("allImages", accommodationService.findAllFiles());
 
     }
 
@@ -78,6 +80,10 @@ public class AccommodationController {
         AccommodationDTO accommodationDTO = accommodationService.accInfo(ano);
         log.info(accommodationDTO);
         model.addAttribute("accInfo", accommodationDTO);
+
+        List<AccommodationImgDTO> imgFileList = accommodationService.findAllFileByAno(ano);
+        log.info(imgFileList);
+        model.addAttribute("imageList", imgFileList);
 
     }
 
@@ -107,9 +113,25 @@ public class AccommodationController {
     }
 
     @PostMapping("/delete/{ano}")
-    public void delete(@PathVariable("ano") int ano) {
+    public void delete(int ano, Model model) {
+
+        List<AccommodationImgDTO> imgFileList = accommodationService.findAllFileByAno(ano);
+        model.addAttribute("imageList", imgFileList);
+
+        for (AccommodationImgDTO accommodationImgDTO : imgFileList) {
+            String fileName = accommodationImgDTO.getFile_name();
+
+            File fileToDelete = new File("c:\\upload\\" + fileName);
+
+            if (fileToDelete.delete()) {
+                System.out.println("파일 삭제 성공: " + fileToDelete.getName());
+            } else {
+                System.out.println("파일 삭제 실패: " + fileToDelete.getName());
+            }
+        }
 
         accommodationService.delete(ano);
+        accommodationService.deleteFile(ano);
 
     }
 

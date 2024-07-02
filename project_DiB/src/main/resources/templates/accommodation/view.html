@@ -11,6 +11,9 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
+                    <div th:if="${imageList != null && imageList.size() > 0}">
+                        <img style="width:500px" th:each="image : ${imageList}" th:src="|/upload/${image.file_name}|">
+                    </div>
                     <div class="input-group mb-3">
                         <input type="text" name="acc_name" class="form-control" th:value="${accInfo.acc_name}" readonly>
                     </div>
@@ -64,7 +67,7 @@
 
         const ano = e.target.getAttribute('data-ano')
 
-        axios.post("/accommodation/delete/"+ ano).then(
+        axios.post("/accommodation/delete/" + ano).then(
             self.location = `/accommodation/list`
         )
 

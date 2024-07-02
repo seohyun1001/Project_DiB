@@ -75,4 +75,31 @@ public class AccommodationServiceImpl implements AccommodationService {
 
     }
 
+    @Override
+    public void deleteFile(int ano) {
+
+        accommodationMapper.deleteFile(ano);
+
+    }
+
+    @Override
+    public List<AccommodationImgDTO> findAllFileByAno(int ano) {
+
+        List<AccommodationImgDTO> result = accommodationMapper.findAllFilesByAno(ano).stream()
+                .map(vo -> modelMapper.map(vo, AccommodationImgDTO.class))
+                .collect(Collectors.toList());
+
+        return result;
+    }
+
+    @Override
+    public  List<AccommodationImgDTO> findAllFiles() {
+
+        List<AccommodationImgDTO> result = accommodationMapper.findAllFiles().stream()
+                .map(vo -> modelMapper.map(vo, AccommodationImgDTO.class))
+                .collect(Collectors.toList());
+
+        return result;
+    }
+
 }
