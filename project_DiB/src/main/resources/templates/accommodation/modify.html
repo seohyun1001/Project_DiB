@@ -11,6 +11,10 @@
             <form action="/accommodation/modify" method="post" enctype="multipart/form-data">
                 <div class="card">
                     <div class="card-body">
+                        <div th:if="${imageList != null && imageList.size() > 0}">
+                            <img style="width:500px" th:each="image : ${imageList}" th:src="|/upload/${image.file_name}|">
+                            <input type="file" name="file" class="form-control">
+                        </div>
                         <div class="input-group mb-3">
                             <input type="text" name="acc_name" class="form-control" th:value="${accInfo.acc_name}">
                         </div>

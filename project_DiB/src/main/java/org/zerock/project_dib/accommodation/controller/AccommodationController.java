@@ -15,6 +15,7 @@ import org.zerock.project_dib.accommodation.service.AccommodationService;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -88,15 +89,7 @@ public class AccommodationController {
     }
 
     @PostMapping("/modify")
-    public String modify(MultipartFile file, int ano, @Valid AccommodationImgDTO accommodationImgDTO, @Valid AccommodationDTO accommodationDTO, RedirectAttributes redirectAttributes, BindingResult bindingResult) throws IOException {
-        String fileName = null;
-        if (!file.isEmpty()) {
-            String originalFilename = file.getOriginalFilename();
-            UUID uuid = UUID.randomUUID();
-            fileName = uuid + "_" + originalFilename;
-            file.transferTo(new File("c:\\upload\\" + fileName));
-            accommodationImgDTO.setFile_name(fileName);
-        }
+    public String modify(int ano, @Valid AccommodationImgDTO accommodationImgDTO, @Valid AccommodationDTO accommodationDTO, RedirectAttributes redirectAttributes, BindingResult bindingResult) throws IOException {
 
         if (bindingResult.hasErrors()) {
             log.info("has modify error........................");
@@ -105,9 +98,6 @@ public class AccommodationController {
         }
 
         accommodationService.modify(accommodationDTO);
-        accommodationService.modifyFile(accommodationImgDTO);
-
-        log.info(accommodationDTO + "\n---------------------------------------------------\n" + accommodationImgDTO);
 
         return "redirect:/accommodation/view?ano=" + ano;
     }

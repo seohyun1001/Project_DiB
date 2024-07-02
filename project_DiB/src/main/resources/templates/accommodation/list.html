@@ -18,10 +18,12 @@
                     </div>
                     <table class="table">
                         <tbody>
-                        <tr th:each="dto, img : ${#lists.zip(accList, allImages)}">
-                            <div th:if="${allImages != null && allImages.size() > 0}">
-                                <img style="width:100px" th:src="|/upload/${allImages.file_name}|">
-                            </div>
+                        <tr th:each="dto:${accList}">
+                            <td>
+                                <div th:each="image : ${allImages}" th:if="${image.ano == dto.ano}">
+                                    <img style="width:100px" th:src="|/upload/${image.file_name}|">
+                                </div>
+                            </td>
                             <th scope="row">[[${dto.ano}]]</th>
                             <td>
                                 <a th:href="|@{/accommodation/view(ano=${dto.ano})}|">[[${dto.acc_name}]]</a>
