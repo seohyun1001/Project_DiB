@@ -102,6 +102,7 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     public PageResponseDTO<NoticeDTO> search(PageRequestDTO pageRequestDTO) {
+        int total = noticeMapper.totalCount(pageRequestDTO);
         List<Notice> notices = noticeMapper.search(pageRequestDTO);
         List<NoticeDTO> dtoList = notices.stream()
                 .map(notice -> {
@@ -113,7 +114,6 @@ public class NoticeServiceImpl implements NoticeService {
                 })
                 .collect(Collectors.toList());
 
-        int total = notices.size();
         return PageResponseDTO.<NoticeDTO>withAll()
                 .pageRequestDTO(pageRequestDTO)
                 .dtoList(dtoList)

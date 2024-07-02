@@ -39,17 +39,23 @@ public class PageRequestDTO {
     private LocalDate from;
     private LocalDate to;
 
-
-    // offset 계산 로직 추가
-    private void calculateOffset() {
+    // offset 계산 로직
+    public void calculateOffset() {
+        if (this.page < 1) {
+            this.page = 1; // page 값이 1보다 작으면 1로 설정
+        }
         this.offset = (page - 1) * size;
     }
+    // offset 관련된 코드들은 페이지네이션을 구현하는데 사용됨
+    // offset 값은 데이터베이스 쿼리에서 특정 위치에서부터 데이터를 가져오도록 하기 위함
+
 
     // 페이지 건너뛰기 계산
     public int getSkip() {
         return (page - 1) * size;
     }
 
+    // URL 링크 생성
     public String getLink() {
         StringBuilder builder = new StringBuilder();
         builder.append("page=").append(this.page);
@@ -78,6 +84,7 @@ public class PageRequestDTO {
         return builder.toString();
     }
 
+    // 타입 체크
     public boolean checkType(String type) {
         if (types == null || types.length == 0) {
             return false;

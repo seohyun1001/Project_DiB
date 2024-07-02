@@ -13,13 +13,9 @@ public interface NoticeMapper {
     Notice read(Long nno);
     void update(Notice notice);
     void delete(Long nno);
+    int totalCount(@Param("pageRequestDTO") PageRequestDTO pageRequestDTO);
 
     List<Notice> selectAll();
     List<Notice> search(@Param("pageRequestDTO") PageRequestDTO pageRequestDTO);
 
-//    // 페이징된 공지사항 목록 조회
-//    List<Notice> getAll(@Param("pageRequestDTO") PageRequestDTO pageRequestDTO);
-//
-//    // 페이징된 공지사항 총 개수 조회
-//    int getCount(@Param("pageRequestDTO") PageRequestDTO pageRequestDTO);
 }

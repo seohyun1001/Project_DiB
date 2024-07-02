@@ -26,12 +26,14 @@ public class NoticeController {
     @Autowired
     private NoticeService noticeService;
 
+    // 공지사항 목록을 가져오는 GET 메소드
     @GetMapping("")
     public String getAllNotices(@ModelAttribute PageRequestDTO pageRequestDTO, Model model, RedirectAttributes redirectAttributes) {
         try {
             if (pageRequestDTO == null) {
                 pageRequestDTO = new PageRequestDTO(); // 페이지 요청 객체가 null일 경우 초기화
             }
+            pageRequestDTO.calculateOffset(); // 오프셋 계산
             PageResponseDTO<NoticeDTO> responseDTO = noticeService.search(pageRequestDTO);
             model.addAttribute("notices", responseDTO.getDtoList());
             model.addAttribute("pageRequestDTO", pageRequestDTO);
@@ -43,9 +45,11 @@ public class NoticeController {
         return "notice/notice";
     }
 
+    // 검색을 처리하는 POST 메소드
     @PostMapping("")
     public String searchNotices(@ModelAttribute PageRequestDTO pageRequestDTO, Model model) {
         try {
+            pageRequestDTO.calculateOffset(); // 오프셋 계산
             PageResponseDTO<NoticeDTO> responseDTO = noticeService.search(pageRequestDTO);
             model.addAttribute("notices", responseDTO.getDtoList());
             model.addAttribute("pageRequestDTO", pageRequestDTO);
@@ -57,33 +61,6 @@ public class NoticeController {
         return "notice/notice";
     }
 
-//    // GET 요청을 처리하여 공지사항 목록을 반환
-//    @GetMapping("")
-//    public String getAllNotices(@ModelAttribute PageRequestDTO pageRequestDTO, Model model) {
-//        if (pageRequestDTO == null) {
-//            pageRequestDTO = new PageRequestDTO(); // 페이지 요청 객체가 null일 경우 초기화
-//        }
-//
-//        PageResponseDTO<NoticeDTO> responseDTO = noticeService.getAllNotices(pageRequestDTO);
-//        model.addAttribute("notices", responseDTO.getDtoList());
-//        model.addAttribute("pageRequestDTO", pageRequestDTO);
-//        model.addAttribute("totalPage", responseDTO.getTotalPage());
-//        return "notice/notice"; // 공지사항 리스트 페이지
-//    }
-//
-//    // POST 요청을 처리하여 검색 기능을 구현
-//    @PostMapping("")
-//    public String searchNotices(PageRequestDTO pageRequestDTO, Model model) {
-//        if (pageRequestDTO == null) {
-//            pageRequestDTO = new PageRequestDTO(); // 페이지 요청 객체가 null일 경우 초기화
-//        }
-//
-//        PageResponseDTO<NoticeDTO> responseDTO = noticeService.getAllNotices(pageRequestDTO);
-//        model.addAttribute("notices", responseDTO.getDtoList());
-//        model.addAttribute("pageRequestDTO", pageRequestDTO);
-//        model.addAttribute("totalPage", responseDTO.getTotalPage());
-//        return "notice/notice"; // 공지사항 리스트 페이지
-//    }
 
     @GetMapping("/register")
     public String showRegisterForm() {
