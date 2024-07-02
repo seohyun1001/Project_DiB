@@ -6,7 +6,7 @@
 <mapper namespace="org.zerock.project_dib.mapper.MemberMapper">
 
     <insert id="insert">
-        insert into member (mid, mpw, name, email, address, birthdate, phone, roleSet, social) values (#{mid}, #{mpw}, #{name}, #{email}, #{address}, #{birthdate}, #{phone}, "USER", 0)
+        insert into member (mid, mpw, name, email, address, phone, roleSet, social) values (#{mid}, #{mpw}, #{name}, #{email}, #{address}, #{phone}, "USER", 0)
     </insert>
 
     <select id="selectOneId" resultType="int">

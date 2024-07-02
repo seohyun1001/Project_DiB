@@ -1,73 +1,87 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/basic.html}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<!--      layout:decorate="~{layout/basic.html}"-->
+
 <head>
     <meta charset="UTF-8">
     <title>Member Join Page</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        main {
+            min-height: 100%;
+        }
+    </style>
 </head>
 
-<div layout:fragment="content">
+<div th:replace="fragment/header :: headerFragment"></div>
+<!--<div layout:fragment="content">-->
+    <div class="align-middle">
     <div class="container-fluid d-flex justify-content-center" style="height:100vh">
-    <div class="row mt-3">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    JOIN
-                </div> <!-- end card-header -->
-                <div class="card-body">
-                    <form id="registerForm" action="/member/join" method="post">
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">MID</span>
-                            <input type="text" name="mid" class="form-control">
-                            <button class="btn btn-secondary confirm" type="button">confirm</button>
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">MPW</span>
-                            <input type="text" name="mpw" class="form-control">
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">NAME</span>
-                            <input type="text" name="name" class="form-control">
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">EMAIL</span>
-                            <input type="text" name="email" class="form-control">
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">ADDRESS</span>
-                            <input type="text" name="address" class="form-control">
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">BIRTHDAY</span>
-                            <input type="text" name="birthdate" class="form-control">
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">PHONE</span>
-                            <input type="text" name="phone" class="form-control">
-                        </div>
-
-                        <div class="my-4">
-                            <div class="float-end">
-                                <button type="submit" class="btn btn-primary submitBtn">Submit</button>
-                                <button type="reset" class="btn btn-secondary">Reset</button>
+        <div class="row mt-3">
+            <div class="col">
+                <div class="card align-self-center">
+                    <div class="card-header">
+                        JOIN
+                    </div> <!-- end card-header -->
+                    <div class="card-body">
+                        <form id="registerForm" action="/member/join" method="post">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">MID</span>
+                                <input type="text" name="mid" class="form-control">
+                                <button class="btn btn-secondary confirm" type="button">confirm</button>
                             </div>
-                        </div>
-                    </form> <!-- end form -->
 
-                </div> <!-- end card-body -->
-            </div> <!-- end card -->
-        </div> <!-- end col -->
-    </div> <!-- end row -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">MPW</span>
+                                <input type="text" name="mpw" class="form-control">
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">NAME</span>
+                                <input type="text" name="name" class="form-control">
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">EMAIL</span>
+                                <input type="text" name="email" class="form-control">
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">ADDRESS</span>
+                                <input type="text" name="address" class="form-control">
+                            </div>
+
+<!--                            <div class="input-group mb-3">-->
+<!--                                <span class="input-group-text">BIRTHDAY</span>-->
+<!--                                <input type="text" name="birthdate" class="form-control">-->
+<!--                            </div>-->
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">PHONE</span>
+                                <input type="text" name="phone" class="form-control">
+                            </div>
+
+                            <div class="my-4">
+                                <div class="float-end">
+                                    <button type="submit" class="btn btn-primary submitBtn">Submit</button>
+                                    <button type="reset" class="btn btn-secondary">Reset</button>
+                                </div>
+                            </div>
+                        </form> <!-- end form -->
+
+                    </div> <!-- end card-body -->
+                </div> <!-- end card -->
+            </div> <!-- end col -->
+        </div> <!-- end row -->
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</div> <!-- end layout -->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    </div>
+<div th:replace="fragment/footer :: footerFragment"></div>
+
+<script th:src="@{/js/script.js}"></script>
+<!--</div> &lt;!&ndash; end layout &ndash;&gt;-->
 
 <script layout:fragment="script" th:inline="javascript">
     document.querySelector(".confirm").addEventListener("click", function (e) {

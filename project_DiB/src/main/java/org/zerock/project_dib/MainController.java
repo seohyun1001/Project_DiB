@@ -15,4 +15,9 @@ public class MainController {
         return "/index";
     }
 
+    @GetMapping("/board/read")
+    public String read() {
+        return "board/read";
+    }
+
 }
