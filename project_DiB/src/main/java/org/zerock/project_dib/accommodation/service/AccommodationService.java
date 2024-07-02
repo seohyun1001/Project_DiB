@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface AccommodationService {
 
-    void insertAccommodation(AccommodationDTO accommodationDTO);
+    Long insertAccommodation(AccommodationDTO accommodationDTO);
 
     List<AccommodationDTO> accList();
 

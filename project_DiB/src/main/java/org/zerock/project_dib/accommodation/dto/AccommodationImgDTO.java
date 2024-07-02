@@ -13,7 +13,7 @@ public class AccommodationImgDTO {
 
     private String file_name;
 
-    private int ano;
+    private Long ano;
 
     private int ord;
 

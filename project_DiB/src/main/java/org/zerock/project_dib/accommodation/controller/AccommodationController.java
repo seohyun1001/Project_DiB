@@ -31,7 +31,7 @@ public class AccommodationController {
     }
 
     @PostMapping("/register")
-    public String addAccommodation(@RequestParam("file_name") MultipartFile file, @Valid AccommodationImgDTO accommodationImgDTO, @Valid AccommodationDTO accommodationDTO, RedirectAttributes redirectAttributes, BindingResult bindingResult) throws IOException, Exception {
+    public String addAccommodation(MultipartFile file, @Valid AccommodationImgDTO accommodationImgDTO, @Valid AccommodationDTO accommodationDTO, RedirectAttributes redirectAttributes, BindingResult bindingResult) throws IOException, Exception {
 
         if (bindingResult.hasErrors()){
             log.info("has register error..........");
@@ -51,7 +51,10 @@ public class AccommodationController {
 
         log.info(accommodationDTO + "\n---------------------------------------------------\n" + accommodationImgDTO);
 
-        accommodationService.insertAccommodation(accommodationDTO);
+
+        Long ano = accommodationService.insertAccommodation(accommodationDTO);
+        accommodationImgDTO.setAno(ano);
+        log.info(accommodationImgDTO);
         accommodationService.insertFile(accommodationImgDTO);
 
         return "redirect:/accommodation/list";

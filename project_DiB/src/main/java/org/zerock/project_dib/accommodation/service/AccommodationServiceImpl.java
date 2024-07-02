@@ -23,11 +23,12 @@ public class AccommodationServiceImpl implements AccommodationService {
     private final AccommodationMapper accommodationMapper;
 
     @Override
-    public void insertAccommodation(AccommodationDTO accommodationDTO) {
+    public Long insertAccommodation(AccommodationDTO accommodationDTO) {
 
         AccommodationVO accommodationVO = modelMapper.map(accommodationDTO, AccommodationVO.class);
         accommodationMapper.insertAccommodation(accommodationVO);
 
+        return accommodationVO.getAno();
     }
 
     @Override

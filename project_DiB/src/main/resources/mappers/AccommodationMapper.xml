@@ -5,9 +5,9 @@
 
 <mapper namespace="org.zerock.project_dib.mapper.AccommodationMapper">
     
-    <insert id="insertAccommodation">
-        insert into accommodation(ano, acc_name, acc_exp, acc_loc, acc_phone)
-        values (#{ano}, #{acc_name}, #{acc_exp}, #{acc_loc}, #{acc_phone})
+    <insert id="insertAccommodation" useGeneratedKeys="true" keyProperty="ano">
+        insert into accommodation(acc_name, acc_exp, acc_loc, acc_phone)
+        values (#{acc_name}, #{acc_exp}, #{acc_loc}, #{acc_phone})
     </insert>
 
     <select id="findAll" resultType="org.zerock.project_dib.accommodation.domain.AccommodationVO">
@@ -27,7 +27,7 @@
         delete from accommodation where ano = #{ano}
     </delete>
 
-    <insert id="insertFile">
+    <insert id="insertFile" >
         insert into accommodation_img (uuid, file_name, ano)
         values (#{uuid}, #{file_name}, #{ano})
     </insert>
