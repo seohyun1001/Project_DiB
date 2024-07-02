@@ -27,4 +27,14 @@
         delete from accommodation where ano = #{ano}
     </delete>
 
+    <insert id="insertFile">
+        insert into accommodation_img (uuid, file_name, ano)
+        values (#{uuid}, #{file_name}, #{ano})
+    </insert>
+
+    <update id="updateFile">
+        update accommodation_img set uuid = #{uuid}, file_name = #{file_name}, ano = #{ano}
+        where ord = #{ord}
+    </update>
+
 </mapper>
