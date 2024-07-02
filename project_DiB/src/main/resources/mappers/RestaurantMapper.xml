@@ -16,21 +16,20 @@
         <result property="regdate" column="regdate"/>
         <collection property="imageSet" ofType="org.zerock.project_dib.restaurant.domain.RestaurantImage">
             <id property="uuid" column="uuid"/>
-            <result property="file_name" column="file_name"/>
+            <result property="fileName" column="file_name"/>
             <result property="ord" column="ord"/>
             <result property="rno" column="rno"/>
         </collection>
     </resultMap>
-    <insert id="insertRest">
-        INSERT INTO restaurant (rno, rest_name, rest_exp, rest_exp2, rest_loc, rest_phone, rest_menu,
-                                rest_time)
-        VALUES (#{rno}, #{rest_name}, #{rest_exp}, #{rest_exp2}, #{rest_loc}, #{rest_phone}, #{rest_menu},
-                #{rest_time})
+    <insert id="insertRest" useGeneratedKeys="true" keyProperty="rno">
+        INSERT INTO restaurant (rest_name, rest_exp, rest_exp2, rest_loc, rest_phone, rest_menu, rest_time)
+        VALUES (#{rest_name}, #{rest_exp}, #{rest_exp2}, #{rest_loc}, #{rest_phone}, #{rest_menu}, #{rest_time})
     </insert>
     <select id="selectAll" resultMap="RestaurantMap">
         SELECT r.*, ri.uuid, ri.file_name, ri.ord, ri.rno
         FROM restaurant r
                  LEFT JOIN restaurant_img ri ON r.rno = ri.rno
+        ORDER BY r.rno ASC
     </select>
     <select id="readOne" resultMap="RestaurantMap">
         SELECT r.*, ri.uuid, ri.file_name, ri.ord, ri.rno
@@ -54,22 +53,50 @@
         from restaurant
         where rno = #{rno}
     </delete>
+
     <select id="search" resultMap="RestaurantMap">
-        SELECT *
-        FROM restaurant
+        SELECT r.*, ri.uuid, ri.file_name, ri.ord, ri.rno
+        FROM restaurant r
+        LEFT JOIN restaurant_img ri ON r.rno = ri.rno
         <where>
             <if test="pageRequestDTO.rno != null">
-                AND rno = #{pageRequestDTO.rno}
+                AND r.rno = #{pageRequestDTO.rno}
             </if>
-            <if test="pageRequestDTO.rest_name != null">
-                AND rest_name = #{pageRequestDTO.rest_name}
+            <if test="pageRequestDTO.rest_name != null and pageRequestDTO.rest_name != ''">
+                AND r.rest_name LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
             </if>
-            <if test="pageRequestDTO.rest_loc != null">
-                AND rest_loc = #{pageRequestDTO.rest_loc}
+            <if test="pageRequestDTO.rest_loc != null and pageRequestDTO.rest_loc != ''">
+                AND r.rest_loc LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
             </if>
+            <if test="pageRequestDTO.rest_menu != null and pageRequestDTO.rest_menu != ''">
+                AND r.rest_menu LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+            </if>
+<!--            <if test="pageRequestDTO.keyword != null and pageRequestDTO.keyword != ''">-->
+<!--                AND (-->
+<!--                r.rest_name LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')-->
+<!--                OR r.rest_loc LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')-->
+<!--                )-->
+<!--            </if>-->
         </where>
-        ORDER BY rno ASC
         LIMIT #{pageRequestDTO.offset}, #{pageRequestDTO.size};
     </select>
 
+    <select id="countTotal" resultType="int">
+        SELECT COUNT(*)
+        FROM restaurant
+        <where>
+<!--            <if test="pageRequestDTO.rno != null">-->
+<!--                OR rno = #{pageRequestDTO.rno}-->
+<!--            </if>-->
+            <if test="pageRequestDTO.rest_name != null">
+                OR rest_name LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+            </if>
+            <if test="pageRequestDTO.rest_loc != null">
+                OR rest_loc LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+            </if>
+            <if test="pageRequestDTO.rest_menu != null">
+                OR rest_menu LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+            </if>
+        </where>
+    </select>
 </mapper>

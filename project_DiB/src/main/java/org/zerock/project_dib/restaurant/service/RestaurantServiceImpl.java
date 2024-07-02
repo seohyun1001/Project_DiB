@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.zerock.project_dib.restaurant.domain.Restaurant;
 import org.zerock.project_dib.restaurant.domain.RestaurantImage;
 import org.zerock.project_dib.restaurant.dto.PageRequestDTO;
@@ -24,34 +25,29 @@ public class RestaurantServiceImpl implements RestaurantService {
     private final ModelMapper modelMapper;
     private final RestaurantMapper restaurantMapper;
     private final RestaurantImageMapper restaurantImageMapper;
-    private final String uploadPath = "C:\\upload";
+    private final String uploadPath = "C:\\img";
 
     @Override
+    @Transactional
     public int insertRestaurant(RestaurantDTO restaurantDTO) {
-        Restaurant restaurant = dtoToEntity(restaurantDTO);
+        Restaurant restaurant = modelMapper.map(restaurantDTO, Restaurant.class);
         restaurantMapper.insertRest(restaurant);
-
-        if (restaurantDTO.getFileNames() != null) {
-            restaurantDTO.getFileNames().forEach(fileName -> {
-                String[] arr = fileName.split("_", 2);
-                restaurant.addImage(arr[0], arr[1]);
-            });
-            for (RestaurantImage image : restaurant.getImageSet()) {
-                restaurantImageMapper.insertFile(image);
-            }
-        }
-        return restaurant.getRno();
+        int rno = restaurant.getRno();
+        log.info("Inserted Restaurant RNO: " + rno);
+        return rno;
     }
 
     @Override
-    public void saveUploadFiles(List<UploadResultDTO> uploadResultDTOList) {
+    @Transactional
+    public void saveUploadFiles(List<UploadResultDTO> uploadResultDTOList, int rno) {
         if (uploadResultDTOList != null && !uploadResultDTOList.isEmpty()) {
             uploadResultDTOList.forEach(uploadResultDTO -> {
                 RestaurantImage restaurantImage = RestaurantImage.builder()
                         .uuid(uploadResultDTO.getUuid())
-                        .file_name(uploadResultDTO.getFileName())
+                        .fileName(uploadResultDTO.getFileName())
+                        .rno(rno)
+                        .ord(uploadResultDTOList.indexOf(uploadResultDTO))
                         .build();
-
                 restaurantImageMapper.insertFile(restaurantImage);
             });
         }
@@ -77,25 +73,23 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public void delete(int rno){restaurantMapper.delete(rno);}
+    public void delete(int rno) {
+        restaurantMapper.delete(rno);
+    }
 
     @Override
-    public void deleteFile(int rno){restaurantImageMapper.deleteFile(rno);}
+    public void deleteFile(int rno) {
+        restaurantImageMapper.deleteFile(rno);
+    }
 
     @Override
     public PageResponseDTO<RestaurantDTO> search(PageRequestDTO pageRequestDTO) {
         List<Restaurant> restaurants = restaurantMapper.search(pageRequestDTO);
         List<RestaurantDTO> dtoList = restaurants.stream()
-                .map(restaurant -> {
-                    RestaurantDTO restaurantDTO = modelMapper.map(restaurant, RestaurantDTO.class);
-                    restaurantDTO.setFileNames(restaurant.getImageSet().stream()
-                            .map(image -> image.getUuid() + "_" + image.getFile_name())
-                            .collect(Collectors.toList()));
-                    return restaurantDTO;
-                })
+                .map(this::entityToDto)
                 .collect(Collectors.toList());
 
-        int total = restaurants.size();
+        int total = restaurantMapper.countTotal(pageRequestDTO);
         return PageResponseDTO.<RestaurantDTO>withAll()
                 .pageRequestDTO(pageRequestDTO)
                 .dtoList(dtoList)
@@ -117,6 +111,10 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     private RestaurantDTO entityToDto(Restaurant restaurant) {
+        List<String> fileNames = restaurant.getImageSet().stream()
+                .map(restaurantImage -> "s_" + restaurantImage.getUuid() + "_" + restaurantImage.getFileName())
+                .collect(Collectors.toList());
+
         return RestaurantDTO.builder()
                 .rno(restaurant.getRno())
                 .rest_name(restaurant.getRest_name())
@@ -126,12 +124,10 @@ public class RestaurantServiceImpl implements RestaurantService {
                 .rest_phone(restaurant.getRest_phone())
                 .rest_menu(restaurant.getRest_menu())
                 .rest_time(restaurant.getRest_time())
-                .fileNames(restaurant.getImageSet().stream()
-                        .map(image -> image.getUuid() + "_" + image.getFile_name())
-                        .collect(Collectors.toList()))
+                .fileNames(fileNames)
+                .regdate(restaurant.getRegdate())
+                .moddate(restaurant.getModdate())
                 .build();
     }
-
-
-
 }
+

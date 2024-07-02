@@ -30,7 +30,7 @@ public class Restaurant extends BaseEntity {
     public void addImage(String uuid, String fileName) {
         RestaurantImage restaurantImage = RestaurantImage.builder()
                 .uuid(uuid)
-                .file_name(fileName)
+                .fileName(fileName)
                 .rno(this.rno)
                 .ord(imageSet.size())
                 .build();
@@ -39,6 +39,4 @@ public class Restaurant extends BaseEntity {
     public void clearImages() {
         this.imageSet.clear();
     }
-
-
 }

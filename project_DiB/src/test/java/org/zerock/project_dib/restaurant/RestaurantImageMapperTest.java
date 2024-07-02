@@ -23,7 +23,7 @@ public class RestaurantImageMapperTest {
         // 샘플 RestaurantImage 객체 생성
         RestaurantImage restaurantImage = RestaurantImage.builder()
                 .uuid(uuid)
-                .file_name("sample_image.jpg")
+                .fileName("sample_image.jpg")
                 .rno(3) // 테스트를 위해 rno를 1로 가정
                 .ord(1)
                 .build();

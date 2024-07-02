@@ -58,7 +58,7 @@ public class RestaurantMapperTest {
                 .map(restaurant -> {
                     RestaurantDTO restaurantDTO = modelMapper.map(restaurant, RestaurantDTO.class);
                     restaurantDTO.setFileNames(restaurant.getImageSet().stream()
-                            .map(image -> image.getUuid() + "_" + image.getFile_name())
+                            .map(image -> image.getUuid() + "_" + image.getFileName())
                             .collect(Collectors.toList()));
                     return restaurantDTO;
                 })
@@ -75,7 +75,7 @@ public class RestaurantMapperTest {
         if (restaurant != null) {
             RestaurantDTO restaurantDTO = modelMapper.map(restaurant, RestaurantDTO.class);
             restaurantDTO.setFileNames(restaurant.getImageSet().stream()
-                    .map(image -> image.getUuid() + "_" + image.getFile_name())
+                    .map(image -> image.getUuid() + "_" + image.getFileName())
                     .collect(Collectors.toList()));
             log.info("Restaurant with rno {}: {}", rno, restaurantDTO);
         } else {
@@ -133,7 +133,7 @@ public class RestaurantMapperTest {
         PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
                 .page(1)
                 .size(10)
-                .rno(null)
+                .rno(65)
                 .rest_name(null)
                 .rest_loc(null)
                 .build();

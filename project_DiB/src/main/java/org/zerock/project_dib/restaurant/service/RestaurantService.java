@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public interface RestaurantService {
     int insertRestaurant(RestaurantDTO restaurantDTO);
-    void saveUploadFiles(List<UploadResultDTO> uploadResultDTOList);
+    void saveUploadFiles(List<UploadResultDTO> uploadResultDTOList,int rno);
     List<RestaurantDTO> getAllRestaurants();
     RestaurantDTO getOne(int rno);
     void update(RestaurantDTO restaurantDTO);

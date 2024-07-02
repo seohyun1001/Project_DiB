@@ -11,8 +11,6 @@
         SELECT uuid, file_name, rno, ord FROM restaurant_img WHERE rno = #{rno}
     </select>
     <delete id="deleteFile">
-        delete
-        from restaurant_img
-        where rno = #{rno}
+        DELETE FROM restaurant_img WHERE rno = #{rno}
     </delete>
 </mapper>

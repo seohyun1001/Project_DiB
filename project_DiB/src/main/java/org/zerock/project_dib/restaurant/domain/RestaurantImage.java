@@ -4,10 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.*;
-import org.zerock.project_dib.restaurant.dto.RestaurantDTO;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,7 +15,8 @@ import org.zerock.project_dib.restaurant.dto.RestaurantDTO;
 public class RestaurantImage implements Comparable<RestaurantImage> {
     @Id
     private String uuid;
-    private String file_name;
+    private String fileName;
+
     private int rno;
     private int ord;
 
@@ -26,6 +27,8 @@ public class RestaurantImage implements Comparable<RestaurantImage> {
     public int compareTo(RestaurantImage other) {
         return this.ord - other.ord;
     }
+
+    public void changeRestaurant(Restaurant restaurant){
+        this.restaurant = restaurant;
+    }
 }
-
-
