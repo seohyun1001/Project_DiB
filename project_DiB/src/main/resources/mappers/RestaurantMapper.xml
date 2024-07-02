@@ -59,6 +59,7 @@
         FROM restaurant r
         LEFT JOIN restaurant_img ri ON r.rno = ri.rno
         <where>
+            (ri.ord = 0 or ri.ord is null)
             <if test="pageRequestDTO.rno != null">
                 AND r.rno = #{pageRequestDTO.rno}
             </if>
@@ -99,4 +100,20 @@
             </if>
         </where>
     </select>
+
+    <delete id="deleteImages">
+        DELETE FROM restaurant_img
+        WHERE rno = #{rno}
+    </delete>
+
+    <insert id="insertImage">
+        INSERT INTO restaurant_img (uuid, file_name, ord, rno)
+        VALUES (#{uploadResult.uuid}, #{uploadResult.fileName}, #{uploadResult.ord}, #{rno})
+    </insert>
+
+<!--    <select id="getFileNames" resultType="string">-->
+<!--        SELECT CONCAT(uuid, '_', file_name)-->
+<!--        FROM restaurant_img-->
+<!--        WHERE rno = #{rno}-->
+<!--    </select>-->
 </mapper>

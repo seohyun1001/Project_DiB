@@ -14,16 +14,17 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
             integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
             crossorigin="anonymous"></script>
+    <style>
+        .restaurant-link {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
 </head>
 
 <body>
 <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-2 border-bottom">
     <div class="col-md-3 mb-2 mb-md-0">
-        <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-            <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap">
-                <use xlink:href="#bootstrap"/>
-            </svg>
-        </a>
     </div>
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
@@ -41,7 +42,7 @@
 <nav class="navbar navbar-expand-lg border-bottom" aria-label="Offcanvas navbar large"
      style="margin-top: 20px; margin-bottom: 20px; margin-left: 300px; margin-right: 300px; padding-bottom: 15px;">
     <div class="container-fluid">
-        <a class="navbar-brand" style="margin-left: 30px;" href="#">List</a>
+        <a class="navbar-brand" style="margin-left: 30px;" href="/restaurant/list">List</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2"
                 aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -76,7 +77,6 @@
     </div>
 </nav>
 
-
 <!-- card -->
 <div class="container my-5">
     <div th:each="restaurant : ${result.dtoList}" class="card mb-3 p-3 rounded mx-auto" style="max-width: 840px;">
@@ -84,14 +84,18 @@
             <div class="col-md-4">
                 <div th:if="${restaurant.fileNames != null}">
                     <div th:each="file, iterStat : ${restaurant.fileNames}">
-                        <img th:if="${iterStat.index == 0}" th:src="@{|/view/${file}|}" class="img-fluid rounded-start"
-                             alt="...">
+                        <a th:if="${iterStat.index == 0}" th:href="@{/restaurant/read(rno=${restaurant.rno})}">
+                            <img th:src="@{|/view/${file}|}" class="img-fluid rounded-start" alt="...">
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title" th:text="${restaurant.rest_name}">Card title</h5>
+                    <h5 class="card-title">
+                        <a th:href="@{/restaurant/read(rno=${restaurant.rno})}" th:text="${restaurant.rest_name}"
+                           class="restaurant-link">Card title</a>
+                    </h5>
                     <p class="card-text" th:text="${restaurant.rest_exp}">This is a wider card with supporting text
                         below as a natural lead-in to additional content. This content is a little bit longer.</p>
                     <p class="card-text" th:text="${restaurant.rest_loc}"></p>

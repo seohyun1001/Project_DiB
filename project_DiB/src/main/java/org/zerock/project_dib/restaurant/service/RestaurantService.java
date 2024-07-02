@@ -17,8 +17,10 @@ public interface RestaurantService {
     RestaurantDTO getOne(int rno);
     void update(RestaurantDTO restaurantDTO);
     void delete(int rno);
-    void deleteFile(int rno);
     PageResponseDTO<RestaurantDTO> search(PageRequestDTO pageRequestDTO);
+    void updateImages(int rno, List<UploadResultDTO> uploadResults);
+
+//    List<String> getFileNames(int rno);
 
 
 

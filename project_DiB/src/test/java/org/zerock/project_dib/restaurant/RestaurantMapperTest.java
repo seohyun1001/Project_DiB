@@ -35,7 +35,7 @@ public class RestaurantMapperTest {
 
     @Test
     public void testInsert() {
-        IntStream.rangeClosed(1,22).forEach(i -> {
+        IntStream.rangeClosed(1,100).forEach(i -> {
             Restaurant restaurant = Restaurant.builder()
                     .rno(i)
                     .rest_name("rest_name" + i)
@@ -94,17 +94,17 @@ public class RestaurantMapperTest {
 
     @Test
     public void testModify() {
-        int rno = 3;
+        int rno = 79;
 
         RestaurantDTO modifiedDTO = RestaurantDTO.builder()
                 .rno(rno)
-                .rest_name("수정된 레스토랑 이름")
-                .rest_exp("수정된 레스토랑 설명")
-                .rest_exp2("수정된 레스토랑 설명 2")
-                .rest_loc("수정된 위치")
-                .rest_phone("수정된 전화번호")
-                .rest_menu("수정된 메뉴")
-                .rest_time("수정된 영업 시간")
+                .rest_name("고기집")
+                .rest_exp("고기를")
+                .rest_exp2("팝니다")
+                .rest_loc("개금동")
+                .rest_phone("123-456-789")
+                .rest_menu("고기")
+                .rest_time("7~10")
                 .build();
         restaurantService.update(modifiedDTO);
 
@@ -122,7 +122,6 @@ public class RestaurantMapperTest {
             log.info("삭제할 레스토랑이 존재하지 않습니다. rno: {}", rno);
             return;
         }
-        restaurantService.deleteFile(rno);
         restaurantService.delete(rno);
     }
 

@@ -74,13 +74,23 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public void delete(int rno) {
+        restaurantImageMapper.deleteFile(rno);
         restaurantMapper.delete(rno);
     }
 
-    @Override
-    public void deleteFile(int rno) {
-        restaurantImageMapper.deleteFile(rno);
+    public void updateImages(int rno, List<UploadResultDTO> uploadResults) {
+        // 기존 이미지 삭제 로직 추가
+        restaurantMapper.deleteImages(rno);
+        // 새로운 이미지 저장 로직 추가
+        for (UploadResultDTO uploadResult : uploadResults) {
+            restaurantMapper.insertImage(rno, uploadResult);
+        }
     }
+
+//    public List<String> getFileNames(int rno) {
+//        return restaurantMapper.getFileNames(rno);
+//    }
+
 
     @Override
     public PageResponseDTO<RestaurantDTO> search(PageRequestDTO pageRequestDTO) {

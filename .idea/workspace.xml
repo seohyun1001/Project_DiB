@@ -7,17 +7,12 @@
     <list default="true" id="07e3978e-3da9-4f74-909c-1f4178aecd8f" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project_DiB/src/main/java/org/zerock/project_dib/restaurant/controller/RestaurantController.java" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/main/java/org/zerock/project_dib/restaurant/controller/RestaurantController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/java/org/zerock/project_dib/restaurant/domain/Restaurant.java" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/main/java/org/zerock/project_dib/restaurant/domain/Restaurant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/java/org/zerock/project_dib/restaurant/domain/RestaurantImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/main/java/org/zerock/project_dib/restaurant/domain/RestaurantImage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/java/org/zerock/project_dib/restaurant/dto/PageRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/main/java/org/zerock/project_dib/restaurant/dto/PageRequestDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project_DiB/src/main/java/org/zerock/project_dib/restaurant/dto/uploadfile/UploadResultDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/main/java/org/zerock/project_dib/restaurant/dto/uploadfile/UploadResultDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project_DiB/src/main/java/org/zerock/project_dib/restaurant/mapper/RestaurantMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/main/java/org/zerock/project_dib/restaurant/mapper/RestaurantMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project_DiB/src/main/java/org/zerock/project_dib/restaurant/service/RestaurantService.java" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/main/java/org/zerock/project_dib/restaurant/service/RestaurantService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project_DiB/src/main/java/org/zerock/project_dib/restaurant/service/RestaurantServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/main/java/org/zerock/project_dib/restaurant/service/RestaurantServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/mappers/RestaurantImageMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/main/resources/mappers/RestaurantImageMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/mappers/RestaurantMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/main/resources/mappers/RestaurantMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_DiB/src/test/java/org/zerock/project_dib/restaurant/RestaurantImageMapperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/test/java/org/zerock/project_dib/restaurant/RestaurantImageMapperTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/templates/restaurant/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/main/resources/templates/restaurant/list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project_DiB/src/test/java/org/zerock/project_dib/restaurant/RestaurantMapperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/test/java/org/zerock/project_dib/restaurant/RestaurantMapperTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,8 +49,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="HTML File" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -171,7 +166,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="RestaurantMapperTest.testReadOne2" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="RestaurantMapperTest.testModify" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/project_DiB" />
@@ -184,7 +179,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;org.zerock.project_dib.restaurant.RestaurantMapperTest.testReadOne2&quot;" />
+            <option value="&quot;org.zerock.project_dib.restaurant.RestaurantMapperTest.testModify&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -277,11 +272,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.RestaurantMapperTest.testInsert" />
+        <item itemvalue="Gradle.RestaurantMapperTest.testModify" />
         <item itemvalue="Gradle.RestaurantMapperTest.testSearchRestaurants" />
         <item itemvalue="Gradle.RestaurantMapperTest.testSelectAll" />
         <item itemvalue="Gradle.RestaurantMapperTest.testSearchRestaurantsWithSorting" />
-        <item itemvalue="Gradle.RestaurantMapperTest.testInsert" />
-        <item itemvalue="Gradle.RestaurantMapperTest.testReadOne2" />
       </list>
     </recent_temporary>
   </component>
@@ -318,7 +313,7 @@
       <workItem from="1719745913857" duration="5124000" />
       <workItem from="1719825025824" duration="10539000" />
       <workItem from="1719882725328" duration="1018000" />
-      <workItem from="1719883844889" duration="1895000" />
+      <workItem from="1719883844889" duration="16290000" />
     </task>
     <servers />
   </component>

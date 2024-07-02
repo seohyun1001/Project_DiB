@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class UploadResultDTO {
     private String uuid;
     private String fileName;
+    private int ord;
     private boolean img;
 
     public String getLink(){
