@@ -9,7 +9,7 @@ import org.zerock.project_dib.pse.domain.Notice;
 import org.zerock.project_dib.pse.dto.NoticeDTO;
 import org.zerock.project_dib.pse.dto.PageRequestDTO;
 import org.zerock.project_dib.pse.dto.PageResponseDTO;
-import org.zerock.project_dib.pse.mapper.NoticeMapper;
+import org.zerock.project_dib.mapper.NoticeMapper;
 
 import java.io.File;
 import java.io.IOException;

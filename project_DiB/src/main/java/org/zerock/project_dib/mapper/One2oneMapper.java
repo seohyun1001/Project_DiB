@@ -1,4 +1,4 @@
-package org.zerock.project_dib.pse.mapper;
+package org.zerock.project_dib.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

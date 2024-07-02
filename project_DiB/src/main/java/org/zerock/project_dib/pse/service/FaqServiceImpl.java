@@ -9,7 +9,7 @@ import org.zerock.project_dib.pse.domain.Faq;
 import org.zerock.project_dib.pse.dto.FaqDTO;
 import org.zerock.project_dib.pse.dto.PageRequestDTO;
 import org.zerock.project_dib.pse.dto.PageResponseDTO;
-import org.zerock.project_dib.pse.mapper.FaqMapper;
+import org.zerock.project_dib.mapper.FaqMapper;
 
 import java.io.File;
 import java.io.IOException;

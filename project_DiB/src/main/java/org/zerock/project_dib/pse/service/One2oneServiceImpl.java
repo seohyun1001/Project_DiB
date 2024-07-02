@@ -9,7 +9,7 @@ import org.zerock.project_dib.pse.domain.One2one;
 import org.zerock.project_dib.pse.dto.One2oneDTO;
 import org.zerock.project_dib.pse.dto.PageRequestDTO;
 import org.zerock.project_dib.pse.dto.PageResponseDTO;
-import org.zerock.project_dib.pse.mapper.One2oneMapper;
+import org.zerock.project_dib.mapper.One2oneMapper;
 
 import java.io.File;
 import java.io.IOException;
