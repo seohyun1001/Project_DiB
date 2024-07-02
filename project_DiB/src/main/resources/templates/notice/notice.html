@@ -75,12 +75,15 @@
                         </li>
                     </ul>
                 </nav>
-                <a href="/notice/register" class="register-notice-btn">공지사항 등록</a>
+
+                <!-- 관리자만 공지사항 등록 버튼이 보이게 설정 -->
+                <a th:if="${isAdmin}" href="/notice/register" class="register-notice-btn">공지사항 등록</a>
+<!--                <a href="/notice/register" class="register-notice-btn">공지사항 등록</a>-->
             </div>
         </div>
     </div>
 </main>
-<!-- jQuery를 추가합니다 -->
+<!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <div th:replace="fragment/footer :: footerFragment"></div>

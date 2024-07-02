@@ -18,12 +18,34 @@
             <li><a href="/stay">숙박</a></li>
             <li><a href="/tourists">관광지</a></li>
             <li><a href="/notice">공지사항</a></li>
-            <li><a href="/member/myPage" sec:authorize="isAuthenticated()">마이페이지</a></li>
-            <li id="login-menu" class="menu-item">
-                <a sec:authorize="isAnonymous()" href="/member/login">로그인</a>
+
+            <!-- 로그인하지 않은 상태 -->
+            <li th:if="${#authentication.name == 'anonymousUser'}" class="menu-item">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        로그인
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/member/login">Login</a>
+                        <a class="dropdown-item" href="/faq">FAQ</a>
+                        <a class="dropdown-item" href="/one2one">1대1 문의</a>
+                    </div>
+                </div>
             </li>
-            <li class="menu-item">
-                <a class="nav-link" sec:authorize="isAuthenticated()" href="/logout">로그아웃</a>
+
+            <!-- 로그인한 상태 -->
+            <li th:if="${#authentication.name != 'anonymousUser'}" class="menu-item">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        My Page
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/member/myPage">My Page</a>
+                        <a class="dropdown-item" href="/member/logout">Logout</a>
+                        <a class="dropdown-item" href="/faq">FAQ</a>
+                        <a class="dropdown-item" href="/one2one">1대1 문의</a>
+                    </div>
+                </div>
             </li>
 
         </ul>
