@@ -1,4 +1,4 @@
-package org.zerock.project_dib.notice.dto;
+package org.zerock.project_dib.pse.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

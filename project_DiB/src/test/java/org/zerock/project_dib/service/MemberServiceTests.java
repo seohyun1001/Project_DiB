@@ -21,7 +21,7 @@ public class MemberServiceTests {
     @Test
     public void joinTest() {
         MemberDTO memberDTO = MemberDTO.builder()
-                .mid("test1")
+                .mid("test")
                 .mpw("1234")
                 .name("tester")
                 .email("test@test.com")

@@ -1,4 +1,4 @@
-package org.zerock.project_dib.notice.domain;
+package org.zerock.project_dib.pse.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

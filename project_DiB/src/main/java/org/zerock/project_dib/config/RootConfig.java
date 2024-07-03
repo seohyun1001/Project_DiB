@@ -18,9 +18,6 @@ public class RootConfig {
 
         return modelMapper;
     }
-<<<<<<< HEAD
-=======
 
 
->>>>>>> origin/main
 }

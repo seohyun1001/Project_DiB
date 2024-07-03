@@ -38,13 +38,11 @@ public class RestaurantController {
     private String uploadPath;
     private final RestaurantService restaurantService;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/register")
     public String registerGET(Model model) {
         return "restaurant/register";
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(value = "/register", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String registerPOST(@Valid RestaurantDTO restaurantDTO,
                                BindingResult bindingResult,
@@ -117,6 +115,7 @@ public class RestaurantController {
         return "restaurant/list";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping({"/read", "/modify"})
     public void modifyRead(int rno, PageRequestDTO pageRequestDTO, Model model) {
         RestaurantDTO restaurantDTO = restaurantService.getOne(rno);
@@ -152,7 +151,7 @@ public class RestaurantController {
 //        return "redirect:/restaurant/list";
 //    }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("principal.username == #restaurantDTO.rest_name")
     @PostMapping(value = "/modify", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String modify(PageRequestDTO pageRequestDTO,
                          @Valid RestaurantDTO restaurantDTO,
@@ -208,7 +207,7 @@ public class RestaurantController {
         return "redirect:/restaurant/list";
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("principal.username == #restaurantDTO.rno")
     @PostMapping("/remove")
     public String remove(RestaurantDTO restaurantDTO, RedirectAttributes redirectAttributes) {
         log.info("restaurant Remove.......");

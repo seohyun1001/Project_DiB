@@ -1,20 +1,16 @@
-package org.zerock.project_dib.notice.service;
+package org.zerock.project_dib.pse.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-<<<<<<< HEAD:project_DiB/src/main/java/org/zerock/project_dib/notice/service/NoticeServiceImpl.java
-import org.zerock.project_dib.notice.domain.Notice;
-import org.zerock.project_dib.notice.dto.NoticeDTO;
-=======
 import org.springframework.web.multipart.MultipartFile;
+import org.zerock.project_dib.mapper.NoticeMapper;
 import org.zerock.project_dib.pse.domain.Notice;
 import org.zerock.project_dib.pse.dto.NoticeDTO;
 import org.zerock.project_dib.pse.dto.PageRequestDTO;
 import org.zerock.project_dib.pse.dto.PageResponseDTO;
->>>>>>> origin/장규원:project_DiB/src/main/java/org/zerock/project_dib/pse/service/NoticeServiceImpl.java
-import org.zerock.project_dib.mapper.NoticeMapper;
+
 
 import java.io.File;
 import java.io.IOException;

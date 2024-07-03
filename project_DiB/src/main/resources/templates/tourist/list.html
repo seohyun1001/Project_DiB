@@ -1,33 +1,4 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title th:text="${title}">메인 페이지</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-    <div th:replace="fragment/header :: headerFragment"></div>
-
-<body>
-<header>
-    <div class="logo">DiB</div>
-<!--    <nav>-->
-<!--        <ul>-->
-<!--            <li>맛집</li>-->
-<!--            <li>숙박</li>-->
-<!--            <li>관광지</li>-->
-<!--            <li>공지사항</li>-->
-<!--        </ul>-->
-<!--    </nav>-->
-    <div class="my-page">
-        <button>My Page ▼</button>
-    </div>
-    <div class="search-bar">
-        <input type="text" placeholder="검색어를 입력해주세요.">
-        <button>🔍</button>
-    </div>
-</header>
-=======
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org"
       layout:decorate="~{layout/basic.html}">
@@ -39,7 +10,6 @@
     <button>🔍</button>
 </div>
 <body>
->>>>>>> origin/main
 <main>
     <section class="content">
         <h1>관광지</h1>
@@ -104,20 +74,19 @@
     </aside>
 </main>
 <footer>
-    <div th:replace="fragment/footer :: footerFragment"></div>
-<!--    <div class="footer-content">-->
-<!--        <p>© 2024 Dive Into Busan</p>-->
-<!--        <nav>-->
-<!--            <ul>-->
-<!--                <li><a href="#">Home</a></li>-->
-<!--                <li><a href="#">About</a></li>-->
-<!--                <li><a href="#">Gallery</a></li>-->
-<!--                <li><a href="#">Our Services</a></li>-->
-<!--                <li><a href="#">Contact Us</a></li>-->
-<!--                <li><a href="#">Privacy Policy</a></li>-->
-<!--            </ul>-->
-<!--        </nav>-->
-<!--    </div>-->
+    <div class="footer-content">
+        <p>© 2024 Dive Into Busan</p>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Gallery</a></li>
+                <li><a href="#">Our Services</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </nav>
+    </div>
 </footer>
 </body>
 </html>

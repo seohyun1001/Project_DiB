@@ -1,14 +1,10 @@
 package org.zerock.project_dib.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-<<<<<<< HEAD
-import org.zerock.project_dib.notice.domain.Notice;
-=======
 import org.apache.ibatis.annotations.Param;
 import org.zerock.project_dib.pse.domain.Notice;
 import org.zerock.project_dib.pse.dto.PageRequestDTO;
 
->>>>>>> origin/장규원
 import java.util.List;
 
 @Mapper

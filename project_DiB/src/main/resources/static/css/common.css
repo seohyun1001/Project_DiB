@@ -172,11 +172,7 @@ footer .foot_area .snslink li + li + li a {background-image:url(../img/ico_insta
 /* container */
 #container {padding-bottom:70px;}
 
-<<<<<<< HEAD
-
-=======
 /* index rolling */
->>>>>>> origin/장규원
 .main_rolling_mobile {display: none;}
 .visualRoll {position:relative; width:100%;}
 .viewImgList {position:relative; width:100%;}	
@@ -420,11 +416,7 @@ h1.loginTit a img {width:100%;}
 	.header_cont .gnb li + li + li + li + li a {background-image:url(../img/ico_gnb05.png);}
 	.gnb_depth {display:none;}
 
-<<<<<<< HEAD
-
-=======
 	/* index rolling */
->>>>>>> origin/장규원
     .main_rolling_pc {display: none;}
     .main_rolling_mobile {display: block;}
     .main_rolling_mobile .swiper-container .swiper-wrapper .swiper-slide img {width: 100%;}
