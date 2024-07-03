@@ -25,6 +25,7 @@ body {
     color: white;
     text-align: center;
     letter-spacing: 5px;
+    font-weight: 500;
 }
 
 
@@ -88,8 +89,9 @@ header {
 
 /* 드롭다운 메뉴 스타일 */
 .dropdown-menu {
-    padding: 0; /* padding 제거 */
-    background-color: white; /* 배경색 흰색으로 설정 */
+    padding: 0;
+    color: white;
+    width: 100%;
 }
 
 /* 드롭다운 메뉴 항목 스타일 */
@@ -98,14 +100,35 @@ header {
 }
 
 
-
-
 /* 로그인 버튼 */
 .menu-item a {
     background-color: rgba(0, 123, 255, 0.8); /* 살짝 투명한 파란색 */
     color: white;
     font-size: 18px; /* 로그인 버튼 크기 조정 */
     padding: 8px 16px;
+}
+
+/* 로그인 버튼 그룹 스타일 */
+.btn-group {
+    display: inline-flex;
+    width: auto; /* 너비 자동 조정 */
+    text-shadow: none;
+}
+
+.btn-group .btn-primary {
+    flex: 1; /* 버튼 크기 동일하게 설정 */
+}
+
+.btn-group .dropdown-menu {
+    width: auto; /* 드롭다운 메뉴의 너비 자동 조정 */
+    min-width: 100%; /* 최소 너비를 버튼과 동일하게 설정 */
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* My Page 버튼 스타일 조정 */
+.menu-item .btn-group .btn-primary {
+    white-space: nowrap;
+    width: auto;
 }
 
 
@@ -122,21 +145,33 @@ header {
 }
 
 .content {
-    position: absolute;
-    top: 30%;
+    top: 500px;
     text-align: center;
-    padding-bottom: 100px;
+    padding-top: 50px;
     background-color: transparent; /* 배경 이미지 위에 반투명 배경 */
-    margin-bottom: 50px; /* 간격 추가 */
+    margin-bottom: 400px; /* 간격 추가 */
+}
+/* 사진 슬라이드 관련 css*/
+.pic-title{
+    font-size: 70px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1); /* 그림자 */
+}
+.pic-subtitle{
+    font-size: 40px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+    margin-bottom: 0px;
+}
+.btn-primary {
+    margin-top: 0px;
 }
 
 /* 첫번째 사진 슬라이드 */
 .picture-slide1 {
-    position: absolute;
-    left: 10%;
-    top: 150%;
-    transform: translateY(-50%); /* 세로 중앙 정렬 보정 */
-    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0px;
+    margin-right: 500px;
 }
 
 .carousel-item img {
@@ -154,10 +189,56 @@ header {
 
 /* 첫번째 사진 설명 */
 .first-description{
-    position: absolute;
-    left: 70%;
-    top: 80%; /* 화면의 세로 중앙에 위치하도록 설정 */
-    transform: translateY(-50%); /* 세로 중앙 정렬 보정 */
+    color: white;
+    font-size: 120px;
+    font-weight: 600;
+    margin-top: 80px;
+    margin-left: 40px; /* 슬라이드와 설명 사이의 간격 조절 */
+    font-family: "Noto Sans KR", sans-serif;
+}
+
+/* 간격 조절 */
+.slide-gap {
+    height: 350px; /* 첫번째와 두번째 사진 슬라이드 사이의 간격 설정 */
+}
+
+
+/* 두번째 사진 슬라이드 */
+.picture-slide2 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* 왼쪽 정렬 */
+    margin-top: 0px;
+    margin-left: 200px;
+}
+
+/* 두번째 사진 설명 */
+.second-description{
+    color: white;
+    font-size: 120px;
+    font-weight: 600;
+    margin-top: 80px;
+    margin-right: 40px;
+    font-family: "Noto Sans KR", sans-serif;
+}
+
+/* 세번째 사진 슬라이드 */
+.picture-slide3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0px;
+    margin-right: 300px;
+}
+
+/* 세번째 사진 설명 */
+.third-description{
+    color: white;
+    font-size: 120px;
+    font-weight: 600;
+    margin-top: 80px;
+    margin-left: 40px;
+    font-family: "Noto Sans KR", sans-serif;
 }
 
 
