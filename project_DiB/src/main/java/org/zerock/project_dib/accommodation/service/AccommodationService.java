@@ -23,4 +23,6 @@ public interface AccommodationService {
 
     List<AccommodationImgDTO> findAllFiles();
 
+    void removeFile(int ord);
+
 }

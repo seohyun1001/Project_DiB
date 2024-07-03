@@ -21,7 +21,7 @@
                         <tr th:each="dto:${accList}">
                             <td>
                                 <div th:each="image : ${allImages}" th:if="${image != null and image.ano == dto.ano}">
-                                    <img style="width:100px; height: 100px;" th:src="|/upload/${image.file_name}|">
+                                    <img style="width:300px; height: auto;" th:src="|/upload/${image.file_name}|">
                                 </div>
                             </td>
                             <th scope="row">[[${dto.ano}]]</th>

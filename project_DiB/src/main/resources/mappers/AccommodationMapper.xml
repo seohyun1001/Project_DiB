@@ -40,4 +40,8 @@
         select * from accommodation_img
     </select>
 
+    <delete id="deleteFile">
+        delete from accommodation_img where ord = #{ord}
+    </delete>
+
 </mapper>

@@ -9,11 +9,15 @@
     <div class="row mt-3">
         <div class="col">
             <form action="/accommodation/modify" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="ano" th:value="${accInfo.ano}">
+
+                <input type="hidden" id="anoValue" name="ano" th:value="${accInfo.ano}">
+
                 <div class="card">
                     <div class="card-body">
                         <div th:if="${imageList != null && imageList.size() > 0}">
-                            <img style="width:500px; height: 500px;" th:each="image : ${imageList}" th:src="|/upload/${image.file_name}|" th:value="${image.ord}">
+                                <img style="width:500px; height: auto; cursor:pointer;" onclick="removeImage()"
+                                     th:each="image : ${imageList}" th:src="|/upload/${image.file_name}|"
+                                     id="ordValue" th:value="${image.ord}">
                         </div>
                         <input type="file" name="file" class="form-control">
                         <div class="input-group mb-3">
@@ -33,7 +37,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn-secondary">목록으로 돌아가기</button>
+                <button type="button" class="btn-secondary">상세보기로 돌아가기</button>
                 <button type="submit" class="btn-primary">수정 완료</button>
             </form>
         </div>
@@ -43,12 +47,25 @@
 </div>
 <script layout:fragment="script" th:inline="javascript">
 
+    function removeImage() {
+
+        const ord = document.getElementById("ordValue").value
+
+        axios.post(`/accommodation/deleteImg/${ord}`)
+            .then(() => {
+                window.location.reload()
+            })
+
+    }
+
     document.querySelector(".btn-secondary").addEventListener("click", function (e) {
 
         e.preventDefault()
         e.stopPropagation()
 
-        self.location = '/accommodation/list'
+        const ano = document.getElementById('anoValue').value
+
+        self.location = '/accommodation/view?ano=' + ano
 
     }, false)
 

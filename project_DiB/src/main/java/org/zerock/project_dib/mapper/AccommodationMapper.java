@@ -25,4 +25,6 @@ public interface AccommodationMapper {
 
     List<AccommodationImgVO> findAllFiles();
 
+    void deleteFile(int ord);
+
 }

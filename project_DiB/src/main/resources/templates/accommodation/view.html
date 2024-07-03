@@ -12,7 +12,7 @@
             <div class="card">
                 <div class="card-body">
                     <div th:if="${imageList != null && imageList.size() > 0}">
-                        <img style="width:500px" th:each="image : ${imageList}" th:src="|/upload/${image.file_name}|">
+                        <img style="width:500px; height: auto;" th:each="image : ${imageList}" th:src="|/upload/${image.file_name}|">
                     </div>
 
                     <input type="hidden" id="anoValue" name="ano" th:value="${accInfo.ano}">

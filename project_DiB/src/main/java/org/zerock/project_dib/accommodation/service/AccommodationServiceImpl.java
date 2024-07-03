@@ -88,4 +88,11 @@ public class AccommodationServiceImpl implements AccommodationService {
         return result;
     }
 
+    @Override
+    public void removeFile(int ord) {
+
+        accommodationMapper.deleteFile(ord);
+
+    }
+
 }
