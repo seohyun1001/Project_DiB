@@ -73,12 +73,19 @@ main {
 
 /* 1대1 문의 otono 컬럼 스타일 */
 .col-one2one-number {
-    width: 10%;
+    width: 3%;
+    text-align: center;
 }
+
+/* 1대1 문의 otono 데이터 스타일 */
+.one2one-table td.otono-text-center {
+    text-align: center;
+}
+
 
 /* 등록일 컬럼 스타일 */
 .col-registered-date {
-    width: 18%;
+    width: 7%;
     text-align: center;
 }
 
@@ -89,7 +96,7 @@ main {
 
 /* 작성자 컬럼 스타일 */
 .col-mid {
-    width: 18%;
+    width: 5%;
     text-align: center;
 }
 
@@ -98,6 +105,12 @@ main {
     text-align: center;
 }
 
+
+/* 1대1 문의 제목 컬럼 스타일 */
+.col-one2one-title {
+    width: 18%;
+    text-align: center;
+}
 
 /* 1대1 문의 제목 스타일 */
 .one2one-title {

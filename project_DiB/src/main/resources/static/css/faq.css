@@ -73,17 +73,29 @@ main {
 
 /* FAQ fno 컬럼 스타일 */
 .col-faq-number {
-    width: 10%;
+    width: 3%;
+    text-align: center;
+}
+
+/* FAQ nno 데이터 스타일 */
+.faq-table td.fno-text-center {
+    text-align: center;
 }
 
 /* 등록일 컬럼 스타일 */
 .col-registered-date {
-    width: 18%;
+    width: 7%;
     text-align: center;
 }
 
 /* 등록일 데이터 스타일 */
 .faq-table td.text-center {
+    text-align: center;
+}
+
+/* 공지사항 제목 컬럼 스타일 */
+.col-faq-title {
+    width: 18%;
     text-align: center;
 }
 

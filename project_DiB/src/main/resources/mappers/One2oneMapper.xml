@@ -43,9 +43,9 @@
     <select id="search" resultMap="One2oneResultMap">
         SELECT
         otono,
-        one2one_title as one2oneTitle,
-        one2one_content as one2oneContent,
-        one2one_image as one2oneImage,
+        one2one_title,
+        one2one_content,
+        one2one_image,
         regdate,
         moddate,
         mid

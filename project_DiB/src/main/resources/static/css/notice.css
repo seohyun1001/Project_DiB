@@ -68,8 +68,26 @@ main {
 
 /* 공지사항 nno 컬럼 스타일 */
 .col-notice-number {
-    width: 10%;
+    width: 3%;
+    text-align: center;
 }
+
+/* 공지사항 nno 데이터 스타일 */
+.notice-table td.nno-text-center {
+    text-align: center;
+}
+
+/* 등록일 컬럼 스타일 */
+.col-registered-date {
+    width: 7%;
+    text-align: center;
+}
+
+/* 등록일 데이터 스타일 */
+.notice-table td.text-center {
+    text-align: center;
+}
+
 
 /* 공지사항 제목 컬럼 스타일 */
 .col-notice-title {
@@ -77,17 +95,6 @@ main {
     text-align: center;
 }
 
-
-/* 등록일 컬럼 스타일 */
-.col-registered-date {
-    width: 18%;
-    text-align: center;
-}
-
-/* 등록일 데이터 스타일 */
-.faq-table td.text-center {
-    text-align: center;
-}
 
 /* 공지사항 제목 스타일 */
 .notice-title {
