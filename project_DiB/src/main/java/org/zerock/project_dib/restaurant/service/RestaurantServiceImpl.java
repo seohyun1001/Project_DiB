@@ -11,8 +11,8 @@ import org.zerock.project_dib.restaurant.dto.PageRequestDTO;
 import org.zerock.project_dib.restaurant.dto.PageResponseDTO;
 import org.zerock.project_dib.restaurant.dto.RestaurantDTO;
 import org.zerock.project_dib.restaurant.dto.uploadfile.UploadResultDTO;
-import org.zerock.project_dib.restaurant.mapper.RestaurantImageMapper;
-import org.zerock.project_dib.restaurant.mapper.RestaurantMapper;
+import org.zerock.project_dib.mapper.RestaurantImageMapper;
+import org.zerock.project_dib.mapper.RestaurantMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;

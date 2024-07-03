@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+
+<button class="confirm">confirm</button>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+document.querySelector(".confirm").addEventListener("click", function (e) {
+    const data = "test";
+
+  axios.get("http://localhost:8080/member/confirmId/" + data).then(res => {
+      console.log(res)
+      const exist = res.data
+      if (exist) {
+          alert("사용 불가능")
+      } else {
+          alert("사용 가능")
+      }
+  })
+})
+
+  </script>
+</body>
+</html>

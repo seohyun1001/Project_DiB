@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: org.modelmapper:modelmapper:3.1.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.modelmapper" artifactId="modelmapper" version="3.1.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.modelmapper/modelmapper/3.1.0/a3727e6b449dfc9d9052d48185d1eeb029faaf12/modelmapper-3.1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

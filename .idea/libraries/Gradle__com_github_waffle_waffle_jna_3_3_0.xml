@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.waffle:waffle-jna:3.3.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.github.waffle" artifactId="waffle-jna" version="3.3.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.waffle/waffle-jna/3.3.0/6c1a06b345702bb1dfd77006af926b091bded851/waffle-jna-3.3.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

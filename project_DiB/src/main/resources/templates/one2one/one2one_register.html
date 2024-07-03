@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="'1대1 문의 등록'">1대1 문의 등록</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/one2one_detail.css}">
+</head>
+<body>
+<div th:replace="fragment/header :: headerFragment"></div>
+
+<main>
+    <div class="one2one-container">
+        <h3 class="one2one-detail-title">1대1 문의</h3>
+        <div class="one2one-detail">
+            <form th:action="@{/one2one/register}" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="one2oneTitle" class="form-label">제목</label>
+                    <input type="text" class="form-control" id="one2oneTitle" name="one2oneTitle" required>
+                </div>
+                <div class="mb-3">
+                    <label for="one2oneContent" class="form-label">내용</label>
+                    <textarea class="form-control" id="one2oneContent" name="one2oneContent" rows="10" required></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="mid" class="form-label">작성자</label>
+                    <input type="text" class="form-control" id="mid" name="mid" th:value="${#authentication.principal.username}" readonly>
+                </div>
+
+                <div class="mb-3">
+                    <label for="one2oneImage" class="form-label">이미지</label>
+                    <input type="file" class="form-control" id="one2oneImage" name="one2oneImage">
+                </div>
+                <div class="d-flex justify-content-between">
+                    <a href="/one2one" class="btn btn-secondary mx-auto">목록으로 돌아가기</a>
+                    <button type="submit" class="btn btn-primary">등록</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<div th:replace="fragment/footer :: footerFragment"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

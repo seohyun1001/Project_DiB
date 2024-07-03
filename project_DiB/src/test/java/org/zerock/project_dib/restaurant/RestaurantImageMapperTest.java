@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.zerock.project_dib.restaurant.domain.RestaurantImage;
-import org.zerock.project_dib.restaurant.mapper.RestaurantImageMapper;
+import org.zerock.project_dib.mapper.RestaurantImageMapper;
 
 import java.util.UUID;
 

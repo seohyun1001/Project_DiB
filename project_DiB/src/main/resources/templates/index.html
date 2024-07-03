@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">메인 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+<div th:replace="fragment/header :: headerFragment"></div>
+
+
+<main class="full-page">
+    <div class="content">
+         <h4 class="subtitle">DIVE into Busan</h4>
+         <h1 class="main-title">B  u  s  a  n</h1>
+    </div>
+</main>
+
+
+
+<div th:replace="fragment/footer :: footerFragment"></div>
+
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

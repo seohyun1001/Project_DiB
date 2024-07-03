@@ -1,0 +1,72 @@
+/* one2one_detail.css */
+
+body {
+    background: url('/img/board_bg.png') no-repeat center center fixed; /* 배경 이미지 설정 */
+    background-size: cover; /* 이미지 크기를 조절하여 화면을 덮도록 설정 */
+}
+
+/* 1대1 문의 컨테이너 스타일 */
+.one2one-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 50px auto;
+    width: 80%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 화면 중앙 흰색 컨테이너의 위치 조정 */
+main {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* one2one-detail */
+.one2one-detail {
+    width: 100%;
+}
+
+/* 1대1 문의 제목 스타일 */
+.one2one-detail-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 20px;
+    margin-top: 10px;
+    width: 100%; /* 변경: 전체 폭으로 확장하여 왼쪽 정렬 유지 */
+}
+
+/* 버튼 스타일 */
+.btn {
+    padding: 7px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    opacity: 0.9;
+}
+
+.btn-primary:hover {
+    background-color: darkblue;
+}
+
+.btn-secondary:hover {
+    background-color: grey;
+}
+
+/* 버튼 컨테이너 스타일 */
+.button-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+    margin-left: 160px;
+    gap: 240px; /* 버튼 사이 간격 */
+}
+
+.btn-group {
+    display: flex;
+    gap: 10px;
+}

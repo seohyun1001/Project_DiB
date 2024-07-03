@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.project_dib.mapper.MemberMapper">
+
+    <insert id="insert">
+        insert into member (mid, mpw, name, email, address, phone, roleSet, social) values (#{mid}, #{mpw}, #{name}, #{email}, #{address}, #{phone}, "USER", 0)
+    </insert>
+
+    <select id="selectOneId" resultType="int">
+        select count(*) from member where mid = #{mid}
+    </select>
+
+    <select id="getWithRoles" resultType="org.zerock.project_dib.member.domain.Member">
+        select * from member where mid = #{mid} and social = 0
+    </select>
+
+    <select id="selectOneMyPage" resultType="org.zerock.project_dib.member.domain.Member">
+        select * from member where mid = #{mid}
+    </select>
+
+    <update id="infoModify">
+        update member set mpw = #{mpw}, email = #{email}, address = #{address}, phone = #{phone} where mid = #{mid}
+    </update>
+
+    <delete id="deleteMember">
+        delete from member where mid = #{mid}
+    </delete>
+
+</mapper>
