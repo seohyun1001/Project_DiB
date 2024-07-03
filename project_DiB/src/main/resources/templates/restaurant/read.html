@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="utf-8">
@@ -12,13 +14,6 @@
 <body>
 <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-2 border-bottom">
     <div class="col-md-3 mb-2 mb-md-0">
-        <!--        <a href="/restaurant/list" class="d-inline-flex link-body-emphasis text-decoration-none">-->
-        <!--            <h3>List</h3>-->
-        <!--        </a>-->
-        <!--        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2"-->
-        <!--                aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">-->
-        <!--            <span class="navbar-toggler-icon"></span>-->
-        <!--        </button>-->
     </div>
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
@@ -46,7 +41,6 @@
         </div>
     </div>
     <div class="row">
-<!--        섬네일 이미지 출력-->
         <div class="col-12">
             <h3>Uploaded Images</h3>
             <div class="row">
@@ -55,19 +49,41 @@
                 </div>
             </div>
         </div>
-<!--        원본 이미지 출력-->
-<!--        <div class="col">-->
-<!--            <div class="card" th:if="${dto.fileNames != null && dto.fileNames.size()>0}">-->
-<!--                <img class="card-img-top"-->
-<!--                     th:each="fileName: ${dto.fileNames}"-->
-<!--                     th:src="|/view/${fileName}|">-->
-<!--            </div>-->
-<!--        </div>-->
     </div>
     <div class="row mt-4">
         <div class="col-12">
             <a href="/restaurant/list" class="btn btn-secondary">Back to List</a>
-            <a th:href="@{/restaurant/modify(rno=${dto.rno})}" class="btn btn-primary">Modify</a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/restaurant/modify(rno=${dto.rno})}" class="btn btn-primary">Modify</a>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <h3>Reviews</h3>
+            <div th:each="review : ${reviews}">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <p class="card-text" th:text="${review.review_text}">Review Text</p>
+                        <p class="card-text"><small class="text-muted" th:text="${review.mid}">User ID</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <h3>Add a Review</h3>
+            <form th:action="@{/replies/}" method="post" enctype="application/json">
+                <div class="mb-3">
+                    <label for="review_text" class="form-label">Review</label>
+                    <textarea class="form-control" id="review_text" name="review_text" rows="3" required></textarea>
+                </div>
+                <input type="hidden" name="rno" th:value="${dto.rno}">
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
