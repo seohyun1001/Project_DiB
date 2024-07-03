@@ -1,4 +1,4 @@
-package org.zerock.project_dib.restaurant.mapper;
+package org.zerock.project_dib.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
