@@ -1,20 +1,20 @@
-package org.zerock.project_dib.restaurant.controller;
+package org.zerock.project_dib.controller;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindException;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.project_dib.restaurant.dto.PageRequestDTO;
 import org.zerock.project_dib.restaurant.dto.PageResponseDTO;
 import org.zerock.project_dib.restaurant.dto.RestaurantReplyDTO;
 import org.zerock.project_dib.restaurant.service.RestaurantReplyService;
+import org.zerock.project_dib.restaurant.service.RestaurantService;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/replies")
@@ -23,54 +23,61 @@ import java.util.Map;
 public class RestaurantReplyController {
 
     private final RestaurantReplyService restaurantReplyService;
+    private final RestaurantService restaurantService;
 
-    @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public Map<String, Integer> register(@Valid @RequestBody RestaurantReplyDTO restaurantReplyDTO, BindingResult bindingResult) throws BindException {
-
-        log.info(restaurantReplyDTO);
+    @PostMapping("/addReply")
+    public String addReply(@Valid RestaurantReplyDTO restaurantReplyDTO,
+                           BindingResult bindingResult,
+                           RedirectAttributes redirectAttributes,
+                           Authentication authentication) {
 
         if (bindingResult.hasErrors()) {
-            throw new BindException(bindingResult);
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            return "redirect:/restaurant/read?rno=" + restaurantReplyDTO.getRno();
         }
 
-        int review_no = restaurantReplyService.registerReply(restaurantReplyDTO);
-        Map<String, Integer> resultMap = new HashMap<>();
-        resultMap.put("review_no", review_no);
+        // 현재 로그인된 사용자의 mid 설정
+        String mid = authentication.getName();
+        restaurantReplyDTO.setMid(mid);
 
-        return resultMap;
+        restaurantReplyService.registerReply(restaurantReplyDTO);
+        redirectAttributes.addFlashAttribute("result", "success");
+        return "redirect:/restaurant/read?rno=" + restaurantReplyDTO.getRno();
     }
 
-    @GetMapping(value = "/list/{rno}")
+    @GetMapping("/list/{rno}")
     @ResponseBody
     public PageResponseDTO<RestaurantReplyDTO> getList(@PathVariable("rno") int rno, PageRequestDTO pageRequestDTO) {
-        PageResponseDTO<RestaurantReplyDTO> responseDTO = restaurantReplyService.getListOfRestaurant(rno, pageRequestDTO);
-        return responseDTO;
+        return restaurantReplyService.getListOfRestaurant(rno, pageRequestDTO);
     }
 
-    @GetMapping(value = "/{review_no}")
+    @GetMapping("/{review_no}")
     @ResponseBody
-    public RestaurantReplyDTO getReplyDto(@PathVariable("review_no") int review_no) {
-        RestaurantReplyDTO restaurantReplyDTO = restaurantReplyService.readReply(review_no);
-        return restaurantReplyDTO;
+    public RestaurantReplyDTO getReply(@PathVariable("review_no") int review_no) {
+        return restaurantReplyService.readReply(review_no);
     }
 
-    @DeleteMapping(value = "/{review_no}")
-    @ResponseBody
-    public Map<String, Integer> remove(@PathVariable("review_no") int review_no) {
+    @PostMapping("/delete/{review_no}")
+    public String deleteReply(@PathVariable("review_no") int review_no, @RequestParam("rno") int rno, RedirectAttributes redirectAttributes) {
         restaurantReplyService.deleteReply(review_no);
-        Map<String, Integer> resultMap = new HashMap<>();
-        resultMap.put("review_no", review_no);
-        return resultMap;
+        redirectAttributes.addFlashAttribute("result", "success");
+        return "redirect:/restaurant/read?rno=" + rno;
     }
 
-    @PutMapping(value = "/{review_no}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public Map<String, Integer> modify(@PathVariable("review_no") int review_no, @RequestBody RestaurantReplyDTO restaurantReplyDTO) {
+    @PostMapping("/update/{review_no}")
+    public String updateReply(@PathVariable("review_no") int review_no,
+                              @Valid RestaurantReplyDTO restaurantReplyDTO,
+                              BindingResult bindingResult,
+                              RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            return "redirect:/restaurant/read?rno=" + restaurantReplyDTO.getRno();
+        }
+
         restaurantReplyDTO.setReview_no(review_no);
         restaurantReplyService.modifyReply(restaurantReplyDTO);
-        Map<String, Integer> resultMap = new HashMap<>();
-        resultMap.put("review_no", review_no);
-        return resultMap;
+        redirectAttributes.addFlashAttribute("result", "success");
+        return "redirect:/restaurant/read?rno=" + restaurantReplyDTO.getRno();
     }
 }
