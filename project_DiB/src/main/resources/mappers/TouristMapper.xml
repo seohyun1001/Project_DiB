@@ -30,8 +30,8 @@
             tourClosetime = #{tourClosetime},
             tourParking   = #{tourParking},
             tourContent   = #{tourContent},
-            modDate        = #{modDate, jdbcType=TIMESTAMP},
-            regDate        = #{regDate, jdbcType=TIMESTAMP}
+            modDate        = CURRENT_TIMESTAMP()
+
         WHERE tno = #{tno}
     </update>
 
@@ -58,5 +58,11 @@
         FROM tourist_img
         WHERE tno = #{tno}
     </delete>
+
+    <update id="updateImgs" parameterType="org.zerock.project_dib.tourist.domain.TouristImg">
+        UPDATE tourist_img
+        SET fileName = #{fileName}, ord = #{ord}
+        WHERE uuid = #{uuid} AND tno = #{tno}
+    </update>
 
 </mapper>

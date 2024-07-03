@@ -28,4 +28,6 @@ public interface TouristMapper {
 
     void deleteImgs(int tno);
 
+    void updateImgs(TouristImg touristImg);
+
 }

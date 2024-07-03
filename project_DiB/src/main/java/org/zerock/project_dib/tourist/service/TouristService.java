@@ -23,5 +23,7 @@ public interface TouristService {
 
     void registerImg(TouristDTO touristDTO, MultipartFile file) throws IOException; // TouristImgDTO 삭제, TouristDTO로 수정
 
+    void modifyImg(TouristDTO touristDTO, MultipartFile file) throws IOException;
+
     void removeImgs(int tno);
 }

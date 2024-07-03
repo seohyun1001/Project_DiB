@@ -53,9 +53,6 @@ public class TouristServiceImpl implements TouristService {
     @Override
     public void modify(TouristDTO touristDTO) {
         Tourist tourist = toEntity(touristDTO);
-
-//        tourist.setModDate(LocalDateTime.now());
-
         touristMapper.update(tourist);
     }
 
@@ -108,6 +105,29 @@ public class TouristServiceImpl implements TouristService {
 
         // 관광지 이미지 등록
         //touristMapper.insertImg(touristImg);
+    }
+
+    @Override
+    public void modifyImg(TouristDTO touristDTO, MultipartFile file) throws IOException {
+        touristMapper.delete(touristDTO.getTno());
+
+        Tourist tourist = toEntity(touristDTO);
+
+        UploadFileDTO upDownDto = new UploadFileDTO();
+        ArrayList<MultipartFile> imgList = new ArrayList<>();
+        imgList.add(file);
+        upDownDto.setFiles(imgList);
+        UpDownController updownController = new UpDownController();
+        List<UploadResultDTO> requireUploadData = updownController.upload(upDownDto);
+        final int[] index = {0};
+        requireUploadData.forEach(uploadResultDTO -> {
+            uploadResultDTO.setUuid(uploadResultDTO.getUuid());
+            uploadResultDTO.setFileName(file.getOriginalFilename());
+            uploadResultDTO.setTno(tourist.getTno());
+            uploadResultDTO.setOrd(index[0]);
+            touristMapper.insertImg(uploadResultDTO.toEntity());
+        });
+
     }
 
     @Override
