@@ -25,6 +25,28 @@ public class RestaurantReplyServiceImpl implements RestaurantReplyService {
     }
 
     @Override
+    public PageResponseDTO<RestaurantReplyDTO> getListOfRestaurant(int rno, PageRequestDTO pageRequestDTO) {
+        List<RestaurantReply> replies = restaurantReplyMapper.listOfRestaurant(rno, pageRequestDTO);
+        int total = restaurantReplyMapper.countTotalReviews(rno);
+
+        List<RestaurantReplyDTO> dtoList = replies.stream()
+                .map(this::entityToDto)
+                .collect(Collectors.toList());
+
+        return PageResponseDTO.<RestaurantReplyDTO>withAll()
+                .dtoList(dtoList)
+                .total(total)
+                .pageRequestDTO(pageRequestDTO)
+                .build();
+    }
+
+    @Override
+    public RestaurantReplyDTO readReply(int review_no) {
+        RestaurantReply entity = restaurantReplyMapper.readReview(review_no);
+        return entity != null ? entityToDto(entity) : null;
+    }
+
+    @Override
     public void modifyReply(RestaurantReplyDTO restaurantReplyDTO) {
         RestaurantReply restaurantReply = dtoToEntity(restaurantReplyDTO);
         restaurantReplyMapper.updateReview(restaurantReply);
@@ -32,27 +54,10 @@ public class RestaurantReplyServiceImpl implements RestaurantReplyService {
 
     @Override
     public void deleteReply(int review_no) {
-        restaurantReplyMapper.deleteReview(review_no);
-    }
-
-    public PageResponseDTO<RestaurantReplyDTO> getListOfRestaurant(int rno, PageRequestDTO pageRequestDTO) {
-        int total = restaurantReplyMapper.countTotalReviews(rno);
-        List<RestaurantReply> replies = restaurantReplyMapper.listOfRestaurant(rno, pageRequestDTO);
-        List<RestaurantReplyDTO> dtoList = replies.stream()
-                .map(reply -> entityToDTO(reply))
-                .collect(Collectors.toList());
-
-        return PageResponseDTO.<RestaurantReplyDTO>withAll()
-                .pageRequestDTO(pageRequestDTO)
-                .dtoList(dtoList)
-                .total(total)
-                .build();
-    }
-
-    @Override
-    public RestaurantReplyDTO readReply(int review_no) {
-        RestaurantReply restaurantReply = restaurantReplyMapper.readReview(review_no);
-        return entityToDTO(restaurantReply);
+        RestaurantReply entity = restaurantReplyMapper.readReview(review_no);
+        if (entity != null) {
+            restaurantReplyMapper.deleteReview(review_no);
+        }
     }
 
     private RestaurantReply dtoToEntity(RestaurantReplyDTO dto) {
@@ -65,7 +70,7 @@ public class RestaurantReplyServiceImpl implements RestaurantReplyService {
                 .build();
     }
 
-    private RestaurantReplyDTO entityToDTO(RestaurantReply entity) {
+    private RestaurantReplyDTO entityToDto(RestaurantReply entity) {
         return RestaurantReplyDTO.builder()
                 .review_no(entity.getReview_no())
                 .review_text(entity.getReview_text())

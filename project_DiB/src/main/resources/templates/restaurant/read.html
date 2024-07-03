@@ -71,10 +71,8 @@
             <div id="reviewList">
                 <!-- 댓글 목록이 여기에 추가됩니다 -->
             </div>
-            <nav>
-                <ul class="pagination justify-content-center" id="pagination">
-                    <!-- 페이지 네비게이션이 여기에 추가됩니다 -->
-                </ul>
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center" id="pagination"></ul>
             </nav>
         </div>
     </div>
@@ -97,6 +95,20 @@
     </div>
 </div>
 
+<!-- 댓글 삭제 및 수정 폼 추가 -->
+<form id="deleteForm" th:action="@{/replies/delete}" method="post" style="display: none;">
+    <input type="hidden" name="review_no" id="deleteReviewNo">
+    <input type="hidden" name="mid" id="deletemid">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+</form>
+
+<form id="updateForm" th:action="@{/replies/update}" method="post" style="display: none;">
+    <input type="hidden" name="review_no" id="updateReviewNo">
+    <input type="hidden" name="review_text" id="updateReviewText">
+    <input type="hidden" name="mid" id="updatemid">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+</form>
+
 <footer class="py-5 text-center text-body-secondary bg-body-tertiary mt-4">
     <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a
             href="https://twitter.com/mdo">@mdo</a>.</p>
@@ -110,20 +122,27 @@
         const rno = /*[[${dto.rno}]]*/ 0;
         const pageSize = 10;
         let currentPage = 1;
-
         function loadReviews(page) {
             $.get(`/replies/list/${rno}?page=${page}&size=${pageSize}`, function (data) {
                 let reviewList = $("#reviewList");
                 reviewList.empty();
-                data.dtoList.forEach(function (review) {
-                    reviewList.append(
-                        `<div class="card mb-3">
+                let name = Object.keys(data)[0]
+                console.log(Object.values(data)[0])
+                Object.values(data)[0].dtoList.forEach(function (review) {
+                    let reviewCard = `
+                        <div class="card mb-3">
                             <div class="card-body">
                                 <p class="card-text">${review.review_text}</p>
                                 <footer class="blockquote-footer">By ${review.mid}</footer>
-                            </div>
+                    `;
+                    if(name === review.mid || name==='ADMIN'){
+                    reviewCard += `
+                                    <button class="btn btn-primary btn-sm edit-btn" data-review-id="${review.review_no}" data-user-id="${review.mid}">Edit</button>
+                                    <button class="btn btn-danger btn-sm delete-btn" data-review-id="${review.review_no}" data-user-id="${review.mid}">Delete</button>
+                                `}
+                    reviewCard += `</div>
                         </div>`
-                    );
+                    reviewList.append(reviewCard);
                 });
 
                 // 페이지 네비게이션 생성
@@ -158,14 +177,37 @@
             });
         }
 
-        // 페이지 로드 시 첫 페이지 댓글 로드
         loadReviews(currentPage);
 
-        // 페이지 버튼 클릭 시 해당 페이지 댓글 로드
-        $("#pagination").on("click", "a.page-link", function (e) {
+        // 페이지 네비게이션 클릭 시
+        $("#pagination").on("click", ".page-link", function (e) {
             e.preventDefault();
-            let page = $(this).data("page");
-            loadReviews(page);
+            currentPage = $(this).data("page");
+            loadReviews(currentPage);
+        });
+
+        // 댓글 수정 버튼 클릭 시
+        $("#reviewList").on("click", ".edit-btn", function () {
+            let reviewId = $(this).data("review-id");
+            let userId = $(this).data("user-id");
+            let reviewText = prompt("Edit your review:");
+            if (reviewText) {
+                $("#updateReviewNo").val(reviewId);
+                $("#updateReviewText").val(reviewText);
+                $("#updatemid").val(userId);
+                $("#updateForm").submit();
+            }
+        });
+
+        // 댓글 삭제 버튼 클릭 시
+        $("#reviewList").on("click", ".delete-btn", function () {
+            let reviewId = $(this).data("review-id");
+            let userId = $(this).data("user-id");
+            if (confirm("Are you sure you want to delete this review?")) {
+                $("#deleteReviewNo").val(reviewId);
+                $("#deletemid").val(userId);
+                $("#deleteForm").submit();
+            }
         });
     });
 </script>
