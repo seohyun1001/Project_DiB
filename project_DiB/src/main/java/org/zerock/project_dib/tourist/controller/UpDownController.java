@@ -72,7 +72,7 @@ public class UpDownController {
   }
 
   //Controller를 이용한 파일 취득 방식
-  @GetMapping("/view/{fileName}")
+  @GetMapping("/tourist/view/{fileName}")
   public ResponseEntity<Resource> viewFileGET(@PathVariable String fileName){
     // 파일 받아오기("C:\\upload\\aaa.jpg")
     Resource resource = new FileSystemResource(uploadPath+ File.separator +fileName);
