@@ -5,12 +5,11 @@ import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.zerock.project_dib.mapper.FaqMapper;
 import org.zerock.project_dib.pse.domain.Faq;
 import org.zerock.project_dib.pse.dto.FaqDTO;
 import org.zerock.project_dib.pse.dto.PageRequestDTO;
 import org.zerock.project_dib.pse.dto.PageResponseDTO;
-
+import org.zerock.project_dib.mapper.FaqMapper;
 
 import java.io.File;
 import java.io.IOException;

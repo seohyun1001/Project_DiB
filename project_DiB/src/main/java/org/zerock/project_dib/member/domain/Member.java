@@ -23,15 +23,16 @@ public class Member {
     private LocalDateTime regdate;
     private LocalDateTime moddate;
     private boolean social;
+    private String roleSet;
 
-    @Builder.Default
-    private final Set<MemberRole> roleSet = new HashSet<>();
+//    @Builder.Default
+//    private final Set<MemberRole> roleSet = new HashSet<>();
 
     public void changePassword(String mpw) {
         this.mpw = mpw;
     }
 
-    public void addRole(MemberRole role) {
-        this.roleSet.add(role);
-    }
+//    public void addRole(MemberRole role) {
+//        this.roleSet.add(role);
+//    }
 }
