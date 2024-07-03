@@ -35,12 +35,18 @@ public class RestaurantReplyServiceImpl implements RestaurantReplyService {
         restaurantReplyMapper.deleteReview(review_no);
     }
 
-    @Override
     public PageResponseDTO<RestaurantReplyDTO> getListOfRestaurant(int rno, PageRequestDTO pageRequestDTO) {
+        int total = restaurantReplyMapper.countTotalReviews(rno);
         List<RestaurantReply> replies = restaurantReplyMapper.listOfRestaurant(rno, pageRequestDTO);
-        List<RestaurantReplyDTO> dtoList = replies.stream().map(this::entityToDTO).collect(Collectors.toList());
-        int total = replies.size();
-        return new PageResponseDTO<>(pageRequestDTO, dtoList, total);
+        List<RestaurantReplyDTO> dtoList = replies.stream()
+                .map(reply -> entityToDTO(reply))
+                .collect(Collectors.toList());
+
+        return PageResponseDTO.<RestaurantReplyDTO>withAll()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total(total)
+                .build();
     }
 
     @Override

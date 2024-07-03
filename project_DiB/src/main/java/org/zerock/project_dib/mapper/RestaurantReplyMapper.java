@@ -16,6 +16,8 @@ public interface RestaurantReplyMapper {
 
     void deleteReview(int review_no);
 
+    int countTotalReviews(int rno);
+
     List<RestaurantReply> listOfRestaurant(@Param("rno") int rno, @Param("pageRequestDTO") PageRequestDTO pageRequestDTO);
 
     RestaurantReply readReview(int review_no);

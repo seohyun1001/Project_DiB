@@ -71,6 +71,11 @@
             <div id="reviewList">
                 <!-- 댓글 목록이 여기에 추가됩니다 -->
             </div>
+            <nav>
+                <ul class="pagination justify-content-center" id="pagination">
+                    <!-- 페이지 네비게이션이 여기에 추가됩니다 -->
+                </ul>
+            </nav>
         </div>
     </div>
 
@@ -100,19 +105,14 @@
     </p>
 </footer>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-        crossorigin="anonymous"></script>
-<script>
+<script th:inline="javascript">
     $(document).ready(function () {
-        const rno = [[${dto.rno}]];
+        const rno = /*[[${dto.rno}]]*/ 0;
+        const pageSize = 10;
+        let currentPage = 1;
 
-        function loadReviews() {
-            $.get(`/replies/list/${rno}`, function (data) {
+        function loadReviews(page) {
+            $.get(`/replies/list/${rno}?page=${page}&size=${pageSize}`, function (data) {
                 let reviewList = $("#reviewList");
                 reviewList.empty();
                 data.dtoList.forEach(function (review) {
@@ -125,10 +125,48 @@
                         </div>`
                     );
                 });
+
+                // 페이지 네비게이션 생성
+                let pagination = $("#pagination");
+                pagination.empty();
+                if (data.prev) {
+                    pagination.append(
+                        `<li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous" data-page="${data.start - 1}">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>`
+                    );
+                }
+                for (let i = data.start; i <= data.end; i++) {
+                    let activeClass = i === data.page ? "active" : "";
+                    pagination.append(
+                        `<li class="page-item ${activeClass}">
+                            <a class="page-link" href="#" data-page="${i}">${i}</a>
+                        </li>`
+                    );
+                }
+                if (data.next) {
+                    pagination.append(
+                        `<li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next" data-page="${data.end + 1}">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>`
+                    );
+                }
             });
         }
 
-        loadReviews();
+        // 페이지 로드 시 첫 페이지 댓글 로드
+        loadReviews(currentPage);
+
+        // 페이지 버튼 클릭 시 해당 페이지 댓글 로드
+        $("#pagination").on("click", "a.page-link", function (e) {
+            e.preventDefault();
+            let page = $(this).data("page");
+            loadReviews(page);
+        });
     });
 </script>
 </body>
