@@ -13,19 +13,19 @@ public interface AccommodationMapper {
 
     List<AccommodationVO> findAll();
 
-    AccommodationVO selectOne(int ano);
+    AccommodationVO selectOne(Long ano);
 
     void update(AccommodationVO accommodationVO);
 
-    void delete(int ano);
+    void delete(Long ano);
 
     void insertFile(AccommodationImgVO accommodationImgVO);
 
     void updateFile(AccommodationImgVO accommodationImgVO);
 
-    void deleteFile(int ano);
+    void deleteFile(Long ano);
 
-    List<AccommodationImgVO> findAllFilesByAno(int ano);
+    List<AccommodationImgVO> findAllFilesByAno(Long ano);
 
     List<AccommodationImgVO> findAllFiles();
 

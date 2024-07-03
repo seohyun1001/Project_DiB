@@ -25,6 +25,10 @@
                         <input type="text" name="acc_loc" class="form-control" th:value="${accInfo.acc_loc}" readonly>
                     </div>
                     <div class="input-group mb-3">
+                        <span class="input-group-text">전화번호</span>
+                        <input type="text" name="acc_phone" class="form-control" th:value="${accInfo.acc_phone}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
                         <span class="input-group-text">수정일</span>
                         <input type="text" name="moddate" class="form-control" th:value="${#temporals.format(accInfo.moddate,'yyyy-MM-dd HH:mm:ss')}" readonly>
                     </div>

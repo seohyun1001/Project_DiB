@@ -11,19 +11,19 @@ public interface AccommodationService {
 
     List<AccommodationDTO> accList();
 
-    AccommodationDTO accInfo(int ano);
+    AccommodationDTO accInfo(Long ano);
 
     void modify(AccommodationDTO accommodationDTO);
 
-    void delete(int ano);
+    void delete(Long ano);
 
     void insertFile(AccommodationImgDTO accommodationImgDTO);
 
     void modifyFile(AccommodationImgDTO accommodationImgDTO);
 
-    void deleteFile(int ano);
+    void deleteFile(Long ano);
 
-    List<AccommodationImgDTO> findAllFileByAno(int ano);
+    List<AccommodationImgDTO> findAllFileByAno(Long ano);
 
     List<AccommodationImgDTO> findAllFiles();
 

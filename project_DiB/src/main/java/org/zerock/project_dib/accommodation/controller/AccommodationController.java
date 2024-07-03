@@ -76,7 +76,7 @@ public class AccommodationController {
     }
 
     @GetMapping({"/view", "/modify"})
-    public void view(int ano, Model model) {
+    public void view(Long ano, Model model) {
 
         AccommodationDTO accommodationDTO = accommodationService.accInfo(ano);
         log.info(accommodationDTO);
@@ -89,12 +89,25 @@ public class AccommodationController {
     }
 
     @PostMapping("/modify")
-    public String modify(int ano, @Valid AccommodationImgDTO accommodationImgDTO, @Valid AccommodationDTO accommodationDTO, RedirectAttributes redirectAttributes, BindingResult bindingResult) throws IOException {
+    public String modify(MultipartFile file, Long ano, @Valid AccommodationImgDTO accommodationImgDTO, @Valid AccommodationDTO accommodationDTO, RedirectAttributes redirectAttributes, BindingResult bindingResult) throws IOException {
 
         if (bindingResult.hasErrors()) {
             log.info("has modify error........................");
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             return "redirect:/accommodation/modify?ano="+ ano;
+        }
+
+        String fileName = null;
+        if (!file.isEmpty()) {
+            String originalFilename = file.getOriginalFilename();
+            UUID uuid = UUID.randomUUID();
+            fileName = uuid + "_" + originalFilename;
+            file.transferTo(new File("c:\\upload\\" + fileName));
+            accommodationImgDTO.setFile_name(fileName);
+            accommodationImgDTO.setUuid(uuid.toString());
+            accommodationImgDTO.setAno(ano);
+
+            accommodationService.insertFile(accommodationImgDTO);
         }
 
         accommodationService.modify(accommodationDTO);
@@ -103,7 +116,7 @@ public class AccommodationController {
     }
 
     @PostMapping("/delete/{ano}")
-    public void delete(int ano, Model model) {
+    public void delete(Long ano, Model model) {
 
         List<AccommodationImgDTO> imgFileList = accommodationService.findAllFileByAno(ano);
         model.addAttribute("imageList", imgFileList);

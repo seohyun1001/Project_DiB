@@ -41,7 +41,7 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     @Override
-    public AccommodationDTO accInfo(int ano) {
+    public AccommodationDTO accInfo(Long ano) {
 
         return modelMapper.map(accommodationMapper.selectOne(ano), AccommodationDTO.class);
     }
@@ -54,7 +54,7 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     @Override
-    public void delete(int ano) {
+    public void delete(Long ano) {
 
         accommodationMapper.delete(ano);
 
@@ -76,14 +76,14 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     @Override
-    public void deleteFile(int ano) {
+    public void deleteFile(Long ano) {
 
         accommodationMapper.deleteFile(ano);
 
     }
 
     @Override
-    public List<AccommodationImgDTO> findAllFileByAno(int ano) {
+    public List<AccommodationImgDTO> findAllFileByAno(Long ano) {
 
         List<AccommodationImgDTO> result = accommodationMapper.findAllFilesByAno(ano).stream()
                 .map(vo -> modelMapper.map(vo, AccommodationImgDTO.class))

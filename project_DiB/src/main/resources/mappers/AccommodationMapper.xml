@@ -19,7 +19,7 @@
     </select>
 
     <update id="update">
-        update accommodation set acc_name = #{acc_name}, acc_exp = #{acc_exp}, acc_loc = #{acc_loc}, acc_phone = #{acc_phone}, moddate = #{moddate}
+        update accommodation set acc_name = #{acc_name}, acc_exp = #{acc_exp}, acc_loc = #{acc_loc}, acc_phone = #{acc_phone}, moddate = current_timestamp()
         where ano = #{ano}
     </update>
 
