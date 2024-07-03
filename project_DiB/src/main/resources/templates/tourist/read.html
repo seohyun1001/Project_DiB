@@ -3,6 +3,8 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
       layout:decorate="~{/layout/basic.html}">
+
+
 <head>
     <title>Tourist Read</title>
 </head>
@@ -22,6 +24,16 @@
                         <span class="input-group-text">관광지 명</span>
                         <input type="text" name="tourName" class="form-control" th:value="${dto.tourName}" readonly>
                     </div>
+
+<!--                    이미지 출력 div-->
+                    <div class="col">
+                        <span th:if="${dto.fileNames != null && dto.fileNames.size()>0}">
+                            <th:block th:each="fileName: ${dto.fileNames}" >
+                                <img class="card-img-top" th:src="@{'/img/' + ${fileName}}" alt="사진" style="width: 50%;">
+                            </th:block>
+                        </span>
+                    </div>
+
                     <div class="input-group mb-3">
                         <span class="input-group-text">관광지 주소</span>
                         <input type="text" name="tourAddr" class="form-control" th:value="${dto.tourAddr}" readonly>
@@ -35,9 +47,8 @@
                         <input type="text" name="tourClosetime" class="form-control" th:value="${dto.tourClosetime}" readonly>
                     </div>
                     <div class="input-group mb-3">
-                        <span class="input-group-text">주차 여부</span>
-                        <input type="checkbox" name="tourParking" class="form-control-sm" th:checked="${dto.tourParking == true}" readonly>
-
+                        <span class="input-group-text" style="margin-right:20px">주차 여부</span>
+                        <input type="checkbox" name="tourParking" class="form-control-sm" th:checked="${dto.tourParking == true}" disabled>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text">설명</span>
@@ -63,14 +74,7 @@
 <!--                        </div>-->
 <!--                    </div>-->
                 </div>
-<!--                이미지 출력 div-->
-<!--                <div class="col">-->
-<!--                    <div class="card" th:if="${dto.fileNames != null && dto.fileNames.size()>0}">-->
-<!--                        <img class="card-img-top"-->
-<!--                             th:each="fileName: ${dto.fileNames}"-->
-<!--                             th:src="|/view/${fileName}|">-->
-<!--                    </div>-->
-<!--                </div>-->
+
             </div>
         </div>
     </div>

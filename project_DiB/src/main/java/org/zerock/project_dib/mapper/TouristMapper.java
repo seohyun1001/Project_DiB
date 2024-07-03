@@ -2,6 +2,7 @@ package org.zerock.project_dib.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Select;
 import org.zerock.project_dib.tourist.domain.Tourist;
 import org.zerock.project_dib.tourist.domain.TouristImg;
 
@@ -26,4 +27,5 @@ public interface TouristMapper {
     void insertImg(TouristImg touristImg);
 
     void deleteImgs(int tno);
+
 }

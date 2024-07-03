@@ -30,7 +30,10 @@ public class TouristController {
 
     @GetMapping("/read/{tno}")
     public String read(@PathVariable("tno") int tno, Model model) {
-        model.addAttribute("dto", touristService.read(tno));
+        List<String> fileNames = touristService.getImgList(tno);
+        TouristDTO dto = touristService.read(tno);
+        dto.setFileNames(fileNames);
+        model.addAttribute("dto", dto);
         return "/tourist/read";
     }
 
@@ -49,11 +52,11 @@ public class TouristController {
         return "redirect:/tourist/list";
     }
 
-@PostMapping("/remove/{tno}")
-public String remove(@PathVariable("tno") int tno) {
+    @PostMapping("/remove/{tno}")
+    public String remove(@PathVariable("tno") int tno) {
         touristService.remove(tno);
         return "redirect:/tourist/list";
-}
+    }
 
     @PostMapping("/modify/{tno}")
     @ResponseBody
@@ -62,11 +65,12 @@ public String remove(@PathVariable("tno") int tno) {
         touristService.modify(touristDTO);
     }
 
-    @GetMapping("/{tno}/images")
-    @ResponseBody
-    public List<TouristImgDTO> getImgList(@PathVariable("tno") int tno) {
-        return touristService.getImgList(tno);
-    }
+//    @GetMapping("/{tno}/images")
+//    public List<TouristImgDTO> getImgList(@PathVariable("tno") int tno, Model model) {
+//        List<TouristImgDTO> fileNames = touristService.getImgList(tno);
+//        model.addAttribute("fileNames", fileNames);
+//        return touristService.getImgList(tno);
+//    }
 
     @PostMapping("/{tno}/images")
     @ResponseBody

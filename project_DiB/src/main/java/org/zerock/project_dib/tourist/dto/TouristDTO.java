@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class TouristDTO {
@@ -25,4 +26,6 @@ public class TouristDTO {
     private LocalDateTime modDate;
 
     private LocalDateTime regDate;
+
+    private List<String> fileNames;
 }

@@ -26,7 +26,7 @@ import java.util.*;
 @Log4j2
 public class UpDownController {
   @Value("${org.zerock.upload.path}")
-  private String uploadPath = Paths.get(System.getProperty("user.dir"), "tourist_img").toString();
+  private String uploadPath = "c:\\upload";
 
   @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
   public List<UploadResultDTO> upload(UploadFileDTO uploadFileDTO) {
@@ -90,25 +90,6 @@ public class UpDownController {
     return ResponseEntity.ok().headers(headers).body(resource);
   }
 
-  /*
-  @PostMapping(value = "/upload2", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-  public String upload(MultipartFile file) {
-    System.out.println(file);
-    log.info(file);
-    if (!file.isEmpty()) {
-      String originalName = file.getOriginalFilename();
-      log.info(originalName);
-      String uuid = UUID.randomUUID().toString();
-      Path savePath = Paths.get(uploadPath, uuid + "_" + originalName);
-      try {
-        file.transferTo(savePath);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
-    return null;
-  }
-  */
 
   @DeleteMapping("/remove/{fileName}")
   public Map<String, Boolean> removeFile(@PathVariable String fileName){
