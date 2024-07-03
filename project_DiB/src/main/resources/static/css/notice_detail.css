@@ -1,8 +1,8 @@
 /* notice_detail.css */
 
 body {
-    background: url('/img/board_bg.png') no-repeat center center fixed; /* 배경 이미지 설정 */
-    background-size: cover; /* 이미지 크기를 조절하여 화면을 덮도록 설정 */
+    background: url('/img/board_bg.png') no-repeat center 0px fixed; /* 배경 이미지 설정 */
+    background-size: 123.5%;
 }
 
 /* 공지사항 컨테이너 스타일 */
@@ -17,6 +17,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    align-items: flex-start; /* 변경: 왼쪽 정렬 */
 }
 
 /* 화면 중앙 흰색 컨테이너의 위치 조정 */

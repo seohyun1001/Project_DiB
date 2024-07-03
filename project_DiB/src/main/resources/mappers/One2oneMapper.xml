@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.zerock.project_dib.pse.mapper.One2oneMapper">
+<mapper namespace="org.zerock.project_dib.mapper.One2oneMapper">
     <resultMap id="One2oneResultMap" type="org.zerock.project_dib.pse.domain.One2one">
         <id property="otono" column="otono" />
         <result property="one2oneTitle" column="one2one_title" />
