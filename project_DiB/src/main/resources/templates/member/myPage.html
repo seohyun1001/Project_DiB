@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/basic.html}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
     <title>My Page</title>
@@ -16,40 +15,35 @@
     <div class="container-fluid d-flex justify-content-center">
     <div class="row mt-3">
         <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    JOIN
-                </div> <!-- end card-header -->
+            <h2 class="h3 mb-3 fw-normal">
+                마이 페이지
+            </h2>
+            <div class="card align-self-center">
                 <div class="card-body">
                     <form id="myPageForm">
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">MID</span>
-                            <input type="text" name="mid" class="form-control" th:value="${memberDTO.mid}" readonly>
+                        <div class="col-12 pb-2">
+                            <label for="mid" class="form-label">아이디</label>
+                            <input type="text" name="mid" class="form-control" id="mid" th:value="${memberDTO.mid}" readonly>
                         </div>
 
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">MPW</span>
-                            <input type="password" name="mpw" class="form-control" readonly>
+                        <div class="col-12 pb-2">
+                            <label for="name" class="form-label">이름</label>
+                            <input type="text" name="name" id="name" class="form-control" th:value="${memberDTO.name}" readonly>
                         </div>
 
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">NAME</span>
-                            <input type="text" name="name" class="form-control" th:value="${memberDTO.name}" readonly>
+                        <div class="col-12 pb-2">
+                            <label for="email" class="form-label">이메일</label>
+                            <input type="text" name="email" id="email" class="form-control" th:value="${memberDTO.email}" readonly>
                         </div>
 
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">EMAIL</span>
-                            <input type="text" name="email" class="form-control" th:value="${memberDTO.email}" readonly>
+                        <div class="col-12 pb-2">
+                            <label for="address" class="form-label">주소</label>
+                            <input type="text" name="address" id="address" class="form-control" th:value="${memberDTO.address}" readonly>
                         </div>
 
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">ADDRESS</span>
-                            <input type="text" name="address" class="form-control" th:value="${memberDTO.address}" readonly>
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">PHONE</span>
-                            <input type="text" name="phone" class="form-control" th:value="${memberDTO.phone}" readonly>
+                        <div class="col-12 pb-2">
+                            <label for="phone" class="form-label">전화번호</label>
+                            <input type="text" name="phone" id="phone" class="form-control" th:value="${memberDTO.phone}" readonly>
                         </div>
 
                         <div class="my-4">
@@ -68,6 +62,11 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 </div>
+
+<div th:replace="fragment/footer :: footerFragment"></div>
+
+<script th:src="@{/js/script.js}"></script>
+
 <script layout:fragment="script" th:inline="javascript">
 
     document.querySelector(".modifyBtn").addEventListener("click", function(e){
