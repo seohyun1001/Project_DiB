@@ -5,8 +5,113 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="07e3978e-3da9-4f74-909c-1f4178aecd8f" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/assets/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/css/common.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/css/layout_base.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/css/styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/css/swiper.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/csv/program.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/._Thumbs.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/._bg_pc_login.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/._btn_firstpage.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/._ico_kakao.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/._ico_naver.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/._img_agree.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/bg_app.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/bg_checkbox.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/bg_radio.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/bg_reglist.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/btn_closeMenu.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/btn_firstpage.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/btn_firstpage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/btn_lastpage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/btn_more1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/btn_more2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/btn_next_arr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/btn_next_arr_w.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/btn_nextpage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/btn_prev_arr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/btn_prev_arr_w.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/btn_prevpage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/btn_roll_play.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/btn_roll_stop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/btn_rollbutt_off.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/btn_rollbutt_on.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/btn_xpop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_arr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_blog_r.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_bullet.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_cellphone.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_contact_mobtm.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_face.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_facebook_r.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_folding_down.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_folding_up.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_gnb01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_gnb02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_gnb03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_gnb04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_instargram_r.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_kakao.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_katalk.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_katalk_mobtm.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_naver.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_nearNext.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_nearPrev.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_phone.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_phone_mobtm.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_search.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_selectArr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_totop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/ico_totop_mo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_captcha.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_place_01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_place_02.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_place_03.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_place_04.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_place_05.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_place_06.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_place_07.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_place_08.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_place_09.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_place_10.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_place_11.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_place_12.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_pop1_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_pop2_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_pop2_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_pop3_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_slidecontents01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_slidecontents02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_slidecontents03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_top2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_top3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_top5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_topplace01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_topplace02.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/img_topplace03.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/left-arrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/mainslide01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/mainslide02.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/mainslide03.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/mainslide_mob01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/mainslide_mob02.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/mainslide_mob03.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/right-arrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/slogan.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/img/tit_login.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/js/common.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/js/html5shiv.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/js/jquery-1.11.3.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/js/jquery.easing.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/js/jquery.smooth-scroll.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/js/placeholders.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/js/reply.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/js/rollmain.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/js/scripts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/js/swiper.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/static/js/upload.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,38 +164,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Gradle.project_DiB 빌드.executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.ProjectDiBApplication.executor": "Run",
-    "git-widget-placeholder": "lsh",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/dib/project_DiB",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Gradle.project_DiB 빌드.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ProjectDiBApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;lsh&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/dib/project_DiB&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mariadb"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mariadb&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="ProjectDiBApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
-      <module name="project_DiB.main" />
+      <module name="org.zerock.project_DiB.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.zerock.project_dib.ProjectDiBApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -122,6 +227,7 @@
       <workItem from="1719905849656" duration="14000" />
       <workItem from="1719905973029" duration="95000" />
       <workItem from="1719906118675" duration="181000" />
+      <workItem from="1719966882684" duration="19000" />
     </task>
     <servers />
   </component>

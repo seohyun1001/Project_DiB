@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Project_DiB.iml" filepath="$PROJECT_DIR$/.idea/Project_DiB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.zerock.project_DiB.iml" filepath="$PROJECT_DIR$/.idea/modules/org.zerock.project_DiB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.zerock.project_DiB.main.iml" filepath="$PROJECT_DIR$/.idea/modules/org.zerock.project_DiB.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.zerock.project_DiB.test.iml" filepath="$PROJECT_DIR$/.idea/modules/org.zerock.project_DiB.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/project_DiB.iml" filepath="$PROJECT_DIR$/.idea/modules/project_DiB.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/project_DiB.main.iml" filepath="$PROJECT_DIR$/.idea/modules/project_DiB.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/project_DiB.test.iml" filepath="$PROJECT_DIR$/.idea/modules/project_DiB.test.iml" />
