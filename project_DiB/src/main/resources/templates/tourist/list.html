@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/basic.html}">
+<div th:href="">
+    <button>My Page ▼</button>
+</div>
+<div class="search-bar">
+    <input type="text" placeholder="검색어를 입력해주세요.">
+    <button>🔍</button>
+</div>
+<body>
+<main>
+    <section class="content">
+        <h1>관광지</h1>
+        <h2>Subheading</h2>
+        <div class="tabs">
+            <button>Tab</button>
+            <button>Tab</button>
+            <button>Tab</button>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        Tourist
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Tourist</h5>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Tno</th>
+                                <th scope="col">명소</th>
+                                <th scope="col">이미지</th>
+                                <th scope="col">주소</th>
+                                <th scope="col">개장 시간</th>
+                                <th scope="col">마감 시간</th>
+                                <th scope="col">주차 여부</th>
+                                <th scope="col">설명</th>
+                                <th scope="col">작성일</th>
+                                <th scope="col">수정일</th>
+                            </tr>
+                            </thead>
+
+                        </table>
+                        <tr>
+                            <th scope="row" th:text="${tourist.tno}">TNO</th>
+                            <td>
+                                <div th:if="${touristImg != null && touristImg.touristImages.size() > 0}">
+                                    <img style="width:100px" th:each="touristImage : ${touristImg.touristImages}"
+                                         th:src="@{|/view/s_${touristImage.uuid}_${touristImage.fileName}|}">
+                                </div>
+                            </td>
+                            <td th:text="${tourist.writer}">Writer</td>
+                            <td th:text="${#temporals.format(tourist.regDate, 'yyyy-MM-dd')}">Registration Date</td>
+                        </tr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <aside>
+        <h3>상세 검색</h3>
+        <ul>
+            <li>지역 분류</li>
+            <li>📍</li>
+            <li>📡</li>
+            <li>인기 순</li>
+            <li>🎵</li>
+            <li>😊</li>
+        </ul>
+    </aside>
+</main>
+<footer>
+    <div class="footer-content">
+        <p>© 2024 Dive Into Busan</p>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Gallery</a></li>
+                <li><a href="#">Our Services</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </nav>
+    </div>
+</footer>
+</body>
+</html>

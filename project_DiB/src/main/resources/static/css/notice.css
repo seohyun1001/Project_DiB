@@ -1,4 +1,10 @@
 /* notice.css */
+/* 공지사항 페이지 배경 이미지 설정 */
+body {
+    background: url('/img/board_bg.png') no-repeat center center fixed; /* 배경 이미지 설정 */
+    background-size: cover; /* 이미지 크기를 조절하여 화면을 덮도록 설정 */
+}
+
 
 /* 공지사항 컨테이너 스타일 */
 .notice-container {
@@ -12,7 +18,12 @@
     height: 600px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start; /* 변경: 왼쪽 정렬 */
+}
+
+/* 기본적인 패딩 값을 0으로 설정 */
+.navbar {
+    padding: 0 !important;
 }
 
 /* 화면 중앙 흰색 컨테이너의 위치 조정 */
@@ -20,6 +31,14 @@ main {
     padding-top: 20px;
     padding-bottom: 20px;
 }
+
+/* notice-table */
+.notice-table {
+    width: 700px;
+    margin-left: auto; /* 왼쪽 정렬을 유지하기 위해 추가 */
+    margin-right: auto; /* 중앙에 위치하도록 추가 */
+}
+
 
 /* 버튼 스타일 */
 .notice-table .table-header button {
@@ -34,40 +53,12 @@ main {
     padding: 0;
 }
 
-/* 특정 버튼에 이미지를 배경으로 설정 */
-.notice-table .table-header .list-btn {
-    background-image: url('/img/list.png');
-}
-
-.notice-table .table-header .grid-btn {
-    background-image: url('/img/grid.png');
-}
-
-.notice-table .table-header .calendar-btn {
-    background-image: url('/img/calendar.png');
-}
-
-/* 버튼 활성화 상태 스타일 */
-.notice-table .table-header .active {
-    background-color: white; /* 활성화된 버튼의 흰색 배경 */
-    border: 1px solid #ccc; /* 활성화된 버튼의 테두리 */
-}
-
-/* 검색 입력창 스타일 */
-.notice-table .table-header input[type="text"] {
-    padding-left: 32px;
-    background: url('/img/search.png') no-repeat;
-    background-size: 20px;
-    background-position: 8px center;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    height: 32px;
-}
 
 /* 공지사항 등록 버튼 스타일 */
 .register-notice-btn {
     display: inline-block;
-    margin-top: 20px;
+    font-size: 0.9rem;
+    white-space: nowrap; /* 텍스트를 한줄로 표시하게 하는 코드 */
     padding: 10px 20px;
     background-color: black;
     color: white;
@@ -78,4 +69,80 @@ main {
 
 .register-notice-btn:hover {
     background-color: darkgray;
+}
+
+/* 공지사항 nno 컬럼 스타일 */
+.col-notice-number {
+    width: 10%;
+}
+
+/* 등록일 컬럼 스타일 */
+.col-registered-date {
+    width: 18%;
+    text-align: center;
+}
+
+/* 등록일 데이터 스타일 */
+.faq-table td.text-center {
+    text-align: center;
+}
+
+/* 공지사항 제목 스타일 */
+.notice-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 20px;
+    margin-top: 10px;
+    width: 100%; /* 변경: 전체 폭으로 확장하여 왼쪽 정렬 유지 */
+}
+
+/* 페이징 스타일 */
+.pagination-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: -80px; /* 페이지 표시 부분을 오른쪽으로 이동 */
+}
+
+.pagination .page-link {
+    color: black; /* 기본 색상 검은색 */
+    background-color: white; /* 기본 배경색 흰색 */
+    border: 1px solid #dee2e6;
+}
+
+.pagination .page-item.active .page-link {
+    color: white; /* 활성화된 버튼의 텍스트 색상 흰색 */
+    background-color: #007bff; /* 활성화된 버튼의 배경색 파란색 */
+    border-color: #007bff;
+}
+
+.pagination .page-link:hover {
+    color: #007bff; /* 마우스를 올렸을 때 텍스트 색상 파란색 */
+}
+
+.pagination .page-item.active .page-link:hover {
+    color: white; /* 활성화된 버튼의 마우스를 올렸을 때 텍스트 색상 흰색 */
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #007bff; /* 활성화된 버튼의 배경색 파란색 */
+    border-color: #007bff;
+}
+
+
+
+/* 테이블 하단 컨테이너 */
+.table-footer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.search-panel .btn {
+    width: 100px;
+    margin-left: 400px;
 }

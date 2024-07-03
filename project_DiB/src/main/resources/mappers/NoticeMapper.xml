@@ -13,17 +13,19 @@
         <result property="moddate" column="moddate" />
     </resultMap>
 
-
+    <!-- 공지사항 읽기 -->
     <select id="read" resultMap="NoticeResultMap" parameterType="long">
         SELECT * FROM notice WHERE nno = #{nno}
     </select>
 
-    <insert id="insert" parameterType="org.zerock.project_dib.pse.dto.NoticeDTO">
+    <!-- 공지사항 삽입 -->
+    <insert id="insert" parameterType="org.zerock.project_dib.pse.domain.Notice">
         INSERT INTO notice (notice_title, notice_content, notice_image, regdate, moddate)
         VALUES (#{noticeTitle}, #{noticeContent}, #{noticeImage}, #{regdate}, #{moddate})
     </insert>
 
-    <update id="update" parameterType="org.zerock.project_dib.pse.dto.NoticeDTO">
+    <!-- 공지사항 수정 -->
+    <update id="update">
         UPDATE notice
         SET notice_title = #{noticeTitle},
             notice_content = #{noticeContent},
@@ -32,11 +34,57 @@
         WHERE nno = #{nno}
     </update>
 
+    <!-- 공지사항 삭제 -->
     <delete id="delete">
         DELETE FROM notice WHERE nno = #{nno}
     </delete>
 
-    <select id="getAll" resultMap="NoticeResultMap">
+    <!-- 공지사항 검색 -->
+    <select id="search" resultMap="NoticeResultMap">
+        SELECT *
+        FROM notice
+        <where>
+            <if test="pageRequestDTO.nno != null">
+                AND nno = #{pageRequestDTO.nno}
+            </if>
+            <if test="pageRequestDTO.noticeTitle != null">
+                AND notice_title = #{pageRequestDTO.noticeTitle}
+            </if>
+            <if test="pageRequestDTO.noticeContent != null">
+                AND notice_content = #{pageRequestDTO.noticeContent}
+            </if>
+            <if test="pageRequestDTO.keyword != null">
+                AND (notice_title LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+                OR notice_content LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%'))
+            </if>
+        </where>
+        ORDER BY nno DESC
+        LIMIT #{pageRequestDTO.offset}, #{pageRequestDTO.size};
+    </select>
+
+    <select id="totalCount" resultType="int">
+        SELECT COUNT(*)
+        FROM notice
+        <where>
+            <if test="pageRequestDTO.nno != null">
+                AND nno = #{pageRequestDTO.nno}
+            </if>
+            <if test="pageRequestDTO.noticeTitle != null">
+                AND notice_title = #{pageRequestDTO.noticeTitle}
+            </if>
+            <if test="pageRequestDTO.noticeContent != null">
+                AND notice_content = #{pageRequestDTO.noticeContent}
+            </if>
+            <if test="pageRequestDTO.keyword != null">
+                AND (notice_title LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+                OR notice_content LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%'))
+            </if>
+        </where>
+    </select>
+
+    <!-- 모든 공지사항 선택 -->
+    <select id="selectAll" resultMap="NoticeResultMap">
         SELECT * FROM notice
     </select>
+
 </mapper>

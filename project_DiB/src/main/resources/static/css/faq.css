@@ -1,0 +1,148 @@
+/* faq.css */
+/* FAQ 페이지 배경 이미지 설정 */
+body {
+    background: url('/img/board_bg.png') no-repeat center center fixed; /* 배경 이미지 설정 */
+    background-size: cover; /* 이미지 크기를 조절하여 화면을 덮도록 설정 */
+}
+
+
+/* FAQ 컨테이너 스타일 */
+.faq-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 50px auto;
+    width: 80%;
+    max-width: 800px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* 변경: 왼쪽 정렬 */
+}
+
+/* 기본적인 패딩 값을 0으로 설정 */
+.navbar {
+    padding: 0 !important;
+}
+
+/* 화면 중앙 흰색 컨테이너의 위치 조정 */
+main {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* faq-table */
+.faq-table {
+    width: 700px;
+    margin-left: auto; /* 왼쪽 정렬을 유지하기 위해 추가 */
+    margin-right: auto; /* 중앙에 위치하도록 추가 */
+}
+
+
+/* 버튼 스타일 */
+.faq-table .table-header button {
+    background-color: #f0f0f0; /* 기본 회색 배경 */
+    border: none;
+    width: 32px;
+    height: 32px;
+    background-size: cover;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 5px;
+    padding: 0;
+}
+
+
+/* FAQ 등록 버튼 스타일 */
+.register-faq-btn {
+    display: inline-block;
+    font-size: 0.9rem;
+    white-space: nowrap; /* 텍스트를 한줄로 표시하게 하는 코드 */
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.register-faq-btn:hover {
+    background-color: darkgray;
+}
+
+/* FAQ fno 컬럼 스타일 */
+.col-faq-number {
+    width: 10%;
+}
+
+/* 등록일 컬럼 스타일 */
+.col-registered-date {
+    width: 18%;
+    text-align: center;
+}
+
+/* 등록일 데이터 스타일 */
+.faq-table td.text-center {
+    text-align: center;
+}
+
+/* FAQ 제목 스타일 */
+.faq-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 20px;
+    margin-top: 10px;
+    width: 100%; /* 변경: 전체 폭으로 확장하여 왼쪽 정렬 유지 */
+}
+
+/* 페이징 스타일 */
+.pagination-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: -80px; /* 페이지 표시 부분을 오른쪽으로 이동 */
+}
+
+.pagination .page-link {
+    color: black; /* 기본 색상 검은색 */
+    background-color: white; /* 기본 배경색 흰색 */
+    border: 1px solid #dee2e6;
+}
+
+.pagination .page-item.active .page-link {
+    color: white; /* 활성화된 버튼의 텍스트 색상 흰색 */
+    background-color: #007bff; /* 활성화된 버튼의 배경색 파란색 */
+    border-color: #007bff;
+}
+
+.pagination .page-link:hover {
+    color: #007bff; /* 마우스를 올렸을 때 텍스트 색상 파란색 */
+}
+
+.pagination .page-item.active .page-link:hover {
+    color: white; /* 활성화된 버튼의 마우스를 올렸을 때 텍스트 색상 흰색 */
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #007bff; /* 활성화된 버튼의 배경색 파란색 */
+    border-color: #007bff;
+}
+
+
+
+/* 테이블 하단 컨테이너 */
+.table-footer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.search-panel .btn {
+    width: 100px;
+    margin-left: 400px;
+}

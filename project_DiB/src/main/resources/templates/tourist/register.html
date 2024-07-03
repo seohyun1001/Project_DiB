@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Tourist Data</title>
+</head>
+<body>
+<h2>Insert Tourist Data</h2>
+<form action="/tourist/register" method="post" enctype="multipart/form-data">
+    <label for="tourName">관광지명:</label><br>
+    <input type="text" id="tourName" name="tourName" required><br><br>
+
+    <label for="tourAddr">관광지 주소:</label><br>
+    <input type="text" id="tourAddr" name="tourAddr" required><br><br>
+
+    <label for="tourOpentime">개장 시간:</label><br>
+    <input type="text" id="tourOpentime" name="tourOpentime" required><br><br>
+
+    <label for="tourClosetime">마감 시간:</label><br>
+    <input type="text" id="tourClosetime" name="tourClosetime" required><br><br>
+
+    <label for="tourParking">주차 여부:</label>
+    <input type="checkbox" id="tourParking" name="tourParking"><br><br>
+
+    <label for="tourContent">관광지 설명:</label><br>
+    <textarea id="tourContent" name="tourContent" rows="4" required></textarea><br><br>
+
+    <label for="file">관광지 이미지:</label><br>
+    <input type="file" id="file" name="file" accept="image/*" required><br><br>
+
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

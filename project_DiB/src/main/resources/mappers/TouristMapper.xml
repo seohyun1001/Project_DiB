@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.project_dib.mapper.TouristMapper">
+
+    <select id="getList" resultType="org.zerock.project_dib.tourist.domain.Tourist">
+        SELECT *
+        FROM tourist
+    </select>
+
+    <select id="read" parameterType="int" resultType="org.zerock.project_dib.tourist.domain.Tourist">
+        SELECT *
+        FROM tourist
+        WHERE tno = #{tno}
+    </select>
+
+    <insert id="insert" parameterType="org.zerock.project_dib.tourist.domain.Tourist" useGeneratedKeys="true" keyProperty="tno">
+        INSERT INTO tourist (tourName, tourAddr, tourOpentime, tourClosetime, tourParking, tourContent
+                             )
+        VALUES (#{tourName}, #{tourAddr}, #{tourOpentime}, #{tourClosetime}, #{tourParking}, #{tourContent}
+                )
+    </insert>
+
+    <update id="update" parameterType="org.zerock.project_dib.tourist.domain.Tourist">
+        UPDATE tourist
+        SET tourName      = #{tourName},
+            tourAddr      = #{tourAddr},
+            tourOpentime  = #{tourOpentime},
+            tourClosetime = #{tourClosetime},
+            tourParking   = #{tourParking},
+            tourContent   = #{tourContent},
+            modDate        = #{modDate, jdbcType=TIMESTAMP},
+            regDate        = #{regDate, jdbcType=TIMESTAMP}
+        WHERE tno = #{tno}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE
+        FROM tourist
+        WHERE tno = #{tno}
+    </delete>
+
+    <select id="getImgList" parameterType="int" resultType="org.zerock.project_dib.tourist.domain.TouristImg">
+        SELECT *
+        FROM tourist_img
+        WHERE tno = #{tno}
+        ORDER BY ord
+    </select>
+
+    <insert id="insertImg" parameterType="org.zerock.project_dib.tourist.domain.TouristImg">
+        INSERT INTO tourist_img (uuid, fileName, tno, ord)
+        VALUES (#{uuid}, #{fileName}, #{tno}, #{ord})
+    </insert>
+
+    <delete id="deleteImgs" parameterType="int">
+        DELETE
+        FROM tourist_img
+        WHERE tno = #{tno}
+    </delete>
+
+</mapper>
