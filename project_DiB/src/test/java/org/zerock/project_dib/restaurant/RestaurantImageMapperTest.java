@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.zerock.project_dib.restaurant.domain.RestaurantImage;
-import org.zerock.project_dib.restaurant.mapper.RestaurantImageMapper;
+import org.zerock.project_dib.mapper.RestaurantImageMapper;
 
 import java.util.UUID;
 
@@ -24,7 +24,7 @@ public class RestaurantImageMapperTest {
         RestaurantImage restaurantImage = RestaurantImage.builder()
                 .uuid(uuid)
                 .fileName("sample_image.jpg")
-                .rno(3) // 테스트를 위해 rno를 1로 가정
+                .rno(1) // 테스트를 위해 rno를 1로 가정
                 .ord(1)
                 .build();
 

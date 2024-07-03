@@ -10,8 +10,8 @@ import org.zerock.project_dib.restaurant.domain.RestaurantImage;
 import org.zerock.project_dib.restaurant.dto.PageRequestDTO;
 import org.zerock.project_dib.restaurant.dto.PageResponseDTO;
 import org.zerock.project_dib.restaurant.dto.RestaurantDTO;
-import org.zerock.project_dib.restaurant.mapper.RestaurantImageMapper;
-import org.zerock.project_dib.restaurant.mapper.RestaurantMapper;
+import org.zerock.project_dib.mapper.RestaurantImageMapper;
+import org.zerock.project_dib.mapper.RestaurantMapper;
 import org.zerock.project_dib.restaurant.service.RestaurantService;
 
 import java.util.List;
@@ -70,7 +70,7 @@ public class RestaurantMapperTest {
     @Test
     public void testReadOne() {
 
-        int rno = 3;
+        int rno= 1;
         Restaurant restaurant = restaurantMapper.readOne(rno);
         if (restaurant != null) {
             RestaurantDTO restaurantDTO = modelMapper.map(restaurant, RestaurantDTO.class);
@@ -94,7 +94,7 @@ public class RestaurantMapperTest {
 
     @Test
     public void testModify() {
-        int rno = 79;
+       int rno = 1;
 
         RestaurantDTO modifiedDTO = RestaurantDTO.builder()
                 .rno(rno)
@@ -114,7 +114,7 @@ public class RestaurantMapperTest {
 
     @Test
     public void testDelete() {
-        int rno = 6;
+        int rno = 1;
         RestaurantDTO restaurantDTO = restaurantService.getOne(rno);
         if (restaurantDTO != null) {
             log.info("삭제 전 레스토랑 정보: {}", restaurantDTO);

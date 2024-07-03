@@ -12,10 +12,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RestaurantReviewDTO {
-    private Long reviewNo;
-    private String reviewText;
+    private Long review_no;
+    private String review_text;
     private String mid;
-    private boolean reviewLike;
+    private boolean review_like;
     private Long rno;
     private LocalDateTime moddate;
     private LocalDateTime regdate;

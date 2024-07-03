@@ -2,6 +2,7 @@ package org.zerock.project_dib.restaurant.service;
 
 import org.springframework.stereotype.Service;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.zerock.project_dib.restaurant.dto.PageRequestDTO;
 import org.zerock.project_dib.restaurant.dto.PageResponseDTO;
 import org.zerock.project_dib.restaurant.dto.RestaurantDTO;
@@ -12,7 +13,10 @@ import java.util.List;
 @Service
 public interface RestaurantService {
     int insertRestaurant(RestaurantDTO restaurantDTO);
-    void saveUploadFiles(List<UploadResultDTO> uploadResultDTOList,int rno);
+
+
+    void saveUploadFiles(List<UploadResultDTO> uploadResultDTOList, int rno);
+
     List<RestaurantDTO> getAllRestaurants();
     RestaurantDTO getOne(int rno);
     void update(RestaurantDTO restaurantDTO);

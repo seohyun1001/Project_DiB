@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class RestaurantScoreDTO {
     private Long sno;
-    private Long reviewNo;
+    private Long review_no;
     private String mid;
     private Long score;
     private LocalDateTime moddate;
