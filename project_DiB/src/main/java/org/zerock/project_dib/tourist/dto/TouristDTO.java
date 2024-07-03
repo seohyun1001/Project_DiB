@@ -13,8 +13,6 @@ public class TouristDTO {
 
     private String tourName;
 
-    pirvate 
-
     private String tourAddr;
 
     private String tourOpentime;
