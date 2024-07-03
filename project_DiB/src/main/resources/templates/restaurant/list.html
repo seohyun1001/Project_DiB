@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="utf-8">
@@ -47,7 +49,8 @@
                 aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <button type="button" class="btn btn-primary ms-2" onclick="window.location.href='/restaurant/register'">
+        <button type="button" class="btn btn-primary ms-2" onclick="window.location.href='/restaurant/register'"
+        sec:authorize="hasRole('ROLE_ADMIN')">
             Create
         </button>
         <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2"

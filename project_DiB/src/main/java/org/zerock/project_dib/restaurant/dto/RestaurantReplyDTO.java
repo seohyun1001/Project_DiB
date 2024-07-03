@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReplyDTO {
+public class RestaurantReplyDTO {
     private int review_no;
     private String review_text;
     private String mid;
