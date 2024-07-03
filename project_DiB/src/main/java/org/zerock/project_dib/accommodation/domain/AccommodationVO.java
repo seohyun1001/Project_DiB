@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Builder
 public class AccommodationVO {
 
-    private int ano;
+    private Long ano;
     private String acc_name;
     private String acc_exp;
     private String acc_loc;
