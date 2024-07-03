@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+        layout:decorate="~{/layout/basic.html}">
+<head>
+    <title>[[${accInfo.acc_name}]]</title>
+</head>
+<div layout:fragment="content">
+    <div class="row mt-3">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <div class="input-group mb-3">
+                        <input type="text" name="acc_name" class="form-control" th:value="${accInfo.acc_name}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <textarea class="form-control col-sm-5" rows="5" name="acc_exp" readonly>[[${accInfo.acc_exp}]]</textarea>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">주소</span>
+                        <input type="text" name="acc_loc" class="form-control" th:value="${accInfo.acc_loc}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">수정일</span>
+                        <input type="text" name="moddate" class="form-control" th:value="${#temporals.format(accInfo.moddate,'yyyy-MM-dd HH:mm:ss')}" readonly>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn-secondary">목록으로 돌아가기</button>
+            <button type="button" class="btn-primary" th:data-ano="${accInfo.ano}">수정</button>
+            <button type="button" class="btn-danger" th:data-ano="${accInfo.ano}">삭제</button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/reply.js"></script>
+</div>
+<script layout:fragment="script" th:inline="javascript">
+
+    document.querySelector(".btn-secondary").addEventListener("click", function (e){
+
+        e.preventDefault()
+        e.stopPropagation()
+
+        self.location = '/accommodation/list'
+
+    },false)
+
+    document.querySelector(".btn-primary").addEventListener("click", function (e){
+
+        e.preventDefault()
+        e.stopPropagation()
+
+        const ano = e.target.getAttribute('data-ano')
+
+        self.location = `/accommodation/modify?ano=` + ano
+
+    },false)
+
+    document.querySelector(".btn-danger").addEventListener("click", function (e){
+
+        e.preventDefault()
+        e.stopPropagation()
+
+        const ano = e.target.getAttribute('data-ano')
+
+        axios.post("/accommodation/delete/"+ ano).then(
+            self.location = `/accommodation/list`
+        )
+
+    },false)
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
