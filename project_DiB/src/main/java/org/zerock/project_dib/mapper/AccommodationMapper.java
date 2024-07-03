@@ -21,10 +21,6 @@ public interface AccommodationMapper {
 
     void insertFile(AccommodationImgVO accommodationImgVO);
 
-    void updateFile(AccommodationImgVO accommodationImgVO);
-
-    void deleteFile(Long ano);
-
     List<AccommodationImgVO> findAllFilesByAno(Long ano);
 
     List<AccommodationImgVO> findAllFiles();

@@ -14,6 +14,9 @@
                     <div th:if="${imageList != null && imageList.size() > 0}">
                         <img style="width:500px" th:each="image : ${imageList}" th:src="|/upload/${image.file_name}|">
                     </div>
+
+                    <input type="hidden" id="anoValue" name="ano" th:value="${accInfo.ano}">
+
                     <div class="input-group mb-3">
                         <input type="text" name="acc_name" class="form-control" th:value="${accInfo.acc_name}" readonly>
                     </div>
@@ -35,8 +38,8 @@
                 </div>
             </div>
             <button type="button" class="btn-secondary">목록으로 돌아가기</button>
-            <button type="button" class="btn-primary" th:data-ano="${accInfo.ano}">수정</button>
-            <button type="button" class="btn-danger" th:data-ano="${accInfo.ano}">삭제</button>
+            <button type="button" class="btn-primary">수정</button>
+            <button type="button" class="btn-danger">삭제</button>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -58,7 +61,7 @@
         e.preventDefault()
         e.stopPropagation()
 
-        const ano = e.target.getAttribute('data-ano')
+        const ano = document.getElementById('anoValue').value
 
         self.location = `/accommodation/modify?ano=` + ano
 
@@ -69,11 +72,10 @@
         e.preventDefault()
         e.stopPropagation()
 
-        const ano = e.target.getAttribute('data-ano')
+        const ano = document.getElementById('anoValue').value
 
-        axios.post("/accommodation/delete/" + ano).then(
-            self.location = `/accommodation/list`
-        )
+        axios.post(`/accommodation/delete/${ano}`)
+            .then(self.location = `/accommodation/list`)
 
     },false)
 

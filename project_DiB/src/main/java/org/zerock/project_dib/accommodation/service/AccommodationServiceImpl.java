@@ -54,7 +54,7 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     @Override
-    public void delete(Long ano) {
+    public void remove(Long ano) {
 
         accommodationMapper.delete(ano);
 
@@ -65,20 +65,6 @@ public class AccommodationServiceImpl implements AccommodationService {
 
         AccommodationImgVO accommodationImgVO = modelMapper.map(accommodationImgDTO, AccommodationImgVO.class);
         accommodationMapper.insertFile(accommodationImgVO);
-
-    }
-
-    @Override
-    public void modifyFile(AccommodationImgDTO accommodationImgDTO) {
-
-        accommodationMapper.updateFile(modelMapper.map(accommodationImgDTO, AccommodationImgVO.class));
-
-    }
-
-    @Override
-    public void deleteFile(Long ano) {
-
-        accommodationMapper.deleteFile(ano);
 
     }
 

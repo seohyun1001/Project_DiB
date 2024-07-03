@@ -15,13 +15,9 @@ public interface AccommodationService {
 
     void modify(AccommodationDTO accommodationDTO);
 
-    void delete(Long ano);
+    void remove(Long ano);
 
     void insertFile(AccommodationImgDTO accommodationImgDTO);
-
-    void modifyFile(AccommodationImgDTO accommodationImgDTO);
-
-    void deleteFile(Long ano);
 
     List<AccommodationImgDTO> findAllFileByAno(Long ano);
 

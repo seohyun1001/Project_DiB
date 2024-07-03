@@ -32,16 +32,6 @@
         values (#{uuid}, #{file_name}, #{ano})
     </insert>
 
-    <update id="updateFile">
-        update accommodation_img set uuid = #{uuid}, file_name = #{file_name}, ano = #{ano}
-        where ord = #{ord}
-    </update>
-
-    <delete id="deleteFile">
-        delete from accommodation_img
-        where ano = #{ano}
-    </delete>
-
     <select id="findAllFilesByAno" resultType="org.zerock.project_dib.accommodation.domain.AccommodationImgVO">
         select * from accommodation_img where ano = #{ano}
     </select>

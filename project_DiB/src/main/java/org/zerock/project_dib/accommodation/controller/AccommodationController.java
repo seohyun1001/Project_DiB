@@ -6,7 +6,10 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.project_dib.accommodation.dto.AccommodationDTO;
@@ -15,7 +18,6 @@ import org.zerock.project_dib.accommodation.service.AccommodationService;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,14 +30,14 @@ public class AccommodationController {
     private final AccommodationService accommodationService;
 
     @GetMapping("/register")
-    public void register(){
+    public void register() {
 
     }
 
     @PostMapping("/register")
     public String addAccommodation(MultipartFile file, @Valid AccommodationImgDTO accommodationImgDTO, @Valid AccommodationDTO accommodationDTO, RedirectAttributes redirectAttributes, BindingResult bindingResult) throws IOException, Exception {
 
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             log.info("has register error..........");
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             return "redirect:/accommodation/register";
@@ -94,7 +96,7 @@ public class AccommodationController {
         if (bindingResult.hasErrors()) {
             log.info("has modify error........................");
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-            return "redirect:/accommodation/modify?ano="+ ano;
+            return "redirect:/accommodation/modify?ano=" + ano;
         }
 
         String fileName = null;
@@ -116,26 +118,29 @@ public class AccommodationController {
     }
 
     @PostMapping("/delete/{ano}")
-    public void delete(Long ano, Model model) {
+    public void delete(@PathVariable Long ano) {
 
-        List<AccommodationImgDTO> imgFileList = accommodationService.findAllFileByAno(ano);
-        model.addAttribute("imageList", imgFileList);
+        try {
+            List<AccommodationImgDTO> imgList = accommodationService.findAllFileByAno(ano);
 
-        for (AccommodationImgDTO accommodationImgDTO : imgFileList) {
-            String fileName = accommodationImgDTO.getFile_name();
+            for (AccommodationImgDTO accommodationImgDTO : imgList) {
 
-            File fileToDelete = new File("c:\\upload\\" + fileName);
+                String fileName = accommodationImgDTO.getFile_name();
 
-            if (fileToDelete.delete()) {
-                System.out.println("파일 삭제 성공: " + fileToDelete.getName());
-            } else {
-                System.out.println("파일 삭제 실패: " + fileToDelete.getName());
+                File fileToDelete = new File("c:\\upload\\" + fileName);
+
+                if (fileToDelete.delete()) {
+                    System.out.println("파일 삭제 성공: " + fileToDelete.getName());
+                } else {
+                    System.out.println("파일 삭제 실패: " + fileToDelete.getName());
+                }
             }
+
+            accommodationService.remove(ano);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        accommodationService.delete(ano);
-        accommodationService.deleteFile(ano);
-
     }
 
 }
