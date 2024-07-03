@@ -8,17 +8,17 @@ public class Tourist {
 
     private int tno;
 
-    private String tourName;
+    private String tour_name;
 
-    private String tourAddr;
+    private String tour_addr;
 
-    private String tourOpentime;
+    private String tour_opentime;
 
-    private String tourClosetime;
+    private String tour_closetime;
 
-    private boolean tourParking;
+    private boolean tour_parking;
 
-    private String tourContent;
+    private String tour_content;
 
     private LocalDateTime modDate;
 
