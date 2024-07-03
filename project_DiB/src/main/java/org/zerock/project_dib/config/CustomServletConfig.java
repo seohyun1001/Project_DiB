@@ -16,7 +16,6 @@ public class CustomServletConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/fonts/**").addResourceLocations("/resources/").addResourceLocations("classpath:/static/fonts/");
         registry.addResourceHandler("/css/**").addResourceLocations("/resources/").addResourceLocations("classpath:/static/css/");
         registry.addResourceHandler("/assets/**").addResourceLocations("/resources/").addResourceLocations("classpath:/static/assets/");
-        registry.addResourceHandler("/upload/**").addResourceLocations("file:///C:/upload/");
 
 
         registry.addResourceHandler("/img/**").addResourceLocations("/resources/").addResourceLocations("classpath:/static/img/").addResourceLocations("file:///C:/upload/");

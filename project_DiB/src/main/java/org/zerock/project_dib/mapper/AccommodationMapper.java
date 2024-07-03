@@ -1,7 +1,6 @@
 package org.zerock.project_dib.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.zerock.project_dib.accommodation.domain.AccommodationImgVO;
 import org.zerock.project_dib.accommodation.domain.AccommodationVO;
 
 import java.util.List;
@@ -13,18 +12,10 @@ public interface AccommodationMapper {
 
     List<AccommodationVO> findAll();
 
-    AccommodationVO selectOne(Long ano);
+    AccommodationVO selectOne(int ano);
 
     void update(AccommodationVO accommodationVO);
 
-    void delete(Long ano);
-
-    void insertFile(AccommodationImgVO accommodationImgVO);
-
-    List<AccommodationImgVO> findAllFilesByAno(Long ano);
-
-    List<AccommodationImgVO> findAllFiles();
-
-    void deleteFile(int ord);
+    void delete(int ano);
 
 }

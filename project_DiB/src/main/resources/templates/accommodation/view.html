@@ -11,12 +11,6 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <div th:if="${imageList != null && imageList.size() > 0}">
-                        <img style="width:500px; height: auto;" th:each="image : ${imageList}" th:src="|/upload/${image.file_name}|">
-                    </div>
-
-                    <input type="hidden" id="anoValue" name="ano" th:value="${accInfo.ano}">
-
                     <div class="input-group mb-3">
                         <input type="text" name="acc_name" class="form-control" th:value="${accInfo.acc_name}" readonly>
                     </div>
@@ -28,18 +22,14 @@
                         <input type="text" name="acc_loc" class="form-control" th:value="${accInfo.acc_loc}" readonly>
                     </div>
                     <div class="input-group mb-3">
-                        <span class="input-group-text">전화번호</span>
-                        <input type="text" name="acc_phone" class="form-control" th:value="${accInfo.acc_phone}" readonly>
-                    </div>
-                    <div class="input-group mb-3">
                         <span class="input-group-text">수정일</span>
                         <input type="text" name="moddate" class="form-control" th:value="${#temporals.format(accInfo.moddate,'yyyy-MM-dd HH:mm:ss')}" readonly>
                     </div>
                 </div>
             </div>
             <button type="button" class="btn-secondary">목록으로 돌아가기</button>
-            <button type="button" class="btn-primary">수정</button>
-            <button type="button" class="btn-danger">삭제</button>
+            <button type="button" class="btn-primary" th:data-ano="${accInfo.ano}">수정</button>
+            <button type="button" class="btn-danger" th:data-ano="${accInfo.ano}">삭제</button>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -61,7 +51,7 @@
         e.preventDefault()
         e.stopPropagation()
 
-        const ano = document.getElementById('anoValue').value
+        const ano = e.target.getAttribute('data-ano')
 
         self.location = `/accommodation/modify?ano=` + ano
 
@@ -72,10 +62,11 @@
         e.preventDefault()
         e.stopPropagation()
 
-        const ano = document.getElementById('anoValue').value
+        const ano = e.target.getAttribute('data-ano')
 
-        axios.post(`/accommodation/delete/${ano}`)
-            .then(self.location = `/accommodation/list`)
+        axios.post("/accommodation/delete/"+ ano).then(
+            self.location = `/accommodation/list`
+        )
 
     },false)
 

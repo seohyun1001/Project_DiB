@@ -8,18 +8,9 @@
 <div layout:fragment="content">
     <div class="row mt-3">
         <div class="col">
-            <form action="/accommodation/modify" method="post" enctype="multipart/form-data">
-
-                <input type="hidden" id="anoValue" name="ano" th:value="${accInfo.ano}">
-
+            <form action="/accommodation/modify" method="post">
                 <div class="card">
                     <div class="card-body">
-                        <div th:if="${imageList != null && imageList.size() > 0}">
-                                <img style="width:500px; height: auto; cursor:pointer;" onclick="removeImage()"
-                                     th:each="image : ${imageList}" th:src="|/upload/${image.file_name}|"
-                                     id="ordValue" th:value="${image.ord}">
-                        </div>
-                        <input type="file" name="file" class="form-control">
                         <div class="input-group mb-3">
                             <input type="text" name="acc_name" class="form-control" th:value="${accInfo.acc_name}">
                         </div>
@@ -31,13 +22,9 @@
                             <span class="input-group-text">주소</span>
                             <input type="text" name="acc_loc" class="form-control" th:value="${accInfo.acc_loc}">
                         </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">전화번호</span>
-                            <input type="text" name="acc_phone" class="form-control" th:value="${accInfo.acc_phone}">
-                        </div>
                     </div>
                 </div>
-                <button type="button" class="btn-secondary">상세보기로 돌아가기</button>
+                <button type="button" class="btn-secondary">목록으로 돌아가기</button>
                 <button type="submit" class="btn-primary">수정 완료</button>
             </form>
         </div>
@@ -47,25 +34,12 @@
 </div>
 <script layout:fragment="script" th:inline="javascript">
 
-    function removeImage() {
-
-        const ord = document.getElementById("ordValue").value
-
-        axios.post(`/accommodation/deleteImg/${ord}`)
-            .then(() => {
-                window.location.reload()
-            })
-
-    }
-
     document.querySelector(".btn-secondary").addEventListener("click", function (e) {
 
         e.preventDefault()
         e.stopPropagation()
 
-        const ano = document.getElementById('anoValue').value
-
-        self.location = '/accommodation/view?ano=' + ano
+        self.location = '/accommodation/list'
 
     }, false)
 

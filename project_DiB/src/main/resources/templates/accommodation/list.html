@@ -1,53 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org"
-      layout:decorate="~{layout/basic.html}">
+    layout:decorate="~{layout/basic.html}">
 <head>
     <title>숙소 목록</title>
 </head>
-<div layout:fragment="content">
-    <div class="row mt-3">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    숙소 목록
-                </div>
-                <div class="card-body">
-                    <div class="text-end">
-                        <button type="button" class="register-btn">등록</button>
+    <div layout:fragment="content">
+        <div class="row mt-3">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        숙소 목록
                     </div>
-                    <table class="table">
-                        <tbody>
-                        <tr th:each="dto:${accList}">
-                            <td>
-                                <div th:each="image : ${allImages}" th:if="${image != null and image.ano == dto.ano}">
-                                    <img style="width:300px; height: auto;" th:src="|/upload/${image.file_name}|">
-                                </div>
-                            </td>
-                            <th scope="row">[[${dto.ano}]]</th>
-                            <td>
-                                <a th:href="|@{/accommodation/view(ano=${dto.ano})}|">[[${dto.acc_name}]]</a>
-                            </td>
-                            <td>[[${dto.acc_exp}]]</td>
-                            <td>[[${#temporals.format(dto.moddate, 'yyyy-MM-dd')}]]</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div class="card-body">
+                        <div class="text-end">
+                        <button type="button" class="register-btn">등록</button>
+                        </div>
+                        <table class="table">
+                            <tbody>
+                            <tr th:each="dto:${accList}">
+                                <th scope="row">[[${dto.ano}]]</th>
+                                <td>
+                                    <a th:href="|@{/accommodation/view(ano=${dto.ano})}|">[[${dto.acc_name}]]</a>
+                                </td>
+                                <td>[[${dto.acc_exp}]]</td>
+                                <td>[[${#temporals.format(dto.moddate, 'yyyy-MM-dd')}]]</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<script layout:fragment="script" th:inline="javascript">
+    <script layout:fragment="script" th:inline="javascript">
 
-    document.querySelector(".register-btn").addEventListener("click", function (e) {
+        document.querySelector(".register-btn").addEventListener("click", function (e){
 
-        e.preventDefault()
-        e.stopPropagation()
+            e.preventDefault()
+            e.stopPropagation()
 
-        self.location = '/accommodation/register'
+            self.location = '/accommodation/register'
 
-    }, false)
+        },false)
 
-</script>
+    </script>
 </html>
