@@ -65,9 +65,13 @@ public class TouristServiceImpl implements TouristService {
     }
 
     @Override
-    public List<TouristImgDTO> getImgList(int tno) {
+    public List<String> getImgList(int tno) {
         List<TouristImg> images = touristMapper.getImgList(tno);
-        return images.stream().map(this::toImgDTO).collect(Collectors.toList());
+        List<String> imgList = new ArrayList<>();
+        for(TouristImg img : images) {
+            imgList.add(img.getUuid()+ "_" + img.getFileName());
+        }
+        return imgList;
     }
 
     @Override
@@ -94,7 +98,7 @@ public class TouristServiceImpl implements TouristService {
         List<UploadResultDTO> requireUploadData = updownController.upload(upDownDto);
         final int[] index = {0};
         requireUploadData.forEach(uploadResultDTO -> {
-            uploadResultDTO.setUuid(UUID.randomUUID().toString());
+            uploadResultDTO.setUuid(uploadResultDTO.getUuid());
             uploadResultDTO.setFileName(file.getOriginalFilename());
             uploadResultDTO.setTno(tourist.getTno());
             uploadResultDTO.setOrd(index[0]);

@@ -19,7 +19,7 @@ public interface TouristService {
 
     void remove(int tno);
 
-    List<TouristImgDTO> getImgList(int tno);
+    List<String> getImgList(int tno);
 
     void registerImg(TouristDTO touristDTO, MultipartFile file) throws IOException; // TouristImgDTO 삭제, TouristDTO로 수정
 

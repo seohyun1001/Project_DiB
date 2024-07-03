@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -26,6 +27,19 @@
         <button>🔍</button>
     </div>
 </header>
+=======
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/basic.html}">
+<div th:href="">
+    <button>My Page ▼</button>
+</div>
+<div class="search-bar">
+    <input type="text" placeholder="검색어를 입력해주세요.">
+    <button>🔍</button>
+</div>
+<body>
+>>>>>>> origin/main
 <main>
     <section class="content">
         <h1>관광지</h1>
@@ -35,16 +49,45 @@
             <button>Tab</button>
             <button>Tab</button>
         </div>
-        <div class="cards">
-            <div th:each="tourist : ${list}" class="card">
-                <div class="image-placeholder">
-                    <img th:src="@{|/images/${tourist.tourImage}|}" alt="예시 이미지">
+        <div class="row mt-3">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        Tourist
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Tourist</h5>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Tno</th>
+                                <th scope="col">명소</th>
+                                <th scope="col">이미지</th>
+                                <th scope="col">주소</th>
+                                <th scope="col">개장 시간</th>
+                                <th scope="col">마감 시간</th>
+                                <th scope="col">주차 여부</th>
+                                <th scope="col">설명</th>
+                                <th scope="col">작성일</th>
+                                <th scope="col">수정일</th>
+                            </tr>
+                            </thead>
+
+                        </table>
+                        <tr>
+                            <th scope="row" th:text="${tourist.tno}">TNO</th>
+                            <td>
+                                <div th:if="${touristImg != null && touristImg.touristImages.size() > 0}">
+                                    <img style="width:100px" th:each="touristImage : ${touristImg.touristImages}"
+                                         th:src="@{|/view/s_${touristImage.uuid}_${touristImage.fileName}|}">
+                                </div>
+                            </td>
+                            <td th:text="${tourist.writer}">Writer</td>
+                            <td th:text="${#temporals.format(tourist.regDate, 'yyyy-MM-dd')}">Registration Date</td>
+                        </tr>
+                    </div>
                 </div>
-                <div class="description">
-                    <p th:text="${tourist.tourName}">관광지</p>
-                    <p th:text="${tourist.tourContent}">간단한 설명</p>
-                </div>
-                <div class="favorite">♡</div>
             </div>
         </div>
     </section>

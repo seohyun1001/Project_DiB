@@ -12,30 +12,34 @@ import org.zerock.project_dib.tourist.service.TouristService;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/tourists")
+@RequestMapping("/tourist")
 public class TouristController {
 
     private final TouristService touristService;
 
-    @GetMapping("/")
+    @GetMapping("/list")
     public String getList(Model model) {
         List<TouristDTO> list = touristService.getList();
         model.addAttribute("list", list);
-        return "tourists";
+        return "/tourist/list";
     }
 
     @GetMapping("/read/{tno}")
-    @ResponseBody
-    public TouristDTO read(@PathVariable("tno") int tno) {
-        return touristService.read(tno);
+    public String read(@PathVariable("tno") int tno, Model model) {
+        List<String> fileNames = touristService.getImgList(tno);
+        TouristDTO dto = touristService.read(tno);
+        dto.setFileNames(fileNames);
+        model.addAttribute("dto", dto);
+        return "/tourist/read";
     }
 
-
+    @GetMapping("/register")
+    public void registerGET() {
+    }
 
     @PostMapping("/register")
     public String register(TouristDTO touristDTO, @RequestParam("file") MultipartFile file) throws IOException {
@@ -45,10 +49,14 @@ public class TouristController {
             touristService.registerImg(touristDTO, file);
         }
 
-        return "redirect:/tourists/";
+        return "redirect:/tourist/list";
     }
 
-
+    @PostMapping("/remove/{tno}")
+    public String remove(@PathVariable("tno") int tno) {
+        touristService.remove(tno);
+        return "redirect:/tourist/list";
+    }
 
     @PostMapping("/modify/{tno}")
     @ResponseBody
@@ -57,11 +65,12 @@ public class TouristController {
         touristService.modify(touristDTO);
     }
 
-    @GetMapping("/{tno}/images")
-    @ResponseBody
-    public List<TouristImgDTO> getImgList(@PathVariable("tno") int tno) {
-        return touristService.getImgList(tno);
-    }
+//    @GetMapping("/{tno}/images")
+//    public List<TouristImgDTO> getImgList(@PathVariable("tno") int tno, Model model) {
+//        List<TouristImgDTO> fileNames = touristService.getImgList(tno);
+//        model.addAttribute("fileNames", fileNames);
+//        return touristService.getImgList(tno);
+//    }
 
     @PostMapping("/{tno}/images")
     @ResponseBody

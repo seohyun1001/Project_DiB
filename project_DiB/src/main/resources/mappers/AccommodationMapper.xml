@@ -5,9 +5,9 @@
 
 <mapper namespace="org.zerock.project_dib.mapper.AccommodationMapper">
     
-    <insert id="insertAccommodation">
-        insert into accommodation(ano, acc_name, acc_exp, acc_loc, acc_phone)
-        values (#{ano}, #{acc_name}, #{acc_exp}, #{acc_loc}, #{acc_phone})
+    <insert id="insertAccommodation" useGeneratedKeys="true" keyProperty="ano">
+        insert into accommodation(acc_name, acc_exp, acc_loc, acc_phone)
+        values (#{acc_name}, #{acc_exp}, #{acc_loc}, #{acc_phone})
     </insert>
 
     <select id="findAll" resultType="org.zerock.project_dib.accommodation.domain.AccommodationVO">
@@ -19,12 +19,29 @@
     </select>
 
     <update id="update">
-        update accommodation set acc_name = #{acc_name}, acc_exp = #{acc_exp}, acc_loc = #{acc_loc}, acc_phone = #{acc_phone}, moddate = #{moddate}
+        update accommodation set acc_name = #{acc_name}, acc_exp = #{acc_exp}, acc_loc = #{acc_loc}, acc_phone = #{acc_phone}, moddate = current_timestamp()
         where ano = #{ano}
     </update>
 
     <delete id="delete">
         delete from accommodation where ano = #{ano}
+    </delete>
+
+    <insert id="insertFile" >
+        insert into accommodation_img (uuid, file_name, ano)
+        values (#{uuid}, #{file_name}, #{ano})
+    </insert>
+
+    <select id="findAllFilesByAno" resultType="org.zerock.project_dib.accommodation.domain.AccommodationImgVO">
+        select * from accommodation_img where ano = #{ano}
+    </select>
+
+    <select id="findAllFiles" resultType="org.zerock.project_dib.accommodation.domain.AccommodationImgVO">
+        select * from accommodation_img
+    </select>
+
+    <delete id="deleteFile">
+        delete from accommodation_img where ord = #{ord}
     </delete>
 
 </mapper>

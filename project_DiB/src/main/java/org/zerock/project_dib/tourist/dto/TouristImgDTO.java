@@ -2,6 +2,8 @@ package org.zerock.project_dib.tourist.dto;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class TouristImgDTO {
 
@@ -12,4 +14,5 @@ public class TouristImgDTO {
     private int tno;
 
     private int ord;
+
 }
