@@ -37,6 +37,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         return rno;
     }
 
+
     @Override
     @Transactional
     public void saveUploadFiles(List<UploadResultDTO> uploadResultDTOList, int rno) {
@@ -72,6 +73,8 @@ public class RestaurantServiceImpl implements RestaurantService {
         restaurantMapper.update(restaurant);
     }
 
+
+
     @Override
     public void delete(int rno) {
         restaurantImageMapper.deleteFile(rno);
@@ -106,6 +109,11 @@ public class RestaurantServiceImpl implements RestaurantService {
                 .total(total)
                 .build();
     }
+
+//    @Override
+//    public void updateImages(int rno, List<UploadResultDTO> uploadResults) {
+//
+//    }
 
     private Restaurant dtoToEntity(RestaurantDTO restaurantDTO) {
         return Restaurant.builder()

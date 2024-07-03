@@ -1,6 +1,5 @@
 package org.zerock.project_dib.restaurant;
 
-import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,6 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-@Log4j2
 public class RestaurantMapperTest {
     @Autowired
     private ModelMapper modelMapper;
@@ -47,7 +45,7 @@ public class RestaurantMapperTest {
                     .rest_time("rest_time" + i)
                     .build();
             restaurantMapper.insertRest(restaurant);
-            log.info("Inserted restaurant with rno: " + restaurant.getRno());
+//            log.info("Inserted restaurant with rno: " + restaurant.getRno());
         });
     }
 
@@ -63,23 +61,23 @@ public class RestaurantMapperTest {
                     return restaurantDTO;
                 })
                 .collect(Collectors.toList());
-        restaurantDTOs.forEach(dto -> log.info("Restaurant with rno {}: {}", dto.getRno(), dto));
+//        restaurantDTOs.forEach(dto -> log.info("Restaurant with rno {}: {}", dto.getRno(), dto));
     }
 
 
     @Test
     public void testReadOne() {
 
-        int rno = 3;
+        int rno= 1;
         Restaurant restaurant = restaurantMapper.readOne(rno);
         if (restaurant != null) {
             RestaurantDTO restaurantDTO = modelMapper.map(restaurant, RestaurantDTO.class);
             restaurantDTO.setFileNames(restaurant.getImageSet().stream()
                     .map(image -> image.getUuid() + "_" + image.getFileName())
                     .collect(Collectors.toList()));
-            log.info("Restaurant with rno {}: {}", rno, restaurantDTO);
+//            log.info("Restaurant with rno {}: {}", rno, restaurantDTO);
         } else {
-            log.info("Restaurant with rno {} not found", rno);
+//            log.info("Restaurant with rno {} not found", rno);
         }
     }
 
@@ -89,12 +87,12 @@ public class RestaurantMapperTest {
         int rno = 1;
         Restaurant restaurant = restaurantMapper.readOne(rno);
         List<RestaurantImage> restaurantImage = restaurantImageMapper.selectFileByRNO(rno);
-        log.info("rno: ");
+//        log.info("rno: ");
     }
 
     @Test
     public void testModify() {
-        int rno = 79;
+       int rno = 1;
 
         RestaurantDTO modifiedDTO = RestaurantDTO.builder()
                 .rno(rno)
@@ -109,17 +107,17 @@ public class RestaurantMapperTest {
         restaurantService.update(modifiedDTO);
 
         RestaurantDTO updatedDTO = restaurantService.getOne(rno);
-        log.info("업데이트된 레스토랑 DTO: {}", updatedDTO);
+//        log.info("업데이트된 레스토랑 DTO: {}", updatedDTO);
     }
 
     @Test
     public void testDelete() {
-        int rno = 6;
+        int rno = 1;
         RestaurantDTO restaurantDTO = restaurantService.getOne(rno);
         if (restaurantDTO != null) {
-            log.info("삭제 전 레스토랑 정보: {}", restaurantDTO);
+//            log.info("삭제 전 레스토랑 정보: {}", restaurantDTO);
         } else {
-            log.info("삭제할 레스토랑이 존재하지 않습니다. rno: {}", rno);
+//            log.info("삭제할 레스토랑이 존재하지 않습니다. rno: {}", rno);
             return;
         }
         restaurantService.delete(rno);
@@ -127,7 +125,7 @@ public class RestaurantMapperTest {
 
     @Test
     public void testSearchRestaurants() {
-        log.info("Testing searchRestaurants() method...");
+//        log.info("Testing searchRestaurants() method...");
 
         PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
                 .page(1)
@@ -143,7 +141,7 @@ public class RestaurantMapperTest {
         assertThat(responseDTO.getDtoList()).isNotEmpty();
 
         responseDTO.getDtoList().forEach(restaurantDTO -> {
-            log.info("Restaurant: {}", restaurantDTO);
+//            log.info("Restaurant: {}", restaurantDTO);
         });
     }
 }

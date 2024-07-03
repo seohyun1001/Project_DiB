@@ -24,7 +24,7 @@ public class RestaurantImageMapperTest {
         RestaurantImage restaurantImage = RestaurantImage.builder()
                 .uuid(uuid)
                 .fileName("sample_image.jpg")
-                .rno(3) // 테스트를 위해 rno를 1로 가정
+                .rno(1) // 테스트를 위해 rno를 1로 가정
                 .ord(1)
                 .build();
 
