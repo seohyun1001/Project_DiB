@@ -82,16 +82,22 @@ main {
     text-align: center;
 }
 
+/* 등록일 데이터 스타일 */
+.one2one-table td.text-center {
+    text-align: center;
+}
+
 /* 작성자 컬럼 스타일 */
 .col-mid {
     width: 18%;
     text-align: center;
 }
 
-/* 등록일 데이터 스타일 */
-.faq-table td.text-center {
+/* 작성자 데이터 스타일 */
+.one2one-table td.mid-text-center {
     text-align: center;
 }
+
 
 /* 1대1 문의 제목 스타일 */
 .one2one-title {

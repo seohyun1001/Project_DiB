@@ -20,8 +20,8 @@
 
     <!-- 1대1 문의 삽입 -->
     <insert id="insert" parameterType="org.zerock.project_dib.pse.domain.One2one">
-        INSERT INTO one2one (one2one_title, one2one_content, one2one_image, regdate, moddate)
-        VALUES (#{one2oneTitle}, #{one2oneContent}, #{one2oneImage}, #{regdate}, #{moddate})
+        INSERT INTO one2one (one2one_title, one2one_content, one2one_image, regdate, moddate, mid)
+        VALUES (#{one2oneTitle}, #{one2oneContent}, #{one2oneImage}, #{regdate}, #{moddate}, #{mid})
     </insert>
 
     <!-- 1대1 문의 수정 -->
