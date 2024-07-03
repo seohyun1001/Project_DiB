@@ -1,10 +1,14 @@
 package org.zerock.project_dib.tourist.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.boot.logging.LogLevel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.zerock.project_dib.tourist.dto.PageRequestDTO;
+import org.zerock.project_dib.tourist.dto.PageResponseDTO;
 import org.zerock.project_dib.tourist.dto.TouristDTO;
 import org.zerock.project_dib.tourist.dto.TouristImgDTO;
 import org.zerock.project_dib.tourist.dto.upload.UploadFileDTO;
@@ -17,13 +21,29 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/tourist")
+@Log4j2
 public class TouristController {
 
     private final TouristService touristService;
 
     @GetMapping("/list")
-    public String getList(Model model) {
-        List<TouristDTO> list = touristService.getList();
+    public String getList(Model model,
+                          @RequestParam(value = "page", defaultValue = "1") int page,
+                          @RequestParam(value = "size", defaultValue = "15") int size,
+                          @RequestParam(value = "filter", required = false) String filter,
+                          @RequestParam(value = "keyword", required = false) String keyword) {
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(page)
+                .size(size)
+                .filter(filter)
+                .keyword(keyword).
+                build();
+        pageRequestDTO.setFilterAndKeyword();
+
+        PageResponseDTO<TouristDTO> list = touristService.search(pageRequestDTO);
+
+        log.info("--------------- tourist ---------------" + list);
+
         model.addAttribute("list", list);
         return "/tourist/list";
     }
