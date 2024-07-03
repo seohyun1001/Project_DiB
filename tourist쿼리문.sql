@@ -11,7 +11,7 @@ CREATE TABLE `accommodation` (
   `moddate` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   `regdate` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   PRIMARY KEY (`ano`)
-);
+);dibdb
 
 
 
@@ -156,7 +156,7 @@ CREATE TABLE `tourist` (
   `tour_parking` tinyint DEFAULT NULL,
   `tour_content` varchar(2000) DEFAULT NULL,
   `tour_image` varchar(100) DEFAULT NULL,
-  `moddate` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `moddate` datetime(6) NOT NULL DEFAULT CURREtouristNT_TIMESTAMP(6),
   `regdate` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   PRIMARY KEY (`tno`)
 );
@@ -167,8 +167,6 @@ CREATE TABLE `tourist_img` (
   `uuid` varchar(255) NOT NULL,
   `file_name` varchar(255) NOT NULL,
   `tno` int NOT NULL,
-  `ord` int,
-  `image` BLOB,
   PRIMARY KEY (`uuid`),
   KEY `T_NO_FK_idx` (`tno`),
   CONSTRAINT `T_NO_FK` FOREIGN KEY (`tno`) REFERENCES `tourist` (`tno`)
