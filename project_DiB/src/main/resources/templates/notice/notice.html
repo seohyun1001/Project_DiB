@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -76,9 +78,10 @@
                     </ul>
                 </nav>
 
-                <!-- 관리자만 공지사항 등록 버튼이 보이게 설정 -->
-                <a th:if="${isAdmin}" href="/notice/register" class="register-notice-btn">공지사항 등록</a>
-<!--                <a href="/notice/register" class="register-notice-btn">공지사항 등록</a>-->
+
+                <!-- 관리자만 공지사항 등록 버튼을 볼 수 있도록 설정 -->
+                <a sec:authorize="hasRole('ROLE_ADMIN')" href="/notice/register" class="register-notice-btn">공지사항 등록</a>
+
             </div>
         </div>
     </div>

@@ -2,7 +2,7 @@
 /* 공지사항 페이지 배경 이미지 설정 */
 body {
     background: url('/img/board_bg.png') no-repeat center 0px fixed; /* 배경 이미지 설정 */
-    background-size: 122%;
+    background-size: 123.5%;
 }
 
 

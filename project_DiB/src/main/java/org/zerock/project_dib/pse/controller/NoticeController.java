@@ -45,11 +45,6 @@ public class NoticeController {
             model.addAttribute("pageRequestDTO", pageRequestDTO);
             model.addAttribute("totalPage", responseDTO.getTotalPage());
 
-            if (principal != null && SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"))) {
-                model.addAttribute("isAdmin", true);
-            } else {
-                model.addAttribute("isAdmin", false);
-            }
 
         } catch (Exception e) {
             e.printStackTrace();

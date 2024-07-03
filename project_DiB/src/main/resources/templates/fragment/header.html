@@ -11,7 +11,10 @@
 <header th:fragment="headerFragment">
     <nav class="navbar">
         <div class="logo">
-            <a href="/">DiB</a>
+            <!-- 로고 이미지 -->
+            <a href="/">
+                <img src="/img/final logo.png" alt="DiB Logo" style="height: 40px;">
+            </a>
         </div>
         <ul class="menu">
             <li><a href="/restaurant">맛집</a></li>
@@ -22,11 +25,11 @@
             <!-- 로그인하지 않은 상태 -->
             <li th:if="${#authentication.name == 'anonymousUser'}" class="menu-item">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        로그인
+                    <a href="/member/login" class="btn btn-primary">Login</a>
+                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/member/login">Login</a>
                         <a class="dropdown-item" href="/faq">FAQ</a>
                         <a class="dropdown-item" href="/one2one">1대1 문의</a>
                     </div>
@@ -36,12 +39,12 @@
             <!-- 로그인한 상태 -->
             <li th:if="${#authentication.name != 'anonymousUser'}" class="menu-item">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        My Page
+                    <a href="/member/myPage" class="btn btn-primary">My Page</a>
+                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/member/myPage">My Page</a>
-                        <a class="dropdown-item" href="/member/logout">Logout</a>
+                        <a class="dropdown-item" href="/logout">Logout</a>
                         <a class="dropdown-item" href="/faq">FAQ</a>
                         <a class="dropdown-item" href="/one2one">1대1 문의</a>
                     </div>

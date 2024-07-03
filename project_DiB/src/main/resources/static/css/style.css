@@ -17,6 +17,7 @@ body {
     text-align: center;
     margin-top: 5px;
     margin-bottom: 10px;
+    font-weight: 900;
 }
 
 /* 서브 타이틀 스타일 */
@@ -52,6 +53,7 @@ header {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    padding: 0;
 }
 
 .menu {
@@ -64,6 +66,8 @@ header {
 
 .menu li {
     margin-left: 20px;
+    display: flex;
+    align-items: center;
 }
 
 /* 게시판 글자 */
@@ -81,6 +85,20 @@ header {
     background-color: rgba(0, 123, 255, 0.6); /* 반투명한 파란색 배경 */
     color: white;
 }
+
+/* 드롭다운 메뉴 스타일 */
+.dropdown-menu {
+    padding: 0; /* padding 제거 */
+    background-color: white; /* 배경색 흰색으로 설정 */
+}
+
+/* 드롭다운 메뉴 항목 스타일 */
+.dropdown-item {
+    padding: 10px 20px; /* 드롭다운 항목의 padding을 조정 */
+}
+
+
+
 
 /* 로그인 버튼 */
 .menu-item a {
