@@ -36,6 +36,10 @@
         select * from accommodation_img where ano = #{ano}
     </select>
 
+    <select id="findAllFilesByOrd" resultType="org.zerock.project_dib.accommodation.domain.AccommodationImgVO">
+        select * from accommodation_img where ord = #{ord}
+    </select>
+
     <select id="findAllFiles" resultType="org.zerock.project_dib.accommodation.domain.AccommodationImgVO">
         select * from accommodation_img
     </select>

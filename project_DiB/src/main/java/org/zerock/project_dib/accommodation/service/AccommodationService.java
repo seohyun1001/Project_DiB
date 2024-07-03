@@ -21,6 +21,8 @@ public interface AccommodationService {
 
     List<AccommodationImgDTO> findAllFileByAno(Long ano);
 
+    AccommodationImgDTO findAllFileByOrd(int ord);
+
     List<AccommodationImgDTO> findAllFiles();
 
     void removeFile(int ord);

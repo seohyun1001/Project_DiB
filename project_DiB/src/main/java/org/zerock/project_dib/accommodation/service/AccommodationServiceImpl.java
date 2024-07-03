@@ -79,6 +79,12 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     @Override
+    public AccommodationImgDTO findAllFileByOrd(int ord) {
+
+        return modelMapper.map(accommodationMapper.findAllFilesByOrd(ord), AccommodationImgDTO.class);
+    }
+
+    @Override
     public  List<AccommodationImgDTO> findAllFiles() {
 
         List<AccommodationImgDTO> result = accommodationMapper.findAllFiles().stream()

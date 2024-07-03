@@ -15,9 +15,9 @@
                 <div class="card">
                     <div class="card-body">
                         <div th:if="${imageList != null && imageList.size() > 0}">
-                                <img style="width:500px; height: auto; cursor:pointer;" onclick="removeImage()"
+                                <img style="width:500px; height: auto; cursor:pointer;" onclick="removeImage(event)"
                                      th:each="image : ${imageList}" th:src="|/upload/${image.file_name}|"
-                                     id="ordValue" th:value="${image.ord}">
+                                    th:id="${image.ord}">
                         </div>
                         <input type="file" name="file" class="form-control">
                         <div class="input-group mb-3">
@@ -47,10 +47,11 @@
 </div>
 <script layout:fragment="script" th:inline="javascript">
 
-    function removeImage() {
+    function removeImage(event) {
 
-        const ord = document.getElementById("ordValue").value
+        const ord = event.target.id
 
+        console.log(ord)
         axios.post(`/accommodation/deleteImg/${ord}`)
             .then(() => {
                 window.location.reload()

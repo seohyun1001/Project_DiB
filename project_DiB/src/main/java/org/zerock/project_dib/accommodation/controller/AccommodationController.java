@@ -143,11 +143,5 @@ public class AccommodationController {
         }
     }
 
-    @PostMapping("/deleteImg/{ord}")
-    public void deleteImg(@PathVariable int ord) {
-
-        accommodationService.removeFile(ord);
-
-    }
 
 }

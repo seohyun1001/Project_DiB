@@ -23,6 +23,8 @@ public interface AccommodationMapper {
 
     List<AccommodationImgVO> findAllFilesByAno(Long ano);
 
+    AccommodationImgVO findAllFilesByOrd(int ord);
+
     List<AccommodationImgVO> findAllFiles();
 
     void deleteFile(int ord);
