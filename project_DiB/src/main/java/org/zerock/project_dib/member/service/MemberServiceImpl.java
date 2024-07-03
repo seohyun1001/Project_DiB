@@ -43,5 +43,24 @@ public class MemberServiceImpl implements MemberService {
         return exist;
     }
 
+    @Override
+    public MemberDTO myPage(String mid) {
+        Member member = memberMapper.selectOneMyPage(mid);
+        MemberDTO memberDTO = modelMapper.map(member, MemberDTO.class);
+        return memberDTO;
+    }
+
+    @Override
+    public void modify(MemberDTO memberDTO) {
+        Member member = modelMapper.map(memberDTO, Member.class);
+        member.changePassword(passwordEncoder.encode(memberDTO.getMpw()));
+        memberMapper.infoModify(member);
+    }
+
+    @Override
+    public void delete(String mid) {
+        memberMapper.deleteMember(mid);
+    }
+
 
 }

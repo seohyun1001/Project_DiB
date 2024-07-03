@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/장규원
 async function uploadToServer (formObj){
 
     console.log("upload to server ----------")
@@ -19,9 +22,13 @@ async function uploadToServer (formObj){
 async function removeFileToServer(uuid, fileName){
     const response = await axios.delete(`/remove/${uuid}_${fileName}`)
     return response.data
+<<<<<<< HEAD
 }
 
 
 
 
 
+=======
+}
+>>>>>>> origin/장규원

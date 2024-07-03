@@ -87,7 +87,7 @@
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="/js/reply.js"></script>
+        <script src="/js/restaurantReply.js"></script>
     </div>
 
     <div class="modal registerModal" tabindex="-1">
@@ -138,7 +138,7 @@
     </div> <!-- modifyModal -->
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/js/reply.js"></script>
+    <script src="/js/restaurantReply.js"></script>
 
 </div>
 
@@ -225,7 +225,7 @@
 
 
 
-    // 모달창 내부의 Register버튼 : 인풋태그의 데이터를 reply.js 보내어 데이터를 저장하고 댓글 목록을 갱신하는 함수
+    // 모달창 내부의 Register버튼 : 인풋태그의 데이터를 restaurantReply.js 보내어 데이터를 저장하고 댓글 목록을 갱신하는 함수
     registerBtn.addEventListener("click", function (e){
 
         // Json타입으로 변환하기 쉽도록 key:value형식으로 데이터를 저장
@@ -234,7 +234,7 @@
             replyText:replyText.value, // 내용
             replyer:replyer.value} // 작성자
 
-        // reply.js의 addReply실행
+        // restaurantReply.js의 addReply실행
         addReply(replyObj).then(result => {
             // 추가된 댓글번호를 메시지 창에 출력
             alert(result.rno)
@@ -325,13 +325,13 @@
             return
         }
 
-        getReply(rno).then(reply => {
-            console.log(reply)
-            replyHeader.innerHTML = reply.rno
-            modifyText.value = reply.replyText
+        getReply(rno).then(restaurantReply => {
+            console.log(restaurantReply)
+            replyHeader.innerHTML = restaurantReply.rno
+            modifyText.value = restaurantReply.replyText
             modifyModal.show()
 
-            hasAuth = currentUser === reply.replyer // 댓글의 작성자와 현재 사용자 일치 여부 확인
+            hasAuth = currentUser === restaurantReply.replyer // 댓글의 작성자와 현재 사용자 일치 여부 확인
 
         }).catch(e => alert('error'))
 

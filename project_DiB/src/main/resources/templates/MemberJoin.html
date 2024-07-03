@@ -14,7 +14,7 @@
 document.querySelector(".confirm").addEventListener("click", function (e) {
     const data = "test";
 
-  axios.get("http://localhost:8080/confirmId/" + data).then(res => {
+  axios.get("http://localhost:8080/member/confirmId/" + data).then(res => {
       console.log(res)
       const exist = res.data
       if (exist) {

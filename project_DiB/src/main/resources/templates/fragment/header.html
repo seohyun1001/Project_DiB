@@ -1,17 +1,23 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title th:text="${title}">메인 페이지</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <header th:fragment="headerFragment">
     <nav class="navbar">
         <div class="logo">
-            <a href="/">DiB</a>
+            <!-- 로고 이미지 -->
+            <a href="/">
+                <img src="/img/final logo.png" alt="DiB Logo" style="height: 40px;">
+            </a>
         </div>
         <ul class="menu">
+<<<<<<< HEAD
             <li><a href="/restaurant/list">맛집</a></li>
             <li><a href="/accommodation/list">숙박</a></li>
             <li><a href="/tourists/list">관광지</a></li>
@@ -19,9 +25,45 @@
             <li id="login-menu" class="menu-item">
                 <a href="/member/join">회원가입</a>
                 <a href="/member/login">로그인</a>
+=======
+            <li><a href="/restaurant">맛집</a></li>
+            <li><a href="/stay">숙박</a></li>
+            <li><a href="/tourists">관광지</a></li>
+            <li><a href="/notice">공지사항</a></li>
+
+            <!-- 로그인하지 않은 상태 -->
+            <li th:if="${#authentication.name == 'anonymousUser'}" class="menu-item">
+                <div class="btn-group">
+                    <a href="/member/login" class="btn btn-primary">Login</a>
+                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/faq">FAQ</a>
+                        <a class="dropdown-item" href="/one2one">1대1 문의</a>
+                    </div>
+                </div>
+>>>>>>> origin/장규원
             </li>
+
+            <!-- 로그인한 상태 -->
+            <li th:if="${#authentication.name != 'anonymousUser'}" class="menu-item">
+                <div class="btn-group">
+                    <a href="/member/myPage" class="btn btn-primary">My Page</a>
+                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/logout">Logout</a>
+                        <a class="dropdown-item" href="/faq">FAQ</a>
+                        <a class="dropdown-item" href="/one2one">1대1 문의</a>
+                    </div>
+                </div>
+            </li>
+
         </ul>
     </nav>
 </header>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
