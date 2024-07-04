@@ -1,8 +1,10 @@
 package org.zerock.project_dib.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.zerock.project_dib.accommodation.domain.AccommodationImgVO;
 import org.zerock.project_dib.accommodation.domain.AccommodationVO;
+import org.zerock.project_dib.accommodation.dto.PageRequestDTO;
 
 import java.util.List;
 
@@ -13,6 +15,10 @@ public interface AccommodationMapper {
 
     List<AccommodationVO> findAll();
 
+    List<AccommodationVO> search(@Param("pageRequestDTO") PageRequestDTO pageRequestDTO);
+
+    int getTotalCount(@Param("pageRequestDTO") PageRequestDTO pageRequestDTO);
+
     AccommodationVO selectOne(Long ano);
 
     void update(AccommodationVO accommodationVO);
@@ -22,6 +28,8 @@ public interface AccommodationMapper {
     void insertFile(AccommodationImgVO accommodationImgVO);
 
     List<AccommodationImgVO> findAllFilesByAno(Long ano);
+
+    AccommodationImgVO findAllFilesByOrd(int ord);
 
     List<AccommodationImgVO> findAllFiles();
 

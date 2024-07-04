@@ -8,6 +8,8 @@ import org.zerock.project_dib.accommodation.domain.AccommodationImgVO;
 import org.zerock.project_dib.accommodation.domain.AccommodationVO;
 import org.zerock.project_dib.accommodation.dto.AccommodationDTO;
 import org.zerock.project_dib.accommodation.dto.AccommodationImgDTO;
+import org.zerock.project_dib.accommodation.dto.PageRequestDTO;
+import org.zerock.project_dib.accommodation.dto.PageResponseDTO;
 import org.zerock.project_dib.mapper.AccommodationMapper;
 
 import java.util.List;
@@ -33,11 +35,35 @@ public class AccommodationServiceImpl implements AccommodationService {
 
     @Override
     public List<AccommodationDTO> accList() {
+
         List<AccommodationDTO> result = accommodationMapper.findAll().stream()
                 .map(vo -> modelMapper.map(vo, AccommodationDTO.class))
                 .collect(Collectors.toList());
 
         return result;
+    }
+
+    @Override
+    public PageResponseDTO<AccommodationDTO> search(PageRequestDTO pageRequestDTO) {
+
+        List<AccommodationVO> voList = accommodationMapper.search(pageRequestDTO);
+        List<AccommodationDTO> dtoList = voList.stream()
+                .map(vo -> modelMapper.map(vo, AccommodationDTO.class))
+                .collect(Collectors.toList());
+
+        int total = accommodationMapper.getTotalCount(pageRequestDTO);
+
+        return PageResponseDTO.<AccommodationDTO>builder()
+                .dtoList(dtoList)
+                .total(total)
+                .page(pageRequestDTO.getPage())
+                .size(pageRequestDTO.getSize())
+                .start((int) (Math.ceil(pageRequestDTO.getPage() / 10.0)) * 10 - 9)
+                .end((int) (Math.ceil(pageRequestDTO.getPage() / 10.0)) * 10)
+                .prev((int) (Math.ceil(pageRequestDTO.getPage() / 10.0)) * 10 - 9 > 1)
+                .next(total > (int) (Math.ceil(pageRequestDTO.getPage() / 10.0)) * 10)
+                .totalPage((int) Math.ceil((double) total / pageRequestDTO.getSize()))
+                .build();
     }
 
     @Override
@@ -76,6 +102,12 @@ public class AccommodationServiceImpl implements AccommodationService {
                 .collect(Collectors.toList());
 
         return result;
+    }
+
+    @Override
+    public AccommodationImgDTO findAllFileByOrd(int ord) {
+
+        return modelMapper.map(accommodationMapper.findAllFilesByOrd(ord), AccommodationImgDTO.class);
     }
 
     @Override
