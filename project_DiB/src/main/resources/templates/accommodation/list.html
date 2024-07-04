@@ -34,6 +34,21 @@
                         </tbody>
                     </table>
                 </div>
+
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item" th:classappend="${pageRequestDTO.page == 1} ? 'disabled'">
+                            <a class="page-link" th:href="@{|/accommodation/list?page=${pageRequestDTO.page - 1}&size=${pageRequestDTO.size}|}">이전</a>
+                        </li>
+                        <li class="page-item" th:each="i : ${#numbers.sequence(1, totalPage)}" th:classappend="${pageRequestDTO.page == i} ? 'active'">
+                            <a class="page-link" th:href="@{|/accommodation/list?page=${i}&size=${pageRequestDTO.size}|}">[[${i}]]</a>
+                        </li>
+                        <li class="page-item" th:classappend="${pageRequestDTO.page == totalPage} ? 'disabled'">
+                            <a class="page-link" th:href="@{|/accommodation/list?page=${pageRequestDTO.page + 1}&size=${pageRequestDTO.size}|}">다음</a>
+                        </li>
+                    </ul>
+                </nav>
+
             </div>
         </div>
     </div>

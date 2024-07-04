@@ -6,14 +6,13 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.project_dib.accommodation.dto.AccommodationDTO;
 import org.zerock.project_dib.accommodation.dto.AccommodationImgDTO;
+import org.zerock.project_dib.accommodation.dto.PageRequestDTO;
+import org.zerock.project_dib.accommodation.dto.PageResponseDTO;
 import org.zerock.project_dib.accommodation.service.AccommodationService;
 
 import java.io.File;
@@ -65,16 +64,19 @@ public class AccommodationController {
     }
 
     @GetMapping("/list")
-    public void list(@Valid AccommodationDTO accommodationDTO, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+    public void list(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "size", defaultValue = "10") int size, Model model) {
 
-        if (bindingResult.hasErrors()) {
-            log.info("has list error........................");
-            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-        }
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(page)
+                .size(size)
+                .build();
 
-        model.addAttribute("accList", accommodationService.accList());
+        PageResponseDTO<AccommodationDTO> responseDTO = accommodationService.search(pageRequestDTO);
+
+        model.addAttribute("accList", responseDTO.getDtoList());
+        model.addAttribute("totalPage", responseDTO.getTotalPage());
+        model.addAttribute("pageRequestDTO", pageRequestDTO);
         model.addAttribute("allImages", accommodationService.findAllFiles());
-
     }
 
     @GetMapping({"/view", "/modify"})
