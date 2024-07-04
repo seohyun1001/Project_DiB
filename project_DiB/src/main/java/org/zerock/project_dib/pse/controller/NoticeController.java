@@ -3,9 +3,6 @@ package org.zerock.project_dib.pse.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +13,9 @@ import org.zerock.project_dib.pse.dto.PageRequestDTO;
 import org.zerock.project_dib.pse.dto.PageResponseDTO;
 import org.zerock.project_dib.pse.service.NoticeService;
 
-import java.security.Principal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
-
 
 @Log4j2
 @Controller
@@ -32,9 +28,7 @@ public class NoticeController {
 
     // 공지사항 목록을 가져오는 GET 메소드
     @GetMapping("")
-    public String getAllNotices(@ModelAttribute PageRequestDTO pageRequestDTO, Model model
-            , RedirectAttributes redirectAttributes
-            , Principal principal) {
+    public String getAllNotices(@ModelAttribute PageRequestDTO pageRequestDTO, Model model, RedirectAttributes redirectAttributes) {
         try {
             if (pageRequestDTO == null) {
                 pageRequestDTO = new PageRequestDTO(); // 페이지 요청 객체가 null일 경우 초기화
@@ -44,8 +38,6 @@ public class NoticeController {
             model.addAttribute("notices", responseDTO.getDtoList());
             model.addAttribute("pageRequestDTO", pageRequestDTO);
             model.addAttribute("totalPage", responseDTO.getTotalPage());
-
-
         } catch (Exception e) {
             e.printStackTrace();
             return "redirect:/notice";

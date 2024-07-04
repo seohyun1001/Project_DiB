@@ -1,4 +1,4 @@
-package org.zerock.project_dib.restaurant.dto;
+package org.zerock.project_dib.tourist.dto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -23,7 +23,7 @@ public class PageResponseDTO<E> {
 
     @Builder(builderMethodName = "withAll")
     public PageResponseDTO(PageRequestDTO pageRequestDTO, List<E> dtoList, int total) {
-        if(total <= 0){
+        if (total <= 0) {
             return;
         }
         this.page = pageRequestDTO.getPage();
@@ -34,7 +34,7 @@ public class PageResponseDTO<E> {
         this.start = this.end-9;
         this.last = (int)(Math.ceil((total/(double)size)));
         this.end = end>last?last:end;
-        this.prev= this.start>1;
+        this.prev = this.start>1;
         this.next = total > this.end * this.size;
     }
 }
