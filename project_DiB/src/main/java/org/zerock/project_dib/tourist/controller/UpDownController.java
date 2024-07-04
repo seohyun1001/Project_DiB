@@ -42,19 +42,22 @@ public class UpDownController {
         log.info(originalName);
         //UUID : 중복되지 않는 아이디를 변수에 저장, 파일이름이 겹치지 않도록 파일이름에 추가하여 설정
         String uuid = UUID.randomUUID().toString();
+        String o_name = uuid + "_" + originalName;
         //파일이 저장되는 경로와 파일이름 함께 설정하는 코드
-        Path savePath = Paths.get(uploadPath, uuid + "_" + originalName);
+        Path savePath = Paths.get(uploadPath, o_name);
         boolean image = false;
         try {
           //파일을 저장하는 transferTo(new File()이나 Path를 매개변수로 써야함)
           multipartFile.transferTo(savePath);
           // 저장한 파일의 이미지인지 아닌지 확인하는 if문
+          log.info(Files.probeContentType(savePath));
           if(Files.probeContentType(savePath).startsWith("image")){
             image = true;
             //썸네일 파일의 경로 및 파일이름 설정
-            File thumbFile = new File(uploadPath, "s_"+uuid+"_"+originalName);
+            File thumbFile = new File(uploadPath, "s_"+o_name);
             //썸네일 파일을 생성하여 저장(원본파일, 썸네일파일, 가로 픽셀, 세로 픽셀)
             Thumbnailator.createThumbnail(savePath.toFile(), thumbFile, 200,200);
+
           }
         } catch (IOException e) {
           e.printStackTrace();

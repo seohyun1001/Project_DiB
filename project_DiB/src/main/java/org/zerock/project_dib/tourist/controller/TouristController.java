@@ -38,6 +38,7 @@ public class TouristController {
                 .keyword(keyword).
                 build();
         pageRequestDTO.setFilterAndKeyword();
+        log.info(pageRequestDTO);
 
         PageResponseDTO<TouristDTO> list = touristService.search(pageRequestDTO);
 

@@ -88,13 +88,10 @@
         left join tourist_img ti ON t.tno = ti.tno
         <where>
             (ti.ord = 0 or ti.ord is null)
-        <if test="pageRequestDTO.tno != null">
-            AND t.tno = #{pageRequestDTO.tno}
-        </if>
-        <if test="pageRequestDTO.tourName != null and pageRequestDTO.tourName != ''">
+        <if test='pageRequestDTO.filter != null and pageRequestDTO.filter.equals("n")'>
             AND t.tourName LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
         </if>
-        <if test="pageRequestDTO.tourAddr != null and pageRequestDTO.tourAddr != ''">
+        <if test='pageRequestDTO.filter != null and pageRequestDTO.filter.equals("a")'>
             AND t.tourAddr LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
         </if>
         </where>
@@ -104,10 +101,10 @@
     <select id="countTotal" resultType="int">
         select count(*) from tourist
         <where>
-            <if test="pageRequestDTO.tourName != null">
+            <if test='pageRequestDTO.filter != null and pageRequestDTO.filter.equals("n")'>
                 OR tourName LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
             </if>
-            <if test="pageRequestDTO.tourAddr != null">
+            <if test='pageRequestDTO.filter != null and pageRequestDTO.filter.equals("a")'>
                 OR tourAddr LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
             </if>
 
