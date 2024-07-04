@@ -28,16 +28,17 @@
 
     <link rel="stylesheet" th:href="@{/css/restaurant_base.css}">
     <link rel="stylesheet" th:href="@{/css/restaurant_list.css}">
+    <div th:replace="fragment/header :: headerFragment"></div>
 </head>
 
 
 <body>
-<div th:replace="fragment/header :: headerFragment"></div>
+
 
 
 <!-- 배너 이미지 -->
 <div class="banner-container">
-    <img src="/img/rest_banner.png" alt="Restaurant Banner" class="banner-img">
+    <img src="/img/rest_banner2.png" alt="Restaurant Banner" class="banner-img">
 </div>
 
 <!-- 검색창 있는 navbar -->
@@ -84,7 +85,8 @@
     <img src="/img/rest_lettering.png" alt="NEW RESTAURANT" class="new-text">
 </div>
 
-<!-- 최근 게시글 슬라이드 -->
+
+<!--  최근 게시글 캐러셀(슬라이드) -->
 <div class="container my-5">
     <div class="row">
         <div th:each="restaurant, iterStat : ${latestThree}" class="col-12 col-md-4 mb-4">
@@ -98,7 +100,12 @@
                     <!-- 파일을 3개까지 가져오기 위해 반복문 -->
                     <div th:each="file, fileStat : ${restaurant.fileNames}" th:classappend="${fileStat.index == 0} ? 'active' : ''" class="carousel-item">
                         <a th:href="@{/restaurant/read(rno=${restaurant.rno})}">
-                            <img th:src="@{/view/{file}(file=${file})}" class="d-block w-100" alt="Restaurant Image">
+                            <!-- 's_'를 제거하고 원본 파일명을 가져오도록 수정 -->
+                            <img th:src="@{/view/{file}(file=${#strings.replace(file, 's_', '')})}" class="d-block w-100" alt="Restaurant Image" style="width: 500px; height: 500px; object-fit: cover;">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5 th:text="${restaurant.rest_name}">Restaurant Name</h5> <!-- 레스토랑 이름 불러오는 코드 -->
+                                <p th:text="${restaurant.rest_exp}">Description</p> <!-- 레스토랑 설명 불러오는 코드 -->
+                            </div>
                         </a>
                     </div>
                 </div>
