@@ -55,14 +55,14 @@ public class TouristController {
         return "redirect:/tourist/list";
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/remove/{tno}")
     public String remove(@PathVariable("tno") int tno) {
         touristService.remove(tno);
         return "redirect:/tourist/list";
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/modify/{tno}")
     public String modifyGET(@PathVariable("tno") int tno, TouristDTO touristDTO, Model model) {
         touristDTO.setTno(tno);
@@ -72,7 +72,7 @@ public class TouristController {
 
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/modify/{tno}")
     public String modify(@PathVariable("tno") int tno, TouristDTO touristDTO, @RequestParam("file") MultipartFile file)  throws IOException {
         touristDTO.setTno(tno);
@@ -91,7 +91,7 @@ public class TouristController {
 //        return touristService.getImgList(tno);
 //    }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/registerImg/{tno}")
     @ResponseBody
     public void registerImg(@PathVariable("tno") int tno, @RequestParam MultipartFile file) throws IOException {
@@ -111,7 +111,7 @@ public class TouristController {
         touristService.registerImg(touristDTO, file);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(value = "/modifyImg/{tno}", consumes = "multipart/form-data")
     public void modifyImg(@PathVariable("tno") int tno, TouristDTO touristDTO ,@RequestParam("file") MultipartFile file, Model model) {
         touristDTO.setTno(tno);
@@ -134,7 +134,7 @@ public class TouristController {
 
 
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/remove/{tno}/images")
     @ResponseBody
     public void removeImgs(@PathVariable("tno") int tno) {
