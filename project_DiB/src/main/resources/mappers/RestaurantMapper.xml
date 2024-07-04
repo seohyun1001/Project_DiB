@@ -14,7 +14,7 @@
         <result property="rest_time" column="rest_time"/>
         <result property="moddate" column="moddate"/>
         <result property="regdate" column="regdate"/>
-        <collection property="imageSet" ofType="org.zerock.project_dib.restaurant.domain.RestaurantImage">
+        <collection property="imageSet" ofType="org.zerock.project_dib.restaurant.domain.RestaurantImage" >
             <id property="uuid" column="uuid"/>
             <result property="fileName" column="file_name"/>
             <result property="ord" column="ord"/>
@@ -36,6 +36,7 @@
         FROM restaurant r
                  LEFT JOIN restaurant_img ri ON r.rno = ri.rno
         WHERE r.rno = #{rno}
+        ORDER BY ri.ord
     </select>
     <update id="update">
         update restaurant
@@ -111,9 +112,9 @@
         VALUES (#{uploadResult.uuid}, #{uploadResult.fileName}, #{uploadResult.ord}, #{rno})
     </insert>
 
-<!--    <select id="getFileNames" resultType="string">-->
-<!--        SELECT CONCAT(uuid, '_', file_name)-->
-<!--        FROM restaurant_img-->
-<!--        WHERE rno = #{rno}-->
-<!--    </select>-->
+    <select id="getFileNames" resultType="string">
+        SELECT CONCAT(uuid, '_', file_name)
+        FROM restaurant_img
+        WHERE rno = #{rno}
+    </select>
 </mapper>
