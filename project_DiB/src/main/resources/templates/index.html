@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <title th:text="${title}">메인 페이지</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -12,12 +17,128 @@
 
 <main class="full-page">
     <div class="content">
-         <h4 class="subtitle">DIVE into Busan</h4>
+         <h2 class="subtitle">DIVE into Busan</h2>
          <h1 class="main-title">B  u  s  a  n</h1>
     </div>
-</main>
+
+    <!-- 첫번째 사진 슬라이드 부분 -->
+    <div class="picture-slide1">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/img/food_thum1.png" class="d-block w-100" alt="Good Food 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="/img/food_thum2.png" class="d-block w-100" alt="Good Food 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="/img/food_thum3.png" class="d-block w-100" alt="Good Food 3">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <div class="first-description">
+            <h1 class="pic-title">미식도시 부산</h1>
+            <h3 class="pic-subtitle">부산의 대표 미식 가이드</h3>
+            <a href="/restaurant" class="btn btn-primary">READ MORE</a>
+        </div>
+    </div>
+
+    <!-- 간격을 위한 div -->
+    <div class="slide-gap"></div>
+
+    <!-- 두번째 사진 슬라이드 부분 -->
+    <div class="picture-slide2">
+        <div class="second-description">
+            <h1 class="pic-title">최고의 휴식을 주는 부산</h1>
+            <h3 class="pic-subtitle">숨은 보석 같은 숙소를 찾아서!</h3>
+            <a href="/stay" class="btn btn-primary">READ MORE</a>
+        </div>
+
+        <div id="carouselExampleIndicators2" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/img/hotel_thumb1.png" class="d-block w-100" alt="Good Food 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="/img/hotel_thumb2.png" class="d-block w-100" alt="Good Food 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="/img/hotel_thumb3.png" class="d-block w-100" alt="Good Food 3">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- 간격을 위한 div -->
+    <div class="slide-gap"></div>
 
 
+    <!-- 세번째 사진 슬라이드 부분 -->
+    <div class="picture-slide3">
+        <div id="carouselExampleIndicators3" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/img/tour_thumb1.png" class="d-block w-100" alt="Good Food 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="/img/tour_thumb2.png" class="d-block w-100" alt="Good Food 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="/img/tour_thumb3.png" class="d-block w-100" alt="Good Food 3">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <div class="third-description">
+            <h1 class="pic-title">부산의 가볼만한 곳!</h1>
+            <h3 class="pic-subtitle">어디까지 알고있니?</h3>
+            <a href="/tourists" class="btn btn-primary">READ MORE</a>
+        </div>
+    </div>
+
+
+
+    </main>
 
 <div th:replace="fragment/footer :: footerFragment"></div>
 

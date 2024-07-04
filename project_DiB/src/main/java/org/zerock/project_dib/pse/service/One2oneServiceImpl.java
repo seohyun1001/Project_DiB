@@ -90,9 +90,10 @@ public class One2oneServiceImpl implements One2oneService {
 
     @Override
     public List<One2oneDTO> getAllOne2ones() {
-        return one2oneMapper.selectAll().stream()
+        List<One2oneDTO>  list = one2oneMapper.selectAll().stream()
                 .map(this::entityToDto)
                 .collect(Collectors.toList());
+        return list;
     }
 
     @Override

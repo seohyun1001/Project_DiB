@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,14 +44,14 @@
                 <thead>
                 <tr>
                     <th scope="col" class="col-faq-number">번호</th>
-                    <th scope="col">제목</th>
+                    <th scope="col" class="col-faq-title">제목</th>
                     <th scope="col" class="col-registered-date">등록일</th>
                 </tr>
                 </thead>
                 <tbody>
                 <!-- FAQ 리스트를 표시 -->
                 <tr th:each="faq : ${faqs}">
-                    <td th:text="${faq.fno}"></td>
+                    <td th:text="${faq.fno}" class="fno-text-center"></td>
                     <td><a th:href="@{/faq/detail/{fno}(fno=${faq.fno})}" th:text="${faq.faqTitle}"></a></td>
                     <td th:text="${faq.regdate}" class="text-center"></td>
                 </tr>
@@ -75,7 +77,10 @@
                         </li>
                     </ul>
                 </nav>
-                <a href="/faq/register" class="register-faq-btn">FAQ 등록</a>
+
+                <!-- 관리자만 공지사항 등록 버튼을 볼 수 있도록 설정 -->
+                <a sec:authorize="hasRole('ROLE_ADMIN')" href="/faq/register" class="register-faq-btn">FAQ 등록</a>
+
             </div>
         </div>
     </div>

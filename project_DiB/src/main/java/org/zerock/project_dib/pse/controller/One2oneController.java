@@ -61,12 +61,15 @@ public class One2oneController {
         return "one2one/one2one";
     }
 
-
+    // 등록 폼을 보여주는 GET 메소드
     @GetMapping("/register")
-    public String showRegisterForm() {
+    public String showRegisterForm(Model model, @AuthenticationPrincipal User user) {
+        // 사용자 이름을 모델에 추가하여 템플릿에서 사용 가능하도록 함
+        model.addAttribute("username", user.getUsername());
         return "one2one/one2one_register";
     }
 
+    // 등록 처리를 하는 POST 메소드
     @PostMapping("/register")
     public String registerOne2one(MultipartFile file, One2oneDTO one2oneDTO, @AuthenticationPrincipal User user) {
         one2oneDTO.setMid(user.getUsername()); // 작성자 ID 설정

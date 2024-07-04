@@ -42,7 +42,7 @@
                 <thead>
                 <tr>
                     <th scope="col" class="col-one2one-number">번호</th>
-                    <th scope="col">제목</th>
+                    <th scope="col" class="col-one2one-title">제목</th>
                     <th scope="col" class="col-registered-date">등록일</th>
                     <th scope="col" class="col-mid">작성자</th>
                 </tr>
@@ -50,10 +50,10 @@
                 <tbody>
                 <!-- 1대1 문의 리스트를 표시 -->
                 <tr th:each="one2one : ${one2ones}">
-                    <td th:text="${one2one.otono}"></td>
+                    <td th:text="${one2one.otono}" class="otono-text-center"></td>
                     <td><a th:href="@{/one2one/detail/{otono}(otono=${one2one.otono})}" th:text="${one2one.one2oneTitle}"></a></td>
                     <td th:text="${one2one.regdate}" class="text-center"></td>
-                    <td th:text="${one2one.mid}"></td>
+                    <td th:text="${one2one.mid}" class="mid-text-center"></td>
                 </tr>
                 </tbody>
             </table>

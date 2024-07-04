@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.zerock.project_dib.pse.mapper.One2oneMapper">
+<mapper namespace="org.zerock.project_dib.mapper.One2oneMapper">
     <resultMap id="One2oneResultMap" type="org.zerock.project_dib.pse.domain.One2one">
         <id property="otono" column="otono" />
         <result property="one2oneTitle" column="one2one_title" />
@@ -20,8 +20,8 @@
 
     <!-- 1대1 문의 삽입 -->
     <insert id="insert" parameterType="org.zerock.project_dib.pse.domain.One2one">
-        INSERT INTO one2one (one2one_title, one2one_content, one2one_image, regdate, moddate)
-        VALUES (#{one2oneTitle}, #{one2oneContent}, #{one2oneImage}, #{regdate}, #{moddate})
+        INSERT INTO one2one (one2one_title, one2one_content, one2one_image, regdate, moddate, mid)
+        VALUES (#{one2oneTitle}, #{one2oneContent}, #{one2oneImage}, #{regdate}, #{moddate}, #{mid})
     </insert>
 
     <!-- 1대1 문의 수정 -->
@@ -43,9 +43,9 @@
     <select id="search" resultMap="One2oneResultMap">
         SELECT
         otono,
-        one2one_title as one2oneTitle,
-        one2one_content as one2oneContent,
-        one2one_image as one2oneImage,
+        one2one_title,
+        one2one_content,
+        one2one_image,
         regdate,
         moddate,
         mid

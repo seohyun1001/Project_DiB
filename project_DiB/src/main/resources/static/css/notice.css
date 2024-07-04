@@ -21,11 +21,6 @@ body {
     align-items: flex-start; /* 변경: 왼쪽 정렬 */
 }
 
-/* 기본적인 패딩 값을 0으로 설정 */
-.navbar {
-    padding: 0 !important;
-}
-
 /* 화면 중앙 흰색 컨테이너의 위치 조정 */
 main {
     padding-top: 20px;
@@ -73,19 +68,33 @@ main {
 
 /* 공지사항 nno 컬럼 스타일 */
 .col-notice-number {
-    width: 10%;
+    width: 3%;
+    text-align: center;
+}
+
+/* 공지사항 nno 데이터 스타일 */
+.notice-table td.nno-text-center {
+    text-align: center;
 }
 
 /* 등록일 컬럼 스타일 */
 .col-registered-date {
-    width: 18%;
+    width: 7%;
     text-align: center;
 }
 
 /* 등록일 데이터 스타일 */
-.faq-table td.text-center {
+.notice-table td.text-center {
     text-align: center;
 }
+
+
+/* 공지사항 제목 컬럼 스타일 */
+.col-notice-title {
+    width: 18%;
+    text-align: center;
+}
+
 
 /* 공지사항 제목 스타일 */
 .notice-title {
@@ -102,8 +111,9 @@ main {
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-left: auto;
-    margin-right: -80px; /* 페이지 표시 부분을 오른쪽으로 이동 */
+    margin-right: auto;
 }
 
 .pagination .page-link {
