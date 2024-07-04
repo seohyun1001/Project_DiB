@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Modify Restaurant</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-2 border-bottom">
+    <div class="col-md-3 mb-2 mb-md-0">
+
+    </div>
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+        <li><a href="#" class="nav-link px-2">Features</a></li>
+        <li><a href="#" class="nav-link px-2">Pricing</a></li>
+        <li><a href="#" class="nav-link px-2">FAQs</a></li>
+        <li><a href="#" class="nav-link px-2">About</a></li>
+    </ul>
+    <div class="col-md-3 text-end">
+        <button type="button" class="btn btn-outline-primary me-2">Login</button>
+        <button type="button" class="btn btn-primary">Sign-up</button>
+    </div>
+</header>
+
+<div class="container mt-4">
+    <form th:action="@{/restaurant/modify}" th:object="${dto}" method="post" enctype="multipart/form-data">
+        <input type="hidden" th:value="${dto.rno}" name="rno">
+        <div class="mb-3">
+            <label for="rest_name" class="form-label">Restaurant Name</label>
+            <textarea class="form-control" id="rest_name" th:text="${dto.rest_name}" name="rest_name"
+                      required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="rest_exp" class="form-label">Restaurant Description</label>
+            <textarea class="form-control" id="rest_exp" rows="3" th:text="${dto.rest_exp}" name="rest_exp"
+                      required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="rest_exp2" class="form-label">Detailed Description</label>
+            <textarea class="form-control" id="rest_exp2" rows="3" th:text="${dto.rest_exp2}" name="rest_exp2"
+                      required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="rest_loc" class="form-label">Location</label>
+            <textarea class="form-control" id="rest_loc" th:text="${dto.rest_loc}" name="rest_loc" required>
+            </textarea>
+        </div>
+        <div class="mb-3">
+            <label for="rest_phone" class="form-label">Phone</label>
+            <textarea class="form-control" id="rest_phone" th:text="${dto.rest_phone}" name="rest_phone"
+                      required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="rest_menu" class="form-label">Menu</label>
+            <textarea class="form-control" id="rest_menu" th:text="${dto.rest_menu}" name="rest_menu"
+                      required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="rest_time" class="form-label">Operating Hours</label>
+            <textarea class="form-control" id="rest_time" th:text="${dto.rest_time}" name="rest_time"
+                      required></textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Uploaded Images</label>
+            <div class="row">
+                <div th:each="file : ${dto.fileNames}" class="col-md-3 mb-3">
+                    <img th:src="@{|/view/${file}|}" class="img-fluid rounded" alt="Restaurant Image">
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="files" class="form-label">Upload New Images</label>
+            <input type="file" class="form-control" id="files" name="files" multiple>
+        </div>
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a href="/restaurant/list" class="btn btn-secondary">Back to List</a>
+        </div>
+    </form>
+    <form th:action="@{/restaurant/remove}" th:object="${dto}" method="post" class="mt-2">
+        <input type="hidden" th:value="${dto.rno}" name="rno">
+        <input type="hidden" th:value="${dto.rest_name}" name="rest_name">
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+</div>
+
+<footer class="py-5 text-center text-body-secondary bg-body-tertiary mt-4">
+    <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a
+            href="https://twitter.com/mdo">@mdo</a>.</p>
+    <p class="mb-0">
+        <a href="#">Back to top</a>
+    </p>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

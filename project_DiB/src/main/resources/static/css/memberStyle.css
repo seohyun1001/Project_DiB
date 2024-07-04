@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    height: 100vh;
+    height: 1100px;
     /*background: url("/im") no-repeat center center fixed; !* 배경 이미지 추가 *!*/
     background-size: cover;
     display: flex;
@@ -71,8 +71,8 @@ header {
 /* 게시판 글자 */
 .menu a {
     text-decoration: none;
-    color: white;
-    font-size: 30px;
+    color: black;
+    font-size: 20px;
     font-weight: bold;
     padding: 10px 20px;
     border-radius: 5px;
@@ -85,8 +85,10 @@ header {
 }
 
 .menu-item a {
-    background-color: #007bff;
+    background-color: rgba(0, 123, 255, 0.8); /* 살짝 투명한 파란색 */
     color: white;
+    font-size: 18px; /* 로그인 버튼 크기 조정 */
+    padding: 8px 16px;
 }
 
 main {
@@ -180,4 +182,8 @@ footer {
     display: flex;
     justify-content: space-between;
     padding-top: 10px;
+}
+
+.col {
+    padding-bottom: 20px;
 }
