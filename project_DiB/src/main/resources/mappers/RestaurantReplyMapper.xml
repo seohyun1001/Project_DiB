@@ -39,4 +39,11 @@
         FROM restaurant_review
         WHERE review_no = #{review_no}
     </select>
+
+    <!-- 특정 레스토랑의 전체 리뷰 개수 조회 -->
+    <select id="countTotalReviews" resultType="int">
+        SELECT COUNT(*)
+        FROM restaurant_review
+        WHERE rno = #{rno}
+    </select>
 </mapper>
