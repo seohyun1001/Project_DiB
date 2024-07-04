@@ -2,6 +2,7 @@ package org.zerock.project_dib.member.security;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,6 +12,8 @@ import org.zerock.project_dib.member.domain.Member;
 import org.zerock.project_dib.mapper.MemberMapper;
 import org.zerock.project_dib.member.security.dto.MemberSecurityDTO;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -33,6 +36,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
 
         Member member = result.get();
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + member.getRoleSet()));
+        if(member.getRoleSet().equals("ADMIN")){
+            authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        }
 
         MemberSecurityDTO memberSecurityDTO = new MemberSecurityDTO(
                 member.getMid(),
@@ -44,12 +52,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 member.getRegdate(),
                 member.getModdate(),
                 false,
-
-                member.getRoleSet()
-                        .stream()
-                        .map(memberRole -> new SimpleGrantedAuthority("ROLE_" + memberRole
-                                .name()))
-                        .collect(Collectors.toSet())
+                authorities
         );
 
         log.info("memberSecurityDTO");
