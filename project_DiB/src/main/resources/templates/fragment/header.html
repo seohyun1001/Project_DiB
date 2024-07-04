@@ -11,44 +11,19 @@
 <header th:fragment="headerFragment">
     <nav class="navbar">
         <div class="logo">
-            <!-- 로고 이미지 -->
-            <a href="/">
-                <img src="/img/final logo.png" alt="DiB Logo" style="height: 40px;">
-            </a>
+            <a href="/">DiB</a>
         </div>
         <ul class="menu">
             <li><a href="/restaurant/list">맛집</a></li>
             <li><a href="/stay">숙박</a></li>
             <li><a href="/tourists">관광지</a></li>
             <li><a href="/notice">공지사항</a></li>
-
-            <!-- 로그인하지 않은 상태 -->
-            <li th:if="${#authentication.name == 'anonymousUser'}" class="menu-item">
-                <div class="btn-group">
-                    <a href="/member/login" class="btn btn-primary">Login</a>
-                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="visually-hidden">Toggle Dropdown</span>
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/faq">FAQ</a>
-                        <a class="dropdown-item" href="/one2one">1대1 문의</a>
-                    </div>
-                </div>
+            <li><a href="/member/myPage" sec:authorize="isAuthenticated()">마이페이지</a></li>
+            <li id="login-menu" class="menu-item">
+                <a sec:authorize="isAnonymous()" href="/member/login">로그인</a>
             </li>
-
-            <!-- 로그인한 상태 -->
-            <li th:if="${#authentication.name != 'anonymousUser'}" class="menu-item">
-                <div class="btn-group">
-                    <a href="/member/myPage" class="btn btn-primary">My Page</a>
-                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="visually-hidden">Toggle Dropdown</span>
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/logout">Logout</a>
-                        <a class="dropdown-item" href="/faq">FAQ</a>
-                        <a class="dropdown-item" href="/one2one">1대1 문의</a>
-                    </div>
-                </div>
+            <li class="menu-item">
+                <a class="nav-link" sec:authorize="isAuthenticated()" href="/logout">로그아웃</a>
             </li>
 
         </ul>

@@ -1,6 +1,8 @@
 package org.zerock.project_dib.tourist.service;
 
 import org.springframework.web.multipart.MultipartFile;
+import org.zerock.project_dib.tourist.dto.PageRequestDTO;
+import org.zerock.project_dib.tourist.dto.PageResponseDTO;
 import org.zerock.project_dib.tourist.dto.TouristDTO;
 import org.zerock.project_dib.tourist.dto.TouristImgDTO;
 
@@ -26,4 +28,6 @@ public interface TouristService {
     void modifyImg(TouristDTO touristDTO, MultipartFile file) throws IOException;
 
     void removeImgs(int tno);
+
+    PageResponseDTO<TouristDTO> search(PageRequestDTO pageRequestDTO);
 }

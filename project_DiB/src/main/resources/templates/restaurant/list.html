@@ -1,15 +1,10 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Restaurant List</title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <link rel="stylesheet" th:href="@{/css/memberStyle.css}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -27,8 +22,22 @@
     </style>
 </head>
 
-<body class="d-flex align-items-center">
-<div th:replace="fragment/header :: headerFragment"></div>
+<body>
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-2 border-bottom">
+    <div class="col-md-3 mb-2 mb-md-0">
+    </div>
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+        <li><a href="#" class="nav-link px-2">Features</a></li>
+        <li><a href="#" class="nav-link px-2">Pricing</a></li>
+        <li><a href="#" class="nav-link px-2">FAQs</a></li>
+        <li><a href="#" class="nav-link px-2">About</a></li>
+    </ul>
+    <div class="col-md-3 text-end">
+        <button type="button" class="btn btn-outline-primary me-2">Login</button>
+        <button type="button" class="btn btn-primary">Sign-up</button>
+    </div>
+</header>
 
 <nav class="navbar navbar-expand-lg border-bottom" aria-label="Offcanvas navbar large"
      style="margin-top: 20px; margin-bottom: 20px; margin-left: 300px; margin-right: 300px; padding-bottom: 15px;">
@@ -38,8 +47,7 @@
                 aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <button type="button" class="btn btn-primary ms-2" onclick="window.location.href='/restaurant/register'"
-        sec:authorize="hasRole('ROLE_ADMIN')">
+        <button type="button" class="btn btn-primary ms-2" onclick="window.location.href='/restaurant/register'">
             Create
         </button>
         <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2"
@@ -118,11 +126,15 @@
 </div>
 <!-- pagination end -->
 
-<div th:replace="fragment/footer :: footerFragment"></div>
+<footer class="py-5 text-center text-body-secondary bg-body-tertiary">
+    <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a
+            href="https://twitter.com/mdo">@mdo</a>.</p>
+    <p class="mb-0">
+        <a href="#">Back to top</a>
+    </p>
+</footer>
 
-<script th:src="@{/js/script.js}"></script>
-
-<script layout:fragment="script" th:inline="javascript">
+<script>
     $(document).ready(function () {
         $('.filter-option').on('click', function () {
             var filterValue = $(this).data('filter');

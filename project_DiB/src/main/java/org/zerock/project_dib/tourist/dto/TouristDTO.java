@@ -1,12 +1,16 @@
 package org.zerock.project_dib.tourist.dto;
 
-import lombok.Data;
+import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@ToString
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class TouristDTO {
 
     private int tno;

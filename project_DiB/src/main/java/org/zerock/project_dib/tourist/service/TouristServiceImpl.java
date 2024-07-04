@@ -8,6 +8,8 @@ import org.zerock.project_dib.tourist.controller.UpDownController;
 import org.zerock.project_dib.tourist.domain.Tourist;
 import org.zerock.project_dib.tourist.domain.TouristImg;
 import org.zerock.project_dib.mapper.TouristMapper;
+import org.zerock.project_dib.tourist.dto.PageRequestDTO;
+import org.zerock.project_dib.tourist.dto.PageResponseDTO;
 import org.zerock.project_dib.tourist.dto.TouristDTO;
 import org.zerock.project_dib.tourist.dto.TouristImgDTO;
 import org.zerock.project_dib.tourist.dto.upload.UploadFileDTO;
@@ -135,6 +137,21 @@ public class TouristServiceImpl implements TouristService {
         touristMapper.deleteImgs(tno);
     }
 
+    @Override
+    public PageResponseDTO<TouristDTO> search(PageRequestDTO pageRequestDTO) {
+        List<Tourist> tourists = touristMapper.search(pageRequestDTO);
+        List<TouristDTO> dtoList = tourists.stream()
+                .map(this::entityToDTO)
+                .collect(Collectors.toList());
+
+        int total = touristMapper.countTotal(pageRequestDTO);
+        return PageResponseDTO.<TouristDTO>withAll()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total(total)
+                .build();
+    }
+
     // DTO to Entity and Entity to DTO conversion methods
     private TouristDTO toDTO(Tourist tourist) {
         TouristDTO dto = new TouristDTO();
@@ -171,6 +188,25 @@ public class TouristServiceImpl implements TouristService {
         dto.setTno(img.getTno());
         dto.setOrd(img.getOrd());
         return dto;
+    }
+
+    private TouristDTO entityToDTO(Tourist tourist) {
+        List<String> fileNames = tourist.getImageSet().stream()
+                .map(touristImg -> "s_" + touristImg.getUuid() + "_" + touristImg.getFileName())
+                .collect(Collectors.toList());
+
+        return TouristDTO.builder()
+                .tno(tourist.getTno())
+                .tourName(tourist.getTourName())
+                .tourAddr(tourist.getTourAddr())
+                .tourOpentime(tourist.getTourOpentime())
+                .tourClosetime(tourist.getTourClosetime())
+                .tourParking(tourist.isTourParking())
+                .tourContent(tourist.getTourContent())
+                .fileNames(fileNames)
+                .regDate(tourist.getRegDate())
+                .modDate(tourist.getModDate())
+                .build();
     }
 
 

@@ -3,6 +3,23 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zerock.project_dib.mapper.TouristMapper">
+    <resultMap id="TouristMap" type="org.zerock.project_dib.tourist.domain.Tourist">
+        <id property="tno" column="tno"/>
+        <result property="tourName" column="tourName"/>
+        <result property="tourAddr" column="tourAddr"/>
+        <result property="tourOpentime" column="tourOpentime"/>
+        <result property="tourClosetime" column="tourClosetime"/>
+        <result property="tourParking" column="tourParking"/>
+        <result property="tourContent" column="tourContent"/>
+        <result property="modDate" column="modDate"/>
+        <result property="regDate" column="regDate"/>
+        <collection property="imageSet" ofType="org.zerock.project_dib.tourist.domain.TouristImg">
+            <id property="uuid" column="uuid"/>
+            <result property="fileName" column="fileName"/>
+            <result property="ord" column="ord"/>
+            <result property="tno" column="tno"/>
+        </collection>
+    </resultMap>
 
     <select id="getList" resultType="org.zerock.project_dib.tourist.domain.Tourist">
         SELECT *
@@ -64,5 +81,37 @@
         SET fileName = #{fileName}, ord = #{ord}
         WHERE uuid = #{uuid} AND tno = #{tno}
     </update>
+
+    <select id="search" resultMap="TouristMap">
+        SELECT t.*, ti.uuid, ti.fileName, ti.ord, ti.tno
+        from tourist t
+        left join tourist_img ti ON t.tno = ti.tno
+        <where>
+            (ti.ord = 0 or ti.ord is null)
+        <if test="pageRequestDTO.tno != null">
+            AND t.tno = #{pageRequestDTO.tno}
+        </if>
+        <if test="pageRequestDTO.tourName != null and pageRequestDTO.tourName != ''">
+            AND t.tourName LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+        </if>
+        <if test="pageRequestDTO.tourAddr != null and pageRequestDTO.tourAddr != ''">
+            AND t.tourAddr LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+        </if>
+        </where>
+        LIMIT #{pageRequestDTO.offset}, #{pageRequestDTO.size}
+    </select>
+
+    <select id="countTotal" resultType="int">
+        select count(*) from tourist
+        <where>
+            <if test="pageRequestDTO.tourName != null">
+                OR tourName LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+            </if>
+            <if test="pageRequestDTO.tourAddr != null">
+                OR tourAddr LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+            </if>
+
+        </where>
+    </select>
 
 </mapper>

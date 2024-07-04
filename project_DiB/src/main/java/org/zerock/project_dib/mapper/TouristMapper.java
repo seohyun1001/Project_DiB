@@ -2,9 +2,11 @@ package org.zerock.project_dib.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.zerock.project_dib.tourist.domain.Tourist;
 import org.zerock.project_dib.tourist.domain.TouristImg;
+import org.zerock.project_dib.tourist.dto.PageRequestDTO;
 
 import java.util.List;
 
@@ -29,5 +31,9 @@ public interface TouristMapper {
     void deleteImgs(int tno);
 
     void updateImgs(TouristImg touristImg);
+
+    List<Tourist> search(@Param("pageRequestDTO") PageRequestDTO pageRequestDTO);
+
+    int countTotal(@Param("pageRequestDTO") PageRequestDTO pageRequestDTO);
 
 }
