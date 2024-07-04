@@ -1,4 +1,4 @@
-package org.zerock.project_dib.controller;
+package org.zerock.project_dib.restaurant.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
