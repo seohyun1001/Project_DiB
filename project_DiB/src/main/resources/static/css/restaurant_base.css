@@ -1,0 +1,173 @@
+/* header 관련 */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: transparent; /* 배경색 투명 설정 */
+}
+
+.logo {
+    margin-right: auto; /* 로고를 왼쪽에 고정 */
+}
+
+.logo a {
+    text-decoration: none;
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 로고에 그림자 추가 */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+}
+
+.menu {
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    margin-left: auto; /* 메뉴를 오른쪽으로 이동 */
+}
+
+.menu li {
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+/* 게시판 글자 */
+.menu a {
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 메뉴 항목에 그림자 추가 */
+}
+
+.menu a:hover {
+    background-color: rgba(0, 123, 255, 0.6); /* 반투명한 파란색 배경 */
+    color: white;
+}
+
+/* 드롭다운 메뉴 스타일 */
+.dropdown-menu {
+    padding: 0;
+    color: white;
+    width: 100%;
+}
+
+/* 드롭다운 메뉴 항목 스타일 */
+.dropdown-item {
+    padding: 10px 20px; /* 드롭다운 항목의 padding을 조정 */
+}
+
+
+/* 로그인 버튼 */
+.menu-item a {
+    background-color: rgba(0, 123, 255, 0.8); /* 살짝 투명한 파란색 */
+    color: white;
+    font-size: 18px; /* 로그인 버튼 크기 조정 */
+    padding: 8px 16px;
+}
+
+/* 로그인 버튼 그룹 스타일 */
+.btn-group {
+    display: inline-flex;
+    width: auto; /* 너비 자동 조정 */
+    text-shadow: none;
+}
+
+.btn-group .btn-primary {
+    flex: 1; /* 버튼 크기 동일하게 설정 */
+}
+
+.btn-group .dropdown-menu {
+    width: auto; /* 드롭다운 메뉴의 너비 자동 조정 */
+    min-width: 100%; /* 최소 너비를 버튼과 동일하게 설정 */
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* My Page 버튼 스타일 조정 */
+.menu-item .btn-group .btn-primary {
+    white-space: nowrap;
+    width: auto;
+}
+
+
+/* 푸터 스타일 */
+footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    color: #333;
+    font-size: 14px;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5px;
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+    flex: 1;
+}
+
+.footer-left {
+    text-align: left;
+    padding: 0 20px 0 0;
+}
+
+.footer-left h2 {
+    margin: 0 0 10px;
+}
+
+.footer-left p {
+    margin: 0 0 10px;
+}
+
+.footer-center {
+    text-align: left;
+}
+
+.footer-right {
+    text-align: left;
+}
+
+
+.footer-center ul,
+.footer-right ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-center ul li,
+.footer-right ul li {
+    margin: 0 0 10px;
+}
+
+.footer-center ul li a,
+.footer-right ul li a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-center ul li a:hover,
+.footer-right ul li a:hover {
+    color: #007bff;
+}
