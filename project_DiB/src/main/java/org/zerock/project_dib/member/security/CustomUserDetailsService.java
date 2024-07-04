@@ -38,7 +38,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         Member member = result.get();
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_" + member.getRoleSet()));
-        if(member.getRoleSet().equals("ADMIN")){
+        if (member.getRoleSet().equals("ADMIN")){
             authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         }
 
