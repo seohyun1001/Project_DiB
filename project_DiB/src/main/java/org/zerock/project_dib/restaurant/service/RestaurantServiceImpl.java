@@ -107,6 +107,17 @@ public class RestaurantServiceImpl implements RestaurantService {
                 .build();
     }
 
+    // 최신 3개의 게시글을 가져오는 메서드_성언 추가
+    @Override
+    public List<RestaurantDTO> getLatestThree() {
+        return restaurantMapper.selectAll().stream()
+                .map(this::entityToDto)
+                .sorted((r1, r2) -> r2.getRegdate().compareTo(r1.getRegdate()))
+                .limit(3)
+                .collect(Collectors.toList());
+    }
+
+
     private Restaurant dtoToEntity(RestaurantDTO restaurantDTO) {
         return Restaurant.builder()
                 .rno(restaurantDTO.getRno())

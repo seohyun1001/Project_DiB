@@ -20,5 +20,7 @@ public interface RestaurantService {
     PageResponseDTO<RestaurantDTO> search(PageRequestDTO pageRequestDTO);
     void updateImages(int rno, List<UploadResultDTO> uploadResults);
 
+    //최신 3개의 게시글을 가져오는 메서드_성언 추가
+    List<RestaurantDTO> getLatestThree();
 }
 

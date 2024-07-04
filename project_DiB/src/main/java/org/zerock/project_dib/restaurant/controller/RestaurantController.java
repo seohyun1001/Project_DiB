@@ -113,7 +113,14 @@ public class RestaurantController {
 
         PageResponseDTO<RestaurantDTO> responseDTO = restaurantService.search(pageRequestDTO);
 
+        //최신 3개의 게시글 가져오기_성언 추가
+        List<RestaurantDTO> latestThree = restaurantService.getLatestThree();
+
         model.addAttribute("result", responseDTO);
+
+        //성언 추가
+        model.addAttribute("latestThree", latestThree);
+        
         return "restaurant/list";
     }
 

@@ -116,4 +116,15 @@
 <!--        FROM restaurant_img-->
 <!--        WHERE rno = #{rno}-->
 <!--    </select>-->
+
+<!--최신 3개의 게시글을 가져오는 쿼리_성언 추가-->
+    <select id="getLatestThree" resultMap="RestaurantMap">
+        SELECT r.*, ri.uuid, ri.file_name, ri.ord, ri.rno
+        FROM restaurant r
+                 LEFT JOIN restaurant_img ri ON r.rno = ri.rno
+        ORDER BY r.regdate DESC
+            LIMIT 3
+    </select>
+
+
 </mapper>

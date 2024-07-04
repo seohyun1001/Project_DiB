@@ -1,0 +1,67 @@
+/* restaurant_list.css */
+
+/* navbar 스타일 */
+.navbar-custom {
+    margin: 0 !important; /* margin을 없앰 */
+    padding-bottom: 15px;
+}
+
+/* Offcanvas 스타일 */
+.offcanvas-custom {
+    margin-right: 30px;
+}
+
+/* 카드 컨테이너 스타일 */
+.card-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* 배너 스타일 */
+.banner-container {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.banner-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* NEW RESTAURANT */
+.slide-intro-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top : 30px;
+}
+.slide-intro-text img.new-text {
+    max-width: 20%; /* 텍스트 이미지 크기를 줄임 */
+    height: auto;
+}
+
+
+/* carousel 스타일 */
+.carousel-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px; /* 세로로 긴 직사각형으로 설정 */
+}
+
+.carousel-item img {
+    max-height: 100%;
+    border-radius: 15px; /* 모서리를 둥글게 설정 */
+}
+
+.carousel-inner {
+    border-radius: 15px; /* 모서리를 둥글게 설정 */
+}
+
+/* 링크 스타일 */
+.restaurant-link {
+    text-decoration: none;
+    color: black;
+}
