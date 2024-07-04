@@ -30,6 +30,8 @@ public interface TouristMapper {
 
     void deleteImgs(int tno);
 
+    void updateImgs(TouristImg touristImg);
+
     List<Tourist> search(@Param("pageRequestDTO") PageRequestDTO pageRequestDTO);
 
     int countTotal(@Param("pageRequestDTO") PageRequestDTO pageRequestDTO);
