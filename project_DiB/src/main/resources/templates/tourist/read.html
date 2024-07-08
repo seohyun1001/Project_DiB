@@ -21,11 +21,6 @@
                 </div>
                 <div class="card-body">
                     <div class="input-group mb-3">
-                        <span class="input-group-text">Tno</span>
-                        <input type="text" name="tno" class="form-control" th:value="${dto.tno}" readonly>
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">관광지 명</span>
                         <input type="text" name="tourName" class="form-control" th:value="${dto.tourName}" readonly>
                     </div>
 
@@ -73,21 +68,24 @@
         </div>
 
             </div>
-        </div>
-    </div>
+<div>
     <form id="readBtn">
     <div class="row mt-3">
         <div class="col-md-12">
-                <a href="/tourist/modify/${dto.tno}" class="btn btn-info" >수정하기</a>
-                <button type="button" class="btn btn-danger removeBtn">삭제</button>
-                <button type="button" href="/tourist/list" class="btn btn-outline-dark">목록</button>
+            <a href="/tourist/register" sec:authorize = "hasRole('ROLE_ADMIN')" id="registerBtn"  class="btn btn-outline-secondary registerBtn">게시글 작성</a>
+            <button sec:authorize = "hasRole('ROLE_ADMIN')" id="removeBtn" class="btn btn-danger removeBtn">삭제</button>
+            <button sec:authorize = "hasRole('ROLE_ADMIN')" id="modifyBtn" class="btn btn-primary modifyBtn">수정</button>
+<!--            <a href="/tourist/register" class="btn btn-outline-secondary">게시글 작성</a>-->
+<!--                <button type="button" class="btn btn-danger removeBtn">삭제</button>-->
+            <a href="/tourist/list" class="btn btn-primary">목록</a>
         </div>
     </div>
+
     </form>
-
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</div>
 
-    </div>
+
 
 <div th:replace="fragment/footer :: footerFragment"></div>
 
@@ -95,17 +93,53 @@
 
 <script layout:fragment="script" th:inline="javascript">
 
-    const tno = [[${dto.tno}]]
-    const formObj = document.querySelector("#readBtn")
-    document.querySelector(".removeBtn").addEventListener("click",function(e){
-        e.preventDefault()
-        e.stopPropagation()
+    // const tno = [[${dto.tno}]]
+    // const formObj = document.querySelector("#readBtn")
+    // document.querySelector(".removeBtn").addEventListener("click",function(e){
+    //     e.preventDefault()
+    //     e.stopPropagation()
+    //
+    //     formObj.action = `/tourist/remove/${tno}`
+    //     formObj.method = 'post'
+    //     alert("삭제 되었습니다.")
+    //     formObj.submit()
+    // },false)
 
-        formObj.action = `/tourist/remove/${tno}`
-        formObj.method = 'post'
-        alert("삭제 되었습니다.")
-        formObj.submit()
-    },false)
+    var isAdmin = true; // 관리자 권한 확인 (예시로 관리자 권한 설정)
+
+    const tno = [[${dto.tno}]];
+    const formObj = document.querySelector("#readBtn");
+    const removeBtn = document.querySelector(".removeBtn");
+    const modifyBtn = document.querySelector(".modifyBtn");
+
+    // 관리자 권한 확인
+    if (isAdmin) {
+        // 삭제 버튼 클릭 이벤트 리스너 추가
+        removeBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            formObj.action = `/tourist/remove/${tno}`;
+            formObj.method = 'post';
+            alert("삭제 되었습니다.");
+            formObj.submit();
+        }, false);
+
+        // 수정 버튼 클릭 이벤트 리스너 추가
+        modifyBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            formObj.action = `/tourist/modify/${tno}`;
+            formObj.method = 'get';
+            formObj.submit();
+        }, false);
+    } else {
+        // 관리자가 아닌 경우 버튼 숨기기
+        document.getElementById('registerBtn').style.display = 'block';
+        document.getElementById('removeBtn').style.display = 'block';
+        document.getElementById('modifyBtn').style.display = 'block';
+    }
 
 </script>
 </body>

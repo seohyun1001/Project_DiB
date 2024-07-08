@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,38 +33,39 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                     aria-label="Close"></button>
             </div> -->
-            <div class="offcanvas-body" style="margin-right: 30px;">
-                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                    <!-- <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li> -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <form class="d-flex mt-3 mt-lg-0" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex mt-3 mt-lg-0" role="search" action="/tourist/list">
+                <div class="offcanvas-body" style="margin-right: 30px;">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <!-- <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li> -->
+                        <div class="input-group-prepend">
+                            <select class="form-select" name="filter">
+                                <option value="">---</option>
+                                <option value="n" th:selected="${list.pageRequest.filter=='n'}">관광지명</option>
+                                <option value="a" th:selected="${list.pageRequest.filter=='a'}">주소</option>
+                            </select>
+                        </div>
+                    </ul>
+
+                    <input class="form-control me-2" name="keyword" type="search" placeholder="Search"
+                           aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                     <!-- 관리자 화면에서 검색 대신 나타날 등록 버튼-->
                     <!-- <button class="btn btn-outline-success" type="submit">등록</button> -->
-                </form>
-            </div>
+
+                </div>
+            </form>
         </div>
+
     </div>
+<!--    <button sec:authorize = "hasRole('ROLE_ADMIN')" id="adminButton" class="admin-button">게시글 등록</button>-->
+
+    <button  id="adminButton" class="admin-button">게시글 등록</button>
+
 </nav> <!-- 검색 창 끝-->
 
 
@@ -86,7 +88,6 @@
 </div> -->
 
 
-
 <!-- 카드 앨범 부분 -->
 <div class="album py-3 ">
     <div class="container">
@@ -99,16 +100,38 @@
                          xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder:"
                          preserveAspectRatio="xMidYMid slice" focusable="false">
                         <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                                                                                dy=".3em">text ex</text>
+                        <!--                        <rect width="100%" height="100%" fill="#55595c">-->
+                        <!--                            -->
+                        <!--                        </rect>-->
+                        <a th:href="@{/tourist/read/{tno}(tno=${tourist.tno})}">
+                            <image th:if="${tourist.fileNames[0] != 's_null_null'}"
+                                   th:href="@{|/img/${tourist.fileNames[0]}|}" width="100%" height="100%"/>
+                        </a>
+                        <!--                        <div class="col-md-4">-->
+                        <!--                            <div th:if="${tourist.fileNames != null && tourist.fileNames.size() > 0}">-->
+                        <!--                                <div th:each="file, iterStat : ${tourist.fileNames}">-->
+
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+
+
+                        <!--                        <div th:if="${dto.touristImages != null && dto.boardImages.size() > 0}">-->
+                        <!--                            <img style="withd:100px" th:each="boardImage : ${dto.boardImages}"-->
+                        <!--                                 th:src="|/view/s_${boardImage.uuid}_${boardImage.fileName}|">-->
+                        <!--                        </div>-->
+
+
                     </svg>
                     <div class="card-body">
-                        <a th:href="@{/tourist/read/${tno}}" class="card-text" th:text="${tourist.tourName}"></a>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">버튼1</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">버튼2</button>
-                            </div>
+                        <a th:href="@{/tourist/read/{tno}(tno=${tourist.tno})}" class="card-text"
+                           th:text="${tourist.tourName}"></a>
+<!--                        <div class="d-flex justify-content-between align-items-center">-->
+<!--                            <div class="btn-group">-->
+<!--                                <button type="button" class="btn btn-sm btn-outline-secondary">버튼1</button>-->
+<!--                                <button type="button" class="btn btn-sm btn-outline-secondary">버튼2</button>-->
+<!--                            </div>-->
+
                             <small class="text-body-secondary">text ex</small>
                         </div>
                     </div>
@@ -121,23 +144,22 @@
 </div> <!-- album end -->
 
 
-
 <!-- pagination -->
-<div class="container-fluid ">
-    <div
-            class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between pb-3 border-bottom">
+<div class="container-fluid">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between pb-3 border-bottom">
         <nav aria-label="..." class="mx-auto">
             <ul class="pagination">
-                <li class="page-item disabled">
-                    <a class="page-link">Previous</a>
+                <!--                <li class="page-item" th:classappend="${list.prev} ? '' : 'disabled'">-->
+                <li class="page-item" th:if="${list.prev == true}">
+                    <a class="page-link" th:href="@{|/tourist/list?page=${list.page - 1}|}"><</a>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item active" aria-current="page">
-                    <a class="page-link" href="#">2</a>
+                <li class="page-item" th:each="i : ${#numbers.sequence(list.start, list.end)}"
+                    th:classappend="${i == list.page} ? 'active'">
+                    <a class="page-link" th:href="@{|/tourist/list?page=${i}|}" th:text="${i}">1</a>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
+                <!--                <li class="page-item" th:classappend="${list.next} ? '' : 'disabled'">-->
+                <li class="page-item" th:if="${list.next == true}">
+                    <a class="page-link" th:href="@{|/tourist/list?page=${list.page + 1}|}">></a>
                 </li>
             </ul>
         </nav>
@@ -150,6 +172,26 @@
 
 <div th:replace="fragment/footer :: footerFragment"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 
+
+<script>
+    // Example logic to check if user is an admin (you should replace this with your own logic)
+    var isAdmin = true; // Assume user is admin for demonstration
+
+    // Check if user is admin
+    if (isAdmin) {
+        // Display the admin button
+        document.getElementById('adminButton').style.display = 'block';
+
+        // Add click event listener to the admin button
+        document.getElementById('adminButton').addEventListener('click', function() {
+            // Redirect to tourist/registerregDate
+            window.location.href = '/tourist/register';
+        });
+    }
+</script>
 </body>
 </html>

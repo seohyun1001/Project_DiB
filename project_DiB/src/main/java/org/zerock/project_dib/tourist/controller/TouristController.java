@@ -28,7 +28,7 @@ public class TouristController {
     @GetMapping("/list")
     public String getList(Model model,
                           @RequestParam(value = "page", defaultValue = "1") int page,
-                          @RequestParam(value = "size", defaultValue = "15") int size,
+                          @RequestParam(value = "size", defaultValue = "9") int size,
                           @RequestParam(value = "filter", required = false) String filter,
                           @RequestParam(value = "keyword", required = false) String keyword) {
         PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
@@ -38,6 +38,7 @@ public class TouristController {
                 .keyword(keyword).
                 build();
         pageRequestDTO.setFilterAndKeyword();
+        log.info(pageRequestDTO);
 
         PageResponseDTO<TouristDTO> list = touristService.search(pageRequestDTO);
 

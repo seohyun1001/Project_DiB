@@ -9,6 +9,7 @@ import java.util.List;
 @Getter
 @ToString
 public class PageResponseDTO<E> {
+    private PageRequestDTO pageRequest;
     private int page;
     private int size;
     private int total;
@@ -26,6 +27,7 @@ public class PageResponseDTO<E> {
         if (total <= 0) {
             return;
         }
+        this.pageRequest = pageRequestDTO;
         this.page = pageRequestDTO.getPage();
         this.size = pageRequestDTO.getSize();
         this.total = total;
