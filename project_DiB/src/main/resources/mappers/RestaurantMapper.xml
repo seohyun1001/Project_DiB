@@ -78,6 +78,7 @@
 <!--                OR r.rest_loc LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')-->
 <!--                )-->
 <!--            </if>-->
+             ORDER BY r.rno DESC
         </where>
         LIMIT #{pageRequestDTO.offset}, #{pageRequestDTO.size};
     </select>
