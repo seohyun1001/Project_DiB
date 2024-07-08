@@ -78,6 +78,7 @@
 <!--                OR r.rest_loc LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')-->
 <!--                )-->
 <!--            </if>-->
+             ORDER BY r.rno DESC
         </where>
         LIMIT #{pageRequestDTO.offset}, #{pageRequestDTO.size};
     </select>
@@ -110,12 +111,6 @@
         INSERT INTO restaurant_img (uuid, file_name, ord, rno)
         VALUES (#{uploadResult.uuid}, #{uploadResult.fileName}, #{uploadResult.ord}, #{rno})
     </insert>
-
-<!--    <select id="getFileNames" resultType="string">-->
-<!--        SELECT CONCAT(uuid, '_', file_name)-->
-<!--        FROM restaurant_img-->
-<!--        WHERE rno = #{rno}-->
-<!--    </select>-->
 
 <!--최신 3개의 게시글을 가져오는 쿼리_성언 추가-->
     <select id="getLatestThree" resultMap="RestaurantMap">

@@ -15,6 +15,7 @@ import org.zerock.project_dib.mapper.RestaurantImageMapper;
 import org.zerock.project_dib.mapper.RestaurantMapper;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,12 +42,14 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Transactional
     public void saveUploadFiles(List<UploadResultDTO> uploadResultDTOList, int rno) {
         if (uploadResultDTOList != null && !uploadResultDTOList.isEmpty()) {
+            AtomicInteger ord = new AtomicInteger(0); // 순번 초기화_성언 추가
             uploadResultDTOList.forEach(uploadResultDTO -> {
                 RestaurantImage restaurantImage = RestaurantImage.builder()
                         .uuid(uploadResultDTO.getUuid())
                         .fileName(uploadResultDTO.getFileName())
                         .rno(rno)
-                        .ord(uploadResultDTOList.indexOf(uploadResultDTO))
+                        .ord(ord.getAndIncrement()) // 순번 설정_성언 추가
+//                        .ord(uploadResultDTOList.indexOf(uploadResultDTO))
                         .build();
                 restaurantImageMapper.insertFile(restaurantImage);
             });
@@ -110,11 +113,11 @@ public class RestaurantServiceImpl implements RestaurantService {
     // 최신 3개의 게시글을 가져오는 메서드_성언 추가
     @Override
     public List<RestaurantDTO> getLatestThree() {
-        return restaurantMapper.selectAll().stream()
-                .map(this::entityToDto)
-                .sorted((r1, r2) -> r2.getRegdate().compareTo(r1.getRegdate()))
-                .limit(3)
-                .collect(Collectors.toList());
+        return restaurantMapper.selectAll().stream() // 모든 레스토랑 데이터를 가져옴
+                .map(this::entityToDto) // 각 레스토랑 엔티티를 DTO로 변환
+                .sorted((r1, r2) -> r2.getRegdate().compareTo(r1.getRegdate())) // 등록일(regdate)을 기준으로 내림차순 정렬
+                .limit(3)  // 최신 3개의 레스토랑 데이터만 추출
+                .collect(Collectors.toList()); // 최종적으로 리스트로 수집
     }
 
 
