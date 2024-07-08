@@ -1,0 +1,147 @@
+/* restaurant_list.css */
+
+/* navbar 스타일 */
+.navbar-custom {
+    margin: 0 !important; /* margin을 없앰 */
+    padding-bottom: 15px;
+}
+
+/* Offcanvas 스타일 */
+.offcanvas-custom {
+    margin-right: 30px;
+}
+
+/* 카드 컨테이너 스타일 */
+.card-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* 배너 스타일 */
+.banner-container {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.banner-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* NEW RESTAURANT */
+.slide-intro-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top : 30px;
+}
+.slide-intro-text img.new-text {
+    max-width: 20%; /* 텍스트 이미지 크기를 줄임 */
+    height: auto;
+}
+
+
+
+/* 링크 스타일 */
+.restaurant-link {
+    text-decoration: none;
+    color: black;
+}
+
+
+/* 카드 썸네일 스타일 */
+.card-thumbnail {
+    width: 200px;
+    height: 200px;
+    object-fit: cover; /* 이미지의 비율을 유지하면서 잘라냄 */
+    border-radius: 15px; /* 모서리를 둥글게 설정 */
+}
+
+/* carousel 스타일 */
+.carousel-item {
+    display: none; /* 기본적으로 display를 none으로 설정(모든 캐러셀 항목을 보이지 않도록 설정) */
+    transition: transform 0.6s ease, opacity 0.6s ease; /* 트랜지션 효과를 설정하여 전환 시 부드럽게 보이도록 설정 */
+}
+/*.carousel-item {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    height: 500px;*/
+/*}*/
+
+.carousel-item img {
+    width: 500px;
+    height: 500px;
+    object-fit: cover; /* 이미지의 비율을 유지하면서 잘라냄 */
+    border-radius: 15px; /* 모서리를 둥글게 설정 */
+}
+
+.carousel-inner {
+    border-radius: 15px;
+}
+
+/* 캐러셀 내부 제목, 설명 */
+.carousel-caption h5 {
+    font-weight: bold;
+    font-size: 1.5rem; /* 제목 크기 조정 */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-caption p {
+    font-weight: bold;
+    font-size: 1.1rem; /* 설명 크기 조정 */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+
+/* 케러셀 기능 관련 */
+.carousel-item.active {
+    display: block; /* active 상태에서는 block으로 설정 */
+}
+
+.carousel-item-next,
+.carousel-item-prev {
+    display: block; /* 다음 또는 이전 슬라이드로 전환될 항목도 display: block으로 설정하여 전환 효과가 적용되도록 */
+}
+
+.carousel-item-next.carousel-item-left,
+.carousel-item-prev.carousel-item-right {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.carousel-item-next,
+.active.carousel-item-right {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.carousel-item-prev,
+.active.carousel-item-left {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+.carousel-fade .carousel-item {
+    transition: opacity 0.5s ease; /* 페이드 전환 효과를 위해 불투명도의 전환 효과를 설정*/
+}
+
+.carousel-fade .carousel-item,
+.carousel-fade .active.carousel-item-left,
+.carousel-fade .active.carousel-item-right {
+    opacity: 0;
+}
+
+.carousel-fade .active,
+.carousel-fade .carousel-item-next.carousel-item-left,
+.carousel-fade .carousel-item-prev.carousel-item-right {
+    opacity: 1;
+}
+
+.carousel-fade .active,
+.carousel-fade .active.carousel-item-left,
+.carousel-fade .active.carousel-item-prev {
+    z-index: 1;
+}
