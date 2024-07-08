@@ -42,7 +42,7 @@
 <nav class="navbar navbar-expand-lg border-bottom" aria-label="Offcanvas navbar large"
      style="margin-top: 20px; margin-bottom: 20px; margin-left: 300px; margin-right: 300px; padding-bottom: 15px;">
     <div class="container-fluid">
-        <a class="navbar-brand" style="margin-left: 30px;" href="#">List</a>
+        <a class="navbar-brand" style="margin-left: 30px;" href="#">검색</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2"
                 aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -83,8 +83,9 @@
         </div>
 
     </div>
-    <button sec:authorize = "hasRole('ROLE_ADMIN')" id="adminButton" class="admin-button">게시글 등록</button>
-<!--    <button  id="adminButton" class="admin-button">게시글 등록</button>-->
+<!--    <button sec:authorize = "hasRole('ROLE_ADMIN')" id="adminButton" class="admin-button">게시글 등록</button>-->
+
+    <button  id="adminButton" class="admin-button">게시글 등록</button>
 
 </nav> <!-- 검색 창 끝-->
 
@@ -146,11 +147,11 @@
                     <div class="card-body">
                         <a th:href="@{/tourist/read/{tno}(tno=${tourist.tno})}" class="card-text"
                            th:text="${tourist.tourName}"></a>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">버튼1</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">버튼2</button>
-                            </div>
+<!--                        <div class="d-flex justify-content-between align-items-center">-->
+<!--                            <div class="btn-group">-->
+<!--                                <button type="button" class="btn btn-sm btn-outline-secondary">버튼1</button>-->
+<!--                                <button type="button" class="btn btn-sm btn-outline-secondary">버튼2</button>-->
+<!--                            </div>-->
 
                             <small class="text-body-secondary">text ex</small>
                         </div>
