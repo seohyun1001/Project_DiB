@@ -17,6 +17,19 @@
     margin-bottom: 20px;
 }
 
+/* 게시글 제목을 볼드체로 설정 */
+.restaurant-link {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+/* 게시글 제목 위에 마우스를 올리면 밑줄이 그어지도록 설정 */
+.restaurant-link:hover {
+    text-decoration: underline;
+}
+
+
 /* 배너 스타일 */
 .banner-container {
     width: 100%;
