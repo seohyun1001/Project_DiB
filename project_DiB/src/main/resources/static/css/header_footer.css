@@ -1,0 +1,92 @@
+/* header_footer.css */
+
+/* 헤더 스타일 */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: transparent; /* 배경색 투명 설정 */
+}
+
+
+/* 푸터 스타일 */
+footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    color: #333;
+    font-size: 14px;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%; /* 전체 너비 설정 */
+    margin-left: 5%;
+    padding: 0 5px;
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+    flex: 1;
+    margin: 0 100px; /* 요소 간의 간격 */
+}
+
+.footer-left {
+    text-align: left;
+    padding: 0 20px 0 0;
+    margin-right: 100px;
+}
+
+.footer-left h2 {
+    margin: 0 0 10px;
+}
+
+.footer-left p {
+    margin: 0 0 30px;
+    width: 400%;
+}
+
+.footer-center {
+    text-align: left;
+}
+
+.footer-center p {
+    width: 400%;
+}
+
+.footer-right {
+    text-align: left;
+    margin-left: 100px;
+}
+
+.footer-right p {
+    width: 400%;
+}
+
+.footer-center ul,
+.footer-right ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-center ul li,
+.footer-right ul li {
+    margin: 0 0 10px;
+}
+
+.footer-center ul li a,
+.footer-right ul li a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-center ul li a:hover,
+.footer-right ul li a:hover {
+    color: #007bff;
+}
