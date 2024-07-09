@@ -86,7 +86,7 @@
     </div>
     <a href="/tourist/register" sec:authorize = "hasRole('ROLE_ADMIN')" id="registerBtn"  class="btn btn-outline-secondary registerBtn">게시글 작성</a>
 
-<!--    <button id="adminButton" class="admin-button">게시글 작성</button>-->
+<!--    <button id="registerBtn" class="admin-button">게시글 작성</button>-->
 
 </nav> <!-- 검색 창 끝-->
 
@@ -169,15 +169,13 @@
 
 
 <script>
-    // Example logic to check if user is an admin (you should replace this with your own logic)
-    var isAdmin = true; // Assume user is admin for demonstration
+    var isAdmin = true;
 
     // Check if user is admin
     if (isAdmin) {
 
         // Add click event listener to the admin button
         document.getElementById('registerBtn').addEventListener('click', function () {
-            // Redirect to tourist/registerregDate
             window.location.href = '/tourist/register';
         });
     } else {
