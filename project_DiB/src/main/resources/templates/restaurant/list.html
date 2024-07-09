@@ -11,9 +11,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
             integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
             crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-            crossorigin="anonymous"></script>
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"-->
+<!--            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"-->
+<!--            crossorigin="anonymous"></script>-->
 
     <link rel="stylesheet" th:href="@{/css/restaurant_base.css}">
     <link rel="stylesheet" th:href="@{/css/restaurant_list.css}">
@@ -203,6 +203,34 @@
                                 <a href="#" class="location-tag" data-location="기장군">#기장군</a>
                             </div>
                         </div>
+
+                        <div class="carousel-container mt-4">
+                            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <a href="http://localhost:8080/tourist/list">
+                                            <img src="/img/ad1.png" class="d-block w-100" alt="ad1.png">
+                                        </a>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <a href="http://localhost:8080/tourist/list">
+                                            <img src="/img/ad2.png" class="d-block w-100" alt="ad2.png">
+                                        </a>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <a href="http://localhost:8080/tourist/list">
+                                            <img src="/img/ad3.png" class="d-block w-100" alt="ad3.png">
+                                        </a>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <a href="http://localhost:8080/tourist/list">
+                                            <img src="/img/ad4.png" class="d-block w-100" alt="ad4.png">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -232,7 +260,7 @@
                 'action': '/restaurant/list',
                 'method': 'get'
             });
-            form.append($('<input>', {
+            form.append($('<input>',{
                 'type': 'hidden',
                 'name': 'filter',
                 'value': 'rest_loc'
