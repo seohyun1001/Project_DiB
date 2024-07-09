@@ -4,7 +4,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.zerock.project_dib.accommodation.domain.AccommodationImgVO;
 import org.zerock.project_dib.accommodation.domain.AccommodationVO;
-import org.zerock.project_dib.accommodation.dto.AccommodationImgDTO;
 import org.zerock.project_dib.accommodation.dto.PageRequestDTO;
 
 import java.util.List;
@@ -30,12 +29,10 @@ public interface AccommodationMapper {
 
     List<AccommodationImgVO> findAllFilesByAno(Long ano);
 
-    AccommodationImgVO findFileByFirstOrd();
-
-    AccommodationImgVO findFileByUuid(String uuid);
+    AccommodationImgVO findAllFilesByOrd(int ord);
 
     List<AccommodationImgVO> findAllFiles();
 
-    void deleteFile(String uuid);
+    void deleteFile(int ord);
 
 }
