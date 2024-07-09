@@ -69,13 +69,14 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mb-5">
 
             <!-- 카드 개별 요소 -->
-            <div class="col" th:each="dto:${accList}">
-                <div class="card shadow-sm">
+            <div class="col" th:each="dto:${accList}" >
+                <div class="card shadow-sm" >
                     <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
                          xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder:"
                          preserveAspectRatio="xMidYMid slice" focusable="false">
                         <a th:href="|@{/accommodation/view(ano=${dto.ano})}|" >
-                            <image th:if="${image != null and image.ano == dto.ano}"
+                            <image th:each="image : ${allImages}"
+                                    th:if="${image != null and image.ano == dto.ano}"
                                     th:href="|/upload/${image.file_name}|" width="100%" height="100%"/>
                         </a>
                     </svg>
@@ -86,68 +87,37 @@
                     </div>
                 </div>
             </div>
-
-        </div>
-        <!-- 카드 개별 요소 끝 -->
+        </div> <!-- 카드 개별 요소 끝 -->
     </div>
 </div> <!-- album end -->
 
-    <div class="row mt-3">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    숙소 목록
-                </div>
-                <div class="card-body">
-                    <div class="text-end">
+<div class="container-fluid">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between pb-3 border-bottom">
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        <li class="page-item" th:classappend="${pageRequestDTO.page == 1} ? 'disabled'">
+            <a class="page-link"
+               th:href="@{|/accommodation/list?page=${pageRequestDTO.page - 1}|}">이전</a>
+        </li>
 
-                    </div>
-                    <table class="table">
-                        <tbody>
-                        <tr th:each="dto:${accList}">
-                            <td>
-                                <div th:each="image, imageStat : ${allImages}"
-                                     th:if="${image != null and image.ano == dto.ano}">
-                                    <a th:href="|@{/accommodation/view(ano=${dto.ano})}|">
-                                        <img style="width:300px; height: auto;" th:src="|/upload/${image.file_name}|">
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <a th:href="|@{/accommodation/view(ano=${dto.ano})}|">[[${dto.acc_name}]]</a>
-                            </td>
-                            <td>[[${dto.acc_exp}]]</td>
-                            <td>[[${#temporals.format(dto.moddate, 'yyyy-MM-dd')}]]</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <nav aria-label="Page navigation">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item" th:classappend="${pageRequestDTO.page == 1} ? 'disabled'">
-                            <a class="page-link"
-                               th:href="@{|/accommodation/list?page=${pageRequestDTO.page - 1}|}">이전</a>
-                        </li>
-
-                        <li class="page-item"
-                            th:each="i : ${#numbers.sequence(
+        <li class="page-item"
+            th:each="i : ${#numbers.sequence(
                                             pageRequestDTO.page > 5 ? pageRequestDTO.page - 5 : 1,
                                             pageRequestDTO.page + 5 <= totalPage ? pageRequestDTO.page + 4 : totalPage)}"
-                            th:classappend="${pageRequestDTO.page == i} ? 'active'">
-                            <a class="page-link" th:href="@{|/accommodation/list?page=${i}|}">[[${i}]]</a>
-                        </li>
+            th:classappend="${pageRequestDTO.page == i} ? 'active'">
+            <a class="page-link" th:href="@{|/accommodation/list?page=${i}|}">[[${i}]]</a>
+        </li>
 
-                        <li class="page-item" th:classappend="${pageRequestDTO.page == totalPage} ? 'disabled'">
-                            <a class="page-link"
-                               th:href="@{|/accommodation/list?page=${pageRequestDTO.page + 1}|}">다음</a>
-                        </li>
-                    </ul>
-                </nav>
-
-            </div>
-        </div>
+        <li class="page-item" th:classappend="${pageRequestDTO.page == totalPage} ? 'disabled'">
+            <a class="page-link"
+               th:href="@{|/accommodation/list?page=${pageRequestDTO.page + 1}|}">다음</a>
+        </li>
+    </ul>
+</nav>
     </div>
+</div>
+
+
 
 <div th:replace="fragment/footer :: footerFragment"></div>
 
