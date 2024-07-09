@@ -15,6 +15,7 @@
             <form action="/accommodation/modify" method="post" enctype="multipart/form-data">
 
                 <input type="hidden" id="anoValue" name="ano" th:value="${accInfo.ano}">
+                <input type="hidden" id="pageValue" name="page" th:value="${pageRequestDTO.page}">
 
                 <div class="card">
                     <div class="card-body">
@@ -69,8 +70,9 @@
         e.stopPropagation()
 
         const ano = document.getElementById('anoValue').value
+        const page = document.getElementById('pageValue').value
 
-        self.location = '/accommodation/view?ano=' + ano
+        self.location = '/accommodation/view?ano=' + ano + `&page=` + page
 
     }, false)
 

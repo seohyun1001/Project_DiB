@@ -135,8 +135,12 @@ public class AccommodationServiceImpl implements AccommodationService {
 
     @Override
     public AccommodationImgDTO findOrdByAno(Long ano) {
-
-        return modelMapper.map(accommodationMapper.findOrdByAno(ano), AccommodationImgDTO.class);
+        AccommodationImgVO vo = accommodationMapper.findOrdByAno(ano);
+        AccommodationImgDTO dto = null;
+        if (vo != null) {
+            dto = modelMapper.map(vo, AccommodationImgDTO.class);
+        }
+        return dto;
     }
 
 }

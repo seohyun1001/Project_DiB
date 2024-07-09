@@ -21,6 +21,7 @@
                     </div>
 
                     <input type="hidden" id="anoValue" name="ano" th:value="${accInfo.ano}">
+                    <input type="hidden" id="pageValue" name="page" th:value="${pageRequestDTO.page}">
 
                     <div class="input-group mb-3">
                         <input type="text" name="acc_name" class="form-control" th:value="${accInfo.acc_name}" readonly>
@@ -58,7 +59,9 @@
         e.preventDefault()
         e.stopPropagation()
 
-        self.location = '/accommodation/list'
+        const page = document.getElementById('pageValue').value
+
+        self.location = '/accommodation/list?page=' + page
 
     },false)
 
@@ -68,8 +71,9 @@
         e.stopPropagation()
 
         const ano = document.getElementById('anoValue').value
+        const page = document.getElementById('pageValue').value
 
-        self.location = `/accommodation/modify?ano=` + ano
+        self.location = `/accommodation/modify?ano=` + ano + `&page=` + page
 
     },false)
 

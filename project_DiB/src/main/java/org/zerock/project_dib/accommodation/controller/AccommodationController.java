@@ -91,7 +91,7 @@ public class AccommodationController {
     }
 
     @GetMapping({"/view", "/modify"})
-    public void view(Long ano, Model model) {
+    public void view(Long ano, Model model, PageRequestDTO pageRequestDTO) {
 
         AccommodationDTO accommodationDTO = accommodationService.accInfo(ano);
         log.info(accommodationDTO);
@@ -104,12 +104,12 @@ public class AccommodationController {
     }
 
     @PostMapping("/modify")
-    public String modify(AccFileDTO files, Long ano, @Valid AccommodationImgDTO accommodationImgDTO, @Valid AccommodationDTO accommodationDTO) throws IOException {
+    public String modify(AccFileDTO files, Long ano, @Valid AccommodationImgDTO accommodationImgDTO, @Valid AccommodationDTO accommodationDTO, PageRequestDTO pageRequestDTO) throws IOException {
 
         AccommodationImgDTO fileList = accommodationService.findOrdByAno(ano);
 
         String fileName = null;
-        int i = fileList.getOrd() + 1;
+        int i = (fileList != null) ? fileList.getOrd() + 1 : 0;
         for(MultipartFile file : files.getFiles()) {
             if (!file.isEmpty()) {
                 String originalFilename = file.getOriginalFilename();
@@ -126,7 +126,7 @@ public class AccommodationController {
 
         accommodationService.modify(accommodationDTO);
 
-        return "redirect:/accommodation/view?ano=" + ano;
+        return "redirect:/accommodation/view?ano=" + ano + "&" + pageRequestDTO.getLink();
     }
 
     @PostMapping("/delete/{ano}")
