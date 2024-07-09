@@ -14,8 +14,11 @@ import org.zerock.project_dib.accommodation.service.AccommodationService;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/accommodation")
@@ -60,7 +63,9 @@ public class AccommodationController {
     }
 
     @GetMapping("/list")
-    public void list(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "size", defaultValue = "10") int size, Model model) {
+    public void list(@RequestParam(value = "page", defaultValue = "1") int page,
+                     @RequestParam(value = "size", defaultValue = "10") int size,
+                     Model model) {
 
         PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
                 .page(page)
@@ -69,12 +74,21 @@ public class AccommodationController {
 
         PageResponseDTO<AccommodationDTO> responseDTO = accommodationService.search(pageRequestDTO);
 
+        List<Long> anoList = responseDTO.getDtoList().stream()
+                .map(AccommodationDTO::getAno)
+                .collect(Collectors.toList());
 
+        List<AccommodationImgDTO> firtImageList = new ArrayList<>();
+
+        for (Long ano : anoList) {
+            Optional<AccommodationImgDTO> firstImageOptional = accommodationService.findAllFileByAno(ano).stream().findFirst();
+            firstImageOptional.ifPresent(firtImageList::add);
+        }
 
         model.addAttribute("accList", responseDTO.getDtoList());
         model.addAttribute("totalPage", responseDTO.getTotalPage());
         model.addAttribute("pageRequestDTO", pageRequestDTO);
-        model.addAttribute("allImages", accommodationService.findAllFiles());
+        model.addAttribute("allImages", firtImageList);
     }
 
     @GetMapping({"/view", "/modify"})

@@ -20,13 +20,12 @@
                         <tbody>
                         <tr th:each="dto:${accList}">
                             <td>
-                                <a th:href="|@{/accommodation/view(ano=${dto.ano})}|">
-                                    <div th:each="image, imageStat : ${allImages}" th:if="${image != null and image.ano == dto.ano and imageStat.index == 0 }">
+                                <div th:each="image, imageStat : ${allImages}" th:if="${image != null and image.ano == dto.ano}">
+                                    <a th:href="|@{/accommodation/view(ano=${dto.ano})}|">
                                         <img style="width:300px; height: auto;" th:src="|/upload/${image.file_name}|">
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
                             </td>
-                            <th scope="row">[[${dto.ano}]]</th>
                             <td>
                                 <a th:href="|@{/accommodation/view(ano=${dto.ano})}|">[[${dto.acc_name}]]</a>
                             </td>
