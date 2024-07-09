@@ -27,34 +27,35 @@
 
                 <input type="hidden" id="anoValue" name="ano" th:value="${accInfo.ano}">
 
-                <div class="input-group mb-3">
-                    <input type="text" name="acc_name" class="form-control" th:value="${accInfo.acc_name}" readonly>
-                </div>
-                <div class="input-group mb-3">
-                    <textarea class="form-control col-sm-5" rows="5" name="acc_exp"
-                              readonly>[[${accInfo.acc_exp}]]</textarea>
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text">주소</span>
-                    <input type="text" name="acc_loc" class="form-control" th:value="${accInfo.acc_loc}" readonly>
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text">전화번호</span>
-                    <input type="text" name="acc_phone" class="form-control" th:value="${accInfo.acc_phone}" readonly>
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text">수정일</span>
-                    <input type="text" name="moddate" class="form-control"
-                           th:value="${#temporals.format(accInfo.moddate,'yyyy-MM-dd HH:mm:ss')}" readonly>
+                    <div class="input-group mb-3">
+                        <input type="text" name="acc_name" class="form-control" th:value="${accInfo.acc_name}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <textarea class="form-control col-sm-5" rows="5" name="acc_exp" readonly>[[${accInfo.acc_exp}]]</textarea>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">주소</span>
+                        <input type="text" name="acc_loc" class="form-control" th:value="${accInfo.acc_loc}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">전화번호</span>
+                        <input type="text" name="acc_phone" class="form-control" th:value="${accInfo.acc_phone}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">수정일</span>
+                        <input type="text" name="moddate" class="form-control" th:value="${#temporals.format(accInfo.moddate,'yyyy-MM-dd HH:mm:ss')}" readonly>
+                    </div>
                 </div>
             </div>
+            <button type="button" class="btn-secondary list-back-btn">목록으로 돌아가기</button>
+            <button sec:authorize="hasRole('ROLE_ADMIN')" type="button" class="btn-primary acc-modify-btn">수정</button>
+            <button sec:authorize="hasRole('ROLE_ADMIN')" type="button" class="btn-danger view-delete-btn">삭제</button>
         </div>
-        <button type="button" class="btn-secondary">목록으로 돌아가기</button>
-        <button sec:authorize="hasRole('ROLE_ADMIN')" type="button" class="btn-primary">수정</button>
-        <button sec:authorize="hasRole('ROLE_ADMIN')" type="button" class="btn-danger">삭제</button>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</div>
+    <script src="/js/reply.js"></script>
+
 
 <div th:replace="fragment/footer :: footerFragment"></div>
 
@@ -63,17 +64,16 @@
 
 <script layout:fragment="script" th:inline="javascript">
 
-
-    document.querySelector(".btn-secondary").addEventListener("click", function (e) {
+    document.querySelector(".list-back-btn").addEventListener("click", function (e){
 
         e.preventDefault()
         e.stopPropagation()
 
         self.location = '/accommodation/list'
 
-    }, false)
+    },false)
 
-    document.querySelector(".btn-primary").addEventListener("click", function (e) {
+    document.querySelector(".acc-modify-btn").addEventListener("click", function (e){
 
         e.preventDefault()
         e.stopPropagation()
@@ -82,9 +82,9 @@
 
         self.location = `/accommodation/modify?ano=` + ano
 
-    }, false)
+    },false)
 
-    document.querySelector(".btn-danger").addEventListener("click", function (e) {
+    document.querySelector(".view-delete-btn").addEventListener("click", function (e){
 
         e.preventDefault()
         e.stopPropagation()
@@ -94,7 +94,7 @@
         axios.post(`/accommodation/delete/${ano}`)
             .then(self.location = `/accommodation/list`)
 
-    }, false)
+    },false)
 
 </script>
 
