@@ -1,0 +1,11 @@
+.textBox{
+    display: block;
+    overflow: hidden;
+    max-height: 60px;
+    margin-bottom: 16px;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-decoration: none;
+}
