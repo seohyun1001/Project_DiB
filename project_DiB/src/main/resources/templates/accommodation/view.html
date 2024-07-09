@@ -12,6 +12,7 @@
 
 <body class="d-flex align-items-center">
 <div th:replace="fragment/header :: headerFragment"></div>
+<form name="formName">
     <div class="row mt-3">
         <div class="col">
             <div class="card">
@@ -48,6 +49,7 @@
             <button sec:authorize = "hasRole('ROLE_ADMIN')" type="button" class="btn btn-danger view-delete-btn">삭제</button>
         </div>
     </div>
+</form>
 <div th:replace="fragment/footer :: footerFragment"></div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/js/reply.js"></script>
@@ -77,17 +79,22 @@
 
     },false)
 
-    document.querySelector(".view-delete-btn").addEventListener("click", function (e){
+    document.querySelector(".view-delete-btn").addEventListener("click", function (e) {
 
         e.preventDefault()
         e.stopPropagation()
 
         const ano = document.getElementById('anoValue').value
+        // const page = document.getElementById('pageValue').value
+        let formObj = document.formName
+        formObj.action = `/accommodation/delete/${ano}`;
+        formObj.method = `post`
+        formObj.submit()
 
-        axios.post(`/accommodation/delete/${ano}`)
-            .then(self.location = `/accommodation/list`)
+        // axios.post(`/accommodation/delete/${ano}`)
+        //     .then(self.location = `/accommodation/list?page=` + page)
 
-    },false)
+    }, false)
 
 </script>
 </body>

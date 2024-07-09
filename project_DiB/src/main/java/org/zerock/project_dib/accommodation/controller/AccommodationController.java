@@ -63,7 +63,7 @@ public class AccommodationController {
 
     @GetMapping("/list")
     public void list(@RequestParam(value = "page", defaultValue = "1") int page,
-                     @RequestParam(value = "size", defaultValue = "10") int size,
+                     @RequestParam(value = "size", defaultValue = "9") int size,
                      Model model) {
 
         PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
@@ -130,7 +130,7 @@ public class AccommodationController {
     }
 
     @PostMapping("/delete/{ano}")
-    public void delete(@PathVariable Long ano) {
+    public String delete(@PathVariable Long ano, PageRequestDTO pageRequestDTO) {
 
         try {
             List<AccommodationImgDTO> imgList = accommodationService.findAllFileByAno(ano);
@@ -153,7 +153,10 @@ public class AccommodationController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        return "redirect:/accommodation/list";
     }
+
 
 
 }
