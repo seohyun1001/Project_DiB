@@ -14,6 +14,16 @@
         select * from accommodation
     </select>
 
+    <select id="search" parameterType="org.zerock.project_dib.accommodation.dto.PageRequestDTO" resultType="org.zerock.project_dib.accommodation.domain.AccommodationVO">
+        SELECT * FROM accommodation
+        ORDER BY ano DESC
+            LIMIT #{pageRequestDTO.size} OFFSET #{pageRequestDTO.skip}
+    </select>
+
+    <select id="getTotalCount" parameterType="org.zerock.project_dib.accommodation.dto.PageRequestDTO" resultType="int">
+        SELECT COUNT(*) FROM accommodation
+    </select>
+
     <select id="selectOne" resultType="org.zerock.project_dib.accommodation.domain.AccommodationVO">
         select * from accommodation where ano = #{ano}
     </select>
@@ -34,6 +44,10 @@
 
     <select id="findAllFilesByAno" resultType="org.zerock.project_dib.accommodation.domain.AccommodationImgVO">
         select * from accommodation_img where ano = #{ano}
+    </select>
+
+    <select id="findAllFilesByOrd" resultType="org.zerock.project_dib.accommodation.domain.AccommodationImgVO">
+        select * from accommodation_img where ord = #{ord}
     </select>
 
     <select id="findAllFiles" resultType="org.zerock.project_dib.accommodation.domain.AccommodationImgVO">

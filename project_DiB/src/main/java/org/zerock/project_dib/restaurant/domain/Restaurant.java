@@ -3,7 +3,9 @@ package org.zerock.project_dib.restaurant.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @ToString(exclude = "imageSet")
@@ -25,7 +27,7 @@ public class Restaurant extends BaseEntity {
 
     @OneToMany(mappedBy = "restaurant", orphanRemoval = true)
     @Builder.Default
-    private Set<RestaurantImage> imageSet  = new HashSet<>();
+    private List<RestaurantImage> imageSet  = new ArrayList<>();
 
     public void addImage(String uuid, String fileName) {
         RestaurantImage restaurantImage = RestaurantImage.builder()

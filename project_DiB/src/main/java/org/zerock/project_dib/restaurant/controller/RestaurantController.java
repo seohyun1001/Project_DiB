@@ -111,7 +111,14 @@ public class RestaurantController {
 
         PageResponseDTO<RestaurantDTO> responseDTO = restaurantService.search(pageRequestDTO);
 
+        //최신 3개의 게시글 가져오기_성언 추가
+        List<RestaurantDTO> latestThree = restaurantService.getLatestThree();
+
         model.addAttribute("result", responseDTO);
+
+        //성언 추가
+        model.addAttribute("latestThree", latestThree);
+        
         return "restaurant/list";
     }
 
@@ -120,15 +127,20 @@ public class RestaurantController {
     public void modifyRead(int rno, PageRequestDTO pageRequestDTO, Model model) {
         RestaurantDTO restaurantDTO = restaurantService.getOne(rno);
         log.info(restaurantDTO);
-//        // 원본 이미지 경로를 생성하여 DTO에 설정
-//        List<String> originalFileNames = new ArrayList<>();
-//        for (String fileName : restaurantDTO.getFileNames()) {
-//            originalFileNames.add(fileName);
-//        }
-//        restaurantDTO.setFileNames(originalFileNames);
+
+        // 원본 이미지 경로를 생성하여 DTO에 설정
+        List<String> originalFileNames = new ArrayList<>();
+        for (String fileName : restaurantDTO.getFileNames()) {
+            // 섬네일 경로에서 원본 경로로 변환 (예: "s_"로 시작하는 부분 제거)
+            String originalFileName = fileName.startsWith("s_") ? fileName.substring(2) : fileName;
+            originalFileNames.add(originalFileName);
+        }
+        restaurantDTO.setFileNames(originalFileNames);
 
         model.addAttribute("dto", restaurantDTO);
     }
+
+
 
 //    @PreAuthorize("principal.username == #restaurantDTO.rest_name")
 //    @PostMapping("/modify")
@@ -151,7 +163,7 @@ public class RestaurantController {
 //        return "redirect:/restaurant/list";
 //    }
 
-    @PreAuthorize("principal.username == #restaurantDTO.rest_name")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(value = "/modify", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String modify(PageRequestDTO pageRequestDTO,
                          @Valid RestaurantDTO restaurantDTO,
@@ -204,10 +216,10 @@ public class RestaurantController {
         restaurantService.update(restaurantDTO);
         redirectAttributes.addFlashAttribute("result", "modified");
         redirectAttributes.addAttribute("rno", restaurantDTO.getRno());
-        return "redirect:/restaurant/list";
+        return "redirect:/restaurant/read?";
     }
 
-    @PreAuthorize("principal.username == #restaurantDTO.rno")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/remove")
     public String remove(RestaurantDTO restaurantDTO, RedirectAttributes redirectAttributes) {
         log.info("restaurant Remove.......");

@@ -12,19 +12,19 @@
     <div class="row mt-3">
         <div class="col">
             <div class="card">
-<!--                <div class="card-header">-->
-<!--                    Tourist Read-->
-<!--                </div>-->
+                <!--                <div class="card-header">-->
+                <!--                    Tourist Read-->
+                <!--                </div>-->
                 <div class="card-body">
-<!--                    <div class="input-group mb-3">-->
-<!--                        <span class="input-group-text">Tno</span>-->
-<!--                        <input type="text" name="tno" class="form-control" th:value="${dto.tno}" readonly>-->
-<!--                    </div>-->
+                    <!--                    <div class="input-group mb-3">-->
+                    <!--                        <span class="input-group-text">Tno</span>-->
+                    <!--                        <input type="text" name="tno" class="form-control" th:value="${dto.tno}" readonly>-->
+                    <!--                    </div>-->
                     <div class="input-group mb-3">
                         <input type="text" name="tourName" class="form-control" th:value="${dto.tourName}" readonly>
                     </div>
 
-<!--                    이미지 출력 div-->
+                    <!--                    이미지 출력 div-->
                     <div class="col">
                         <span th:if="${dto.fileNames != null && dto.fileNames.size()>0}">
                             <th:block th:each="fileName: ${dto.fileNames}" >
@@ -68,16 +68,16 @@
         </div>
     </div>
     <form id="readBtn">
-    <div class="row mt-3">
-        <div class="col-md-12">
-            <a href="/tourist/register" sec:authorize = "hasRole('ROLE_ADMIN')" id="registerBtn"  class="btn btn-outline-secondary registerBtn">게시글 작성</a>
-            <button sec:authorize = "hasRole('ROLE_ADMIN')" id="removeBtn" class="btn btn-danger removeBtn">삭제</button>
-            <button sec:authorize = "hasRole('ROLE_ADMIN')" id="modifyBtn" class="btn btn-primary modifyBtn">수정</button>
-<!--            <a href="/tourist/register" class="btn btn-outline-secondary">게시글 작성</a>-->
-<!--                <button type="button" class="btn btn-danger removeBtn">삭제</button>-->
-            <a href="/tourist/list" class="btn btn-primary">목록</a>
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <a href="/tourist/register" sec:authorize = "hasRole('ROLE_ADMIN')" id="registerBtn"  class="btn btn-outline-secondary registerBtn">게시글 작성</a>
+                <button sec:authorize = "hasRole('ROLE_ADMIN')" id="removeBtn" class="btn btn-danger removeBtn">삭제</button>
+                <button sec:authorize = "hasRole('ROLE_ADMIN')" id="modifyBtn" class="btn btn-primary modifyBtn">수정</button>
+                <!--            <a href="/tourist/register" class="btn btn-outline-secondary">게시글 작성</a>-->
+                <!--                <button type="button" class="btn btn-danger removeBtn">삭제</button>-->
+                <a href="/tourist/list" class="btn btn-primary">목록</a>
+            </div>
         </div>
-    </div>
     </form>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -135,17 +135,3 @@
 
 </script>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

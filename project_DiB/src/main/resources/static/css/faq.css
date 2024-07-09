@@ -1,8 +1,8 @@
 /* faq.css */
 /* FAQ 페이지 배경 이미지 설정 */
 body {
-    background: url('/img/board_bg.png') no-repeat center center fixed; /* 배경 이미지 설정 */
-    background-size: cover; /* 이미지 크기를 조절하여 화면을 덮도록 설정 */
+    background: url('/img/board_bg.png') no-repeat center 0px fixed; /* 배경 이미지 설정 */
+    background-size: 123.5%;
 }
 
 
@@ -73,17 +73,29 @@ main {
 
 /* FAQ fno 컬럼 스타일 */
 .col-faq-number {
-    width: 10%;
+    width: 3%;
+    text-align: center;
+}
+
+/* FAQ nno 데이터 스타일 */
+.faq-table td.fno-text-center {
+    text-align: center;
 }
 
 /* 등록일 컬럼 스타일 */
 .col-registered-date {
-    width: 18%;
+    width: 7%;
     text-align: center;
 }
 
 /* 등록일 데이터 스타일 */
 .faq-table td.text-center {
+    text-align: center;
+}
+
+/* 공지사항 제목 컬럼 스타일 */
+.col-faq-title {
+    width: 18%;
     text-align: center;
 }
 
@@ -102,8 +114,9 @@ main {
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-left: auto;
-    margin-right: -80px; /* 페이지 표시 부분을 오른쪽으로 이동 */
+    margin-right: auto;
 }
 
 .pagination .page-link {
