@@ -23,6 +23,14 @@
             <div class="mb-3">
                 <label for="noticeContent" class="form-label"></label>
                 <textarea class="form-control" id="noticeContent" rows="10" readonly th:text="${notice.noticeContent}"></textarea>
+
+<!--                <h3>Uploaded Images</h3>-->
+<!--                <div class="row">-->
+<!--                    <div th:each="file : ${dto.fileNames}" class="col-md-3 mb-3">-->
+<!--                        <img th:src="@{|/view/${file}|}" class="img-fluid rounded" alt="Restaurant Image">-->
+<!--                    </div>-->
+<!--                </div>-->
+
             </div>
             <div class="mb-3">
                 <label for="regdate" class="form-label"></label>
