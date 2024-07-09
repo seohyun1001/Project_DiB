@@ -84,9 +84,9 @@
         </div>
 
     </div>
-    <!--    <button sec:authorize = "hasRole('ROLE_ADMIN')" id="adminButton" class="admin-button">게시글 등록</button>-->
+    <a href="/tourist/register" sec:authorize = "hasRole('ROLE_ADMIN')" id="registerBtn"  class="btn btn-outline-secondary registerBtn">게시글 작성</a>
 
-    <button id="adminButton" class="admin-button">게시글 등록</button>
+<!--    <button id="adminButton" class="admin-button">게시글 작성</button>-->
 
 </nav> <!-- 검색 창 끝-->
 
@@ -174,14 +174,15 @@
 
     // Check if user is admin
     if (isAdmin) {
-        // Display the admin button
-        document.getElementById('adminButton').style.display = 'block';
 
         // Add click event listener to the admin button
-        document.getElementById('adminButton').addEventListener('click', function () {
+        document.getElementById('registerBtn').addEventListener('click', function () {
             // Redirect to tourist/registerregDate
             window.location.href = '/tourist/register';
         });
+    } else {
+        // Display the admin button
+        document.getElementById('registerBtn').style.display = 'block';
     }
 </script>
 </html>
