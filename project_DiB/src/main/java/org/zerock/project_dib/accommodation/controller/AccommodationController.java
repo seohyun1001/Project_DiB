@@ -14,7 +14,6 @@ import org.zerock.project_dib.accommodation.service.AccommodationService;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -70,17 +69,12 @@ public class AccommodationController {
 
         PageResponseDTO<AccommodationDTO> responseDTO = accommodationService.search(pageRequestDTO);
 
-        List<AccommodationImgDTO> allImages = accommodationService.findAllFiles();
 
-        // ord 값이 가장 큰 이미지
-        AccommodationImgDTO maxOrdImage = allImages.stream()
-                .max(Comparator.comparingInt(AccommodationImgDTO::getOrd))
-                .orElse(null);
 
         model.addAttribute("accList", responseDTO.getDtoList());
         model.addAttribute("totalPage", responseDTO.getTotalPage());
         model.addAttribute("pageRequestDTO", pageRequestDTO);
-        model.addAttribute("maxOrdImage", maxOrdImage);
+        model.addAttribute("allImages", accommodationService.findAllFiles());
     }
 
     @GetMapping({"/view", "/modify"})

@@ -37,9 +37,9 @@
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn-secondary">목록으로 돌아가기</button>
-            <button type="button" class="btn-primary">수정</button>
-            <button type="button" class="btn-danger">삭제</button>
+            <button type="button" class="btn-secondary list-back-btn">목록으로 돌아가기</button>
+            <button type="button" class="btn-primary acc-modify-btn">수정</button>
+            <button type="button" class="btn-danger view-delete-btn">삭제</button>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -47,7 +47,7 @@
 </div>
 <script layout:fragment="script" th:inline="javascript">
 
-    document.querySelector(".btn-secondary").addEventListener("click", function (e){
+    document.querySelector(".list-back-btn").addEventListener("click", function (e){
 
         e.preventDefault()
         e.stopPropagation()
@@ -56,7 +56,7 @@
 
     },false)
 
-    document.querySelector(".btn-primary").addEventListener("click", function (e){
+    document.querySelector(".acc-modify-btn").addEventListener("click", function (e){
 
         e.preventDefault()
         e.stopPropagation()
@@ -67,7 +67,7 @@
 
     },false)
 
-    document.querySelector(".btn-danger").addEventListener("click", function (e){
+    document.querySelector(".view-delete-btn").addEventListener("click", function (e){
 
         e.preventDefault()
         e.stopPropagation()
