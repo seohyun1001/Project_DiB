@@ -2,6 +2,7 @@ package org.zerock.project_dib.tourist.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -108,7 +109,7 @@ public class TouristController {
 //        return touristService.getImgList(tno);
 //    }
 
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/registerImg/{tno}")
     @ResponseBody
     public void registerImg(@PathVariable("tno") int tno, @RequestParam MultipartFile file) throws IOException {
@@ -128,7 +129,7 @@ public class TouristController {
         touristService.registerImg(touristDTO, file);
     }
 
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(value = "/modifyImg/{tno}", consumes = "multipart/form-data")
     public void modifyImg(@PathVariable("tno") int tno, TouristDTO touristDTO ,@RequestParam("file") MultipartFile file, Model model) {
         touristDTO.setTno(tno);
@@ -151,7 +152,7 @@ public class TouristController {
 
 
 
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/remove/{tno}/images")
     @ResponseBody
     public void removeImgs(@PathVariable("tno") int tno) {
