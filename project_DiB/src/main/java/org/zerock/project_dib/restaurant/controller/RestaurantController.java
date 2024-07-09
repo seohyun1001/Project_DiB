@@ -163,7 +163,7 @@ public class RestaurantController {
 //        return "redirect:/restaurant/list";
 //    }
 
-    @PreAuthorize("principal.username == #restaurantDTO.rest_name")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(value = "/modify", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String modify(PageRequestDTO pageRequestDTO,
                          @Valid RestaurantDTO restaurantDTO,
@@ -219,7 +219,7 @@ public class RestaurantController {
         return "redirect:/restaurant/read?";
     }
 
-    @PreAuthorize("principal.username == #restaurantDTO.rno")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/remove")
     public String remove(RestaurantDTO restaurantDTO, RedirectAttributes redirectAttributes) {
         log.info("restaurant Remove.......");
