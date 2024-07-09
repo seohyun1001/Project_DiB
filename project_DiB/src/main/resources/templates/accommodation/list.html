@@ -106,7 +106,8 @@
                         <tbody>
                         <tr th:each="dto:${accList}">
                             <td>
-                                <div th:each="image, imageStat : ${allImages}" th:if="${image != null and image.ano == dto.ano}">
+                                <div th:each="image, imageStat : ${allImages}"
+                                     th:if="${image != null and image.ano == dto.ano}">
                                     <a th:href="|@{/accommodation/view(ano=${dto.ano})}|">
                                         <img style="width:300px; height: auto;" th:src="|/upload/${image.file_name}|">
                                     </a>
@@ -128,10 +129,15 @@
                             <a class="page-link"
                                th:href="@{|/accommodation/list?page=${pageRequestDTO.page - 1}|}">이전</a>
                         </li>
-                        <li class="page-item" th:each="i : ${#numbers.sequence(1, totalPage)}"
+
+                        <li class="page-item"
+                            th:each="i : ${#numbers.sequence(
+                                            pageRequestDTO.page > 5 ? pageRequestDTO.page - 5 : 1,
+                                            pageRequestDTO.page + 5 <= totalPage ? pageRequestDTO.page + 4 : totalPage)}"
                             th:classappend="${pageRequestDTO.page == i} ? 'active'">
                             <a class="page-link" th:href="@{|/accommodation/list?page=${i}|}">[[${i}]]</a>
                         </li>
+
                         <li class="page-item" th:classappend="${pageRequestDTO.page == totalPage} ? 'disabled'">
                             <a class="page-link"
                                th:href="@{|/accommodation/list?page=${pageRequestDTO.page + 1}|}">다음</a>
