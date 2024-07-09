@@ -1,6 +1,6 @@
 package org.zerock.project_dib.restaurant;
 
-import lombok.extern.log4j.Log4j2;
+//import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,7 +10,7 @@ import org.zerock.project_dib.mapper.RestaurantImageMapper;
 import java.util.UUID;
 
 @SpringBootTest
-@Log4j2
+//@Log4j2
 public class RestaurantImageMapperTest {
     @Autowired
     private RestaurantImageMapper restaurantImageMapper;
@@ -32,7 +32,7 @@ public class RestaurantImageMapperTest {
         restaurantImageMapper.insertFile(restaurantImage);
 
         // 결과를 로그로 출력
-        log.info("Inserted RestaurantImage: " + restaurantImage);
+//        log.info("Inserted RestaurantImage: " + restaurantImage);
     }
 
 

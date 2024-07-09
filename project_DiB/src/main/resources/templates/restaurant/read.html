@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Restaurant Details</title>
+    <title>Restaurant read</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -17,69 +17,138 @@
             integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
             crossorigin="anonymous"></script>
 
+    <style>
+        .restaurant-link {
+            text-decoration: none;
+            color: black;
+        }
+
+        .header-shadow {
+            box-shadow: 0 4px 2px -2px gray !important; /* !important로 우선순위 높이기 */
+            z-index: 1000; /* 그림자가 다른 요소들보다 위에 표시되도록 함 */
+            position: relative; /* z-index가 적용되도록 position 속성 추가 */
+            margin-bottom: 20px; /* 헤더 아래 여백 추가 */
+        }
+
+        .btn-flex {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .card-body-footer-gap {
+            margin-bottom: 20px; /* 푸터와의 간격 추가 */
+        }
+
+    </style>
+
     <link rel="stylesheet" th:href="@{/css/restaurant_base.css}">
     <link rel="stylesheet" th:href="@{/css/restaurant_read.css}">
+
+    <div class="header-shadow">
+        <header th:replace="fragment/header :: headerFragment"></header>
+    </div>
 </head>
 
 <body>
-
-
 <div class="container mt-4">
+    <!-- 상단: 이미지 슬라이드, 레스토랑 이름, 설명 -->
     <div class="row">
         <div class="col-12">
-            <h2 th:text="${dto.rest_name}">Restaurant Name</h2>
-            <p th:text="${dto.rest_exp}">Restaurant Description</p>
-            <p th:text="${dto.rest_exp2}">Detailed Description</p>
-            <p><strong>Location:</strong> <span th:text="${dto.rest_loc}">Location</span></p>
-            <p><strong>Phone:</strong> <span th:text="${dto.rest_phone}">Phone</span></p>
-            <p><strong>Menu:</strong> <span th:text="${dto.rest_menu}">Menu</span></p>
-            <p><strong>Operating Hours:</strong> <span th:text="${dto.rest_time}">Operating Hours</span></p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <h3>Uploaded Images</h3>
             <div class="row">
-                <div th:each="file : ${dto.fileNames}" class="col-md-3 mb-3">
-                    <img th:src="@{|/view/${file}|}" class="img-fluid rounded" alt="Restaurant Image">
+                <div class="col-md-4">
+                    <!-- Bootstrap Carousel -->
+                    <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div th:each="file, iterStat : ${dto.fileNames}"
+                                 th:class="${iterStat.index == 0} ? 'carousel-item active' : 'carousel-item'">
+                                <img th:src="@{|/view/${file}|}" class="d-block w-100" alt="Restaurant Image">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel"
+                                data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel"
+                                data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <h2 th:text="${dto.rest_name}">Restaurant Name</h2>
+                    <p class="restaurant-description" th:text="${dto.rest_exp}">Restaurant Description</p>
+                    <p class="restaurant-description detailed-description" th:text="${dto.rest_exp2}">Detailed
+                        Description</p>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- 하단: 나머지 데이터 -->
+    <div class="row mt-4 details-container">
+        <div class="col-md-8">
+            <dl class="details-list">
+                <dt>위치</dt>
+                <dd th:text="${dto.rest_loc}">Location</dd>
+                <dt>매장 전화번호</dt>
+                <dd th:text="${dto.rest_phone}">Phone</dd>
+                <dt>메뉴</dt>
+                <dd class="detailed-menu" th:text="${dto.rest_menu}">Menu</dd>
+            </dl>
+        </div>
+        <div class="col-md-4">
+            <dl class="details-list">
+                <dt>영업 시간</dt>
+                <dd class="operating-hours" th:text="${dto.rest_time}">Operating Hours</dd>
+            </dl>
+        </div>
+    </div>
+
+    <!-- 하단: 버튼들 -->
     <div class="row mt-4">
         <div class="col-12">
-            <a href="/restaurant/list" class="btn btn-secondary">Back to List</a>
+            <a href="/restaurant/list" class="btn btn-secondary">목록</a>
             <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/restaurant/modify(rno=${dto.rno})}"
-               class="btn btn-primary">Modify</a>
+               class="btn btn-primary">수정</a>
         </div>
     </div>
 
-    <div class="row mt-4" >
-        <div class="col-12" >
-            <h3 sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">Reviews</h3>
-            <div id="reviewList">
-                <!-- 댓글 목록이 여기에 추가됩니다 -->
+    <!-- 하단: 리뷰 -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card card-body-footer-gap">
+                <div class="card-header">
+                    <h3 sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">맛집 톡</h3>
+                </div>
+                <div class="card-body">
+                    <div id="reviewList">
+                        <!-- 댓글 목록이 여기에 추가됩니다 -->
+                    </div>
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center" id="pagination"></ul>
+                    </nav>
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <form sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" th:action="@{/replies/addReply}"
+                                  method="post">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                                <div class="mb-3">
+                                    <label for="review_text" class="form-label"></label>
+                                    <textarea class="form-control" id="review_text" name="review_text" rows="3"
+                                              required></textarea>
+                                </div>
+                                <input type="hidden" name="rno" th:value="${dto.rno}">
+                                <div class="mb-3 no-margin-bottom">
+                                    <button type="submit" class="btn btn-primary">리뷰 등록</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <nav aria-label="Page navigation">
-                <ul class="pagination justify-content-center" id="pagination"></ul>
-            </nav>
-        </div>
-    </div>
-
-    <div class="row mt-4" >
-        <div class="col-12" >
-            <h3 sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">Add a Review</h3>
-            <form sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" th:action="@{/replies/addReply}" method="post">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                <div class="mb-3">
-                    <label for="review_text" class="form-label">Review</label>
-                    <textarea class="form-control" id="review_text" name="review_text" rows="3" required></textarea>
-                </div>
-                <input type="hidden" name="rno" th:value="${dto.rno}">
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-primary">Submit Review</button>
-                </div>
-            </form>
         </div>
     </div>
 </div>
@@ -98,19 +167,14 @@
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 </form>
 
-<footer class="py-5 text-center text-body-secondary bg-body-tertiary mt-4">
-    <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a
-            href="https://twitter.com/mdo">@mdo</a>.</p>
-    <p class="mb-0">
-        <a href="#">Back to top</a>
-    </p>
-</footer>
+<div th:replace="fragment/footer :: footerFragment"></div>
 
 <script th:inline="javascript">
     $(document).ready(function () {
         const rno = /*[[${dto.rno}]]*/ 0;
         const pageSize = 10;
         let currentPage = 1;
+
         function loadReviews(page) {
             $.get(`/replies/list/${rno}?page=${page}&size=${pageSize}`, function (data) {
                 let reviewList = $("#reviewList");
@@ -119,17 +183,21 @@
                 console.log(Object.values(data)[0])
                 Object.values(data)[0].dtoList.forEach(function (review) {
                     let reviewCard = `
-                        <div class="card mb-3">
+                        <div class="card mb-3 review-card">
                             <div class="card-body">
-                                <p class="card-text">${review.review_text}</p>
-                                <footer class="blockquote-footer">By ${review.mid}</footer>
+                                <p class="card-text">${review.review_text.replace(/\n/g, "<br>")}</p>
+                                <div class="small-footer">By ${review.mid}</div>
+                                <div class="btn-flex">
                     `;
-                    if(name === review.mid || name==='ADMIN'){
+                    if (name === review.mid || name === 'ADMIN') {
+                        reviewCard += `
+                                    <button class="btn btn-outline-primary btn-sm edit-btn" data-review-id="${review.review_no}" data-user-id="${review.mid}">수정</button>
+                                    <button class="btn btn-outline-danger btn-sm delete-btn" data-review-id="${review.review_no}" data-user-id="${review.mid}">삭제</button>
+                                `
+                    }
                     reviewCard += `
-                                    <button class="btn btn-primary btn-sm edit-btn" data-review-id="${review.review_no}" data-user-id="${review.mid}">Edit</button>
-                                    <button class="btn btn-danger btn-sm delete-btn" data-review-id="${review.review_no}" data-user-id="${review.mid}">Delete</button>
-                                `}
-                    reviewCard += `</div>
+                                </div>
+                            </div>
                         </div>`
                     reviewList.append(reviewCard);
                 });
@@ -179,7 +247,7 @@
         $("#reviewList").on("click", ".edit-btn", function () {
             let reviewId = $(this).data("review-id");
             let userId = $(this).data("user-id");
-            let reviewText = prompt("Edit your review:");
+            let reviewText = prompt("리뷰 수정:");
             if (reviewText) {
                 $("#updateReviewNo").val(reviewId);
                 $("#updateReviewText").val(reviewText);
@@ -192,14 +260,19 @@
         $("#reviewList").on("click", ".delete-btn", function () {
             let reviewId = $(this).data("review-id");
             let userId = $(this).data("user-id");
-            if (confirm("Are you sure you want to delete this review?")) {
+            if (confirm("정말 삭제하시겠습니까?")) {
                 $("#deleteReviewNo").val(reviewId);
                 $("#deletemid").val(userId);
                 $("#deleteForm").submit();
             }
         });
+
+        // 줄바꿈을 <br> 태그로 변환하여 표시
+        $(".operating-hours, .detailed-description, .detailed-menu").each(function () {
+            let text = $(this).text();
+            $(this).html(text.replace(/\n/g, "<br>"));
+        });
     });
 </script>
 </body>
-
 </html>

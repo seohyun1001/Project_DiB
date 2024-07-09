@@ -1,0 +1,91 @@
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.main-content {
+    margin-top: 20px;
+}
+
+h2 {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: auto;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.pagination {
+    margin-top: 20px;
+}
+
+.small-footer {
+    font-size: 0.875em; /* 폰트 크기 조정 */
+    color: #6c757d; /* 색상 조정 */
+    margin-top: -0.5em; /* 여백 조정 */
+    margin-bottom: 10px; /* 아래쪽 여백 추가 */
+}
+
+.carousel-item img {
+    height: 500px; /* 고정된 이미지 높이 */
+    width: 500px; /* 고정된 이미지 너비 */
+    object-fit: contain; /* 이미지가 잘리지 않고 고정 크기에 맞춤 */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(100%); /* 화살표 아이콘을 검은색으로 변경 */
+}
+
+.restaurant-description {
+    font-family: 'Arial', sans-serif; /* 상세 설명의 폰트 변경 */
+    font-size: 1.2em; /* 폰트 크기 조정 */
+}
+
+.block-label {
+    display: block;
+}
+
+.details-list dt {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.details-list dd {
+    margin-left: 0;
+    margin-bottom: 10px;
+}
+
+.col-md-8, .col-md-4 {
+    padding-top: 50px;
+    /*padding-left: 10px;*/
+    /*padding-right: 10px;*/
+}
+
+.details-container {
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+.review-card {
+    margin-bottom: 15px;
+}
+
+.no-margin-bottom {
+    margin-bottom: 0 !important;
+}
