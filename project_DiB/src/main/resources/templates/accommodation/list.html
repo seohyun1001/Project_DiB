@@ -20,7 +20,7 @@
                         <tbody>
                         <tr th:each="dto:${accList}">
                             <td>
-                                <div th:each="image : ${allImages}" th:if="${image != null and image.ano == dto.ano}">
+                                <div th:each="image : ${allImages}" th:if="${image != null and image.ano == dto.ano and image.ord == 0 }">
                                     <img style="width:300px; height: auto;" th:src="|/upload/${image.file_name}|">
                                 </div>
                             </td>

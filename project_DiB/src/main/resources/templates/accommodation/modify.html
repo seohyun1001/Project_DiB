@@ -17,9 +17,9 @@
                         <div th:if="${imageList != null && imageList.size() > 0}">
                                 <img style="width:500px; height: auto; cursor:pointer;" onclick="removeImage(event)"
                                      th:each="image : ${imageList}" th:src="|/upload/${image.file_name}|"
-                                    th:id="${image.ord}">
+                                    th:id="${image.uuid}">
                         </div>
-                        <input type="file" name="file" class="form-control">
+                        <input type="file" name="files" class="form-control" multiple>
                         <div class="input-group mb-3">
                             <input type="text" name="acc_name" class="form-control" th:value="${accInfo.acc_name}">
                         </div>
@@ -49,14 +49,13 @@
 
     function removeImage(event) {
 
-        const ord = event.target.id
+        const uuid = event.target.id
 
-        console.log(ord)
-        axios.post(`/accommodation/deleteImg/${ord}`)
+        console.log(uuid)
+        axios.post(`/accommodation/deleteImg/${uuid}`)
             .then(() => {
                 window.location.reload()
             })
-
     }
 
     document.querySelector(".btn-secondary").addEventListener("click", function (e) {

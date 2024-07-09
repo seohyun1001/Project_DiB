@@ -38,16 +38,20 @@
     </delete>
 
     <insert id="insertFile" >
-        insert into accommodation_img (uuid, file_name, ano)
-        values (#{uuid}, #{file_name}, #{ano})
+        insert into accommodation_img (uuid, file_name, ano, ord)
+        values (#{uuid}, #{file_name}, #{ano}, #{ord})
     </insert>
 
     <select id="findAllFilesByAno" resultType="org.zerock.project_dib.accommodation.domain.AccommodationImgVO">
         select * from accommodation_img where ano = #{ano}
     </select>
 
-    <select id="findAllFilesByOrd" resultType="org.zerock.project_dib.accommodation.domain.AccommodationImgVO">
-        select * from accommodation_img where ord = #{ord}
+    <select id="findFileByFirstOrd" resultType="org.zerock.project_dib.accommodation.domain.AccommodationImgVO">
+        select * from accommodation_img where ord = 0
+    </select>
+
+    <select id="findFileByUuid" resultType="org.zerock.project_dib.accommodation.domain.AccommodationImgVO">
+        select * from accommodation_img where uuid = #{uuid}
     </select>
 
     <select id="findAllFiles" resultType="org.zerock.project_dib.accommodation.domain.AccommodationImgVO">
@@ -55,7 +59,7 @@
     </select>
 
     <delete id="deleteFile">
-        delete from accommodation_img where ord = #{ord}
+        delete from accommodation_img where uuid = #{uuid}
     </delete>
 
 </mapper>
