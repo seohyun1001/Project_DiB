@@ -98,46 +98,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- 카드 개별 요소 끝 -->
-
-            <!--            <div class="row mt-3">-->
-            <!--                <div class="col">-->
-            <!--                    <div class="card">-->
-            <!--                        <div class="card-header">-->
-            <!--                            숙소 목록-->
-            <!--                        </div>-->
-            <!--                        <div class="card-body">-->
-
-            <!--                            <table class="table">-->
-            <!--                                <tbody>-->
-            <!--                                <tr th:each="dto:${accList}">-->
-            <!--                                    <td>-->
-            <!--                                        <div th:each="image : ${allImages}"-->
-            <!--                                             th:if="${image != null and image.ano == dto.ano}">-->
-            <!--                                            <img style="width:300px; height: auto;"-->
-            <!--                                                 th:src="|/upload/${image.file_name}|">-->
-            <!--                                        </div>-->
-            <!--                                    </td>-->
-            <!--                                    <th scope="row">[[${dto.ano}]]</th>-->
-            <!--                                    <td>-->
-            <!--                                        <a th:href="|@{/accommodation/view(ano=${dto.ano})}|">[[${dto.acc_name}]]</a>-->
-            <!--                                    </td>-->
-            <!--                                    <td>[[${dto.acc_exp}]]</td>-->
-            <!--                                    <td>[[${#temporals.format(dto.moddate, 'yyyy-MM-dd')}]]</td>-->
-            <!--                                </tr>-->
-            <!--                                </tbody>-->
-            <!--                            </table>-->
-            <!--                        </div>-->
-
-
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div>-->
-
-        </div>
-    </div>
-</div>
 
 <div class="container-fluid ">
     <div
@@ -160,6 +120,11 @@
         </nav>
     </div>
 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div th:replace="fragment/footer :: footerFragment"></div>
 
