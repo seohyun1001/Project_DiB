@@ -99,12 +99,12 @@
             <!-- 카드 개별 요소 -->
             <div class="col" th:each="tourist : ${list.dtoList}">
                 <div class="card shadow-sm">
-                    <svg class="bd-placeholder-img card-img-top imgbox" width="100%" height="225px"
+                    <svg class="bd-placeholder-img card-img-top imgbox" width="100%" height="250px"
                          xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder:"
                          preserveAspectRatio="xMidYMid slice" focusable="false">
                         <a th:href="@{/tourist/read/{tno}(tno=${tourist.tno})}">
                             <image th:if="${tourist.fileNames[0] != 's_null_null'}"
-                                   th:href="@{|/img/${tourist.fileNames[0]}|}" width="100%" height="100%"/>
+                                   th:href="@{|/img/${tourist.fileNames[0]}|}" width="100%"/>
                         </a>
 
                     </svg>
