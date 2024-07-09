@@ -22,13 +22,13 @@
                             <td>
                                 <div th:each="image, imageStat : ${allImages}"
                                      th:if="${image != null and image.ano == dto.ano}">
-                                    <a th:href="|@{/accommodation/view(ano=${dto.ano})}|">
+                                    <a th:href="|@{/accommodation/view(ano=${dto.ano}, page=${pageRequestDTO.page})}|">
                                         <img style="width:300px; height: auto;" th:src="|/upload/${image.file_name}|">
                                     </a>
                                 </div>
                             </td>
                             <td>
-                                <a th:href="|@{/accommodation/view(ano=${dto.ano})}|">[[${dto.acc_name}]]</a>
+                                <a th:href="|@{/accommodation/view(ano=${dto.ano}, page=${pageRequestDTO.page})}|">[[${dto.acc_name}]]</a>
                             </td>
                             <td>[[${dto.acc_exp}]]</td>
                             <td>[[${#temporals.format(dto.moddate, 'yyyy-MM-dd')}]]</td>
@@ -46,8 +46,8 @@
 
                         <li class="page-item"
                             th:each="i : ${#numbers.sequence(
-                                            pageRequestDTO.page > 5 ? pageRequestDTO.page - 5 : 1,
-                                            pageRequestDTO.page + 5 <= totalPage ? pageRequestDTO.page + 4 : totalPage)}"
+                pageRequestDTO.page > 5 ? pageRequestDTO.page - 5 : 1,
+                pageRequestDTO.page > 5 ? (pageRequestDTO.page + 4 <= totalPage ? pageRequestDTO.page + 4 : totalPage) : (totalPage < 10 ? totalPage : 10))}"
                             th:classappend="${pageRequestDTO.page == i} ? 'active'">
                             <a class="page-link" th:href="@{|/accommodation/list?page=${i}|}">[[${i}]]</a>
                         </li>
