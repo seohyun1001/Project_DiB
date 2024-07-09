@@ -9,7 +9,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.zerock.project_dib.accommodation.dto.*;
+import org.zerock.project_dib.accommodation.dto.AccommodationDTO;
+import org.zerock.project_dib.accommodation.dto.AccommodationImgDTO;
+import org.zerock.project_dib.accommodation.dto.PageRequestDTO;
+import org.zerock.project_dib.accommodation.dto.PageResponseDTO;
 import org.zerock.project_dib.accommodation.service.AccommodationService;
 
 import java.io.File;
@@ -31,30 +34,31 @@ public class AccommodationController {
     }
 
     @PostMapping("/register")
-    public String addAccommodation(AccFileDTO files, @Valid AccommodationImgDTO accommodationImgDTO, @Valid AccommodationDTO accommodationDTO) throws IOException, Exception {
+    public String addAccommodation(MultipartFile file, @Valid AccommodationImgDTO accommodationImgDTO, @Valid AccommodationDTO accommodationDTO, RedirectAttributes redirectAttributes, BindingResult bindingResult) throws IOException, Exception {
 
-        Long ano = accommodationService.insertAccommodation(accommodationDTO);
-
-        String fileName = null;
-        int i = 0;
-        for(MultipartFile file : files.getFiles()) {
-            if (!file.isEmpty()) {
-                String originalFilename = file.getOriginalFilename();
-                UUID uuid = UUID.randomUUID();
-                fileName = uuid + "_" + originalFilename;
-                file.transferTo(new File("c:\\upload\\" + fileName));
-                accommodationImgDTO.setFile_name(fileName);
-                accommodationImgDTO.setUuid(uuid.toString());
-                accommodationImgDTO.setAno(ano);
-                accommodationImgDTO.setOrd(i);
-                i++;
-                accommodationService.insertFile(accommodationImgDTO);
-            }
+        if (bindingResult.hasErrors()) {
+            log.info("has register error..........");
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            return "redirect:/accommodation/register";
         }
 
+        String fileName = null;
+        if (!file.isEmpty()) {
+            String originalFilename = file.getOriginalFilename();
+            UUID uuid = UUID.randomUUID();
+            fileName = uuid + "_" + originalFilename;
+            file.transferTo(new File("c:\\upload\\" + fileName));
+            accommodationImgDTO.setFile_name(fileName);
+            accommodationImgDTO.setUuid(uuid.toString());
+        }
+
+        log.info(accommodationDTO + "\n---------------------------------------------------\n" + accommodationImgDTO);
+
+
+        Long ano = accommodationService.insertAccommodation(accommodationDTO);
         accommodationImgDTO.setAno(ano);
         log.info(accommodationImgDTO);
-
+        accommodationService.insertFile(accommodationImgDTO);
 
         return "redirect:/accommodation/list";
     }
@@ -89,22 +93,25 @@ public class AccommodationController {
     }
 
     @PostMapping("/modify")
-    public String modify(AccFileDTO files, Long ano, @Valid AccommodationImgDTO accommodationImgDTO, @Valid AccommodationDTO accommodationDTO) throws IOException {
+    public String modify(MultipartFile file, Long ano, @Valid AccommodationImgDTO accommodationImgDTO, @Valid AccommodationDTO accommodationDTO, RedirectAttributes redirectAttributes, BindingResult bindingResult) throws IOException {
+
+        if (bindingResult.hasErrors()) {
+            log.info("has modify error........................");
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            return "redirect:/accommodation/modify?ano=" + ano;
+        }
 
         String fileName = null;
-        int i = 0;
-        for(MultipartFile file : files.getFiles()) {
-            if (!file.isEmpty()) {
-                String originalFilename = file.getOriginalFilename();
-                UUID uuid = UUID.randomUUID();
-                fileName = uuid + "_" + originalFilename;
-                file.transferTo(new File("c:\\upload\\" + fileName));
-                accommodationImgDTO.setFile_name(fileName);
-                accommodationImgDTO.setUuid(uuid.toString());
-                accommodationImgDTO.setOrd(i);
-                i++;
-                accommodationService.insertFile(accommodationImgDTO);
-            }
+        if (!file.isEmpty()) {
+            String originalFilename = file.getOriginalFilename();
+            UUID uuid = UUID.randomUUID();
+            fileName = uuid + "_" + originalFilename;
+            file.transferTo(new File("c:\\upload\\" + fileName));
+            accommodationImgDTO.setFile_name(fileName);
+            accommodationImgDTO.setUuid(uuid.toString());
+            accommodationImgDTO.setAno(ano);
+
+            accommodationService.insertFile(accommodationImgDTO);
         }
 
         accommodationService.modify(accommodationDTO);

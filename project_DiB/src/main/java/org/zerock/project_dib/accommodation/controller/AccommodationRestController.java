@@ -16,10 +16,10 @@ public class AccommodationRestController {
 
     private final AccommodationService accommodationService;
 
-    @PostMapping("/deleteImg/{uuid}")
-    public void deleteImg(@PathVariable String uuid) {
+    @PostMapping("/deleteImg/{ord}")
+    public void deleteImg(@PathVariable int ord) {
 
-        String fileName = accommodationService.findFileByUuid(uuid).getFile_name();
+        String fileName = accommodationService.findAllFileByOrd(ord).getFile_name();
 
         File fileToDelete = new File("c:\\upload\\" + fileName);
 
@@ -29,7 +29,8 @@ public class AccommodationRestController {
             System.out.println("파일 삭제 실패: " + fileToDelete.getName());
         }
 
-        accommodationService.removeFile(uuid);
+        accommodationService.removeFile(ord);
+
     }
 
 }

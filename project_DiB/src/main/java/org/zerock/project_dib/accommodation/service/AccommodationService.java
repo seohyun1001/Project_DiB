@@ -25,12 +25,10 @@ public interface AccommodationService {
 
     List<AccommodationImgDTO> findAllFileByAno(Long ano);
 
-    AccommodationImgDTO findAllFileByOrd();
-
-    AccommodationImgDTO findFileByUuid(String uuid);
+    AccommodationImgDTO findAllFileByOrd(int ord);
 
     List<AccommodationImgDTO> findAllFiles();
 
-    void removeFile(String uuid);
+    void removeFile(int ord);
 
 }
