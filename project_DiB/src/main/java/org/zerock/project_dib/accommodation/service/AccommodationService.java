@@ -33,4 +33,7 @@ public interface AccommodationService {
 
     void removeFile(String uuid);
 
+    AccommodationImgDTO findOrdByAno(Long ano);
+
 }
+

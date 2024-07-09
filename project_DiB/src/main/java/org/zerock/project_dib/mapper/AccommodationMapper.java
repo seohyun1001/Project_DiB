@@ -38,4 +38,6 @@ public interface AccommodationMapper {
 
     void deleteFile(String uuid);
 
+    AccommodationImgVO findOrdByAno(Long ano);
+
 }

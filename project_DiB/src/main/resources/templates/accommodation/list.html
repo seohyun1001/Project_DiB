@@ -20,9 +20,14 @@
                         <tbody>
                         <tr th:each="dto:${accList}">
                             <td>
-                                <div th:each="image : ${allImages}" th:if="${image != null and image.ano == dto.ano and image.ord == 0 }">
-                                    <img style="width:300px; height: auto;" th:src="|/upload/${image.file_name}|">
-                                </div>
+<!--                                <div th:each="image : ${allImages}" th:if="${image != null and image.ano == dto.ano and image.ord == 0 }">-->
+<!--                                    <img style="width:300px; height: auto;" th:src="|/upload/${image.file_name}|">-->
+<!--                                </div>-->
+
+<!--                                ord 값이 가장 큰 사진을 출력-->
+<!--                                <div th:if="${maxOrdImage != null}">-->
+<!--                                    <img style="width:300px; height:auto;" th:src="|/upload/${maxOrdImage.fileName}|">-->
+<!--                                </div>-->
                             </td>
                             <th scope="row">[[${dto.ano}]]</th>
                             <td>
