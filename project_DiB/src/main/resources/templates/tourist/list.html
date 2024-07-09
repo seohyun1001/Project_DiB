@@ -84,7 +84,7 @@
                          preserveAspectRatio="xMidYMid slice" focusable="false">
                         <a th:href="@{/tourist/read/{tno}(tno=${tourist.tno})}">
                             <image th:if="${tourist.fileNames[0] != 's_null_null'}"
-                                   th:href="@{|/img/${tourist.fileNames[0]}|}" width="100%"/>
+                                   th:href="@{|/img/${#strings.replace(tourist.fileNames[0], 's_', '')}|}" width="100%"/> <!-- 's_'를 제외하도록 변경 -->
                         </a>
 
                     </svg>
