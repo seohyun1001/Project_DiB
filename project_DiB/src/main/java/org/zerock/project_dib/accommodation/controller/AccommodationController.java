@@ -58,7 +58,6 @@ public class AccommodationController {
         accommodationImgDTO.setAno(ano);
         log.info(accommodationImgDTO);
 
-
         return "redirect:/accommodation/list";
     }
 
