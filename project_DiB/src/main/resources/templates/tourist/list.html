@@ -62,30 +62,11 @@
         </div>
 
     </div>
-<!--    <button sec:authorize = "hasRole('ROLE_ADMIN')" id="adminButton" class="admin-button">게시글 등록</button>-->
+    <!--    <button sec:authorize = "hasRole('ROLE_ADMIN')" id="adminButton" class="admin-button">게시글 등록</button>-->
 
-    <button  id="adminButton" class="admin-button">게시글 등록</button>
+    <button id="adminButton" class="admin-button">게시글 등록</button>
 
 </nav> <!-- 검색 창 끝-->
-
-
-<!-- reference -->
-<!-- <div class="container my-5">
-    <div class="bg-body-tertiary p-5 rounded">
-        <div class="col-sm-8 py-5 mx-auto">
-            <h1 class="display-5 fw-normal">Navbar with offcanvas examples</h1>
-            <p class="fs-5">This example shows how responsive offcanvas menus work within the navbar. For positioning of
-                navbars, checkout the <a href="/docs/5.3/examples/navbar-static/">top</a> and <a
-                    href="/docs/5.3/examples/navbar-fixed/">fixed top</a> examples.</p>
-            <p>From the top down, you'll see a dark navbar, light navbar and a responsive navbar—each with offcanvases
-                built in. Resize your browser window to the large breakpoint to see the toggle for the offcanvas.</p>
-            <p>
-                <a class="btn btn-primary" href="/docs/5.3/components/navbar/#offcanvas" role="button">Learn more about
-                    offcanvas navbars &raquo;</a>
-            </p>
-        </div>
-    </div>
-</div> -->
 
 
 <!-- 카드 앨범 부분 -->
@@ -99,48 +80,22 @@
                     <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
                          xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder:"
                          preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <!--                        <rect width="100%" height="100%" fill="#55595c">-->
-                        <!--                            -->
-                        <!--                        </rect>-->
                         <a th:href="@{/tourist/read/{tno}(tno=${tourist.tno})}">
                             <image th:if="${tourist.fileNames[0] != 's_null_null'}"
                                    th:href="@{|/img/${tourist.fileNames[0]}|}" width="100%" height="100%"/>
                         </a>
-                        <!--                        <div class="col-md-4">-->
-                        <!--                            <div th:if="${tourist.fileNames != null && tourist.fileNames.size() > 0}">-->
-                        <!--                                <div th:each="file, iterStat : ${tourist.fileNames}">-->
-
-                        <!--                                </div>-->
-                        <!--                            </div>-->
-                        <!--                        </div>-->
-
-
-                        <!--                        <div th:if="${dto.touristImages != null && dto.boardImages.size() > 0}">-->
-                        <!--                            <img style="withd:100px" th:each="boardImage : ${dto.boardImages}"-->
-                        <!--                                 th:src="|/view/s_${boardImage.uuid}_${boardImage.fileName}|">-->
-                        <!--                        </div>-->
-
-
                     </svg>
                     <div class="card-body">
                         <a th:href="@{/tourist/read/{tno}(tno=${tourist.tno})}" class="card-text"
                            th:text="${tourist.tourName}"></a>
-<!--                        <div class="d-flex justify-content-between align-items-center">-->
-<!--                            <div class="btn-group">-->
-<!--                                <button type="button" class="btn btn-sm btn-outline-secondary">버튼1</button>-->
-<!--                                <button type="button" class="btn btn-sm btn-outline-secondary">버튼2</button>-->
-<!--                            </div>-->
-
-                            <small class="text-body-secondary">text ex</small>
-                        </div>
+                        <a th:text="${tourist.tourAddr}"></a>
                     </div>
                 </div>
             </div>
-            <!-- 카드 개별 요소 끝 -->
-
         </div>
+        <!-- 카드 개별 요소 끝 -->
     </div>
+</div>
 </div> <!-- album end -->
 
 
@@ -187,7 +142,7 @@
         document.getElementById('adminButton').style.display = 'block';
 
         // Add click event listener to the admin button
-        document.getElementById('adminButton').addEventListener('click', function() {
+        document.getElementById('adminButton').addEventListener('click', function () {
             // Redirect to tourist/registerregDate
             window.location.href = '/tourist/register';
         });
