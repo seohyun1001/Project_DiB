@@ -4,6 +4,7 @@ import org.zerock.project_dib.restaurant.dto.PageRequestDTO;
 import org.zerock.project_dib.restaurant.dto.PageResponseDTO;
 import org.zerock.project_dib.restaurant.dto.RestaurantReplyDTO;
 
+
 public interface RestaurantReplyService {
     int registerReply(RestaurantReplyDTO restaurantReplyDTO);
     void modifyReply(RestaurantReplyDTO restaurantReplyDTO);

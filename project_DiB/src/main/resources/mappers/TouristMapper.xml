@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.project_dib.mapper.TouristMapper">
+    <resultMap id="TouristMap" type="org.zerock.project_dib.tourist.domain.Tourist">
+        <id property="tno" column="tno"/>
+        <result property="tourName" column="tourName"/>
+        <result property="tourAddr" column="tourAddr"/>
+        <result property="tourOpentime" column="tourOpentime"/>
+        <result property="tourClosetime" column="tourClosetime"/>
+        <result property="tourParking" column="tourParking"/>
+        <result property="tourContent" column="tourContent"/>
+        <result property="modDate" column="modDate"/>
+        <result property="regDate" column="regDate"/>
+        <collection property="imageSet" ofType="org.zerock.project_dib.tourist.domain.TouristImg">
+            <id property="uuid" column="uuid"/>
+            <result property="fileName" column="fileName"/>
+            <result property="ord" column="ord"/>
+            <result property="tno" column="tno"/>
+        </collection>
+    </resultMap>
+
+    <select id="getList" resultType="org.zerock.project_dib.tourist.domain.Tourist">
+        SELECT *
+        FROM tourist
+    </select>
+
+    <select id="read" parameterType="int" resultType="org.zerock.project_dib.tourist.domain.Tourist">
+        SELECT *
+        FROM tourist
+        WHERE tno = #{tno}
+    </select>
+
+    <insert id="insert" parameterType="org.zerock.project_dib.tourist.domain.Tourist" useGeneratedKeys="true" keyProperty="tno">
+        INSERT INTO tourist (tourName, tourAddr, tourOpentime, tourClosetime, tourParking, tourContent
+                             )
+        VALUES (#{tourName}, #{tourAddr}, #{tourOpentime}, #{tourClosetime}, #{tourParking}, #{tourContent}
+                )
+    </insert>
+
+    <update id="update" parameterType="org.zerock.project_dib.tourist.domain.Tourist">
+        UPDATE tourist
+        SET tourName      = #{tourName},
+            tourAddr      = #{tourAddr},
+            tourOpentime  = #{tourOpentime},
+            tourClosetime = #{tourClosetime},
+            tourParking   = #{tourParking},
+            tourContent   = #{tourContent},
+            modDate        = CURRENT_TIMESTAMP()
+
+        WHERE tno = #{tno}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE
+        FROM tourist
+        WHERE tno = #{tno}
+    </delete>
+
+    <select id="getImgList" parameterType="int" resultType="org.zerock.project_dib.tourist.domain.TouristImg">
+        SELECT *
+        FROM tourist_img
+        WHERE tno = #{tno}
+        ORDER BY ord
+    </select>
+
+    <insert id="insertImg" parameterType="org.zerock.project_dib.tourist.domain.TouristImg">
+        INSERT INTO tourist_img (uuid, fileName, tno, ord)
+        VALUES (#{uuid}, #{fileName}, #{tno}, #{ord})
+    </insert>
+
+    <delete id="deleteImgs" parameterType="int">
+        DELETE
+        FROM tourist_img
+        WHERE tno = #{tno}
+    </delete>
+
+    <update id="updateImgs" parameterType="org.zerock.project_dib.tourist.domain.TouristImg">
+        UPDATE tourist_img
+        SET fileName = #{fileName}, ord = #{ord}
+        WHERE uuid = #{uuid} AND tno = #{tno}
+    </update>
+
+    <select id="search" resultMap="TouristMap">
+        SELECT t.*, ti.uuid, ti.fileName, ti.ord, ti.tno
+        from tourist t
+        left join tourist_img ti ON t.tno = ti.tno
+        <where>
+            (ti.ord = 0 or ti.ord is null)
+        <if test='pageRequestDTO.filter != null and pageRequestDTO.filter.equals("n")'>
+            AND t.tourName LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+        </if>
+        <if test='pageRequestDTO.filter != null and pageRequestDTO.filter.equals("a")'>
+            AND t.tourAddr LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+        </if>
+        </where>
+        LIMIT #{pageRequestDTO.offset}, #{pageRequestDTO.size}
+    </select>
+
+    <select id="countTotal" resultType="int">
+        select count(*) from tourist
+        <where>
+            <if test='pageRequestDTO.filter != null and pageRequestDTO.filter.equals("n")'>
+                OR tourName LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+            </if>
+            <if test='pageRequestDTO.filter != null and pageRequestDTO.filter.equals("a")'>
+                OR tourAddr LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+            </if>
+
+        </where>
+    </select>
+
+</mapper>

@@ -4,8 +4,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.zerock.project_dib.accommodation.domain.AccommodationImgVO;
 import org.zerock.project_dib.accommodation.domain.AccommodationVO;
 import org.zerock.project_dib.accommodation.dto.AccommodationDTO;
+import org.zerock.project_dib.accommodation.dto.AccommodationImgDTO;
+import org.zerock.project_dib.accommodation.dto.PageRequestDTO;
+import org.zerock.project_dib.accommodation.dto.PageResponseDTO;
 import org.zerock.project_dib.mapper.AccommodationMapper;
 
 import java.util.List;
@@ -21,15 +25,17 @@ public class AccommodationServiceImpl implements AccommodationService {
     private final AccommodationMapper accommodationMapper;
 
     @Override
-    public void insertAccommodation(AccommodationDTO accommodationDTO) {
+    public Long insertAccommodation(AccommodationDTO accommodationDTO) {
 
         AccommodationVO accommodationVO = modelMapper.map(accommodationDTO, AccommodationVO.class);
         accommodationMapper.insertAccommodation(accommodationVO);
 
+        return accommodationVO.getAno();
     }
 
     @Override
     public List<AccommodationDTO> accList() {
+
         List<AccommodationDTO> result = accommodationMapper.findAll().stream()
                 .map(vo -> modelMapper.map(vo, AccommodationDTO.class))
                 .collect(Collectors.toList());
@@ -38,7 +44,30 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     @Override
-    public AccommodationDTO accInfo(int ano) {
+    public PageResponseDTO<AccommodationDTO> search(PageRequestDTO pageRequestDTO) {
+
+        List<AccommodationVO> voList = accommodationMapper.search(pageRequestDTO);
+        List<AccommodationDTO> dtoList = voList.stream()
+                .map(vo -> modelMapper.map(vo, AccommodationDTO.class))
+                .collect(Collectors.toList());
+
+        int total = accommodationMapper.getTotalCount(pageRequestDTO);
+
+        return PageResponseDTO.<AccommodationDTO>builder()
+                .dtoList(dtoList)
+                .total(total)
+                .page(pageRequestDTO.getPage())
+                .size(pageRequestDTO.getSize())
+                .start((int) (Math.ceil(pageRequestDTO.getPage() / 10.0)) * 10 - 9)
+                .end((int) (Math.ceil(pageRequestDTO.getPage() / 10.0)) * 10)
+                .prev((int) (Math.ceil(pageRequestDTO.getPage() / 10.0)) * 10 - 9 > 1)
+                .next(total > (int) (Math.ceil(pageRequestDTO.getPage() / 10.0)) * 10)
+                .totalPage((int) Math.ceil((double) total / pageRequestDTO.getSize()))
+                .build();
+    }
+
+    @Override
+    public AccommodationDTO accInfo(Long ano) {
 
         return modelMapper.map(accommodationMapper.selectOne(ano), AccommodationDTO.class);
     }
@@ -51,9 +80,50 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     @Override
-    public void delete(int ano) {
+    public void remove(Long ano) {
 
         accommodationMapper.delete(ano);
+
+    }
+
+    @Override
+    public void insertFile(AccommodationImgDTO accommodationImgDTO) {
+
+        AccommodationImgVO accommodationImgVO = modelMapper.map(accommodationImgDTO, AccommodationImgVO.class);
+        accommodationMapper.insertFile(accommodationImgVO);
+
+    }
+
+    @Override
+    public List<AccommodationImgDTO> findAllFileByAno(Long ano) {
+
+        List<AccommodationImgDTO> result = accommodationMapper.findAllFilesByAno(ano).stream()
+                .map(vo -> modelMapper.map(vo, AccommodationImgDTO.class))
+                .collect(Collectors.toList());
+
+        return result;
+    }
+
+    @Override
+    public AccommodationImgDTO findAllFileByOrd(int ord) {
+
+        return modelMapper.map(accommodationMapper.findAllFilesByOrd(ord), AccommodationImgDTO.class);
+    }
+
+    @Override
+    public  List<AccommodationImgDTO> findAllFiles() {
+
+        List<AccommodationImgDTO> result = accommodationMapper.findAllFiles().stream()
+                .map(vo -> modelMapper.map(vo, AccommodationImgDTO.class))
+                .collect(Collectors.toList());
+
+        return result;
+    }
+
+    @Override
+    public void removeFile(int ord) {
+
+        accommodationMapper.deleteFile(ord);
 
     }
 

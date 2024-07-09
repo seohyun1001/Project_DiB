@@ -1,16 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org"
-      layout:decorate="~{/layout/basic.html}">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>[[${accInfo.acc_name}]]</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/touristStyle.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<div layout:fragment="content">
+
+<body class="d-flex align-items-center">
+<div th:replace="fragment/header :: headerFragment"></div>
     <div class="row mt-3">
         <div class="col">
-            <form action="/accommodation/modify" method="post">
+            <form action="/accommodation/modify" method="post" enctype="multipart/form-data">
+
+                <input type="hidden" id="anoValue" name="ano" th:value="${accInfo.ano}">
+
                 <div class="card">
                     <div class="card-body">
+                        <div th:if="${imageList != null && imageList.size() > 0}">
+                                <img style="width:500px; height: auto; cursor:pointer;" onclick="removeImage(event)"
+                                     th:each="image : ${imageList}" th:src="|/upload/${image.file_name}|"
+                                    th:id="${image.ord}">
+                        </div>
+                        <input type="file" name="file" class="form-control">
                         <div class="input-group mb-3">
                             <input type="text" name="acc_name" class="form-control" th:value="${accInfo.acc_name}">
                         </div>
@@ -22,28 +35,48 @@
                             <span class="input-group-text">주소</span>
                             <input type="text" name="acc_loc" class="form-control" th:value="${accInfo.acc_loc}">
                         </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">전화번호</span>
+                            <input type="text" name="acc_phone" class="form-control" th:value="${accInfo.acc_phone}">
+                        </div>
                     </div>
                 </div>
-                <button type="button" class="btn-secondary">목록으로 돌아가기</button>
+                <button type="button" class="btn-secondary">상세보기로 돌아가기</button>
                 <button type="submit" class="btn-primary">수정 완료</button>
             </form>
         </div>
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/js/restaurantReply.js"></script>
-</div>
+    </div>
+
+<div th:replace="fragment/footer :: footerFragment"></div>
+<script src="/js/reply.js"></script>
 <script layout:fragment="script" th:inline="javascript">
+
+    function removeImage(event) {
+
+        const ord = event.target.id
+
+        console.log(ord)
+        axios.post(`/accommodation/deleteImg/${ord}`)
+            .then(() => {
+                window.location.reload()
+            })
+
+    }
 
     document.querySelector(".btn-secondary").addEventListener("click", function (e) {
 
         e.preventDefault()
         e.stopPropagation()
 
-        self.location = '/accommodation/list'
+        const ano = document.getElementById('anoValue').value
+
+        self.location = '/accommodation/view?ano=' + ano
 
     }, false)
 
 </script>
+</body>
 </html>
 
 

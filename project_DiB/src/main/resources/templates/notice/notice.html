@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko"
-      xmlns:th="http://www.thymeleaf.org"
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
@@ -78,16 +77,13 @@
                         </li>
                     </ul>
                 </nav>
-
-
                 <!-- 관리자만 공지사항 등록 버튼을 볼 수 있도록 설정 -->
                 <a sec:authorize="hasRole('ROLE_ADMIN')" href="/notice/register" class="register-notice-btn">공지사항 등록</a>
-
             </div>
         </div>
     </div>
 </main>
-<!-- jQuery -->
+<!-- jQuery를 추가합니다 -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <div th:replace="fragment/footer :: footerFragment"></div>

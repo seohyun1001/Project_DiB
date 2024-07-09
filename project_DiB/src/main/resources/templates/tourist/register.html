@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Tourist Data</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/touristStyle.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+
+<body class="d-flex align-items-center">
+<div th:replace="fragment/header :: headerFragment"></div>
+
+<form action="/tourist/register" method="post" enctype="multipart/form-data">
+    <div class="align-middle">
+        <div class="container-fluid d-flex justify-content-center">
+            <div class="row mt-3">
+                <div class="col">
+                    <h2 class="h3 mb-3 fw-normal">
+                        Tourist Register
+                    </h2>
+                    <div class="card align-self-center">
+                        <div class="card-body">
+                            <div class="col-12 pb-2">
+                                <label class="form-label" for="tourName">관광지명:</label>
+                                <input type="text" id="tourName" name="tourName" class="form-control" required>
+                            </div>
+
+                            <div class="col-12 pb-2">
+                                <label class="form-label" for="tourAddr">관광지 주소:</label>
+                                <input type="text" id="tourAddr" name="tourAddr" class="form-control" required>
+                            </div>
+
+                            <div class="col-12 pb-2">
+                                <label class="form-label" for="tourOpentime">개장 시간:</label>
+                                <input type="text" id="tourOpentime" name="tourOpentime" class="form-control" required>
+                            </div>
+
+                            <div class="col-12 pb-2">
+                                <label class="form-label" for="tourClosetime">마감 시간:</label>
+                                <input type="text" id="tourClosetime" name="tourClosetime" class="form-control"
+                                       required>
+                            </div>
+
+                            <div class="col-12 pb-2">
+                                <label class="form-label" for="tourParking">주차 여부:</label>
+                                <input type="checkbox" id="tourParking" name="tourParking">
+                            </div>
+
+                            <div class="col-12 pb-2">
+                                <label class="form-label" for="tourContent">관광지 설명:</label>
+                                <textarea id="tourContent" name="tourContent" rows="4" class="form-control"
+                                          required></textarea>
+                            </div>
+
+                            <div class="col-12 pb-2">
+                                <label for="file">관광지 이미지:</label><br>
+                                <input type="file" id="file" name="file" accept="image/*" required>
+                            </div>
+
+                            <div class="my-4">
+                                <div class="float-end">
+                                    <button type="submit" class="btn-primary">등록하기</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<div th:replace="fragment/footer :: footerFragment"></div>
+
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

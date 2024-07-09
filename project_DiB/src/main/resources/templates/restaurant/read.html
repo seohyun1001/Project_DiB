@@ -56,7 +56,7 @@
 
     <div class="row mt-4" >
         <div class="col-12" >
-            <h3>Reviews</h3>
+            <h3 sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">Reviews</h3>
             <div id="reviewList">
                 <!-- 댓글 목록이 여기에 추가됩니다 -->
             </div>
@@ -68,8 +68,8 @@
 
     <div class="row mt-4" >
         <div class="col-12" >
-            <h3>Add a Review</h3>
-            <form th:action="@{/replies/addReply}" method="post">
+            <h3 sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">Add a Review</h3>
+            <form sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" th:action="@{/replies/addReply}" method="post">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                 <div class="mb-3">
                     <label for="review_text" class="form-label">Review</label>
