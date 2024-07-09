@@ -62,4 +62,9 @@
         delete from accommodation_img where uuid = #{uuid}
     </delete>
 
+    <select id="findOrdByAno" resultType="org.zerock.project_dib.accommodation.domain.AccommodationImgVO">
+        select * from accommodation_img where ano = #{ano} order by ord DESC LIMIT 1
+    </select>
+
+
 </mapper>

@@ -14,6 +14,7 @@ import org.zerock.project_dib.accommodation.service.AccommodationService;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -69,10 +70,17 @@ public class AccommodationController {
 
         PageResponseDTO<AccommodationDTO> responseDTO = accommodationService.search(pageRequestDTO);
 
+        List<AccommodationImgDTO> allImages = accommodationService.findAllFiles();
+
+        // ord 값이 가장 큰 이미지
+        AccommodationImgDTO maxOrdImage = allImages.stream()
+                .max(Comparator.comparingInt(AccommodationImgDTO::getOrd))
+                .orElse(null);
+
         model.addAttribute("accList", responseDTO.getDtoList());
         model.addAttribute("totalPage", responseDTO.getTotalPage());
         model.addAttribute("pageRequestDTO", pageRequestDTO);
-        model.addAttribute("allImages", accommodationService.findAllFiles());
+        model.addAttribute("maxOrdImage", maxOrdImage);
     }
 
     @GetMapping({"/view", "/modify"})
@@ -91,8 +99,10 @@ public class AccommodationController {
     @PostMapping("/modify")
     public String modify(AccFileDTO files, Long ano, @Valid AccommodationImgDTO accommodationImgDTO, @Valid AccommodationDTO accommodationDTO) throws IOException {
 
+        AccommodationImgDTO fileList = accommodationService.findOrdByAno(ano);
+
         String fileName = null;
-        int i = 0;
+        int i = fileList.getOrd() + 1;
         for(MultipartFile file : files.getFiles()) {
             if (!file.isEmpty()) {
                 String originalFilename = file.getOriginalFilename();
