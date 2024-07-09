@@ -55,7 +55,7 @@
         where rno = #{rno}
     </delete>
 
-    <select id="search" resultMap="RestaurantMap">
+    <select id="searchRest" resultMap="RestaurantMap">
         SELECT r.*, ri.uuid, ri.file_name, ri.ord, ri.rno
         FROM restaurant r
         LEFT JOIN restaurant_img ri ON r.rno = ri.rno

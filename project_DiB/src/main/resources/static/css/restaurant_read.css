@@ -33,12 +33,14 @@ p {
 .pagination {
     margin-top: 20px;
 }
+
 .small-footer {
     font-size: 0.875em; /* 폰트 크기 조정 */
     color: #6c757d; /* 색상 조정 */
     margin-top: -0.5em; /* 여백 조정 */
     margin-bottom: 10px; /* 아래쪽 여백 추가 */
 }
+
 .carousel-item img {
     height: 500px; /* 고정된 이미지 높이 */
     width: 500px; /* 고정된 이미지 너비 */
@@ -78,4 +80,12 @@ p {
 .details-container {
     margin-left: 200px;
     margin-right: 200px;
+}
+
+.review-card {
+    margin-bottom: 15px;
+}
+
+.no-margin-bottom {
+    margin-bottom: 0 !important;
 }

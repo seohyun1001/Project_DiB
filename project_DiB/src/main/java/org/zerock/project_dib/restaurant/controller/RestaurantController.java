@@ -210,7 +210,7 @@ public class RestaurantController {
         restaurantService.update(restaurantDTO);
         redirectAttributes.addFlashAttribute("result", "modified");
         redirectAttributes.addAttribute("rno", restaurantDTO.getRno());
-        return "redirect:/restaurant/list";
+        return "redirect:/restaurant/read?";
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")

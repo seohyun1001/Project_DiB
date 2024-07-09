@@ -17,7 +17,7 @@ public interface RestaurantMapper {
     Restaurant readOne(int rno);
     void update(Restaurant restaurant);
     void delete(int rno);
-    List<Restaurant> search(@Param("pageRequestDTO") PageRequestDTO pageRequestDTO);
+    List<Restaurant> searchRest(@Param("pageRequestDTO") PageRequestDTO pageRequestDTO);
     int countTotal(@Param("pageRequestDTO") PageRequestDTO pageRequestDTO);
 
     void deleteImages(int rno);

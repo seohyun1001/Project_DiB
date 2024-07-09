@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
@@ -27,6 +28,16 @@
             z-index: 1000; /* 그림자가 다른 요소들보다 위에 표시되도록 함 */
             position: relative; /* z-index가 적용되도록 position 속성 추가 */
             margin-bottom: 20px; /* 헤더 아래 여백 추가 */
+        }
+
+        .btn-flex {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .card-body-footer-gap {
+            margin-bottom: 20px; /* 푸터와의 간격 추가 */
         }
 
     </style>
@@ -69,7 +80,8 @@
                 <div class="col-md-8">
                     <h2 th:text="${dto.rest_name}">Restaurant Name</h2>
                     <p class="restaurant-description" th:text="${dto.rest_exp}">Restaurant Description</p>
-                    <p class="restaurant-description detailed-description" th:text="${dto.rest_exp2}">Detailed Description</p>
+                    <p class="restaurant-description detailed-description" th:text="${dto.rest_exp2}">Detailed
+                        Description</p>
                 </div>
             </div>
         </div>
@@ -84,7 +96,7 @@
                 <dt>매장 전화번호</dt>
                 <dd th:text="${dto.rest_phone}">Phone</dd>
                 <dt>메뉴</dt>
-                <dd th:text="${dto.rest_menu}">Menu</dd>
+                <dd class="detailed-menu" th:text="${dto.rest_menu}">Menu</dd>
             </dl>
         </div>
         <div class="col-md-4">
@@ -107,31 +119,36 @@
     <!-- 하단: 리뷰 -->
     <div class="row mt-4">
         <div class="col-12">
-            <h3 sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">맛집 톡</h3>
-            <div id="reviewList">
-                <!-- 댓글 목록이 여기에 추가됩니다 -->
+            <div class="card card-body-footer-gap">
+                <div class="card-header">
+                    <h3 sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">맛집 톡</h3>
+                </div>
+                <div class="card-body">
+                    <div id="reviewList">
+                        <!-- 댓글 목록이 여기에 추가됩니다 -->
+                    </div>
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center" id="pagination"></ul>
+                    </nav>
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <form sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" th:action="@{/replies/addReply}"
+                                  method="post">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                                <div class="mb-3">
+                                    <label for="review_text" class="form-label"></label>
+                                    <textarea class="form-control" id="review_text" name="review_text" rows="3"
+                                              required></textarea>
+                                </div>
+                                <input type="hidden" name="rno" th:value="${dto.rno}">
+                                <div class="mb-3 no-margin-bottom">
+                                    <button type="submit" class="btn btn-primary">리뷰 등록</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <nav aria-label="Page navigation">
-                <ul class="pagination justify-content-center" id="pagination"></ul>
-            </nav>
-        </div>
-    </div>
-
-    <!-- 하단: 리뷰 추가 -->
-    <div class="row mt-4">
-        <div class="col-12">
-            <a sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"></a>
-            <form sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" th:action="@{/replies/addReply}" method="post">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                <div class="mb-3">
-                    <label for="review_text" class="form-label"></label>
-                    <textarea class="form-control" id="review_text" name="review_text" rows="3" required></textarea>
-                </div>
-                <input type="hidden" name="rno" th:value="${dto.rno}">
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-primary">리뷰 등록</button>
-                </div>
-            </form>
         </div>
     </div>
 </div>
@@ -166,18 +183,21 @@
                 console.log(Object.values(data)[0])
                 Object.values(data)[0].dtoList.forEach(function (review) {
                     let reviewCard = `
-                        <div class="card mb-3">
+                        <div class="card mb-3 review-card">
                             <div class="card-body">
-                                <p class="card-text">${review.review_text}</p>
+                                <p class="card-text">${review.review_text.replace(/\n/g, "<br>")}</p>
                                 <div class="small-footer">By ${review.mid}</div>
+                                <div class="btn-flex">
                     `;
                     if (name === review.mid || name === 'ADMIN') {
                         reviewCard += `
-                                    <button class="btn btn-primary btn-sm edit-btn" data-review-id="${review.review_no}" data-user-id="${review.mid}">수정</button>
-                                    <button class="btn btn-danger btn-sm delete-btn" data-review-id="${review.review_no}" data-user-id="${review.mid}">삭제</button>
+                                    <button class="btn btn-outline-primary btn-sm edit-btn" data-review-id="${review.review_no}" data-user-id="${review.mid}">수정</button>
+                                    <button class="btn btn-outline-danger btn-sm delete-btn" data-review-id="${review.review_no}" data-user-id="${review.mid}">삭제</button>
                                 `
                     }
-                    reviewCard += `</div>
+                    reviewCard += `
+                                </div>
+                            </div>
                         </div>`
                     reviewList.append(reviewCard);
                 });
@@ -248,7 +268,7 @@
         });
 
         // 줄바꿈을 <br> 태그로 변환하여 표시
-        $(".operating-hours, .detailed-description").each(function() {
+        $(".operating-hours, .detailed-description, .detailed-menu").each(function () {
             let text = $(this).text();
             $(this).html(text.replace(/\n/g, "<br>"));
         });
