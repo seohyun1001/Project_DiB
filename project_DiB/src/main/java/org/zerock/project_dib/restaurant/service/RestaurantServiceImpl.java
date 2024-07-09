@@ -94,7 +94,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public PageResponseDTO<RestaurantDTO> search(PageRequestDTO pageRequestDTO) {
-        List<Restaurant> restaurants = restaurantMapper.searchRest(pageRequestDTO);
+        List<Restaurant> restaurants = restaurantMapper.search(pageRequestDTO);
         List<RestaurantDTO> dtoList = restaurants.stream()
                 .map(this::entityToDto)
                 .collect(Collectors.toList());
