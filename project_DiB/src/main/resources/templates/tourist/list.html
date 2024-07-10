@@ -48,7 +48,7 @@
                             <select class="form-select" name="filter">
                                 <option value="">---</option>
                                 <option value="n" th:selected="${list.pageRequest.filter=='n'}">관광지명</option>
-                                <option value="a" th:selected="${list.pageRequest.filter=='a'}">주소</option>
+                                <option value="a" th:selected="${list.pageRequest.filter=='a'}">지역</option>
                             </select>
                         </div>
                     </ul>
@@ -102,9 +102,9 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mb-5">
 
             <!-- 카드 개별 요소 -->
-            <div class="col" th:each="tourist : ${list.dtoList}">
-                <div class="card shadow-sm">
-                    <svg class="bd-placeholder-img card-img-top imgbox" width="100%" height="250px"
+            <div class="col" th:each="tourist : ${list.dtoList}" style="width:350px; height:350px;">
+                <div class="card shadow-sm" >
+                    <svg class="bd-placeholder-img card-img-top imgbox"
                          xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder:"
                          preserveAspectRatio="xMidYMid slice" focusable="false">
                         <a th:href="@{/tourist/read/{tno}(tno=${tourist.tno})}">
@@ -118,14 +118,7 @@
                            style="margin:auto" th:text="${tourist.tourName}"></a><br>
                         <a th:text="${tourist.tourContent}"></a>
                     </div>
-<!--                    <div class="card-body textBox">-->
-<!--                        <div style="text-align: center;">-->
-<!--                            <a th:href="@{/tourist/read/{tno}(tno=${tourist.tno})}" class="card-text"-->
-<!--                               th:text="${tourist.tourName}"></a>-->
-<!--                        </div>-->
-<!--                        <br>-->
-<!--                        <a th:text="${tourist.tourContent}"></a>-->
-<!--                    </div>-->
+
                 </div>
             </div>
         </div>
