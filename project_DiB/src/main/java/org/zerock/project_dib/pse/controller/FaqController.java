@@ -3,6 +3,7 @@ package org.zerock.project_dib.pse.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -60,11 +61,13 @@ public class FaqController {
     }
 
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/register")
     public String showRegisterForm() {
         return "faq/faq_register";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/register")
     public String registerFaq(MultipartFile file, FaqDTO faqDTO) {
         faqService.register(faqDTO);
@@ -78,6 +81,7 @@ public class FaqController {
         return "faq/faq_detail"; // FAQ 상세 페이지로 이동
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/modify/{fno}")
     public String showModifyForm(@PathVariable Long fno, Model model) {
         FaqDTO faqDTO = faqService.readOne(fno);
@@ -85,6 +89,7 @@ public class FaqController {
         return "faq/faq_modify"; // 수정 페이지로 이동
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/modify")
     public String modifyFaq(@ModelAttribute FaqDTO faqDTO) {
         faqDTO.setModdate(LocalDate.now()); // 수정일자를 현재 날짜로 설정
@@ -93,6 +98,7 @@ public class FaqController {
         return "redirect:/faq";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/delete/{fno}")
     public String deleteFaq(@PathVariable Long fno) {
         faqService.remove(fno);

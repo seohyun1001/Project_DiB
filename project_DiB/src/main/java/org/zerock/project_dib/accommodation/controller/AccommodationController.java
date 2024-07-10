@@ -3,6 +3,7 @@ package org.zerock.project_dib.accommodation.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,11 +29,13 @@ public class AccommodationController {
 
     private final AccommodationService accommodationService;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/register")
     public void register() {
 
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/register")
     public String addAccommodation(AccFileDTO files, @Valid AccommodationImgDTO accommodationImgDTO, @Valid AccommodationDTO accommodationDTO) throws IOException, Exception {
 
@@ -90,7 +93,20 @@ public class AccommodationController {
         model.addAttribute("allImages", firtImageList);
     }
 
-    @GetMapping({"/view", "/modify"})
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping( "/modify")
+    public void modify(Long ano, Model model, PageRequestDTO pageRequestDTO) {
+
+        AccommodationDTO accommodationDTO = accommodationService.accInfo(ano);
+        log.info(accommodationDTO);
+        model.addAttribute("accInfo", accommodationDTO);
+
+        List<AccommodationImgDTO> imgFileList = accommodationService.findAllFileByAno(ano);
+        log.info(imgFileList);
+        model.addAttribute("imageList", imgFileList);
+
+    }
+    @GetMapping("/view")
     public void view(Long ano, Model model, PageRequestDTO pageRequestDTO) {
 
         AccommodationDTO accommodationDTO = accommodationService.accInfo(ano);
@@ -103,6 +119,7 @@ public class AccommodationController {
 
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/modify")
     public String modify(AccFileDTO files, Long ano, @Valid AccommodationImgDTO accommodationImgDTO, @Valid AccommodationDTO accommodationDTO, PageRequestDTO pageRequestDTO) throws IOException {
 
@@ -129,6 +146,7 @@ public class AccommodationController {
         return "redirect:/accommodation/view?ano=" + ano + "&" + pageRequestDTO.getLink();
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/delete/{ano}")
     public String delete(@PathVariable Long ano, PageRequestDTO pageRequestDTO) {
 

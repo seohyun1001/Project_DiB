@@ -38,6 +38,7 @@ public class RestaurantController {
     private String uploadPath;
     private final RestaurantService restaurantService;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/register")
     public String registerGET(Model model) {
         return "restaurant/register";
@@ -118,12 +119,14 @@ public class RestaurantController {
 
         //성언 추가
         model.addAttribute("latestThree", latestThree);
-        
+
         return "restaurant/list";
     }
 
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping( "/modify")
+    // isAuthenticated 에서 hasRole('ROLE_ADMIN')으로 수정했음 - 김서현
+    //    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/modify")
     public void modify(int rno, PageRequestDTO pageRequestDTO, Model model) {
         RestaurantDTO restaurantDTO = restaurantService.getOne(rno);
         log.info(restaurantDTO);
@@ -156,7 +159,6 @@ public class RestaurantController {
 
         model.addAttribute("dto", restaurantDTO);
     }
-
 
 
 //    @PreAuthorize("principal.username == #restaurantDTO.rest_name")

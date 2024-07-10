@@ -21,8 +21,7 @@
 <div th:replace="fragment/header :: headerFragment"></div>
 
 <!-- 검색 창 -->
-<nav class="navbar navbar-expand-lg border-bottom" aria-label="Offcanvas navbar large"
-     style="margin-top: 20px; margin-bottom: 20px; margin-left: 300px; margin-right: 300px; padding-bottom: 15px;">
+<nav class="navbar navbar-expand-lg border-bottom" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
         <a class="navbar-brand" style="margin-left: 30px;" href="#">List</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2"
@@ -63,11 +62,10 @@
             <!--                </div>-->
             <!--            </form>-->
         </div>
-
+        <button sec:authorize = "hasRole('ROLE_ADMIN')" type="button" class="btn btn-primary register-btn">등록</button>
     </div>
-    <!--    <button sec:authorize = "hasRole('ROLE_ADMIN')" id="adminButton" class="admin-button">게시글 등록</button>-->
 
-    <button sec:authorize = "hasRole('ROLE_ADMIN')" type="button" class="btn btn-primary register-btn">등록</button>
+
 </nav> <!-- 검색 창 끝-->
 
 <!-- 카드 앨범 부분 -->

@@ -58,6 +58,7 @@ public class TouristController {
         return "/tourist/read";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/register")
     public void registerGET() {
     }
@@ -73,14 +74,14 @@ public class TouristController {
         return "redirect:/tourist/list";
     }
 
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/remove/{tno}")
     public String remove(@PathVariable("tno") int tno) {
         touristService.remove(tno);
         return "redirect:/tourist/list";
     }
 
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/modify/{tno}")
     public String modifyGET(@PathVariable("tno") int tno, TouristDTO touristDTO, Model model) {
         touristDTO.setTno(tno);
@@ -90,7 +91,7 @@ public class TouristController {
 
     }
 
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/modify/{tno}")
     public String modify(@PathVariable("tno") int tno, TouristDTO touristDTO, @RequestParam("file") MultipartFile file)  throws IOException {
         touristDTO.setTno(tno);

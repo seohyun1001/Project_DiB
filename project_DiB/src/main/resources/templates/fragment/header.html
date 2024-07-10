@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,7 +35,8 @@
                     </button>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="/faq">FAQ</a>
-                        <a class="dropdown-item" href="/one2one">1대1 문의</a>
+                        <a class="dropdown-item" href="/one2one" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">1대1 문의</a>
+<!--                        1대1 문의는 로그인 한 사람에게만 보이게 수정했습니다. 김서현-->
                     </div>
                 </div>
             </li>
@@ -49,7 +51,7 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="/logout">Logout</a>
                         <a class="dropdown-item" href="/faq">FAQ</a>
-                        <a class="dropdown-item" href="/one2one">1대1 문의</a>
+                        <a class="dropdown-item" href="/one2one" >1대1 문의</a>
                     </div>
                 </div>
             </li>
