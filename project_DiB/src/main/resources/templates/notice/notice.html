@@ -57,7 +57,7 @@
                 <!-- 공지사항 리스트를 표시 -->
                 <tr th:each="notice : ${notices}">
                     <td th:text="${notice.nno}" class="nno-text-center"></td>
-                    <td><a th:href="@{/notice/detail/{nno}(nno=${notice.nno})}" th:text="${notice.noticeTitle}" style="text-decoration-line: none; font-weight: bold; text-decoration-color: #000000"></a></td>
+                    <td><a th:href="@{/notice/detail/{nno}(nno=${notice.nno})}" th:text="${notice.noticeTitle}" style="text-decoration-line: none; color: black;"></a></td>
                     <td th:text="${notice.regdate}" class="text-center"></td>
                 </tr>
                 </tbody>

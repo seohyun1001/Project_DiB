@@ -118,7 +118,7 @@
 
     <!-- 하단: 리뷰 -->
     <div class="row mt-4">
-        <div class="col-12">
+        <div class="col-12" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
             <div class="card card-body-footer-gap">
                 <div class="card-header">
                     <h3 sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">맛집 톡</h3>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,21 +19,21 @@
         <div class="one2one-detail">
             <div class="mb-3">
                 <label for="one2oneTitle" class="form-label"></label>
-                <input type="text" class="form-control" id="one2oneTitle" th:value="${one2one.one2oneTitle}" readonly>
+                <h2 type="text" class="form-control" id="one2oneTitle" th:text="${one2one.one2oneTitle}" readonly></h2>
             </div>
             <div class="mb-3">
                 <label for="one2oneContent" class="form-label"></label>
-                <textarea class="form-control" id="one2oneContent" rows="10" readonly th:text="${one2one.one2oneContent}"></textarea>
+                <p class="form-control" id="one2oneContent" rows="10" readonly th:text="${one2one.one2oneContent}"></p>
             </div>
 
             <div class="mb-3">
                 <label for="mid" class="form-label">작성자</label>
-                <input type="text" class="form-control" id="mid" th:value="${one2one.mid}" readonly>
+                <p type="text" class="form-control" id="mid" th:text="${one2one.mid}" readonly></p>
             </div>
 
             <div class="mb-3">
                 <label for="regdate" class="form-label"></label>
-                <input type="text" class="form-control" id="regdate" th:value="${one2one.regdate}" readonly>
+                <p type="text" class="form-control" id="regdate" th:text="${one2one.regdate}" readonly></p>
             </div>
 <!--            <div class="mb-3">-->
 <!--                <label for="one2oneImage" class="form-label">이미지</label>-->
@@ -41,11 +42,13 @@
             <div class="button-container">
                 <a href="/one2one" class="btn btn-secondary">목록으로</a>
                 <div class="btn-group">
-                <form th:action="@{/one2one/delete/{otono}(otono=${one2one.otono})}" method="post">
+                <form th:action="@{/one2one/delete/{otono}(otono=${one2one.otono})}" method="post" sec:authorize="hasRole('ROLE_ADMIN') or ${one2one.mid} == ${#authentication.name}">
                     <button type="submit" class="btn btn-danger">삭제</button>
                 <a th:href="@{/one2one/modify/{otono}(otono=${one2one.otono})}" class="btn btn-primary">수정</a>
+                </form>
             </div>
         </div>
+    </div>
     </div>
 </main>
 
