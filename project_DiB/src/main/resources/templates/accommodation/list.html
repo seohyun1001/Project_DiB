@@ -140,7 +140,13 @@
 
 
 
-
+<script sec:authorize="hasRole('ROLE_ADMIN')">
+    document.querySelector(".register-btn").addEventListener("click", function (e) {
+        e.preventDefault()
+        e.stopPropagation()
+        self.location = '/tourist/register'
+    }, false)
+</script>
 <div th:replace="fragment/footer :: footerFragment"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -148,15 +154,6 @@
         crossorigin="anonymous"></script>
 
 <script layout:fragment="script" th:inline="javascript">
-
-    document.querySelector(".register-btn").addEventListener("click", function (e) {
-
-        e.preventDefault()
-        e.stopPropagation()
-
-        self.location = '/accommodation/register'
-
-    }, false)
 
 </script>
 </body>

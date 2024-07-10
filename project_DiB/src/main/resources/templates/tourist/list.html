@@ -131,6 +131,13 @@
     </div>
 </div>
 <!-- pagination end -->
+<script sec:authorize="hasRole('ROLE_ADMIN')">
+    document.querySelector(".register-btn").addEventListener("click", function (e) {
+        e.preventDefault()
+        e.stopPropagation()
+        self.location = '/tourist/register'
+    }, false)
+</script>
 
 <div th:replace="fragment/footer :: footerFragment"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -138,14 +145,7 @@
         crossorigin="anonymous"></script>
 
 <script>
-    document.querySelector(".register-btn").addEventListener("click", function (e) {
 
-        e.preventDefault()
-        e.stopPropagation()
-
-        self.location = '/tourist/register'
-
-    }, false)
 
     function submitSearch() {
         var keywordSearchForm = document.querySelector("#searchForm input[name='keyword']").value;
