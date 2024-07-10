@@ -93,14 +93,16 @@
                     <div class="container my-5" style="padding: 0;">
                         <div th:each="restaurant : ${result.dtoList}" class="card mb-3 p-3 rounded mx-auto" style="max-width: 840px;">
                             <div class="row g-0">
-                                <div class="col-md-4">
+                                <div class="col-md-4" style="height: 200px; overflow: hidden;">
                                     <div th:if="${restaurant.fileNames != null}">
                                         <div th:each="file, iterStat : ${restaurant.fileNames}">
                                             <a th:if="${iterStat.index == 0}" th:href="@{/restaurant/read(rno=${restaurant.rno})}">
-                                                <img th:src="@{/view/{file}(file=${file})}" class="img-fluid rounded-start" alt="...">
+                                                <img th:src="@{/view/{file}(file=${file})}" class="img-fluid rounded-start" alt="..."
+                                                     style="width: 100%; height: 100%; object-fit: cover;">
                                             </a>
                                         </div>
                                     </div>
+
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
