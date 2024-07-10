@@ -9,6 +9,11 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/notice.css}">
     <link rel="stylesheet" th:href="@{/css/header_footer.css}">
+    <style>
+        .notice-container{
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
 <div th:replace="fragment/header :: headerFragment"></div>
@@ -52,7 +57,7 @@
                 <!-- 공지사항 리스트를 표시 -->
                 <tr th:each="notice : ${notices}">
                     <td th:text="${notice.nno}" class="nno-text-center"></td>
-                    <td><a th:href="@{/notice/detail/{nno}(nno=${notice.nno})}" th:text="${notice.noticeTitle}"></a></td>
+                    <td><a th:href="@{/notice/detail/{nno}(nno=${notice.nno})}" th:text="${notice.noticeTitle}" style="text-decoration-line: none; font-weight: bold; text-decoration-color: #000000"></a></td>
                     <td th:text="${notice.regdate}" class="text-center"></td>
                 </tr>
                 </tbody>
