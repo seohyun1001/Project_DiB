@@ -74,9 +74,6 @@ public class RestaurantController {
                     multipartFile.transferTo(savePath);
                     if (Files.probeContentType(savePath).startsWith("image")) {
                         image = true;
-                        File thumbFile = new File(uploadPath, "s_" + uuid + "_" + originalName);
-                        Thumbnailator.createThumbnail(savePath.toFile(), thumbFile, 200, 200);
-
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -213,8 +210,6 @@ public class RestaurantController {
                     multipartFile.transferTo(savePath);
                     if (Files.probeContentType(savePath).startsWith("image")) {
                         image = true;
-                        File thumbFile = new File(uploadPath, "s_" + uuid + "_" + originalName);
-                        Thumbnailator.createThumbnail(savePath.toFile(), thumbFile, 200, 200);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

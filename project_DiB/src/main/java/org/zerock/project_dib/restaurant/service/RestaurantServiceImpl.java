@@ -26,7 +26,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     private final ModelMapper modelMapper;
     private final RestaurantMapper restaurantMapper;
     private final RestaurantImageMapper restaurantImageMapper;
-    private final String uploadPath = "C:\\img";
+    private final String uploadPath = "C:\\upload";
 
     @Override
     @Transactional
@@ -136,7 +136,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     private RestaurantDTO entityToDto(Restaurant restaurant) {
         List<String> fileNames = restaurant.getImageSet().stream()
-                .map(restaurantImage -> "s_" + restaurantImage.getUuid() + "_" + restaurantImage.getFileName())
+                .map(restaurantImage -> restaurantImage.getUuid() + "_" + restaurantImage.getFileName())
                 .collect(Collectors.toList());
 
         return RestaurantDTO.builder()
