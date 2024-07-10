@@ -105,6 +105,8 @@
 <!--            </div>-->
     <div class="row mt-4">
         <div class="col-12" style="padding-bottom: 20px">
+            <input type="hidden" id="anoValue" name="ano" th:value="${accInfo.ano}">
+            <input type="hidden" id="pageValue" name="page" th:value="${pageRequestDTO.page}">
             <button type="button" class="btn btn-secondary list-back-btn">목록</button>
             <button sec:authorize = "hasRole('ROLE_ADMIN')" type="button" class="btn btn-primary acc-modify-btn">수정</button>
             <button sec:authorize = "hasRole('ROLE_ADMIN')" type="button" class="btn btn-danger view-delete-btn">삭제</button>
