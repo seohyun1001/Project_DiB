@@ -26,10 +26,21 @@
 .location-container {
     display: flex;
     justify-content: center;
+    overflow-x: auto; /* 가로 스크롤 추가 */
+    width: 1000px;
+    white-space: nowrap; /* 태그들이 줄 바꿈 없이 한 줄로 나타나도록 설정 */
+}
+
+.location-tag {
+    border-color: #FF385C;
+    color: #FF385C;
+    white-space: nowrap; /* 태그가 한 줄로 나타나도록 설정 */
 }
 
 .location-tag:hover {
-    background-color: #e0e0e0; /* 연한 회색 */
+    background-color: #FF385C;
+    color: white;
+    border-color: white;
 }
 
 .img-container {
@@ -67,27 +78,54 @@
     border: none;
     outline: none;
     box-shadow: none;
-    margin-right: 10px; /* 각 요소 간의 간격 추가 */
+    margin-right: 15px; /* 각 요소 간의 간격 추가 */
 }
+
 .search-container button {
-    background-color: #ff5a5f;
+    background-color: transparent;
     border: none;
-    color: white;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 10px; /* 버튼 좌측에 간격 추가 */
+    padding: 0;
 }
+
+.search-container button .search-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.search-container button:hover .search-icon {
+    content: url('/img/tour_search2.png');
+}
+
 .search-container .divider {
     border-left: 1px solid #ddd;
     height: 24px;
     margin: 0 10px;
 }
 
+/* 주차 여부 체크 버튼 */
 .form-check-input {
     visibility: visible;
     background-color: #e0e0e0;
+}
+
+/* 스크롤 버튼 스타일 */
+.scroll-button {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin: 0 10px; /* 스크롤 버튼과 태그 버튼 사이 간격 추가 */
+}
+
+.scroll-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
