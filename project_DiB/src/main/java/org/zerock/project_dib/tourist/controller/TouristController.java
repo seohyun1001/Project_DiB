@@ -16,6 +16,7 @@ import org.zerock.project_dib.tourist.service.TouristService;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -46,6 +47,7 @@ public class TouristController {
         log.info("--------------- tourist ---------------" + list);
 
         model.addAttribute("list", list);
+
         return "/tourist/list";
     }
 
