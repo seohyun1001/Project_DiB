@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,10 +37,12 @@
                 <a href="/faq" class="btn btn-secondary">목록으로</a>
                 <div class="btn-group">
                 <form th:action="@{/faq/delete/{fno}(fno=${faq.fno})}" method="post">
-                    <button type="submit" class="btn btn-danger">삭제</button>
-                <a th:href="@{/faq/modify/{fno}(fno=${faq.fno})}" class="btn btn-primary">수정</a>
+                    <button type="submit" class="btn btn-danger" sec:authorize="hasRole('ROLE_ADMIN')">삭제</button>
+                <a th:href="@{/faq/modify/{fno}(fno=${faq.fno})}" class="btn btn-primary" sec:authorize="hasRole('ROLE_ADMIN')">수정</a>
+                </form>
             </div>
         </div>
+    </div>
     </div>
 </main>
 
