@@ -30,7 +30,7 @@
                             <div class="carousel-inner" th:if="${imageList != null && imageList.size() > 0}">
                                 <div th:each="image, iterStat : ${imageList}"
                                      th:class="${iterStat.index == 0} ? 'carousel-item active' : 'carousel-item'">
-                                    <img th:src="|/upload/${image.file_name}|" class="d-block w-100" style="width:500px; height: auto;" alt="Image">
+                                    <img th:src="|/upload/${image.file_name}|" class="d-block w-100" style="width:100%; height: 250px;" alt="Image">
                                 </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel"
@@ -103,15 +103,22 @@
 <!--                    </div>-->
 <!--                </div>-->
 <!--            </div>-->
-<!--            <button type="button" class="btn btn-secondary list-back-btn">목록으로 돌아가기</button>-->
-<!--            <button sec:authorize = "hasRole('ROLE_ADMIN')" type="button" class="btn btn-primary acc-modify-btn">수정</button>-->
-<!--            <button sec:authorize = "hasRole('ROLE_ADMIN')" type="button" class="btn btn-danger view-delete-btn">삭제</button>-->
+    <div class="row mt-4">
+        <div class="col-12" style="padding-bottom: 20px">
+            <button type="button" class="btn btn-secondary list-back-btn">목록</button>
+            <button sec:authorize = "hasRole('ROLE_ADMIN')" type="button" class="btn btn-primary acc-modify-btn">수정</button>
+            <button sec:authorize = "hasRole('ROLE_ADMIN')" type="button" class="btn btn-danger view-delete-btn">삭제</button>
+        </div>
+    </div>
 <!--        </div>-->
 <!--    </div>-->
 </form>
 <div th:replace="fragment/footer :: footerFragment"></div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/js/reply.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
 
 <script layout:fragment="script" th:inline="javascript">
 
@@ -157,7 +164,7 @@
 
     $(document).ready(function () {
         // 줄바꿈을 <br> 태그로 변환하여 표시
-        $(".detailed-description").each(function () {
+        $(".restaurant-description").each(function () {
             let text = $(this).text();
             $(this).html(text.replace(/\n/g, "<br>"));
         });
