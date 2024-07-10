@@ -71,7 +71,7 @@ public class MemberController {
     @PostMapping("/delete")
     public String delete(String mid, RedirectAttributes redirectAttributes) {
         memberService.delete(mid);
-        return "redirect:/";
+        return "redirect:/logout";
     }
 
 }

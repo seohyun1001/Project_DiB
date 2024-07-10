@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -78,7 +79,7 @@
                         </li>
                     </ul>
                 </nav>
-                <a href="/one2one/register" class="register-one2one-btn">1대1 문의 등록</a>
+                <a href="/one2one/register" class="register-one2one-btn" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">1대1 문의 등록</a>
             </div>
         </div>
     </div>
