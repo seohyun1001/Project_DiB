@@ -40,9 +40,12 @@ public class MemberController {
     }
 
     @GetMapping("/login")
-    public void login(String error, String logout) {
+    public void login(String error, String logout, Model model) {
         log.info("------------------------- login -------------------------");
         log.info("-------------------- error : " + error + "--------------------");
+        if (error != null) {
+            model.addAttribute("loginError", "아이디 또는 비밀번호를 확인해주세요");
+        }
         if (logout != null){
             log.info("user logout --------------");
         }
@@ -71,7 +74,7 @@ public class MemberController {
     @PostMapping("/delete")
     public String delete(String mid, RedirectAttributes redirectAttributes) {
         memberService.delete(mid);
-        return "redirect:/";
+        return "redirect:/logout";
     }
 
 }

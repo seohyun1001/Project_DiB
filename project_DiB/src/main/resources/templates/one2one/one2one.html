@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,6 +9,11 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/one2one.css}">
     <link rel="stylesheet" th:href="@{/css/header_footer.css}">
+    <style>
+        .one2one-container{
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
 <div th:replace="fragment/header :: headerFragment"></div>
@@ -52,7 +58,7 @@
                 <!-- 1대1 문의 리스트를 표시 -->
                 <tr th:each="one2one : ${one2ones}">
                     <td th:text="${one2one.otono}" class="otono-text-center"></td>
-                    <td><a th:href="@{/one2one/detail/{otono}(otono=${one2one.otono})}" th:text="${one2one.one2oneTitle}"></a></td>
+                    <td><a th:href="@{/one2one/detail/{otono}(otono=${one2one.otono})}" th:text="${one2one.one2oneTitle}" style="text-decoration-line: none; color: black;"></a></td>
                     <td th:text="${one2one.regdate}" class="text-center"></td>
                     <td th:text="${one2one.mid}" class="mid-text-center"></td>
                 </tr>
@@ -78,7 +84,7 @@
                         </li>
                     </ul>
                 </nav>
-                <a href="/one2one/register" class="register-one2one-btn">1대1 문의 등록</a>
+                <a href="/one2one/register" class="register-one2one-btn" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">1대1 문의 등록</a>
             </div>
         </div>
     </div>

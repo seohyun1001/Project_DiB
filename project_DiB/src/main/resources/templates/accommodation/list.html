@@ -1,73 +1,81 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>숙소 목록</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" th:href="@{/css/memberStyle.css}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/tourist_list.css}">
+
+    <link rel="stylesheet" th:href="@{/css/header_footer.css}">
+
+    <link rel="stylesheet" th:href="@{/css/restaurant_base.css}">
+    <style>
+        .acc_name_css{
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+    </style>
 </head>
-
-
-<body class="d-flex align-items-center">
+<body >
 <div th:replace="fragment/header :: headerFragment"></div>
 
 <!-- 검색 창 -->
 <nav class="navbar navbar-expand-lg border-bottom" aria-label="Offcanvas navbar large"
-     style="margin-top: 20px; margin-bottom: 20px; margin-left: 300px; margin-right: 300px; padding-bottom: 15px;">
+     style="margin-top: 20px; margin-bottom: 20px; padding-bottom: 15px;">
     <div class="container-fluid">
-        <a class="navbar-brand" style="margin-left: 30px;" href="#">List</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2"
-                aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2"
-             aria-labelledby="offcanvasNavbar2Label">
-            <!-- <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Offcanvas</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
-                    aria-label="Close"></button>
-            </div> -->
-            <div class="offcanvas-body" style="margin-right: 30px;">
-                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                    <!-- <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li> -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <form class="d-flex mt-3 mt-lg-0" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                    <div class="text-end">
-                        <button type="button" class="btn-outline-success register-btn">등록</button>
-                    </div>
-                    <!-- 관리자 화면에서 검색 대신 나타날 등록 버튼-->
-                    <!-- <button class="btn btn-outline-success" type="submit">등록</button> -->
-                </form>
-            </div>
-        </div>
-    </div>
-</nav> <!-- 검색 창 끝-->
+        <div class="search-container">
+            <form id="searchForm" class="d-flex" role="search" action="/tourist/list" method="get" style="margin-right: 10px;">
+                <input class="form-control" name="keyword" type="search" placeholder="숙박명 검색" aria-label="Search">
+                <input type="hidden" name="filter" value="n">
+            </form>
+            <div class="divider"></div>
+            <form id="locationForm" class="d-flex" role="search" action="/tourist/list" method="get" style="margin-right: 10px;">
+                <input class="form-control" name="keyword" type="search" placeholder="위치 검색" aria-label="Search">
+                <input type="hidden" name="filter" value="a">
+            </form>
+            <div class="divider"></div>
 
+            <!-- 검색 버튼을 이미지로 -->
+            <button type="button" onclick="submitSearch()" class="search-button">
+                <img src="/img/tour_search.png" alt="Search" class="search-icon">
+            </button>
+        </div>
+        <button sec:authorize = "hasRole('ROLE_ADMIN')" type="button" class="btn btn-primary register-btn">등록</button>
+    </div>
+</nav> <!-- 검색 창 끝 -->
+
+<!-- 지역 태그 목록 -->
+<div class="mt-3">
+    <div class="d-flex align-items-center justify-content-center">
+        <button id="scrollLeft" class="scroll-button">&lt;</button> <!-- 왼쪽 스크롤 버튼 -->
+        <div class="location-container d-flex flex-nowrap overflow-hidden">
+            <a href="#" class="location-tag btn btn-outline-secondary m-1" data-location="dum">#ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁa </a>
+            <a href="#" class="location-tag btn btn-outline-secondary m-1" data-location="">#전체</a>
+            <a href="#" class="location-tag btn btn-outline-secondary m-1" data-location="강서구">#강서구</a>
+            <a href="#" class="location-tag btn btn-outline-secondary m-1" data-location="북구">#북구</a>
+            <a href="#" class="location-tag btn btn-outline-secondary m-1" data-location="사상구">#사상구</a>
+            <a href="#" class="location-tag btn btn-outline-secondary m-1" data-location="사하구">#사하구</a>
+            <a href="#" class="location-tag btn btn-outline-secondary m-1" data-location="금정구">#금정구</a>
+            <a href="#" class="location-tag btn btn-outline-secondary m-1" data-location="동래구">#동래구</a>
+            <a href="#" class="location-tag btn btn-outline-secondary m-1" data-location="연제구">#연제구</a>
+            <a href="#" class="location-tag btn btn-outline-secondary m-1" data-location="부산진구">#부산진구</a>
+            <a href="#" class="location-tag btn btn-outline-secondary m-1" data-location="해운대구">#해운대구</a>
+            <a href="#" class="location-tag btn btn-outline-secondary m-1" data-location="수영구">#수영구</a>
+            <a href="#" class="location-tag btn btn-outline-secondary m-1" data-location="남구">#남구</a>
+            <a href="#" class="location-tag btn btn-outline-secondary m-1" data-location="동구">#동구</a>
+            <a href="#" class="location-tag btn btn-outline-secondary m-1" data-location="중구">#중구</a>
+            <a href="#" class="location-tag btn btn-outline-secondary m-1" data-location="서구">#서구</a>
+            <a href="#" class="location-tag btn btn-outline-secondary m-1" data-location="영도구">#영도구</a>
+            <a href="#" class="location-tag btn btn-outline-secondary m-1" data-location="기장군">#기장군</a>
+        </div>
+        <button id="scrollRight" class="scroll-button">&gt;</button> <!-- 오른쪽 스크롤 버튼 -->
+    </div>
+</div>
 
 <!-- 카드 앨범 부분 -->
 <div class="album py-3 ">
@@ -75,91 +83,70 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mb-5">
 
             <!-- 카드 개별 요소 -->
-            <div class="col" th:each="dto:${accList}">
-                <div class="card shadow-sm">
-                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+            <div class="col" th:each="dto:${accList}" >
+                <div class="card shadow-sm" >
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="250px"
                          xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder:"
                          preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#55595c"/>
-                        <text x="50%" y="50%" fill="#eceeef"
-                              dy=".3em">text ex
-                        </text>
+                        <a th:href="|@{/accommodation/view(ano=${dto.ano})}|" >
+                            <image th:each="image : ${allImages}"
+                                   th:if="${image != null and image.ano == dto.ano}"
+                                   th:href="|/upload/${image.file_name}|" width="100%"/>
+                        </a>
                     </svg>
                     <div class="card-body">
-                        <a th:href="|@{/accommodation/view(ano=${dto.ano})}|" class="card-text"
-                           th:text="${dto.acc_name}"></a>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">버튼1</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">버튼2</button>
-                            </div>
-                            <small class="text-body-secondary">text ex</small>
-                        </div>
+                        <div class="card-text ">
+                        <a th:href="|@{/accommodation/view(ano=${dto.ano})}|"
+                           th:text="${dto.acc_name}" class="acc_name_css"></a></div>
+                        <div class="card-text">
+                            <a th:text="${dto.acc_loc}"></a></div>
                     </div>
                 </div>
             </div>
-            <!-- 카드 개별 요소 끝 -->
-
-            <!--            <div class="row mt-3">-->
-            <!--                <div class="col">-->
-            <!--                    <div class="card">-->
-            <!--                        <div class="card-header">-->
-            <!--                            숙소 목록-->
-            <!--                        </div>-->
-            <!--                        <div class="card-body">-->
-
-            <!--                            <table class="table">-->
-            <!--                                <tbody>-->
-            <!--                                <tr th:each="dto:${accList}">-->
-            <!--                                    <td>-->
-            <!--                                        <div th:each="image : ${allImages}"-->
-            <!--                                             th:if="${image != null and image.ano == dto.ano}">-->
-            <!--                                            <img style="width:300px; height: auto;"-->
-            <!--                                                 th:src="|/upload/${image.file_name}|">-->
-            <!--                                        </div>-->
-            <!--                                    </td>-->
-            <!--                                    <th scope="row">[[${dto.ano}]]</th>-->
-            <!--                                    <td>-->
-            <!--                                        <a th:href="|@{/accommodation/view(ano=${dto.ano})}|">[[${dto.acc_name}]]</a>-->
-            <!--                                    </td>-->
-            <!--                                    <td>[[${dto.acc_exp}]]</td>-->
-            <!--                                    <td>[[${#temporals.format(dto.moddate, 'yyyy-MM-dd')}]]</td>-->
-            <!--                                </tr>-->
-            <!--                                </tbody>-->
-            <!--                            </table>-->
-            <!--                        </div>-->
-
-
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div>-->
-
-        </div>
+        </div> <!-- 카드 개별 요소 끝 -->
     </div>
-</div>
+</div> <!-- album end -->
 
-<div class="container-fluid ">
-    <div
-            class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between pb-3 border-bottom">
-        <nav aria-label="Page navigation">
+        <nav aria-label="Page navigation" style="padding-bottom: 20px">
             <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link"
+                       th:href="@{|/accommodation/list?page=1|}">처음으로</a>
+                </li>
+
                 <li class="page-item" th:classappend="${pageRequestDTO.page == 1} ? 'disabled'">
                     <a class="page-link"
                        th:href="@{|/accommodation/list?page=${pageRequestDTO.page - 1}|}">이전</a>
                 </li>
-                <li class="page-item" th:each="i : ${#numbers.sequence(1, totalPage)}"
+
+                <li class="page-item"
+                    th:each="i : ${#numbers.sequence(
+                pageRequestDTO.page > 5 ? pageRequestDTO.page - 5 : 1,
+                pageRequestDTO.page > 5 ? (pageRequestDTO.page + 4 <= totalPage ? pageRequestDTO.page + 4 : totalPage) : (totalPage < 10 ? totalPage : 10))}"
                     th:classappend="${pageRequestDTO.page == i} ? 'active'">
                     <a class="page-link" th:href="@{|/accommodation/list?page=${i}|}">[[${i}]]</a>
                 </li>
+
                 <li class="page-item" th:classappend="${pageRequestDTO.page == totalPage} ? 'disabled'">
                     <a class="page-link"
                        th:href="@{|/accommodation/list?page=${pageRequestDTO.page + 1}|}">다음</a>
                 </li>
+                <li class="page-item">
+                    <a class="page-link"
+                       th:href="@{|/accommodation/list?page=${totalPage}|}">마지막으로</a>
+                </li>
             </ul>
         </nav>
-    </div>
-</div>
+
+
+
+<script sec:authorize="hasRole('ROLE_ADMIN')">
+    document.querySelector(".register-btn").addEventListener("click", function (e) {
+        e.preventDefault()
+        e.stopPropagation()
+        self.location = '/accommodate/register'
+    }, false)
+</script>
 
 <div th:replace="fragment/footer :: footerFragment"></div>
 
@@ -169,17 +156,6 @@
 
 <script layout:fragment="script" th:inline="javascript">
 
-    document.querySelector(".register-btn").addEventListener("click", function (e) {
-
-        e.preventDefault()
-        e.stopPropagation()
-
-        self.location = '/accommodation/register'
-
-    }, false)
-
 </script>
-
 </body>
-
 </html>

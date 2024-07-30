@@ -105,9 +105,15 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     @Override
-    public AccommodationImgDTO findAllFileByOrd(int ord) {
+    public AccommodationImgDTO findAllFileByOrd() {
 
-        return modelMapper.map(accommodationMapper.findAllFilesByOrd(ord), AccommodationImgDTO.class);
+        return modelMapper.map(accommodationMapper.findFileByFirstOrd(), AccommodationImgDTO.class);
+    }
+
+    @Override
+    public AccommodationImgDTO findFileByUuid(String uuid) {
+
+        return modelMapper.map(accommodationMapper.findFileByUuid(uuid), AccommodationImgDTO.class);
     }
 
     @Override
@@ -121,10 +127,20 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     @Override
-    public void removeFile(int ord) {
+    public void removeFile(String uuid) {
 
-        accommodationMapper.deleteFile(ord);
+        accommodationMapper.deleteFile(uuid);
 
+    }
+
+    @Override
+    public AccommodationImgDTO findOrdByAno(Long ano) {
+        AccommodationImgVO vo = accommodationMapper.findOrdByAno(ano);
+        AccommodationImgDTO dto = null;
+        if (vo != null) {
+            dto = modelMapper.map(vo, AccommodationImgDTO.class);
+        }
+        return dto;
     }
 
 }

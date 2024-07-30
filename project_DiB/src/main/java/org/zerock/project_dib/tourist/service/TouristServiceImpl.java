@@ -14,6 +14,7 @@ import org.zerock.project_dib.tourist.dto.TouristDTO;
 import org.zerock.project_dib.tourist.dto.TouristImgDTO;
 import org.zerock.project_dib.tourist.dto.upload.UploadFileDTO;
 import org.zerock.project_dib.tourist.dto.upload.UploadResultDTO;
+import org.zerock.project_dib.tourist.exception.NoResultFoundException;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -132,25 +133,31 @@ public class TouristServiceImpl implements TouristService {
 
     }
 
+
     @Override
     public void removeImgs(int tno) {
         touristMapper.deleteImgs(tno);
     }
 
+
     @Override
     public PageResponseDTO<TouristDTO> search(PageRequestDTO pageRequestDTO) {
         List<Tourist> tourists = touristMapper.search(pageRequestDTO);
+
+
         List<TouristDTO> dtoList = tourists.stream()
                 .map(this::entityToDTO)
                 .collect(Collectors.toList());
 
         int total = touristMapper.countTotal(pageRequestDTO);
-        return PageResponseDTO.<TouristDTO>withAll()
+        PageResponseDTO<TouristDTO> list = PageResponseDTO.<TouristDTO>withAll()
                 .pageRequestDTO(pageRequestDTO)
                 .dtoList(dtoList)
                 .total(total)
                 .build();
+        return list;
     }
+
 
     // DTO to Entity and Entity to DTO conversion methods
     private TouristDTO toDTO(Tourist tourist) {

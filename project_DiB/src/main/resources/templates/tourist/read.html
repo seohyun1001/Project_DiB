@@ -1,88 +1,163 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      layout:decorate="~{/layout/basic.html}">
-
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tourist Read</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/restaurant_base.css}">
+    <link rel="stylesheet" th:href="@{/css/restaurant_read.css}">
+
+    <div class="header-shadow">
+        <header th:replace="fragment/header :: headerFragment"></header>
+    </div>
+
 </head>
-<div layout:fragment="content">
-    <div class="row mt-3">
-        <div class="col">
-            <div class="card">
-                <!--                <div class="card-header">-->
-                <!--                    Tourist Read-->
-                <!--                </div>-->
-                <div class="card-body">
-                    <!--                    <div class="input-group mb-3">-->
-                    <!--                        <span class="input-group-text">Tno</span>-->
-                    <!--                        <input type="text" name="tno" class="form-control" th:value="${dto.tno}" readonly>-->
-                    <!--                    </div>-->
-                    <div class="input-group mb-3">
-                        <input type="text" name="tourName" class="form-control" th:value="${dto.tourName}" readonly>
+<body>
+<div class="container mt-4">
+    <!-- 상단: 이미지 슬라이드, 레스토랑 이름, 설명 -->
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <!-- Bootstrap Carousel -->
+                    <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner" th:if="${dto.fileNames != null && dto.fileNames.size()>0}">
+                            <div th:each="fileName, iterStat : ${dto.fileNames}"
+                                 th:class="${iterStat.index == 0} ? 'carousel-item active' : 'carousel-item'">
+                                <img th:src="@{'/img/' + ${fileName}}" class="d-block w-100" style="width:100%; height: 250px;" alt="Image">
+                            </div>
+                        </div>
+<!--                        <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel"-->
+<!--                                data-bs-slide="prev">-->
+<!--                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+<!--                            <span class="visually-hidden">Previous</span>-->
+<!--                        </button>-->
+<!--                        <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel"-->
+<!--                                data-bs-slide="next">-->
+<!--                            <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+<!--                            <span class="visually-hidden">Next</span>-->
+<!--                        </button>-->
                     </div>
-
-                    <!--                    이미지 출력 div-->
-                    <div class="col">
-                        <span th:if="${dto.fileNames != null && dto.fileNames.size()>0}">
-                            <th:block th:each="fileName: ${dto.fileNames}" >
-                                <img class="card-img-top" th:src="@{'/img/' + ${fileName}}" alt="사진" style="width: 50%;">
-                            </th:block>
-                        </span>
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">관광지 주소</span>
-                        <input type="text" name="tourAddr" class="form-control" th:value="${dto.tourAddr}" readonly>
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">개장 시간</span>
-                        <input type="text" name="tourOpentime" class="form-control" th:value="${dto.tourOpentime}" readonly>
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">마감 시간</span>
-                        <input type="text" name="tourClosetime" class="form-control" th:value="${dto.tourClosetime}" readonly>
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" style="margin-right:20px">주차 여부</span>
-                        <input type="checkbox" name="tourParking" class="form-control-sm" th:checked="${dto.tourParking == true}" disabled>
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">설명</span>
-                        <textarea class="form-control col-sm-5" rows="5" name="tourContent" readonly th:text="${dto.tourContent}"></textarea>
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">ModDate</span>
-                        <input type="text" name="modDate" class="form-control" th:value="${#temporals.format(dto.modDate,'yyyy-MM-dd HH:mm:ss')}" readonly>
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">RegDate</span>
-                        <input type="text" name="regDate" class="form-control" th:value="${#temporals.format(dto.regDate,'yyyy-MM-dd HH:mm:ss')}" readonly>
-                    </div>
-
                 </div>
-
+                <div class="col-md-8">
+                    <h2 th:text="${dto.tourName}">Restaurant Name</h2>
+                    <p class="tourist-description" th:text="${dto.tourContent}">Restaurant Description</p>
+<!--                    <p class="restaurant-description detailed-description" th:text="${dto.rest_exp2}">Detailed-->
+<!--                        Description</p>-->
+                </div>
             </div>
+        </div>
+    </div>
+
+    <!-- 하단: 나머지 데이터 -->
+    <div class="row mt-4 details-container">
+        <div class="col-md-8">
+            <dl class="details-list">
+                <dt>위치</dt>
+                <dd th:text="${dto.tourAddr}">Location</dd>
+                <dt>주차 여부</dt>
+                <dd th:text="${dto.tourParking ? '가능' : '불가능'}"></dd>
+<!--                <input type="checkbox" name="tourParking" class="form-control-sm" th:checked="${dto.tourParking == true}" disabled>-->
+            </dl>
+        </div>
+        <div class="col-md-4">
+            <dl class="details-list">
+                <dt>개장 시간</dt>
+                <dd class="operating-hours" th:text="${dto.tourOpentime}">Operating Hours</dd>
+            </dl>
+            <dl class="details-list">
+                <dt>마감 시간</dt>
+                <dd class="operating-hours" th:text="${dto.tourClosetime}">Operating Hours</dd>
+            </dl>
         </div>
     </div>
     <form id="readBtn">
         <div class="row mt-3">
-            <div class="col-md-12">
-                <a href="/tourist/register" sec:authorize = "hasRole('ROLE_ADMIN')" id="registerBtn"  class="btn btn-outline-secondary registerBtn">게시글 작성</a>
+            <div class="col-md-12" style="padding-bottom: 20px">
+                <a href="/tourist/list" class="btn btn-secondary">목록</a>
                 <button sec:authorize = "hasRole('ROLE_ADMIN')" id="removeBtn" class="btn btn-danger removeBtn">삭제</button>
                 <button sec:authorize = "hasRole('ROLE_ADMIN')" id="modifyBtn" class="btn btn-primary modifyBtn">수정</button>
-                <!--            <a href="/tourist/register" class="btn btn-outline-secondary">게시글 작성</a>-->
-                <!--                <button type="button" class="btn btn-danger removeBtn">삭제</button>-->
-                <a href="/tourist/list" class="btn btn-primary">목록</a>
             </div>
         </div>
     </form>
+</div>
+
+<!--    <div class="row mt-3">-->
+<!--        <div class="col">-->
+<!--            <div class="card">-->
+<!--                &lt;!&ndash;                <div class="card-header">&ndash;&gt;-->
+<!--                &lt;!&ndash;                    Tourist Read&ndash;&gt;-->
+<!--                &lt;!&ndash;                </div>&ndash;&gt;-->
+<!--                <div class="card-body">-->
+<!--                    &lt;!&ndash;                    <div class="input-group mb-3">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        <span class="input-group-text">Tno</span>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        <input type="text" name="tno" class="form-control" th:value="${dto.tno}" readonly>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                    <div class="input-group mb-3">-->
+<!--                        <input type="text" name="tourName" class="form-control" th:value="${dto.tourName}" readonly>-->
+<!--                    </div>-->
+
+<!--                    &lt;!&ndash;                    이미지 출력 div&ndash;&gt;-->
+<!--                    <div class="col">-->
+<!--                        <span th:if="${dto.fileNames != null && dto.fileNames.size()>0}">-->
+<!--                            <th:block th:each="fileName: ${dto.fileNames}" >-->
+<!--                                <img class="card-img-top" th:src="@{'/img/' + ${fileName}}" alt="사진" style="width: 50%;">-->
+<!--                            </th:block>-->
+<!--                        </span>-->
+<!--                    </div>-->
+
+<!--                    <div class="input-group mb-3">-->
+<!--                        <span class="input-group-text">관광지 주소</span>-->
+<!--                        <input type="text" name="tourAddr" class="form-control" th:value="${dto.tourAddr}" readonly>-->
+<!--                    </div>-->
+<!--                    <div class="input-group mb-3">-->
+<!--                        <span class="input-group-text">개장 시간</span>-->
+<!--                        <input type="text" name="tourOpentime" class="form-control" th:value="${dto.tourOpentime}" readonly>-->
+<!--                    </div>-->
+<!--                    <div class="input-group mb-3">-->
+<!--                        <span class="input-group-text">마감 시간</span>-->
+<!--                        <input type="text" name="tourClosetime" class="form-control" th:value="${dto.tourClosetime}" readonly>-->
+<!--                    </div>-->
+<!--                    <div class="input-group mb-3">-->
+<!--                        <span class="input-group-text" style="margin-right:20px">주차 여부</span>-->
+<!--                        <input type="checkbox" name="tourParking" class="form-control-sm" th:checked="${dto.tourParking == true}" disabled>-->
+<!--                    </div>-->
+<!--                    <div class="input-group mb-3">-->
+<!--                        <span class="input-group-text">설명</span>-->
+<!--                        <textarea class="form-control col-sm-5" rows="5" name="tourContent" readonly th:text="${dto.tourContent}"></textarea>-->
+<!--                    </div>-->
+<!--                    <div class="input-group mb-3">-->
+<!--                        <span class="input-group-text">ModDate</span>-->
+<!--                        <input type="text" name="modDate" class="form-control" th:value="${#temporals.format(dto.modDate,'yyyy-MM-dd HH:mm:ss')}" readonly>-->
+<!--                    </div>-->
+<!--                    <div class="input-group mb-3">-->
+<!--                        <span class="input-group-text">RegDate</span>-->
+<!--                        <input type="text" name="regDate" class="form-control" th:value="${#temporals.format(dto.regDate,'yyyy-MM-dd HH:mm:ss')}" readonly>-->
+<!--                    </div>-->
+
+<!--                </div>-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/js/reply.js"></script>
-</div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+            crossorigin="anonymous"></script>
+
+    <div th:replace="fragment/footer :: footerFragment"></div>
 <script layout:fragment="script" th:inline="javascript">
 
     // const tno = [[${dto.tno}]]
@@ -133,5 +208,14 @@
         document.getElementById('modifyBtn').style.display = 'block';
     }
 
+    $(document).ready(function () {
+        // 줄바꿈을 <br> 태그로 변환하여 표시
+        $(".tourist-description").each(function () {
+            let text = $(this).text();
+            $(this).html(text.replace(/\n/g, "<br>"));
+        });
+    });
+
 </script>
+</body>
 </html>

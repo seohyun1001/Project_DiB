@@ -3,6 +3,7 @@ package org.zerock.project_dib.pse.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -61,12 +62,13 @@ public class NoticeController {
         return "notice/notice";
     }
 
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/register")
     public String showRegisterForm() {
         return "notice/notice_register";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/register")
     public String registerNotice(MultipartFile file, NoticeDTO noticeDTO) {
         noticeService.register(noticeDTO);
@@ -80,6 +82,7 @@ public class NoticeController {
         return "notice/notice_detail"; // 공지사항 상세 페이지로 이동
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/modify/{nno}")
     public String showModifyForm(@PathVariable Long nno, Model model) {
         NoticeDTO noticeDTO = noticeService.readOne(nno);
@@ -87,6 +90,7 @@ public class NoticeController {
         return "notice/notice_modify"; // 수정 페이지로 이동
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/modify")
     public String modifyNotice(@ModelAttribute NoticeDTO noticeDTO) {
         noticeDTO.setModdate(LocalDate.now()); // 수정일자를 현재 날짜로 설정
@@ -95,6 +99,7 @@ public class NoticeController {
         return "redirect:/notice";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/delete/{nno}")
     public String deleteNotice(@PathVariable Long nno) {
         noticeService.remove(nno);
