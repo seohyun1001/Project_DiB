@@ -1,5 +1,4 @@
 package org.zerock.project_dib.member.dto;
-
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
