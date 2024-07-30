@@ -20,11 +20,6 @@
         <module name="project_DiB.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="org.zerock.project_DiB.test" target="17" />
-      <module name="project_DiB" target="17" />
-      <module name="project_DiB.main" target="17" />
-      <module name="project_DiB.test" target="17" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="17" />
   </component>
 </project>

@@ -4,14 +4,10 @@
     <facet external-system-id="GRADLE" type="web" name="Web">
       <configuration>
         <webroots />
-        <sourceRoots>
-          <root url="file://$MODULE_DIR$/../../project_DiB/src/main/java" />
-          <root url="file://$MODULE_DIR$/../../project_DiB/src/main/resources" />
-        </sourceRoots>
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_17">
+  <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/../../project_DiB/build/classes/java/main" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../project_DiB/build/generated/sources/annotationProcessor/java/main">
@@ -21,7 +17,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../../project_DiB/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../project_DiB/src/main/resources" type="java-resource" />
     </content>
-    <orderEntry type="jdk" jdkName="corretto-17" jdkType="JavaSDK" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.projectlombok:lombok:1.18.32" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: com.querydsl:querydsl-apt:jakarta:5.1.0" level="project" />
