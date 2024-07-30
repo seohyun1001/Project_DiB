@@ -7,10 +7,16 @@
     <list default="true" id="07e3978e-3da9-4f74-909c-1f4178aecd8f" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/project_DiB.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/project_DiB.main.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/mappers/MemberMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/main/resources/mappers/MemberMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/templates/accommodation/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/main/resources/templates/accommodation/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/templates/faq/faq_register.html" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/main/resources/templates/faq/faq_register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/templates/notice/notice_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/main/resources/templates/notice/notice_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/templates/notice/notice_register.html" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/main/resources/templates/notice/notice_register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/templates/one2one/one2one_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/main/resources/templates/one2one/one2one_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_DiB/src/main/resources/templates/one2one/one2one_register.html" beforeDir="false" afterPath="$PROJECT_DIR$/project_DiB/src/main/resources/templates/one2one/one2one_register.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +33,12 @@
       <state>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="project_DiB" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -46,9 +57,12 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/seohyun1001/Project_DiB.git&quot;,
-    &quot;accountId&quot;: &quot;e729eabe-e501-43ef-9e8e-6917034b0698&quot;
+    &quot;accountId&quot;: &quot;b76138fa-2d62-4e97-aaf8-25608f641ea6&quot;
   }
 }</component>
+  <component name="PerforceDirect.Settings">
+    <option name="CHARSET" value="없음" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -61,12 +75,18 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Gradle.project_DiB 빌드.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.ProjectDiBApplication.executor": "Run",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/geon/Desktop/담임쌤 수업자료/JavaWeb",
+    "last_opened_file_path": "C:/Users/it/Documents/Project_DiB",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -85,6 +105,7 @@
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="project_DiB.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.zerock.project_dib.ProjectDiBApplication" />
+      <option name="UPDATE_ACTION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -112,6 +133,8 @@
       <workItem from="1718862526859" duration="1598000" />
       <workItem from="1718865671620" duration="26000" />
       <workItem from="1719274670171" duration="2523000" />
+      <workItem from="1721792685368" duration="2091000" />
+      <workItem from="1722316979456" duration="9697000" />
     </task>
     <servers />
   </component>
