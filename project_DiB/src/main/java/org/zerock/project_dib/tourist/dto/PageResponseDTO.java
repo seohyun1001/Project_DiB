@@ -24,13 +24,16 @@ public class PageResponseDTO<E> {
 
     @Builder(builderMethodName = "withAll")
     public PageResponseDTO(PageRequestDTO pageRequestDTO, List<E> dtoList, int total) {
-        if (total <= 0) {
-            return;
-        }
+
         this.pageRequest = pageRequestDTO;
         this.page = pageRequestDTO.getPage();
         this.size = pageRequestDTO.getSize();
         this.total = total;
+
+        if (total <= 0) {
+            return;
+        }
+
         this.dtoList = dtoList;
         this.end = (int)(Math.ceil(this.page/10.0))*10;
         this.start = this.end-9;

@@ -47,7 +47,7 @@
                     </div>
                     <div class="col-md-8">
                         <h2 th:text="${accInfo.acc_name}">Restaurant Name</h2>
-                        <p class="restaurant-description detailed-description" th:text="${accInfo.acc_exp}">Restaurant Description</p>
+                        <p class="acc-description detailed-description" th:text="${accInfo.acc_exp}">Restaurant Description</p>
 <!--                        <p class="restaurant-description detailed-description" th:text="${dto.rest_exp2}">Detailed-->
 <!--                            Description</p>-->
                     </div>
@@ -166,7 +166,7 @@
 
     $(document).ready(function () {
         // 줄바꿈을 <br> 태그로 변환하여 표시
-        $(".restaurant-description").each(function () {
+        $(".acc-description").each(function () {
             let text = $(this).text();
             $(this).html(text.replace(/\n/g, "<br>"));
         });

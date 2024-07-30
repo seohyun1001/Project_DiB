@@ -53,7 +53,7 @@
                 <!-- FAQ 리스트를 표시 -->
                 <tr th:each="faq : ${faqs}">
                     <td th:text="${faq.fno}" class="fno-text-center"></td>
-                    <td><a th:href="@{/faq/detail/{fno}(fno=${faq.fno})}" th:text="${faq.faqTitle}"></a></td>
+                    <td><a th:href="@{/faq/detail/{fno}(fno=${faq.fno})}" th:text="${faq.faqTitle}" style="text-decoration-line: none; color: black; "></a></td>
                     <td th:text="${faq.regdate}" class="text-center"></td>
                 </tr>
                 </tbody>
